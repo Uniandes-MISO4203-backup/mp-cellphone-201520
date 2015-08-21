@@ -1,0 +1,27 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>co.edu.uniandes.csw.mpcellphone</groupId>
+    <artifactId>mpcellphone</artifactId>
+    <version>1.0</version>
+    <packaging>pom</packaging>
+    <name>mpcellphone</name>
+    <modules>
+        <module>mpcellphone.logic</module>
+        <module>mpcellphone.web</module>
+    </modules>
+    <profiles>
+        <profile>
+            <id>sonar</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <sonar.jdbc.url>${sonar_jdbc_url}</sonar.jdbc.url>
+                <sonar.jdbc.username>${sonar_jdbc_username}</sonar.jdbc.username>
+                <sonar.jdbc.password>${sonar_jdbc_password}</sonar.jdbc.password>
+                <sonar.host.url>${sonar_host_url}</sonar.host.url>
+            </properties>
+        </profile>
+    </profiles>
+</project>
