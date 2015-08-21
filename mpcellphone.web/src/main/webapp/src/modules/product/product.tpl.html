@@ -1,0 +1,27 @@
+<alert ng-repeat="alert in alerts" type="{{alert.type}}" close="ctrl.closeAlert($index)">{{alert.msg}}</alert>
+<div ng-hide="ctrl.editMode">
+    <div class="col-sm-12">
+    <div ng-repeat="record in records">
+        <div class="col-sm-4 well text-center">
+            <div class="col-md-12">
+                <div class="img-thumbnail" id="cover" ng-if="record.cellPhone.image">
+                    <a ng-href="{{record.cellPhone.image}}" target="_blank"><img class="img-responsive" style="height: 20vw;" ng-src="{{record.cellPhone.image}}" alt="{{record.cellPhone.image}}"></a>
+                </div>
+            </div>
+            <div class="caption" >
+                <p><strong>Cellphone:</strong> {{record.cellPhone.name}}</p>
+                <p><strong>Price:</strong> {{record.price | currency}}</p>
+                <p><strong>Provider:</strong> {{record.provider.name}}</p>
+            </div>
+            <p class="text-center">
+                <button ng-repeat="action in ctrl.recordActions" id="{{$parent.$index}}-{{action.name}}-btn" class="btn btn-{{action.class || 'default'}} btn-sm" ng-show="action.show()" ng-click="action.fn(record)"><span class="glyphicon glyphicon-{{action.icon}}"></span> {{action.displayName}}</button>
+            </p>
+        </div>
+    </div>
+</div>
+    <div class="text-center">
+        <pagination ng-show="ctrl.numPages > 1" num-pages="ctrl.numPages" total-items="ctrl.totalItems"
+                    ng-model="ctrl.currentPage" ng-change="ctrl.pageChanged()" items-per-page="ctrl.itemsPerPage"
+                    max-size="ctrl.maxSize" class="pagination-md" boundary-links="true" rotate="false"></pagination>
+    </div>
+</div>

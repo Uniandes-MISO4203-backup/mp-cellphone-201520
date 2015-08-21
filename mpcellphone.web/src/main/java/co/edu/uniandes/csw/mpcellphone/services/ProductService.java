@@ -1,7 +1,9 @@
 package co.edu.uniandes.csw.mpcellphone.services;
 
 import co.edu.uniandes.csw.mpcellphone.api.IProductLogic;
+import co.edu.uniandes.csw.mpcellphone.api.IProviderLogic;
 import co.edu.uniandes.csw.mpcellphone.dtos.ProductDTO;
+import co.edu.uniandes.csw.mpcellphone.dtos.ProviderDTO;
 import co.edu.uniandes.csw.mpcellphone.providers.StatusCreated;
 import java.util.List;
 import javax.inject.Inject;
@@ -17,6 +19,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import org.apache.shiro.SecurityUtils;
 
 /**
  * @generated
@@ -27,10 +30,13 @@ import javax.ws.rs.core.MediaType;
 public class ProductService {
 
     @Inject private IProductLogic productLogic;
+    @Inject private IProviderLogic providerLogic;
     @Context private HttpServletResponse response;
     @QueryParam("page") private Integer page;
     @QueryParam("maxRecords") private Integer maxRecords;
-
+    @QueryParam("q")
+    private String cellPhoneName;
+    private ProviderDTO provider = (ProviderDTO) SecurityUtils.getSubject().getSession().getAttribute("Provider");
     /**
      * @generated
      */
@@ -45,10 +51,18 @@ public class ProductService {
      */
     @GET
     public List<ProductDTO> getProducts() {
-        if (page != null && maxRecords != null) {
-            this.response.setIntHeader("X-Total-Count", productLogic.countProducts());
+        if (provider != null) {
+            return providerLogic.getProvider(provider.getId()).getProducts();
+        } else {
+            if (cellPhoneName != null) {
+                return productLogic.getByCellPhoneName(cellPhoneName);
+            } else {
+                if (page != null && maxRecords != null) {
+                    this.response.setIntHeader("X-Total-Count", productLogic.countProducts());
+                }
+                return productLogic.getProducts(page, maxRecords);
+            }
         }
-        return productLogic.getProducts(page, maxRecords);
     }
 
     /**

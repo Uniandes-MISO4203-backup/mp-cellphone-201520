@@ -11,4 +11,5 @@ public interface IProviderLogic {
     public ProviderDTO updateProvider(ProviderDTO dto);
     public void deleteProvider(Long id);
     public List<ProviderDTO> findByName(String name);
+    public ProviderDTO getProviderByUserId(String userId);
 }

@@ -68,4 +68,8 @@ public class ProviderLogic implements IProviderLogic {
     public List<ProviderDTO> findByName(String name) {
         return ProviderConverter.listEntity2DTO(persistence.findByName(name));
     }
+    
+    public ProviderDTO getProviderByUserId(String userId){
+        return ProviderConverter.fullEntity2DTO(persistence.getProviderByUserId(userId));
+    }
 }

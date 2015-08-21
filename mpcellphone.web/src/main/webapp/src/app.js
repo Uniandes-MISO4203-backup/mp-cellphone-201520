@@ -23,12 +23,19 @@
                     templateUrl: tplUrl,
                     controller: 'clientCtrl',
                     controllerAs: alias
-                })
-                .when('/provider', {
+                }).when('/products', {
+                        templateUrl: tplUrl,
+                        controller: 'productsCtrl',
+                        controllerAs: alias                    
+                }).when('/provider', {
                     templateUrl: tplUrl,
                     controller: 'providerCtrl',
                     controllerAs: alias
-                })
-                .otherwise('/');
+                }).when('/catalog', {
+                        templateUrl: 'src/modules/product/product.tpl.html',
+                        controller: 'productCtrl',
+                        controllerAs: 'ctrl'
+                    })
+                .otherwise('/catalog');
         }]);
 })(window.angular);

@@ -7,11 +7,16 @@ import javax.persistence.Entity;
 import java.util.List;
 import javax.persistence.OneToMany;
 import javax.persistence.CascadeType;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 /**
  * @generated
  */
 @Entity
+@NamedQueries({
+    @NamedQuery(name = "Provider.getByUserId", query = "select u from ProviderEntity u WHERE u.userId = :user_id")
+})
 public class ProviderEntity implements Serializable {
 
     @Id

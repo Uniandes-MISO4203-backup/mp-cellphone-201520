@@ -11,4 +11,5 @@ public interface IProductLogic {
     public ProductDTO updateProduct(ProductDTO dto);
     public void deleteProduct(Long id);
     public List<ProductDTO> findByName(String name);
+    public List<ProductDTO> getByCellPhoneName(String name);
 }
