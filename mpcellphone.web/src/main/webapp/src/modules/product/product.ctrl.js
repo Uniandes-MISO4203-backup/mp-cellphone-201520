@@ -21,10 +21,10 @@
                         if (authSvc.getCurrentUser()) {
                             return cartItemSvc.addItem({
                                 product: record,
-                                name: record.book.name,
+                                name: record.cellPhone.name,
                                 quantity: 1});
                         } else {
-                            $location.path('/login');// o colocar servicio de LocalStorage
+                            $location.path('/login');
                         }
                     },
                     show: function () {
