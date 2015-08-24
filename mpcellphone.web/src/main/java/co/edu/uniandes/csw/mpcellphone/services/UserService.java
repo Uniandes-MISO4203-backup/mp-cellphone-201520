@@ -57,7 +57,7 @@ public class UserService {
             currentUser.login(token);
             ClientDTO client = clientLogic.getClientByUserId(currentUser.getPrincipal().toString());
             if (client != null) {
-                currentUser.getSession().setAttribute("ClientId", client);
+                currentUser.getSession().setAttribute("Client", client);
                 return Response.ok(client).build();
             } else {
                 ProviderDTO provider = providerLogic.getProviderByUserId(currentUser.getPrincipal().toString());
