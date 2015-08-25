@@ -17,8 +17,8 @@
             $scope.lastQuantity = 0;
             $scope.total = 0;
 
-            this.recordActions = [{
-                    name: 'Delete',
+            this.recordActions = {
+                delete: {
                     displayName: ' ',
                     icon: 'trash',
                     class: 'primary',
@@ -30,7 +30,7 @@
                     show: function () {
                         return true;
                     }
-                }];
+                }};
 
             this.calcTotal = function () {
                 $scope.total = 0;
