@@ -19,7 +19,7 @@
                     <td><div> <a editable-text="record.quantity" onbeforesave="verify(record.quantity)" onaftersave="postVerify(record)">{{ record.quantity }}</a></div></td>        
                     <td><div>{{record.product.price | currency}}</div></td>
                     <td><div>{{subtotal(record)| currency}}</div></td>
-                    <td><button ng-repeat="action in ctrl.recordActions" id="{{$parent.$index}}-{{action.name}}-btn" class="btn btn-default btn-sm" ng-show="action.show()" ng-click="action.fn(record)"><span class="glyphicon glyphicon-{{action.icon}}"></span> {{action.displayName}}</button></td>
+                    <td><button ng-repeat="(key, action) in ctrl.recordActions" id="{{$parent.$index}}-{{key}}-btn" class="btn btn-default btn-sm" ng-show="action.show()" ng-click="action.fn(record)"><span class="glyphicon glyphicon-{{action.icon}}"></span> {{action.displayName}}</button></td>
                 </tr>
                 <tr>
                     <td><div></div></td>
