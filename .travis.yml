@@ -1,1 +1,3 @@
 language: java
+after_success:
+ - mvn sonar:sonar -Dsonar.jdbc.url=$sonar_jdbc_url -Dsonar.jdbc.driver=$sonar_jdbc_driver -Dsonar.host.url=$sonar_host_url -Dsonar.jdbc.username=$sonar_jdbc_username -Dsonar.jdbc.password=$sonar_jdbc_password
