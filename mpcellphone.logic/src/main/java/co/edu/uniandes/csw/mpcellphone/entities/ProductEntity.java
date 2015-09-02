@@ -1,12 +1,16 @@
 package co.edu.uniandes.csw.mpcellphone.entities;
 
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * @generated
@@ -15,6 +19,7 @@ import javax.persistence.NamedQuery;
 @NamedQueries({
     @NamedQuery(name = "Product.getByCellPhoneName", query = "select u from ProductEntity u WHERE UPPER(u.cellPhone.name) like :name")
 })
+@XmlRootElement
 public class ProductEntity implements Serializable {
 
     @Id
@@ -29,6 +34,8 @@ public class ProductEntity implements Serializable {
     private CellPhoneEntity cellPhone;
     @ManyToOne
     private ProviderEntity provider;
+    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<QuestionEntity> question;
     /**
      * @generated
      */
@@ -97,6 +104,14 @@ public class ProductEntity implements Serializable {
      */
     public void setProvider(ProviderEntity provider) {
         this.provider = provider;
+    }
+
+    public List<QuestionEntity> getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(List<QuestionEntity> question) {
+        this.question = question;
     }
 
 }
