@@ -40,7 +40,7 @@
                     name: 'commet',
                     displayName: 'Comment',
                     icon: 'comment',
-                    class: 'primary',
+                    class: 'warning',
                     fn: function (record)
                     {
                         if (authSvc.getCurrentUser())
@@ -68,7 +68,7 @@
                     name: 'question',
                     displayName: 'Question',
                     icon: 'question-sign',
-                    class: 'primary',
+                    class: 'info',
                     fn: function (record)
                     {
                         if (authSvc.getCurrentUser())
@@ -123,7 +123,11 @@
                                 idProduct   : ProducSelComment.id, 
                                 idUser      : authSvc.getCurrentUser().id
                             }
-                            console.log(objEnvia);
+                            //console.log(objEnvia);
+                            svc.saveQuestion(objEnvia);
+                                    /*.then(function(){
+                                console.log("Termina");
+                            });*/
                         }
                         else
                         {
