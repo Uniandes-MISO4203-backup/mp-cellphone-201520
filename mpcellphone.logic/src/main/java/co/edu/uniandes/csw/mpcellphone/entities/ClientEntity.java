@@ -31,8 +31,6 @@ public class ClientEntity implements Serializable {
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CartItemEntity> shoppingCart;
 
-    @ManyToOne
-    private QuestionEntity question;
     /**
      * @generated
      */

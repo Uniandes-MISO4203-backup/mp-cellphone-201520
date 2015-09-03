@@ -35,7 +35,6 @@ public class QuestionEntity implements Serializable {
     @ManyToOne
     private ProductEntity product_id;
 
-    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
     private ClientEntity user_id;
     
     public Long getId() {
