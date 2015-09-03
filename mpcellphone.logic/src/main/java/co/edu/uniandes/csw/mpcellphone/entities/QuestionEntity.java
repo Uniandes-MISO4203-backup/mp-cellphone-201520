@@ -33,9 +33,9 @@ public class QuestionEntity implements Serializable {
     private Date questionDate;
     
     @ManyToOne
-    private ProductEntity product_id;
+    private ProductEntity product;
 
-    private ClientEntity user_id;
+    private ClientEntity user;
     
     public Long getId() {
         return id;
@@ -61,21 +61,20 @@ public class QuestionEntity implements Serializable {
         this.questionDate = questionDate;
     }
 
-    public ProductEntity getProduct_id() {
-        return product_id;
+    public ProductEntity getProduct() {
+        return product;
     }
 
-    public void setProduct_id(ProductEntity product_id) {
-        this.product_id = product_id;
+    public void setProduct(ProductEntity product) {
+        this.product = product;
     }
 
-    public ClientEntity getUser_id() {
-        return user_id;
+    public ClientEntity getUser() {
+        return user;
     }
 
-    public void setUser_id(ClientEntity user_id) {
-        this.user_id = user_id;
+    public void setUser(ClientEntity user) {
+        this.user = user;
     }
-    
 
 }
