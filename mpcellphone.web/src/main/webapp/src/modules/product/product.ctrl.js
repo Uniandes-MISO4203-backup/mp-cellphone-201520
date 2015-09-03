@@ -40,7 +40,7 @@
                     name: 'commet',
                     displayName: 'Comment',
                     icon: 'comment',
-                    class: 'primary',
+                    class: 'warning',
                     fn: function (record)
                     {
                         if (authSvc.getCurrentUser())
@@ -61,6 +61,37 @@
                         return true;
                     }
              }];
+            
+            //Para los comentarios por producto...
+            this.questionActions = [
+            {
+                    name: 'question',
+                    displayName: 'Question',
+                    icon: 'question-sign',
+                    class: 'info',
+                    fn: function (record)
+                    {
+                        if (authSvc.getCurrentUser())
+                        {
+                            ProducSelComment = record;
+                            $('#modalQuestion').modal('show');
+                            $('#nameUserQuestion').html("<center><b>" + authSvc.getCurrentUser().name + " Dice:</b></center><br>");
+                            $('#titleProductQuestion').html("Cellphone: " + record.cellPhone.name);
+                            $("#question").val(""); 
+                        }
+                        else
+                        {
+                            $location.path('/login');
+                        }
+                    },
+                    show: function () {
+                        return true;
+                    }
+             }];
+         
+         
+         
+        
          
             this.keyActions  = [
             {   
@@ -92,6 +123,38 @@
                                 idProduct   : ProducSelComment.id, 
                                 idUser      : authSvc.getCurrentUser().id
                             }
+                            //console.log(objEnvia);
+                            svc.saveQuestion(objEnvia);
+                                    /*.then(function(){
+                                console.log("Termina");
+                            });*/
+                        }
+                        else
+                        {
+                            alert("Por favor escribe tu comentario");
+                        }
+                    }
+                    else
+                    {
+                        $location.path('/login');
+                    }
+                }
+             }];
+         
+        this.saveQuestion = [
+            {   
+                fn: function ()
+                {
+                    //tmp = authSvc;
+                    if (authSvc.getCurrentUser())
+                    {
+                        if($("#question").val().length !== 0)
+                        {
+                            var objEnvia = {
+                                comment     : $("#question").val(), 
+                                idProduct   : ProducSelComment.id, 
+                                idUser      : authSvc.getCurrentUser().id
+                            }
                             console.log(objEnvia);
                         }
                         else
@@ -105,6 +168,7 @@
                     }
                 }
              }];
+         
 //            this.loadRefOptions();
             this.fetchRecords();
         }]);
