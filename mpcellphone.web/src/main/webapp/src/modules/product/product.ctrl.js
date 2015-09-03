@@ -113,7 +113,6 @@
             {   
                 fn: function ()
                 {
-                    //tmp = authSvc;
                     if (authSvc.getCurrentUser())
                     {
                         if($("#comment").val().length !== 0)
@@ -122,12 +121,10 @@
                                 comment     : $("#comment").val(), 
                                 idProduct   : ProducSelComment.id, 
                                 idUser      : authSvc.getCurrentUser().id
-                            }
-                            //console.log(objEnvia);
-                            svc.saveQuestion(objEnvia);
-                                    /*.then(function(){
-                                console.log("Termina");
-                            });*/
+                            };
+                            svc.saveComment({id : 7, ship: $("#comment").val(), state: "correcto vista"}).then(function(data){
+                                $('#myModal').modal('hide');
+                            });
                         }
                         else
                         {
