@@ -15,6 +15,8 @@
             </div>
             <p class="text-center">
                 <button ng-repeat="action in ctrl.recordActions" id="{{$parent.$index}}-{{action.name}}-btn" class="btn btn-{{action.class || 'default'}} btn-sm" ng-show="action.show()" ng-click="action.fn(record)"><span class="glyphicon glyphicon-{{action.icon}}"></span> {{action.displayName}}</button>
+                <button ng-repeat="action in ctrl.commentActions" id="{{$parent.$index}}-{{action.name}}-btn" class="btn btn-{{action.class || 'default'}} btn-sm" ng-show="action.show()" ng-click="action.fn(record)"><span class="glyphicon glyphicon-{{action.icon}}"></span> {{action.displayName}}</button>
+                
             </p>
         </div>
     </div>
@@ -25,3 +27,31 @@
                     max-size="ctrl.maxSize" class="pagination-md" boundary-links="true" rotate="false"></pagination>
     </div>
 </div>
+
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+   
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title" id = "titleProduct">Comment</h4>
+        </div>
+          <form ng-repeat="action in ctrl.saveComment" id="loginForm" method="post" class="form-horizontal" ng-submit="action.fn()">
+        <div class="modal-body">
+            <div class="form-group">
+                <div id = "nameUser"></div>
+                <textarea ng-repeat="action in ctrl.keyActions" class="form-control" rows="4" id="comment" style = "width: 90%; margin: 0 auto;" ng-keyup = "action.fn()"></textarea>
+            </div>
+            <div class="alert alert-info" role="alert" id = "cantidad"><center>265</center></div>          
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-success">Send</button>
+          <!--<input class="btn btn-success" type="submit" value="Send!" id="submit"> //-->
+        </div>
+        </form>
+      </div>
+      
+    </div>
+  </div>
