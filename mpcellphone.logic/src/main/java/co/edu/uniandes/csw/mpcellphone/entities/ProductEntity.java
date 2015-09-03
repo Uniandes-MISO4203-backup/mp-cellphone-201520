@@ -34,7 +34,9 @@ public class ProductEntity implements Serializable {
     private CellPhoneEntity cellPhone;
     @ManyToOne
     private ProviderEntity provider;
-    @OneToMany(mappedBy = "product_id", cascade = CascadeType.ALL, orphanRemoval = true)
+    
+    
+    @OneToMany
     private List<QuestionEntity> question;
     /**
      * @generated

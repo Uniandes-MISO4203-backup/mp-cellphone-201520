@@ -7,6 +7,8 @@ package co.edu.uniandes.csw.mpcellphone.converters;
 
 import co.edu.uniandes.csw.mpcellphone.dtos.QuestionDTO;
 import co.edu.uniandes.csw.mpcellphone.entities.QuestionEntity;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -59,6 +61,8 @@ public abstract class QuestionConverter {
             QuestionDTO dto = new QuestionDTO();
             dto.setId(entity.getId());
             dto.setQuestion(entity.getQuestion());
+            dto.setProduct(ProductConverter.refEntity2DTO(entity.getProduct()));
+            dto.setUser(ClientConverter.refEntity2DTO(entity.getUser()));
             dto.setQuestionDate(entity.getQuestionDate());
 
             return dto;
@@ -75,6 +79,8 @@ public abstract class QuestionConverter {
             QuestionEntity entity = new QuestionEntity();
             entity.setId(dto.getId());
             entity.setQuestion(dto.getQuestion());
+            entity.setProduct(ProductConverter.refDTO2Entity(dto.getProduct()));
+            entity.setUser(ClientConverter.refDTO2Entity(dto.getUser()));
             entity.setQuestionDate(dto.getQuestionDate());
 
             return entity;
@@ -111,4 +117,32 @@ public abstract class QuestionConverter {
         }
     }
 
+    /**
+     * @param entities
+     * @return 
+     */
+    public static List<QuestionDTO> listEntity2DTO(List<QuestionEntity> entities) {
+        List<QuestionDTO> dtos = new ArrayList<QuestionDTO>();
+        if (entities != null) {
+            for (QuestionEntity entity : entities) {
+                dtos.add(basicEntity2DTO(entity));
+            }
+        }
+        return dtos;
+    }
+
+    /**
+     * @param dtos
+     * @return 
+     */
+    public static List<QuestionEntity> listDTO2Entity(List<QuestionDTO> dtos) {
+        List<QuestionEntity> entities = new ArrayList<QuestionEntity>();
+        if (dtos != null) {
+            for (QuestionDTO dto : dtos) {
+                entities.add(basicDTO2Entity(dto));
+            }
+        }
+        return entities;
+    }
+    
 }

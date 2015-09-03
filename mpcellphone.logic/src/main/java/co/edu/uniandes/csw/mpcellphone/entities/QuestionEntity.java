@@ -35,6 +35,7 @@ public class QuestionEntity implements Serializable {
     @ManyToOne
     private ProductEntity product;
 
+    @ManyToOne
     private ClientEntity user;
     
     public Long getId() {
