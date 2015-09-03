@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import java.util.List;
 import javax.persistence.OneToMany;
 import javax.persistence.CascadeType;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
@@ -30,7 +31,8 @@ public class ClientEntity implements Serializable {
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CartItemEntity> shoppingCart;
 
-    
+    @ManyToOne
+    private QuestionEntity question;
     /**
      * @generated
      */
