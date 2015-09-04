@@ -5,9 +5,19 @@
             CrudCreator.extendService(this, context);
             this.saveQuestion = function(data)
             {
-                return this.api.one('cheapest', idBook).get();
-                //return this.api.one('cheapest', idBook).get();
-                //console.log("llega", data);
+                //Para las preguntas... questions
+                return this.api.one("../questions").customPOST(data).then(function() 
+                {
+                    console.log("Success");
+                });
+            };
+            //Para los comemtarios...
+            this.saveComment = function(data)
+            {
+                return this.api.one("../orders").customPOST(data).then(function() 
+                {
+                    console.log("Success");
+                });
             };
     }]);
 })(window.angular);
