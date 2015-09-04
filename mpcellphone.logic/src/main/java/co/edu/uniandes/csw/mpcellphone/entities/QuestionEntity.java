@@ -7,12 +7,10 @@ package co.edu.uniandes.csw.mpcellphone.entities;
 
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -33,10 +31,10 @@ public class QuestionEntity implements Serializable {
     private Date questionDate;
     
     @ManyToOne
+    private ClientEntity client;
+    @ManyToOne
     private ProductEntity product;
 
-    @ManyToOne
-    private ClientEntity user;
     
     public Long getId() {
         return id;
@@ -70,12 +68,12 @@ public class QuestionEntity implements Serializable {
         this.product = product;
     }
 
-    public ClientEntity getUser() {
-        return user;
+    public ClientEntity getClient() {
+        return client;
     }
 
-    public void setUser(ClientEntity user) {
-        this.user = user;
+    public void setClient(ClientEntity client) {
+        this.client = client;
     }
 
 }

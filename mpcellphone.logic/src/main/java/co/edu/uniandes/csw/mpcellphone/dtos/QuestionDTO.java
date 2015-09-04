@@ -18,7 +18,7 @@ public class QuestionDTO {
     private Long id;
     private String question;
     private Date questionDate;
-    private ClientDTO user;
+    private ClientDTO client;
     private ProductDTO product;
 
     public Long getId() {
@@ -45,12 +45,12 @@ public class QuestionDTO {
         this.questionDate = questionDate;
     }
 
-    public ClientDTO getUser() {
-        return user;
+    public ClientDTO getClient() {
+        return client;
     }
 
-    public void setUser(ClientDTO user) {
-        this.user = user;
+    public void setClient(ClientDTO client) {
+        this.client = client;
     }
 
     public ProductDTO getProduct() {

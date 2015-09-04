@@ -8,7 +8,6 @@ package co.edu.uniandes.csw.mpcellphone.ejbs;
 import co.edu.uniandes.csw.mpcellphone.api.IQuestionLogic;
 import co.edu.uniandes.csw.mpcellphone.converters.QuestionConverter;
 import co.edu.uniandes.csw.mpcellphone.dtos.QuestionDTO;
-import co.edu.uniandes.csw.mpcellphone.entities.QuestionEntity;
 import co.edu.uniandes.csw.mpcellphone.persistence.QuestionPersistence;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -44,12 +43,11 @@ public class QuestionLogic implements IQuestionLogic {
 
     /**
      * @param dto
+     * @param idClient
      * @return 
      */
-    public QuestionDTO createQuestion(QuestionDTO dto) {
-        QuestionEntity entity = QuestionConverter.fullDTO2Entity(dto);
-        persistence.create(entity);
-        return QuestionConverter.fullEntity2DTO(entity);
+    public QuestionDTO createQuestion(QuestionDTO dto, Long idClient) {
+        return persistence.createQuestion(dto, idClient);
     }
 
 }
