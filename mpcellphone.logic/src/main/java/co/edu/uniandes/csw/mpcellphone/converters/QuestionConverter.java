@@ -29,7 +29,6 @@ public abstract class QuestionConverter {
             QuestionDTO dto = new QuestionDTO();
             dto.setId(entity.getId());
             dto.setQuestion(entity.getQuestion());
-            dto.setQuestionDate(entity.getQuestionDate());
 
             return dto;
         } else {
@@ -61,7 +60,6 @@ public abstract class QuestionConverter {
             QuestionDTO dto = new QuestionDTO();
             dto.setId(entity.getId());
             dto.setQuestion(entity.getQuestion());
-            dto.setQuestionDate(entity.getQuestionDate());
             dto.setClient(ClientConverter.refEntity2DTO(entity.getClient()));
             dto.setProduct(ProductConverter.refEntity2DTO(entity.getProduct()));
 
@@ -79,7 +77,6 @@ public abstract class QuestionConverter {
             QuestionEntity entity = new QuestionEntity();
             entity.setId(dto.getId());
             entity.setQuestion(dto.getQuestion());
-            entity.setQuestionDate(dto.getQuestionDate());
             entity.setClient(ClientConverter.refDTO2Entity(dto.getClient()));
             entity.setProduct(ProductConverter.refDTO2Entity(dto.getProduct()));
 
