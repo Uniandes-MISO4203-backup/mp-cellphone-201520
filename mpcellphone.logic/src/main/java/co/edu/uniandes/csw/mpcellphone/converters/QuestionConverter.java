@@ -81,6 +81,7 @@ public abstract class QuestionConverter {
             QuestionEntity entity = new QuestionEntity();
             entity.setId(dto.getId());
             entity.setQuestion(dto.getQuestion());
+            dto.setDate(entity.getDate());
             entity.setClient_id(dto.getClient_id());
             entity.setProduct_id(dto.getProduct_id());
 
