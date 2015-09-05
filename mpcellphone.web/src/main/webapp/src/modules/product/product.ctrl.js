@@ -3,8 +3,6 @@
     var mod = ng.module('productModule');
     var maximoCaracteres = 255;
     var ProducSelComment = 0; //Para guardar el item que se está haciendo el comentario..
-    var f = new Date(); //Fecha actual
-    var questionDate = f.getDate() + "/" + (f.getMonth() +1) + "/" + f.getFullYear();
 
     mod.controller('productCtrl', ['CrudCreator', '$scope', 'productService', 'productModel', 'cartItemService', '$location', 'authService', function (CrudCreator, $scope, svc, model, cartItemSvc, $location, authSvc) {
             CrudCreator.extendController(this, svc, $scope, model, 'product', 'Products');
@@ -77,7 +75,7 @@
                         {
                             ProducSelComment = record;
                             $('#modalQuestion').modal('show');
-                            $('#nameUserQuestion').html("<center><b>" + authSvc.getCurrentUser().name + " Dice:</b></center><br>");
+                            $('#nameUserQuestion').html("<center><b>" + authSvc.getCurrentUser().name + " Says:</b></center><br>");
                             $('#titleProductQuestion').html("Cellphone: " + record.cellPhone.name);
                             $("#question").val(""); 
                         }
@@ -144,16 +142,19 @@
             {   
                 fn: function ()
                 {
+                    var qDate = new Date(); //Fecha actual
                     //tmp = authSvc;
                     if (authSvc.getCurrentUser())
                     {
                         if($("#question").val().length !== 0)
                         {
                             var objEnvia = {
-                                question     : $("#question").val(), 
-                                product      : ProducSelComment.id
+                                question    : $("#question").val(), 
+                                date        : qDate,
+                                product_id  : ProducSelComment.id,
+                                client_id   : authSvc.getCurrentUser().id
                             };
-                            svc.saveQuestion(objEnvia).then(function(data){
+                            svc.saveQuestion(objEnvia).then(function(){
                                 $('#myModal').modal('hide');
                             });
                         }

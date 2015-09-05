@@ -44,7 +44,6 @@ public class QuestionLogic implements IQuestionLogic {
 
     /**
      * @param dto
-     * @param idClient
      * @return 
      */
     public QuestionDTO createQuestion(QuestionDTO dto) {
