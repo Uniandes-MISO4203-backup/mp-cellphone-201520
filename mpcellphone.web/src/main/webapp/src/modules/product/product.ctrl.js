@@ -142,7 +142,9 @@
             {   
                 fn: function ()
                 {
-                    var qDate = new Date(); //Fecha actual
+                    function pad(s) { return (s < 10) ? '0' + s : s; }
+                    var d = new Date();
+                    var qDate = [d.getFullYear(), pad(d.getMonth()+1), pad(d.getDate())].join('-');
                     //tmp = authSvc;
                     if (authSvc.getCurrentUser())
                     {

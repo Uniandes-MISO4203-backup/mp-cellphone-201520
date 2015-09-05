@@ -1,15 +1,12 @@
 package co.edu.uniandes.csw.mpcellphone.entities;
 
 import java.io.Serializable;
-import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -35,9 +32,6 @@ public class ProductEntity implements Serializable {
     @ManyToOne
     private ProviderEntity provider;
     
-    
-    @OneToMany
-    private List<QuestionEntity> question;
     /**
      * @generated
      */
@@ -106,14 +100,6 @@ public class ProductEntity implements Serializable {
      */
     public void setProvider(ProviderEntity provider) {
         this.provider = provider;
-    }
-
-    public List<QuestionEntity> getQuestion() {
-        return question;
-    }
-
-    public void setQuestion(List<QuestionEntity> question) {
-        this.question = question;
     }
 
 }

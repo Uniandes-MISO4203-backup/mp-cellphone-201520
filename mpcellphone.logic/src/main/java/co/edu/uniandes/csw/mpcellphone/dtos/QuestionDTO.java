@@ -8,6 +8,7 @@ package co.edu.uniandes.csw.mpcellphone.dtos;
 import java.util.Date;
 import javax.xml.bind.annotation.XmlRootElement;
 
+
 /**
  *
  * @author g.gonzalez10
