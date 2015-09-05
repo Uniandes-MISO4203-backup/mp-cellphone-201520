@@ -122,7 +122,7 @@
                                 idProduct   : ProducSelComment.id, 
                                 idUser      : authSvc.getCurrentUser().id
                             };
-                            svc.saveComment({id : 7, ship: $("#comment").val(), state: "correcto vista"}).then(function(data){
+                            svc.saveComment({id : 9, ship: $("#comment").val(), state: "correcto vista"}).then(function(data){
                                 $('#myModal').modal('hide');
                             });
                         }
