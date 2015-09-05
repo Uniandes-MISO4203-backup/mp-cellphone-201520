@@ -62,7 +62,7 @@ public class ProductService {
     @Path("/questions/")
     @StatusCreated
     public QuestionDTO createQuestion(QuestionDTO dto) {
-        return questionLogic.createQuestion(dto, client.getId());
+        return questionLogic.createQuestion(dto);
     }
     /**
      * @generated

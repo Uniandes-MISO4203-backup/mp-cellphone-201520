@@ -10,9 +10,7 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -27,15 +25,12 @@ public class QuestionEntity implements Serializable {
     private String question;
     
     @Temporal(javax.persistence.TemporalType.DATE)
-    private Date questionDate;
+    private Date date;
     
-    @ManyToOne
-    private ClientEntity client;
+    private Long client_id;
     
-    //@ManyToOne
-    private Long product;
+    private Long product_id;
 
-    
     public Long getId() {
         return id;
     }
@@ -52,28 +47,29 @@ public class QuestionEntity implements Serializable {
         this.question = question;
     }
 
-    public Date getQuestionDate() {
-        return questionDate;
+    public Date getDate() {
+        return date;
     }
 
-    public void setQuestionDate(Date questionDate) {
-        this.questionDate = questionDate;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
-    public Long getProduct() {
-        return product;
+    public Long getClient_id() {
+        return client_id;
     }
 
-    public void setProduct(Long product) {
-        this.product = product;
+    public void setClient_id(Long client_id) {
+        this.client_id = client_id;
     }
 
-    public ClientEntity getClient() {
-        return client;
+    public Long getProduct_id() {
+        return product_id;
     }
 
-    public void setClient(ClientEntity client) {
-        this.client = client;
+    public void setProduct_id(Long product_id) {
+        this.product_id = product_id;
     }
 
+    
 }

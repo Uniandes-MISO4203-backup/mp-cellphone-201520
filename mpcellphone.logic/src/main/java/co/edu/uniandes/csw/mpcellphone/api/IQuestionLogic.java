@@ -16,6 +16,6 @@ public interface IQuestionLogic {
     public int countQuestion();
     public List<QuestionDTO> getQuestions(Integer page, Integer maxRecords);
     public QuestionDTO getQuestion(Long id);
-    public QuestionDTO createQuestion(QuestionDTO dto, Long idClient);
+    public QuestionDTO createQuestion(QuestionDTO dto);
     
 }
