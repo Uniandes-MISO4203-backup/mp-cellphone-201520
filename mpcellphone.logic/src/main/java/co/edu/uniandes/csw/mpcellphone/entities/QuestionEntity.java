@@ -19,7 +19,6 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author g.gonzalez10
  */
 @Entity
-@XmlRootElement
 public class QuestionEntity implements Serializable {
     
     @Id
@@ -32,8 +31,9 @@ public class QuestionEntity implements Serializable {
     
     @ManyToOne
     private ClientEntity client;
-    @ManyToOne
-    private ProductEntity product;
+    
+    //@ManyToOne
+    private Long product;
 
     
     public Long getId() {
@@ -60,11 +60,11 @@ public class QuestionEntity implements Serializable {
         this.questionDate = questionDate;
     }
 
-    public ProductEntity getProduct() {
+    public Long getProduct() {
         return product;
     }
 
-    public void setProduct(ProductEntity product) {
+    public void setProduct(Long product) {
         this.product = product;
     }
 

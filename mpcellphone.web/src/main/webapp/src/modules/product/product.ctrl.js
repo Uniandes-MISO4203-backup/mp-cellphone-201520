@@ -3,6 +3,8 @@
     var mod = ng.module('productModule');
     var maximoCaracteres = 255;
     var ProducSelComment = 0; //Para guardar el item que se está haciendo el comentario..
+    var f = new Date(); //Fecha actual
+    var questionDate = f.getDate() + "/" + (f.getMonth() +1) + "/" + f.getFullYear();
 
     mod.controller('productCtrl', ['CrudCreator', '$scope', 'productService', 'productModel', 'cartItemService', '$location', 'authService', function (CrudCreator, $scope, svc, model, cartItemSvc, $location, authSvc) {
             CrudCreator.extendController(this, svc, $scope, model, 'product', 'Products');
@@ -62,7 +64,7 @@
                     }
              }];
             
-            //Para los comentarios por producto...
+            //Para las preguntas por producto...
             this.questionActions = [
             {
                     name: 'question',
@@ -148,15 +150,16 @@
                         if($("#question").val().length !== 0)
                         {
                             var objEnvia = {
-                                comment     : $("#question").val(), 
-                                idProduct   : ProducSelComment.id, 
-                                idUser      : authSvc.getCurrentUser().id
-                            }
-                            console.log(objEnvia);
+                                question     : $("#question").val(), 
+                                product      : ProducSelComment.id
+                            };
+                            svc.saveQuestion(objEnvia).then(function(data){
+                                $('#myModal').modal('hide');
+                            });
                         }
                         else
                         {
-                            alert("Por favor escribe tu comentario");
+                            alert("Por favor escribe tu pregunta");
                         }
                     }
                     else

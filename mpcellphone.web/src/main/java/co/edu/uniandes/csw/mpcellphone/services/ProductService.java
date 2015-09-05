@@ -1,10 +1,15 @@
 package co.edu.uniandes.csw.mpcellphone.services;
 
+import co.edu.uniandes.csw.mpcellphone.api.IClientLogic;
 import co.edu.uniandes.csw.mpcellphone.api.IProductLogic;
 import co.edu.uniandes.csw.mpcellphone.api.IProviderLogic;
+import co.edu.uniandes.csw.mpcellphone.api.IQuestionLogic;
+import co.edu.uniandes.csw.mpcellphone.dtos.ClientDTO;
 import co.edu.uniandes.csw.mpcellphone.dtos.ProductDTO;
 import co.edu.uniandes.csw.mpcellphone.dtos.ProviderDTO;
+import co.edu.uniandes.csw.mpcellphone.dtos.QuestionDTO;
 import co.edu.uniandes.csw.mpcellphone.providers.StatusCreated;
+import static com.sun.enterprise.util.Print.print;
 import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
@@ -31,12 +36,15 @@ public class ProductService {
 
     @Inject private IProductLogic productLogic;
     @Inject private IProviderLogic providerLogic;
+    @Inject private IQuestionLogic questionLogic;
+    @Inject  private IClientLogic clientLogic;
     @Context private HttpServletResponse response;
     @QueryParam("page") private Integer page;
     @QueryParam("maxRecords") private Integer maxRecords;
     @QueryParam("q")
     private String cellPhoneName;
     private ProviderDTO provider = (ProviderDTO) SecurityUtils.getSubject().getSession().getAttribute("Provider");
+    private final ClientDTO client = (ClientDTO)SecurityUtils.getSubject().getSession().getAttribute("Client");
     /**
      * @generated
      */
@@ -46,6 +54,16 @@ public class ProductService {
         return productLogic.createProduct(dto);
     }
 
+    /**
+     * Servicio que actualiza las preguntas de los clientes
+     * Creado por ggonzalez10
+     */
+    @POST
+    @Path("/questions/")
+    @StatusCreated
+    public QuestionDTO createQuestion(QuestionDTO dto) {
+        return questionLogic.createQuestion(dto, client.getId());
+    }
     /**
      * @generated
      */

@@ -19,7 +19,7 @@ public class QuestionDTO {
     private String question;
     private Date questionDate;
     private ClientDTO client;
-    private ProductDTO product;
+    private Long product;
 
     public Long getId() {
         return id;
@@ -53,11 +53,11 @@ public class QuestionDTO {
         this.client = client;
     }
 
-    public ProductDTO getProduct() {
+    public Long getProduct() {
         return product;
     }
 
-    public void setProduct(ProductDTO product) {
+    public void setProduct(Long product) {
         this.product = product;
     }
 
