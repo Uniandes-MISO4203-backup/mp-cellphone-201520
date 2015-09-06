@@ -12,6 +12,7 @@ public class ClientDTO {
     private Long id;
     private String name;
     private String userId;
+    private String email;
     private List<CartItemDTO> shoppingCart;
     private List<OrderDTO> order;
     /**
@@ -54,6 +55,14 @@ public class ClientDTO {
      */
     public void setUserId(String userid) {
         this.userId = userid;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     /**

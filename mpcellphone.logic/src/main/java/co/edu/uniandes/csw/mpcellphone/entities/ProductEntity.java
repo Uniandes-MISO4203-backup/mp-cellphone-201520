@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * @generated
@@ -15,6 +16,7 @@ import javax.persistence.NamedQuery;
 @NamedQueries({
     @NamedQuery(name = "Product.getByCellPhoneName", query = "select u from ProductEntity u WHERE UPPER(u.cellPhone.name) like :name")
 })
+@XmlRootElement
 public class ProductEntity implements Serializable {
 
     @Id
@@ -29,6 +31,7 @@ public class ProductEntity implements Serializable {
     private CellPhoneEntity cellPhone;
     @ManyToOne
     private ProviderEntity provider;
+    
     /**
      * @generated
      */

@@ -40,7 +40,7 @@
                     name: 'commet',
                     displayName: 'Comment',
                     icon: 'comment',
-                    class: 'primary',
+                    class: 'warning',
                     fn: function (record)
                     {
                         if (authSvc.getCurrentUser())
@@ -62,20 +62,20 @@
                     }
              }];
             
-            //Para los comentarios por producto...
+            //Para las preguntas por producto...
             this.questionActions = [
             {
                     name: 'question',
                     displayName: 'Question',
                     icon: 'question-sign',
-                    class: 'primary',
+                    class: 'info',
                     fn: function (record)
                     {
                         if (authSvc.getCurrentUser())
                         {
                             ProducSelComment = record;
                             $('#modalQuestion').modal('show');
-                            $('#nameUserQuestion').html("<center><b>" + authSvc.getCurrentUser().name + " Dice:</b></center><br>");
+                            $('#nameUserQuestion').html("<center><b>" + authSvc.getCurrentUser().name + " Says:</b></center><br>");
                             $('#titleProductQuestion').html("Cellphone: " + record.cellPhone.name);
                             $("#question").val(""); 
                         }
@@ -113,17 +113,19 @@
             {   
                 fn: function ()
                 {
-                    //tmp = authSvc;
                     if (authSvc.getCurrentUser())
                     {
                         if($("#comment").val().length !== 0)
                         {
-                            var objEnvia = {
-                                comment     : $("#comment").val(), 
-                                idProduct   : ProducSelComment.id, 
-                                idUser      : authSvc.getCurrentUser().id
-                            }
-                            console.log(objEnvia);
+                            svc.saveComment({
+                                                comment     : $("#comment").val(), 
+                                                product_id  : ProducSelComment.id, 
+                                                client_id   : authSvc.getCurrentUser().id, 
+                                                date        : new Date().toISOString().substring(0, 10)
+                                            }).then(function(){
+                                                alert("Su comentario ha sido enviado satisfactoriamente");  
+                                                $('#myModal').modal('hide');
+                                            });
                         }
                         else
                         {
@@ -147,15 +149,21 @@
                         if($("#question").val().length !== 0)
                         {
                             var objEnvia = {
-                                comment     : $("#question").val(), 
-                                idProduct   : ProducSelComment.id, 
-                                idUser      : authSvc.getCurrentUser().id
-                            }
+                                question    : $("#question").val(), 
+                                date        : new Date().toISOString().substring(0, 10),
+                                product_id  : ProducSelComment.id,
+                                client_id   : authSvc.getCurrentUser().id
+                            };
                             console.log(objEnvia);
+                            svc.saveQuestion(objEnvia).then(function()
+                            {
+                                alert("La pregunta ha sido enviada satisfactoriamente");
+                                $('#modalQuestion').modal('hide');
+                            });
                         }
                         else
                         {
-                            alert("Por favor escribe tu comentario");
+                            alert("Por favor escribe tu pregunta");
                         }
                     }
                     else
