@@ -117,14 +117,14 @@
                     {
                         if($("#comment").val().length !== 0)
                         {
-                            var objEnvia = {
-                                comment     : $("#comment").val(), 
-                                idProduct   : ProducSelComment.id, 
-                                idUser      : authSvc.getCurrentUser().id
-                            };
-                            svc.saveComment({id : 9, ship: $("#comment").val(), state: "correcto vista"}).then(function(data){
-                                $('#myModal').modal('hide');
-                            });
+                            svc.saveComment({
+                                                comment     : $("#comment").val(), 
+                                                product_id  : ProducSelComment.id, 
+                                                client_id   : authSvc.getCurrentUser().id, 
+                                                date        : new Date().toISOString().substring(0, 10)
+                                            }).then(function(){
+                                                $('#myModal').modal('hide');
+                                            });
                         }
                         else
                         {
