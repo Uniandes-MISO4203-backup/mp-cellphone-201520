@@ -12,6 +12,7 @@ public class ProviderDTO {
     private Long id;
     private String name;
     private String userId;
+    private String email;
     private List<ProductDTO> products;
     /**
      * @generated
@@ -53,6 +54,14 @@ public class ProviderDTO {
      */
     public void setUserId(String userid) {
         this.userId = userid;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     /**
