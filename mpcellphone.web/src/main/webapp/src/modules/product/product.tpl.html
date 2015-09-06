@@ -1,3 +1,15 @@
+<div class="alert alert-info" role="alert" id = "cantidad">
+       <center>
+           <div class="alert alert-success" role="alert">
+                <b>$ 200.000</b> <input type="text" class="span2" value="" data-slider-min="200000" data-slider-max="2000000" data-slider-step="5" data-slider-value="[800000,1200000]" id="sl2" > <b>$ 2'000.000</b>
+           </div>
+          <select data-ng-model="currentGroup" data-ng-options="group as group.Name for group in groups"></select>
+          <select data-ng-model="currentItem" data-ng-options="item as item.Name for item in currentGroup.Items"></select>
+       </center>
+    <br>
+    
+</div>  
+
 <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="ctrl.closeAlert($index)">{{alert.msg}}</alert>
 <div ng-hide="ctrl.editMode">
     <div class="col-sm-12">

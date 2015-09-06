@@ -1,5 +1,4 @@
 (function (ng) {
-
     var mainApp = ng.module('mainApp', [
         //'ngCrudMock',
         'authModule',

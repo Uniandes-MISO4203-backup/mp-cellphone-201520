@@ -3,10 +3,21 @@
     var mod = ng.module('productModule');
     var maximoCaracteres = 255;
     var ProducSelComment = 0; //Para guardar el item que se está haciendo el comentario..
-
+    //Para guardar el dato al servicio de producto más barato...
+    var cheapProduct = {
+                            provider  : 0, 
+                            product   : 0,
+                            lowprice  : 0, 
+                            highprice : 0
+                        };
+ 
     mod.controller('productCtrl', ['CrudCreator', '$scope', 'productService', 'productModel', 'cartItemService', '$location', 'authService', function (CrudCreator, $scope, svc, model, cartItemSvc, $location, authSvc) {
             CrudCreator.extendController(this, svc, $scope, model, 'product', 'Products');
-
+      
+            $('#sl2').slider().on('slide', function(){s
+                buscarCheap();
+            });
+            
             this.searchByName = function (cellPhoneName) {
                 var search;
                 if (cellPhoneName) {
@@ -14,7 +25,7 @@
                 }
                 $location.url('/catalog' + search);
             };
-
+            
             this.recordActions = [{
                     name: 'addToCart',
                     displayName: 'Add to Cart',
@@ -34,6 +45,7 @@
                         return true;
                     }
                 }];
+            
             //Para los comentarios por producto...
             this.commentActions = [
             {
@@ -89,10 +101,7 @@
                     }
              }];
          
-         
-         
-        
-         
+             //Para limitar el número de carácteres...
             this.keyActions  = [
             {   
                 fn: function ()
@@ -139,11 +148,10 @@
                 }
              }];
          
-        this.saveQuestion = [
+            this.saveQuestion = [
             {   
                 fn: function ()
                 {
-                    //tmp = authSvc;
                     if (authSvc.getCurrentUser())
                     {
                         if($("#question").val().length !== 0)
@@ -173,7 +181,68 @@
                 }
              }];
          
-//            this.loadRefOptions();
-            this.fetchRecords();
-        }]);
+//      this.loadRefOptions();
+        this.fetchRecords().then(function(data)
+        {
+            tmp = data;
+            var groups = [{
+                            "Id"    : 0, 
+                            "Name"  : "Seleccionar Proveedor",  
+                            "Items" : [{
+                                        "Id": 0,
+                                        "Name": "Seleccione Producto"
+                                      }]}];
+            var existe = false;
+            for(var i = 0; i < data.length; i++)
+            {
+                //Saber que el proveedor no esté ya relacionado...
+                existe = false;
+                for(var c = 0; c < groups.length; c++)
+                {
+                    if(Number(groups[c].Id) === Number(data[i].provider.id))
+                    {
+                        groups[c].Items.push({
+                                                   "Id"     : data[i].id,
+                                                   "Name"   : data[i].name
+                                              });
+                        existe = true;
+                        break;
+                    }
+                }
+                if(!existe)
+                {
+                    groups.push({
+                                    "Id"    : data[i].provider.id, 
+                                    "Name"  : data[i].provider.name, 
+                                    "Items" : []
+                                });
+                }
+            }
+            $scope.groups = groups;
+            $scope.currentGroup = groups[0];
+            $scope.$watch('currentGroup', function(value)
+            {
+                $scope.currentItem = value.Items[0] || 0;
+            });
+            
+            $scope.$watch('currentItem', function(value)
+            {
+                if(value.Id !== 0)
+                {
+                    cheapProduct.provider = $scope.currentGroup.Id;
+                    cheapProduct.product = value.Id;
+                    buscarCheap();
+                }
+            });
+        });
+        
+        var buscarCheap = function()
+        {
+            var price = $('#sl2').val().split(",");
+            cheapProduct.lowprice = price[0] || 0 ;
+            cheapProduct.highprice = price[1] || 0;
+            console.log(cheapProduct);
+            //$location.url('/catalog?q=htc');
+        };
+    }]);
 })(window.angular);
