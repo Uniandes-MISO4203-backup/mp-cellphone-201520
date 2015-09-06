@@ -27,7 +27,7 @@ public abstract class ClientConverter {
             dto.setId(entity.getId());
             dto.setName(entity.getName());
             dto.setUserId(entity.getUserId());
-            dto.setEmail(entity.getEmail());
+            //dto.setEmail(entity.getEmail());
 
             return dto;
         } else {
@@ -60,7 +60,7 @@ public abstract class ClientConverter {
             dto.setId(entity.getId());
             dto.setName(entity.getName());
             dto.setUserId(entity.getUserId());
-            dto.setEmail(entity.getEmail());
+           // dto.setEmail(entity.getEmail());
 
             return dto;
         } else {
@@ -77,7 +77,7 @@ public abstract class ClientConverter {
             entity.setId(dto.getId());
             entity.setName(dto.getName());
             entity.setUserId(dto.getUserId());
-            entity.setEmail(dto.getEmail());
+           // entity.setEmail(dto.getEmail());
 
             return entity;
         } else {
