@@ -123,6 +123,7 @@
                                                 client_id   : authSvc.getCurrentUser().id, 
                                                 date        : new Date().toISOString().substring(0, 10)
                                             }).then(function(){
+                                                alert("Su comentario ha sido enviado satisfactoriamente");  
                                                 $('#myModal').modal('hide');
                                             });
                         }
@@ -142,9 +143,6 @@
             {   
                 fn: function ()
                 {
-                    function pad(s) { return (s < 10) ? '0' + s : s; }
-                    var d = new Date();
-                    var qDate = [d.getFullYear(), pad(d.getMonth()+1), pad(d.getDate())].join('-');
                     //tmp = authSvc;
                     if (authSvc.getCurrentUser())
                     {
@@ -152,12 +150,15 @@
                         {
                             var objEnvia = {
                                 question    : $("#question").val(), 
-                                date        : qDate,
+                                date        : new Date().toISOString().substring(0, 10),
                                 product_id  : ProducSelComment.id,
                                 client_id   : authSvc.getCurrentUser().id
                             };
-                            svc.saveQuestion(objEnvia).then(function(){
-                                $('#myModal').modal('hide');
+                            console.log(objEnvia);
+                            svc.saveQuestion(objEnvia).then(function()
+                            {
+                                alert("La pregunta ha sido enviada satisfactoriamente");
+                                $('#modalQuestion').modal('hide');
                             });
                         }
                         else
