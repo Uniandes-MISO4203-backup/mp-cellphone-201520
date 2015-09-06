@@ -5,9 +5,7 @@
  */
 package co.edu.uniandes.csw.mpcellphone.api;
 
-import co.edu.uniandes.csw.mpcellphone.converters.OrderConverter;
 import co.edu.uniandes.csw.mpcellphone.dtos.OrderDTO;
-import co.edu.uniandes.csw.mpcellphone.entities.OrderEntity;
 import java.util.List;
 
 /**

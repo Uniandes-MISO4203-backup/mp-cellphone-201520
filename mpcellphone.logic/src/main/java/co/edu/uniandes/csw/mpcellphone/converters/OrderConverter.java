@@ -5,6 +5,7 @@ import java.util.List;
 import co.edu.uniandes.csw.mpcellphone.entities.ClientEntity;
 import co.edu.uniandes.csw.mpcellphone.entities.OrderEntity;
 import co.edu.uniandes.csw.mpcellphone.dtos.OrderDTO;
+import java.sql.Date;
 
 /**
  * Converter para la entidad Order
@@ -27,9 +28,8 @@ public abstract class OrderConverter {
         if (entity != null) {
             OrderDTO dto = new OrderDTO();
             dto.setId(entity.getId());
-            dto.setShip(entity.getShip());
             dto.setState(entity.getState());
-            dto.setDate(entity.getDate());
+            dto.setDateOrder(entity.getDateOrder());
 
             return dto;
         } else {
@@ -61,10 +61,10 @@ public abstract class OrderConverter {
         if (entity != null) {
             OrderDTO dto = new OrderDTO();
             dto.setId(entity.getId());
-            dto.setShip(entity.getShip());
+            dto.setShip(ShipConverter.refEntity2DTO(entity.getShip()));
             dto.setState(entity.getState());
             dto.setClient(ClientConverter.refEntity2DTO(entity.getClient()));
-            dto.setDate(entity.getDate());
+            dto.setDateOrder(entity.getDateOrder());
 
             return dto;
         } else {
@@ -80,10 +80,10 @@ public abstract class OrderConverter {
         if (dto != null) {
             OrderEntity entity = new OrderEntity();
             entity.setId(dto.getId());
-            entity.setShip(dto.getShip());
+            entity.setShip(ShipConverter.refDTO2Entity(dto.getShip()));
             entity.setState(dto.getState());
             entity.setClient(ClientConverter.refDTO2Entity(dto.getClient()));
-            entity.setDate(dto.getDate());
+            entity.setDateOrder((Date) dto.getDateOrder());
 
             return entity;
         } else {

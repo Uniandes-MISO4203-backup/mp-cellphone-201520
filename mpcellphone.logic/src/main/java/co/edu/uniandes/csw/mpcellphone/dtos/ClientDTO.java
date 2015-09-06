@@ -13,6 +13,7 @@ public class ClientDTO {
     private String name;
     private String userId;
     private List<CartItemDTO> shoppingCart;
+    private List<OrderDTO> order;
     /**
      * @generated
      */
@@ -69,4 +70,12 @@ public class ClientDTO {
         this.shoppingCart = shoppingcart;
     }
 
+    public List<OrderDTO> getOrder() {
+        return order;
+    }
+
+    public void setOrder(List<OrderDTO> order) {
+        this.order = order;
+    }
+       
 }

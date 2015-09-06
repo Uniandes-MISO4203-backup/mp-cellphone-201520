@@ -26,13 +26,13 @@ public class OrderEntity {
     
     @ManyToOne
     private ClientEntity client;
-    
-    private String ship;
+    @ManyToOne
+    private ShipEntity ship;
     
     private String state;
     
-    @Temporal(TemporalType.DATE)
-    private Date date;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dateOrder;
 
     public Long getId() {
         return id;
@@ -50,11 +50,11 @@ public class OrderEntity {
         this.client = client;
     }
 
-    public String getShip() {
+    public ShipEntity getShip() {
         return ship;
     }
 
-    public void setShip(String ship) {
+    public void setShip(ShipEntity ship) {
         this.ship = ship;
     }
 
@@ -66,11 +66,11 @@ public class OrderEntity {
         this.state = state;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getDateOrder() {
+        return dateOrder;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setDateOrder(Date dateOrder) {
+        this.dateOrder = dateOrder;
     }
 }

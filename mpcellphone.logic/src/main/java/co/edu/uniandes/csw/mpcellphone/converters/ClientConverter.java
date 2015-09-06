@@ -9,7 +9,7 @@ import java.util.List;
  * @generated
  */
 public abstract class ClientConverter {
-
+    
     /**
      * @generated
      */
@@ -89,6 +89,7 @@ public abstract class ClientConverter {
         if (entity != null) {
             ClientDTO dto = basicEntity2DTO(entity);
             dto.setShoppingCart(CartItemConverter.listEntity2DTO(entity.getShoppingCart()));
+            dto.setOrder(OrderConverter.listEntity2DTO(entity.getOrder()));
             return dto;
         } else {
             return null;
@@ -102,6 +103,7 @@ public abstract class ClientConverter {
         if (dto != null) {
             ClientEntity entity = basicDTO2Entity(dto);
             entity.setShoppingCart(CartItemConverter.childListDTO2Entity(dto.getShoppingCart(), entity));
+            entity.setOrder(OrderConverter.childListDTO2Entity(dto.getOrder(), entity));
             return entity;
         } else {
             return null;
