@@ -1,15 +1,17 @@
 package co.edu.uniandes.csw.mpcellphone.services;
 
 import co.edu.uniandes.csw.mpcellphone.api.IClientLogic;
+import co.edu.uniandes.csw.mpcellphone.api.ICommentLogic;
 import co.edu.uniandes.csw.mpcellphone.api.IProductLogic;
 import co.edu.uniandes.csw.mpcellphone.api.IProviderLogic;
 import co.edu.uniandes.csw.mpcellphone.api.IQuestionLogic;
 import co.edu.uniandes.csw.mpcellphone.dtos.ClientDTO;
+import co.edu.uniandes.csw.mpcellphone.dtos.CommentDTO;
 import co.edu.uniandes.csw.mpcellphone.dtos.ProductDTO;
 import co.edu.uniandes.csw.mpcellphone.dtos.ProviderDTO;
 import co.edu.uniandes.csw.mpcellphone.dtos.QuestionDTO;
 import co.edu.uniandes.csw.mpcellphone.providers.StatusCreated;
-import static com.sun.enterprise.util.Print.print;
+//import static com.sun.enterprise.util.Print.print;
 import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
@@ -37,6 +39,7 @@ public class ProductService {
     @Inject private IProductLogic productLogic;
     @Inject private IProviderLogic providerLogic;
     @Inject private IQuestionLogic questionLogic;
+    @Inject private ICommentLogic commentLogic;
     @Inject  private IClientLogic clientLogic;
     @Context private HttpServletResponse response;
     @QueryParam("page") private Integer page;
@@ -64,6 +67,18 @@ public class ProductService {
     public QuestionDTO createQuestion(QuestionDTO dto) {
         return questionLogic.createQuestion(dto);
     }
+    
+    /**
+     * Servicio para establecer preguntas sobre un producto..
+     * Creado por jh.rubiano10
+     */
+    @POST
+    @Path("/comments/")
+    @StatusCreated
+    public CommentDTO createComment(CommentDTO dto) {
+        return commentLogic.createComment(dto);
+    }
+    
     /**
      * @generated
      */

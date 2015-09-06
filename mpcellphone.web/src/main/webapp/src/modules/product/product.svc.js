@@ -6,7 +6,7 @@
             //Para los comemtarios...
             this.saveComment = function(data)
             {
-                return this.api.one("../orders").customPOST(data).then(function() 
+                return this.api.one("comments/").customPOST(data).then(function() 
                 {
                     console.log("Success");
                 });
