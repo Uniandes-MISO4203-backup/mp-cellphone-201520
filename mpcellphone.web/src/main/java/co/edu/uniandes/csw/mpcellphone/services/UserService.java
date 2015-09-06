@@ -121,6 +121,7 @@ public class UserService {
                     ClientDTO newClient = new ClientDTO();
                     newClient.setName(user.getUserName());
                     newClient.setUserId(acctClient.getHref());
+                    newClient.setEmail(acctClient.getEmail());
                     newClient = clientLogic.createClient(newClient);
                     break;
 
@@ -129,6 +130,7 @@ public class UserService {
                     ProviderDTO newProvider = new ProviderDTO();
                     newProvider.setName(user.getUserName());
                     newProvider.setUserId(acctProvider.getHref());
+                    newProvider.setEmail(acctProvider.getEmail());
                     newProvider = providerLogic.createProvider(newProvider);
                     break;                                      
             }
