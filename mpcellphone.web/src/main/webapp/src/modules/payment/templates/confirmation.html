@@ -1,0 +1,50 @@
+<div>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Shipping Info</h3>
+        </div>
+        <div class="panel-body">
+            <ul>
+                <li>State: {{shippingData.state}}</li>
+                <li>Country: {{shippingData.country}}</li>
+                <li>City: {{shippingData.city}}</li>
+                <li>Address: {{shippingData.address}}</li>
+                <li>Estimated Time: {{shippingData.stimatedTime}}</li>
+            </ul>
+        </div>
+    </div>
+    <div class="panel panel-success">
+        <div class="panel-heading">
+          <h3 class="panel-title">Payment Info</h3>
+        </div>
+        <div class="panel-body">
+            <ul>
+                <li>Date: {{paymentData.payDate}}</li>
+                <li>Payment Method: {{paymentData.paymentMethod}}</li>
+                <li>Card Number: {{paymentData.numberCard}}</li>
+                <li>SVC: {{paymentData.svc}}</li>
+                <li>Bank: {{paymentData.bank}}</li>
+                <li>Total Tax: {{paymentData.totalTax}}</li>
+                <li>Total Sale: {{paymentData.totalSale}}</li>
+            </ul> 
+        </div>
+    </div>
+    <button data-toggle="modal" data-target="#myModal">Pay</button>
+      
+    <div class="modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                  <h4 class="modal-title">Process End</h4>
+                </div>
+                <div class="modal-body">
+                  <p>Payment Success</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -2,10 +2,8 @@ package co.edu.uniandes.csw.mpcellphone.converters;
 
 import java.util.ArrayList;
 import java.util.List;
-import co.edu.uniandes.csw.mpcellphone.entities.ClientEntity;
 import co.edu.uniandes.csw.mpcellphone.entities.TransactionEntity;
 import co.edu.uniandes.csw.mpcellphone.dtos.TransactionDTO;
-import java.util.Date;
 
 /**
  * Converter para la entidad Transaction

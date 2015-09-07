@@ -26,6 +26,7 @@ public class OrderEntity {
     
     @ManyToOne
     private ClientEntity client;
+    
     @ManyToOne
     private ShipEntity ship;
     

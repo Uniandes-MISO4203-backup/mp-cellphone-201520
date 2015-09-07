@@ -19,10 +19,10 @@ public class TransactionDTO {
     private OrderDTO order;
     private PaymentMethodDTO paymentMethod;
     private TaxDTO tax;
-    private Long totalSale;
-    private Long totalDiscount;
-    private Long totalTax;
-    private Date payDate;
+    private String totalSale;
+    private String totalDiscount;
+    private String totalTax;
+    private String payDate;
     private Long numberCard;
     private String bank;
     private String expirationDate;
@@ -60,35 +60,35 @@ public class TransactionDTO {
         this.tax = tax;
     }
 
-    public Long getTotalSale() {
+    public String getTotalSale() {
         return totalSale;
     }
 
-    public void setTotalSale(Long totalSale) {
+    public void setTotalSale(String totalSale) {
         this.totalSale = totalSale;
     }
 
-    public Long getTotalDiscount() {
+    public String getTotalDiscount() {
         return totalDiscount;
     }
 
-    public void setTotalDiscount(Long totalDiscount) {
+    public void setTotalDiscount(String totalDiscount) {
         this.totalDiscount = totalDiscount;
     }
 
-    public Long getTotalTax() {
+    public String getTotalTax() {
         return totalTax;
     }
 
-    public void setTotalTax(Long totalTax) {
+    public void setTotalTax(String totalTax) {
         this.totalTax = totalTax;
     }
 
-    public Date getPayDate() {
+    public String getPayDate() {
         return payDate;
     }
 
-    public void setPayDate(Date payDate) {
+    public void setPayDate(String payDate) {
         this.payDate = payDate;
     }
 
