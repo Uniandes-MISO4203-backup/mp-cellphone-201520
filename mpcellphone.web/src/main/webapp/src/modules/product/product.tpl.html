@@ -1,19 +1,30 @@
 <div class="alert alert-info" role="alert">
        <center>
+        <form class="form-inline">
+            <div class="form-group">
+              <label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
+              <div class="input-group">
+                <div class="input-group-addon">$</div>
+                <input ng-model="priceItem" type="number" class="form-control" id="exampleInputAmount" placeholder="Amount" step="100000">
+                <div class="input-group-addon">.00</div>
+              </div>
+            </div>
+            <select data-ng-model="currentGroup" data-ng-options="group as group.Name for group in groups" class="btn btn-default"></select>
+          </form>   
+           <!--
            <div class="alert alert-success" role="alert">
-                <b>$ 200.000</b> <input type="text" class="span2" value="" data-slider-min="200000" data-slider-max="2000000" data-slider-step="5" data-slider-value="[800000,1200000]" id="sl2" > <b>$ 2'000.000</b>
+                <b>$ 200.000</b> <input tye="text" class="span2" value="" data-slider-min="200000" data-slider-max="2000000" data-slider-step="5" data-slider-value="[200000,2000000]" id="sl2"> <b>$ 2'000.000</b>
            </div>
-          <select data-ng-model="currentGroup" data-ng-options="group as group.Name for group in groups"></select>
-          <select data-ng-model="currentItem" data-ng-options="item as item.Name for item in currentGroup.Items"></select>
+           //-->
+          <!-- <select data-ng-model="currentItem" data-ng-options="item as item.Name for item in currentGroup.Items"></select> //-->
+          <!-- <input type="text" class="form-control" ng-model="priceItem" id = "priceItem"> //-->
        </center>
-    <br>
-    
 </div>  
 
 <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="ctrl.closeAlert($index)">{{alert.msg}}</alert>
 <div ng-hide="ctrl.editMode">
     <div class="col-sm-12">
-    <div ng-repeat="record in records">
+    <div ng-repeat="record in records" ng-show = "cheap(currentGroup, priceItem, record)">
         <div class="col-sm-4 well text-center">
             <div class="col-md-12">
                 <div class="img-thumbnail" id="cover" ng-if="record.cellPhone.image">
