@@ -5,7 +5,7 @@ import javax.ejb.Stateless;
 
 /**
  * Clase encargada de contener la comunicacion con la persistencia
- * @author Cindy Hernández - cv.hernandez10
+ * @author Cindy Hernandez - cv.hernandez10
  */
 @Stateless
 public class ShipPersistence extends CrudPersistence<ShipEntity> {

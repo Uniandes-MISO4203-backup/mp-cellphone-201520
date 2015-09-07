@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * DTO para la entidad Order
- * @author Cindy Hernández - cv.hernandez10
+ * @author Cindy Hernandez - cv.hernandez10
  */
 @XmlRootElement
 public class OrderDTO {

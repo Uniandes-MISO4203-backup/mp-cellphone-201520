@@ -17,7 +17,7 @@ import javax.inject.Inject;
 
 /**
  * EJB relacionado con el comportamiento de metodos de pago
- * @author Cindy Hernández - cv.hernandez10
+ * @author Cindy Hernandez - cv.hernandez10
  */
 @Stateless
 public class PaymentMethodLogic implements IPaymentMethodLogic {

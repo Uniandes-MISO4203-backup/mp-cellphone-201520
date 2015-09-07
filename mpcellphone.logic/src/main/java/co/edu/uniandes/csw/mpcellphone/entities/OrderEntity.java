@@ -15,7 +15,7 @@ import javax.persistence.TemporalType;
 
 /**
  * Entidad relacionada con la tabla que almacena la orden de una compra
- * @author Cindy Hernández - cv.hernandez10
+ * @author Cindy Hernandez - cv.hernandez10
  */
 @Entity
 public class OrderEntity {

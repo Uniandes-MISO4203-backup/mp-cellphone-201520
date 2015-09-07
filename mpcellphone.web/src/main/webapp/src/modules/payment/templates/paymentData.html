@@ -1,80 +1,130 @@
 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-    <ul class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-        <li ng-repeat="n in cartItems">
-            {{n.name}} - {{n.quantity}}
-        </li>
-    </ul>
-    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-        <label for="pse">PSE</label>
-        <input type="radio" name="paymentType" id="pse" ng-click="changePayment($event)">
-        <label for="creditCard">Credit Card</label>
-        <input type="radio" name="paymentType" id="creditCard" ng-click="changePayment($event)">
-    </div>
-    <div style="display:none" id="pseForm">
-        <form>
-            <div>
-                <label>Name</label>
-                <input type="text" ng-model="payment.clientName"/>
-            </div>
-            
-            <div>
-                <label>Last Name</label>
-                <input type="text" ng-model="payment.clientSurname"/>
-            </div>
-            
-            <div>
-                <label>Email</label>
-                <input type="text" ng-model="payment.clientMail"/>
-            </div>
-            
-            <div>
-                <label>Id</label>
-                <input type="text" ng-model="payment.clientId"/>
-            </div>
-            
-            <div>
-                <label>Cell Phone</label>
-                <input type="text" ng-model="payment.clientPhoneNumber"/>
-            </div>
-            
-            <div>
-                <label>Bank</label>
-                <input type="text" ng-model="payment.clientBankName"/>
-            </div>
-        </form>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">Products To Buy</h3>
+        </div>
+        <div class="panel-body">
+            <table class="table table-striped table-hover ">
+                <thead>
+                  <tr>
+                    <th>Product Name</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                  </tr>
+                </thead>
+                <tbody ng-repeat="n in cartItems">
+                  <tr>
+                    <td>{{n.name}}</td>
+                    <td>{{n.quantity}}</td>
+                    <td>{{n.price | currency}}</td>
+                  </tr>
+                </tbody>
+            </table> 
+        </div>
     </div>
     
-    <div style="display:none" id="creditCardForm">
-        <form>
-            <div>
-                <label>Titular Name</label>
-                <input type="text" ng-model="payment.clientCardName"/>
+    <div class="panel panel-success">
+        <div class="panel-heading">
+          <h3 class="panel-title">Payment Info</h3>
+        </div>
+        <div class="panel-body">
+            <div style="text-align: center;">
+                <button type="submit" class="btn btn-info" name="paymentType" id="pse" ng-click="changePayment($event)">PSE</button>
+                <button type="submit" class="btn btn-warning" name="paymentType" id="creditCard" ng-click="changePayment($event)">Credit Card</button>
             </div>
-            
-            <div>
-                <label>Credit Card</label>
-                <select ng-model="payment.creditCardHolder">
-                    <option>Select a Card Provider</option>
-                    <option ng-repeat="card in creditCardHolders" value="{{card.id}}">{{card.methodName}}</option>
-                </select>
+            <div style="display:none" id="pseForm">
+                <form class="form-horizontal" style="margin: 2% auto;">
+                    <fieldset>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label" for="name">Name</label>
+                            <div class="col-lg-10">
+                                <input class="form-control" type="text" placeholder="Name" ng-model="payment.clientName"/>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label" for="lastName">Last Name</label>
+                            <div class="col-lg-10">
+                                <input class="form-control" type="text" placeholder="Last Name" ng-model="payment.clientSurname"/>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label" for="email">Email</label>
+                            <div class="col-lg-10">
+                                <input class="form-control" type="text" placeholder="Email" ng-model="payment.clientMail"/>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label" for="id">Id</label>
+                            <div class="col-lg-10">
+                                <input class="form-control" type="text" placeholder="Identification" ng-model="payment.clientId"/>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label" for="cellPhone">Cell Phone</label>
+                            <div class="col-lg-10">
+                                <input class="form-control" type="text" placeholder="Cell Phone" ng-model="payment.clientPhoneNumber"/>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label" for="bank">Bank</label>
+                            <div class="col-lg-10">
+                                <input class="form-control" type="text" placeholder="Bank" ng-model="payment.clientBankName"/>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
             </div>
-            
-            <div>
-                <label>Card Number</label>
-                <input type="text" ng-model="payment.cardNumber"/>
+
+            <div style="display:none" id="creditCardForm">
+                <form class="form-horizontal" style="margin: 2% auto;">
+                    <fieldset>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label" for="titularName">Titular Name</label>
+                            <div class="col-lg-10">
+                                <input class="form-control" placeholder="Titular Name" type="text" ng-model="payment.clientCardName"/>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label" for="creditCard">Credit Card</label>
+                            <div class="col-lg-10">
+                                <select class="form-control" ng-model="payment.creditCardHolder">
+                                    <option>Select a Card Provider</option>
+                                    <option ng-repeat="card in creditCardHolders" value="{{card.id}}">{{card.methodName}}</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label" for="cardNumber">Card Number</label>
+                            <div class="col-lg-10">
+                                <input class="form-control" placeholder="Card Number" type="text" ng-model="payment.cardNumber"/>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label" for="cardExpiration">Card Expiration Date</label>
+                            <div class="col-lg-10">
+                                <input class="form-control" placeholder="Expiration Date" type="text" ng-model="payment.cardExpiration"/>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label" for="cardCode">Card Code</label>
+                            <div class="col-lg-10">
+                                <input class="form-control" placeholder="Card Code" type="text" ng-model="payment.cardCode"/>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
             </div>
-            
-            <div>
-                <label>Card Expiration Date</label>
-                <input type="text" ng-model="payment.cardExpiration"/>
-            </div>
-            
-            <div>
-                <label>Card Code</label>
-                <input type="text" ng-model="payment.cardCode"/>
-            </div>
-        </form>
+            <button style="margin-left: 50%; margin-top: 1%;" class="btn btn-info" ng-click="submitPayment()">Next</button>
+        </div>
     </div>
-    <button class="btn btn-default" ng-click="submitPayment()">Next</button>
 </div>
     

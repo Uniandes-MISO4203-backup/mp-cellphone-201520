@@ -16,7 +16,7 @@ import javax.inject.Inject;
 
 /**
  * EJB relacionado con el comportamiento de una orden
- * @author Cindy Hernández - cv.hernandez10
+ * @author Cindy Hernandez - cv.hernandez10
  */
 @Stateless
 public class OrderLogic implements IOrderLogic {

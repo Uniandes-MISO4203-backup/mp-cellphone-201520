@@ -7,7 +7,7 @@ import co.edu.uniandes.csw.mpcellphone.dtos.TransactionDTO;
 
 /**
  * Converter para la entidad Transaction
- * @author Cindy Hernández - cv.hernandez10
+ * @author Cindy Hernandez - cv.hernandez10
  */
 public abstract class TransactionConverter {
 

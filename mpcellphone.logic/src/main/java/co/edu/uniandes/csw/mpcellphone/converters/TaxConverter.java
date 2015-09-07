@@ -9,7 +9,7 @@ import java.sql.Date;
 
 /**
  * Converter para la entidad Tax
- * @author Cindy Hernández - cv.hernandez10
+ * @author Cindy Hernandez - cv.hernandez10
  */
 public abstract class TaxConverter {
 
