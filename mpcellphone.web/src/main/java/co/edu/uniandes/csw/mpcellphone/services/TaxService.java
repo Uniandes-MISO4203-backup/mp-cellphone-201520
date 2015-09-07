@@ -59,7 +59,7 @@ public class TaxService {
     }
 
     /**
-     * Metodo GET, para obtener un dato especifico al enviar un parámetro por URL
+     * Metodo GET, para obtener un dato especifico al enviar un parametro por URL
      * @param id
      * @return 
      */
