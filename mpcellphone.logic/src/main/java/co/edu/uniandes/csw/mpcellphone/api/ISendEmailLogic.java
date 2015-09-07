@@ -11,5 +11,5 @@ package co.edu.uniandes.csw.mpcellphone.api;
  */
 public interface ISendEmailLogic {
 
-    public int sendEmailMP (String emailTo, String subject, String msg);
+    public void sendEmailMP (String emailFrom, String emailTo, String subject, String msg);
 }
