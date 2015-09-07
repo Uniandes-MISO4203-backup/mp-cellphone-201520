@@ -22,7 +22,7 @@ import javax.ws.rs.core.MediaType;
 
 /**
  * Servicio REST de Order
- * @author Cindy Hernández - cv.hernandez10
+ * @author Cindy Hernandez - cv.hernandez10
  */
 @Path("/orders")
 @Consumes(MediaType.APPLICATION_JSON)

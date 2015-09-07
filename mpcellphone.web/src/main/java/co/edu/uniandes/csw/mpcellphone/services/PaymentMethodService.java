@@ -22,7 +22,7 @@ import javax.ws.rs.core.MediaType;
 
 /**
  * Servicio REST de PaymentMethod
- * @author Cindy Hernández - cv.hernandez10
+ * @author Cindy Hernandez - cv.hernandez10
  */
 @Path("/payment_method")
 @Consumes(MediaType.APPLICATION_JSON)

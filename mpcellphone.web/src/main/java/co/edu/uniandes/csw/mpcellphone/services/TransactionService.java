@@ -20,7 +20,7 @@ import javax.ws.rs.core.MediaType;
 
 /**
  * Servicio REST de Transaction
- * @author Cindy Hernández - cv.hernandez10
+ * @author Cindy Hernandez - cv.hernandez10
  */
 @Path("/pay")
 @Consumes(MediaType.APPLICATION_JSON)

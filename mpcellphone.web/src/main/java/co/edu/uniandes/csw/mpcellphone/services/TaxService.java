@@ -20,7 +20,7 @@ import javax.ws.rs.core.MediaType;
 
 /**
  * Servicio REST de Tax
- * @author Cindy Hernández - cv.hernandez10
+ * @author Cindy Hernandez - cv.hernandez10
  */
 @Path("/tax")
 @Consumes(MediaType.APPLICATION_JSON)
