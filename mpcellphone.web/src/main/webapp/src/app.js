@@ -1,5 +1,4 @@
 (function (ng) {
-
     var mainApp = ng.module('mainApp', [
         //'ngCrudMock',
         'authModule',
@@ -10,7 +9,8 @@
         'providerModule',
         'ngRoute',
         'ngCrud',
-        'xeditable'
+        'xeditable',
+        'paymentModule'
     ]);
 
     mainApp.config(['$routeProvider', 'CrudTemplateURL', 'CrudCtrlAlias', function ($routeProvider, tplUrl, alias) {
@@ -39,6 +39,10 @@
             }).when('/shoppingCart', {
                 templateUrl: 'src/modules/cartItem/templates/ShoppingCart.html',
                 controller: 'cartItemCtrl',
+                controllerAs: 'ctrl'
+            }).when('/checkout', {
+                templateUrl: 'src/modules/payment/templates/Checkout.html',
+                controller: 'checkoutCtrl',
                 controllerAs: 'ctrl'
             })
                     .otherwise('/catalog');

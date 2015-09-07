@@ -9,7 +9,7 @@ import java.util.List;
  * @generated
  */
 public abstract class ClientConverter {
-
+    
     /**
      * @generated
      */
@@ -27,7 +27,7 @@ public abstract class ClientConverter {
             dto.setId(entity.getId());
             dto.setName(entity.getName());
             dto.setUserId(entity.getUserId());
-            dto.setEmail(entity.getEmail());
+            //dto.setEmail(entity.getEmail());
 
             return dto;
         } else {
@@ -60,7 +60,7 @@ public abstract class ClientConverter {
             dto.setId(entity.getId());
             dto.setName(entity.getName());
             dto.setUserId(entity.getUserId());
-            dto.setEmail(entity.getEmail());
+           // dto.setEmail(entity.getEmail());
 
             return dto;
         } else {
@@ -77,7 +77,7 @@ public abstract class ClientConverter {
             entity.setId(dto.getId());
             entity.setName(dto.getName());
             entity.setUserId(dto.getUserId());
-            entity.setEmail(dto.getEmail());
+           // entity.setEmail(dto.getEmail());
 
             return entity;
         } else {
@@ -92,6 +92,7 @@ public abstract class ClientConverter {
         if (entity != null) {
             ClientDTO dto = basicEntity2DTO(entity);
             dto.setShoppingCart(CartItemConverter.listEntity2DTO(entity.getShoppingCart()));
+            dto.setOrder(OrderConverter.listEntity2DTO(entity.getOrder()));
             return dto;
         } else {
             return null;
@@ -105,6 +106,7 @@ public abstract class ClientConverter {
         if (dto != null) {
             ClientEntity entity = basicDTO2Entity(dto);
             entity.setShoppingCart(CartItemConverter.childListDTO2Entity(dto.getShoppingCart(), entity));
+            entity.setOrder(OrderConverter.childListDTO2Entity(dto.getOrder(), entity));
             return entity;
         } else {
             return null;

@@ -6,18 +6,20 @@
 package co.edu.uniandes.csw.mpcellphone.dtos;
 
 import java.util.Date;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * DTO para la entidad Order
  * @author Cindy Hernández - cv.hernandez10
  */
+@XmlRootElement
 public class OrderDTO {
     
     private Long id;
     private ClientDTO client;    
-    private String ship;    
+    private ShipDTO ship;    
     private String state;    
-    private Date date;
+    private Date dateOrder;
 
     public Long getId() {
         return id;
@@ -35,11 +37,11 @@ public class OrderDTO {
         this.client = client;
     }
 
-    public String getShip() {
+    public ShipDTO getShip() {
         return ship;
     }
 
-    public void setShip(String ship) {
+    public void setShip(ShipDTO ship) {
         this.ship = ship;
     }
 
@@ -51,11 +53,11 @@ public class OrderDTO {
         this.state = state;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getDateOrder() {
+        return dateOrder;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setDateOrder(Date dateOrder) {
+        this.dateOrder = dateOrder;
     }   
 }

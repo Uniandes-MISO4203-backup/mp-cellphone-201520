@@ -26,15 +26,13 @@ public class ClientEntity implements Serializable {
     private String name;
 
     private String userId;
-    
-    private String email;
 
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CartItemEntity> shoppingCart;
-
+    
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<OrderEntity> order;
-
+    private List<OrderEntity> order;    
+    
     /**
      * @generated
      */
@@ -77,14 +75,6 @@ public class ClientEntity implements Serializable {
         this.userId = userId;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     /**
      * @generated
      */
@@ -99,4 +89,11 @@ public class ClientEntity implements Serializable {
         this.shoppingCart = shoppingcart;
     }
 
+    public List<OrderEntity> getOrder() {
+        return order;
+    }
+
+    public void setOrder(List<OrderEntity> order) {
+        this.order = order;
+    }
 }

@@ -1,0 +1,80 @@
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-controller="checkoutCtrl">
+    <ul class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <li ng-repeat="n in cartItems">
+            {{n.name}} - {{n.quantity}}
+        </li>
+    </ul>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <label for="pse">PSE</label>
+        <input type="radio" name="paymentType" id="pse" ng-click="changePayment($event)">
+        <label for="creditCard">Credit Card</label>
+        <input type="radio" name="paymentType" id="creditCard" ng-click="changePayment($event)">
+    </div>
+    <div style="display:none" id="pseForm">
+        <form>
+            <div>
+                <label>Name</label>
+                <input type="text" ng-model="payment.clientName"/>
+            </div>
+            
+            <div>
+                <label>Last Name</label>
+                <input type="text" ng-model="payment.clientSurname"/>
+            </div>
+            
+            <div>
+                <label>Email</label>
+                <input type="text" ng-model="payment.clientMail"/>
+            </div>
+            
+            <div>
+                <label>Id</label>
+                <input type="text" ng-model="payment.clientId"/>
+            </div>
+            
+            <div>
+                <label>Cell Phone</label>
+                <input type="text" ng-model="payment.clientPhoneNumber"/>
+            </div>
+            
+            <div>
+                <label>Bank</label>
+                <input type="text" ng-model="payment.clientBankName"/>
+            </div>
+        </form>
+    </div>
+    
+    <div style="display:none" id="creditCardForm">
+        <form>
+            <div>
+                <label>Titular Name</label>
+                <input type="text" ng-model="payment.clientCardName"/>
+            </div>
+            
+            <div>
+                <label>Credit Card</label>
+                <select ng-model="payment.creditCardHolder">
+                    <option>Select a Card Provider</option>
+                    <option ng-repeat="card in creditCardHolders" value="{{card.id}}">{{card.methodName}}</option>
+                </select>
+            </div>
+            
+            <div>
+                <label>Card Number</label>
+                <input type="text" ng-model="payment.cardNumber"/>
+            </div>
+            
+            <div>
+                <label>Card Expiration Date</label>
+                <input type="text" ng-model="payment.cardExpiration"/>
+            </div>
+            
+            <div>
+                <label>Card Code</label>
+                <input type="text" ng-model="payment.cardCode"/>
+            </div>
+        </form>
+    </div>
+    <button class="btn btn-default" ng-click="submitPayment()">Next</button>
+</div>
+    
