@@ -35,6 +35,8 @@ public class TransactionEntity {
     @ManyToOne
     private TaxEntity tax;
     
+    private Long numberCard;
+    
     private Long totalSale;
     
     private Long totalDiscount;
@@ -43,6 +45,12 @@ public class TransactionEntity {
     
     @Temporal(TemporalType.DATE)
     private Date payDate;
+    
+    private String bank;
+    
+    private String expirationDate;
+    
+    private Long svc;
 
     public Long getId() {
         return id;
@@ -107,5 +115,38 @@ public class TransactionEntity {
     public void setPayDate(Date payDate) {
         this.payDate = payDate;
     }
+
+    public Long getNumberCard() {
+        return numberCard;
+    }
+
+    public void setNumberCard(Long numberCard) {
+        this.numberCard = numberCard;
+    }
+
+    public String getBank() {
+        return bank;
+    }
+
+    public void setBank(String bank) {
+        this.bank = bank;
+    }
+
+    public String getExpirationDate() {
+        return expirationDate;
+    }
+
+    public void setExpirationDate(String expirationDate) {
+        this.expirationDate = expirationDate;
+    }
+
+    public Long getSvc() {
+        return svc;
+    }
+
+    public void setSvc(Long svc) {
+        this.svc = svc;
+    }
+
     
 }

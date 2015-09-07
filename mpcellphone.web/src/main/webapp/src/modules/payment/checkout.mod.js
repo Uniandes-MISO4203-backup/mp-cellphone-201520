@@ -3,6 +3,8 @@
 
     mod.constant('checkoutContext', 'orders');
     mod.constant('paymentContext', 'pay');
+    mod.constant('shippingContext', 'ship');
+    mod.constant('creditCardContext', 'payment_method');
 /*
     mod.constant('checkoutModel', {
         fields: [{

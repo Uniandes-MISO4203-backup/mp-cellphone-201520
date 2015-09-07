@@ -1,0 +1,25 @@
+<div ng-controller="checkoutCtrl" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <form class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <h2>Datos de Env&iacute;o</h2>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <label for="state" class="col-lg-3 col-md-3 col-sm-12 col-xs-12">State: </label>
+            <input class="col-lg-8 col-md-8 col-sm-12 col-xs-12" type="text" id="state" ng-model="shipping.state" ng-required>
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <label class="col-lg-3 col-md-3 col-sm-12 col-xs-12" for="country">Country: </label>
+            <input class="col-lg-8 col-md-8 col-sm-12 col-xs-12" type="text" id="country" ng-model="shipping.country">
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <label class="col-lg-3 col-md-3 col-sm-12 col-xs-12" for="city">City: </label>
+            <input class="col-lg-8 col-md-8 col-sm-12 col-xs-12" type="text" id="city" ng-model="shipping.city">
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <label class="col-lg-3 col-md-3 col-sm-12 col-xs-12" for="address">Address: </label>
+            <input class="col-lg-8 col-md-8 col-sm-12 col-xs-12" type="text" id="address" ng-model="shipping.address">
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <label class="col-lg-12 col-md-12 col-sm-12 col-xs-12">Estimated shipping time: {{shipping.time}} </label>
+        </div>
+        <input type="submit" value="Next" ng-click="submitShippingData()"/>
+    </form>
+</div>

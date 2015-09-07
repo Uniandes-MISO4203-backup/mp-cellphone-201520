@@ -32,6 +32,10 @@ public abstract class TransactionConverter {
             dto.setTotalDiscount(entity.getTotalDiscount());
             dto.setTotalSale(entity.getTotalSale());
             dto.setTotalTax(entity.getTotalSale());
+            dto.setBank(entity.getBank());
+            dto.setNumberCard(entity.getNumberCard());
+            dto.setSvc(entity.getSvc());
+            dto.setExpirationDate(entity.getExpirationDate());
 
             return dto;
         } else {
@@ -69,6 +73,10 @@ public abstract class TransactionConverter {
             dto.setTotalTax(entity.getTotalSale());
             dto.setPaymentMethod(PaymentMethodConverter.refEntity2DTO(entity.getPaymentMethod()));
             dto.setTax(TaxConverter.refEntity2DTO(entity.getTax()));
+            dto.setBank(entity.getBank());
+            dto.setNumberCard(entity.getNumberCard());
+            dto.setSvc(entity.getSvc());
+            dto.setExpirationDate(entity.getExpirationDate());
 
             return dto;
         } else {
@@ -90,6 +98,10 @@ public abstract class TransactionConverter {
             entity.setTotalTax(entity.getTotalSale());
             entity.setPaymentMethod(PaymentMethodConverter.refDTO2Entity(dto.getPaymentMethod()));
             entity.setTax(TaxConverter.refDTO2Entity(dto.getTax()));
+            entity.setBank(dto.getBank());
+            entity.setNumberCard(dto.getNumberCard());
+            entity.setSvc(dto.getSvc());
+            entity.setExpirationDate(dto.getExpirationDate());
 
             return entity;
         } else {

@@ -1,9 +1,5 @@
-<div>
-    <ul>
-        <li ng-repeat="n in cartItems">
-            {{n.name}}
-        </li>
-    </ul>
-    Total: {{totalCompra}}
+<div ng-include="'src/modules/payment/templates/shippingDataTmpl.html'" id="shippingData" style="display:none">
 </div>
-dnklsanakls
+<div ng-include="'src/modules/payment/templates/paymentData.html'" id="paymentData">
+</div>
+Total: {{totalCompra}}
