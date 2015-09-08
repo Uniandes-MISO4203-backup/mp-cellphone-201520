@@ -12,4 +12,6 @@ public interface IProductLogic {
     public void deleteProduct(Long id);
     public List<ProductDTO> findByName(String name);
     public List<ProductDTO> getByCellPhoneName(String name);
+    public ProductDTO getCheaperProduct(Long idProvider);
+    public ProductDTO getCheaperProvider(Long idCellPhone);
 }

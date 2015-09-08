@@ -72,4 +72,12 @@ public class ProductLogic implements IProductLogic {
     public List<ProductDTO> getByCellPhoneName(String name){
         return ProductConverter.listEntity2DTO(persistence.getByCellPhoneName(name));
     }
+    
+    public ProductDTO getCheaperProduct(Long idProvider){       
+        return ProductConverter.fullEntity2DTO(persistence.getCheaperProduct(idProvider));
+    }
+    
+    public ProductDTO getCheaperProvider(Long idCellPhone){       
+        return ProductConverter.fullEntity2DTO(persistence.getCheaperProvider(idCellPhone));
+    }
 }

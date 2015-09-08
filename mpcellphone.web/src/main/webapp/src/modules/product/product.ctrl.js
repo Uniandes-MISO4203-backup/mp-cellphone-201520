@@ -210,6 +210,62 @@
                 }
              }];
          
+         //Para encontrar el Proveedor con el menor precio para un producto
+        this.cheapestActions = [ 
+               {
+                    name: 'BestProvider',
+                    displayName: 'Best Provider',
+                    icon: 'search',
+                    class: 'warning',
+                    fn: function (record) {
+                            return findItem(record);
+                            console.log(record);
+                    },
+                    show: function () {
+                        return true;
+                    }
+              }
+            ]
+        
+        var findItem = function(record)
+            {
+               svc.findItem(record.cellPhone.id).then(function(cellPhone){
+                   $scope.records = [];
+                   $scope.records.push(cellPhone);
+                   console.log(cellPhone);
+               });
+            };
+        //Para encontrar el menor precio de un Proveedor
+        this.cheapestProvActions = [ 
+               {
+                    name: 'BestPrice',
+                    displayName: 'Best Price',
+                    icon: 'search',
+                    class: 'warning',
+                    fn: function (record) {
+                            findItemProv(record);
+                            console.log(record);
+                    },
+                    show: function () {
+                        return true;
+                    }
+              }
+            ]
+        
+        var findItemProv = function(record)
+            {
+                svc.findItem(record.cellPhone.id).then(function(cellPhone){
+                   $scope.records = [];
+                   $scope.records.push(cellPhone);
+                   console.log(cellPhone);
+               });/*
+                svc.findItemProv(record.provider.id).then(function(provider){
+                   $scope.records = [];
+                   $scope.records.push(provider);
+                   console.log(provider);
+               });*/
+            };
+         
 //      this.loadRefOptions();
         this.fetchRecords().then(function(data)
         {

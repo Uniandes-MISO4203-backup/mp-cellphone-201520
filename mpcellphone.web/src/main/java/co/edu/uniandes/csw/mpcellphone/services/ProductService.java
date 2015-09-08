@@ -128,4 +128,16 @@ public class ProductService {
     public void deleteProduct(@PathParam("id") Long id) {
         productLogic.deleteProduct(id);
     }
+    
+    @GET
+    @Path("/cheapest/{id: \\d+}")
+    public ProductDTO getCheapestProduct(@PathParam("id") Long idProvider) {
+        return productLogic.getCheaperProduct(idProvider);
+    }
+    
+    @GET
+    @Path("/cheapestProv/{id: \\d+}")
+    public ProductDTO getCheapestProvider(@PathParam("id") Long idCellPhone) {
+        return productLogic.getCheaperProvider(idCellPhone);
+    }
 }
