@@ -184,10 +184,11 @@
                         if($("#question").val().length !== 0)
                         {
                             var objEnvia = {
-                                question    : $("#question").val(), 
-                                date        : new Date().toISOString().substring(0, 10),
-                                product_id  : ProducSelComment.id,
-                                client_id   : authSvc.getCurrentUser().id
+                                question : $("#question").val(), 
+                                product  : ProducSelComment.cellPhone,
+                                client   : authSvc.getCurrentUser(),
+                                provider : ProducSelComment.provider
+
                             };
                             console.log(objEnvia);
                             svc.saveQuestion(objEnvia).then(function()

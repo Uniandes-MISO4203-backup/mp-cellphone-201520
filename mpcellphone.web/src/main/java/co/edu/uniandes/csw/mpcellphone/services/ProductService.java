@@ -2,13 +2,11 @@ package co.edu.uniandes.csw.mpcellphone.services;
 
 import co.edu.uniandes.csw.mpcellphone.api.IClientLogic;
 import co.edu.uniandes.csw.mpcellphone.api.ICommentLogic;
-import co.edu.uniandes.csw.mpcellphone.api.IEmailLogic;
 import co.edu.uniandes.csw.mpcellphone.api.IProductLogic;
 import co.edu.uniandes.csw.mpcellphone.api.IProviderLogic;
 import co.edu.uniandes.csw.mpcellphone.api.IQuestionLogic;
 import co.edu.uniandes.csw.mpcellphone.dtos.ClientDTO;
 import co.edu.uniandes.csw.mpcellphone.dtos.CommentDTO;
-import co.edu.uniandes.csw.mpcellphone.dtos.EmailDTO;
 import co.edu.uniandes.csw.mpcellphone.dtos.ProductDTO;
 import co.edu.uniandes.csw.mpcellphone.dtos.ProviderDTO;
 import co.edu.uniandes.csw.mpcellphone.dtos.QuestionDTO;
@@ -42,7 +40,6 @@ public class ProductService {
     @Inject private IQuestionLogic questionLogic;
     @Inject private ICommentLogic commentLogic;
     @Inject private IClientLogic clientLogic;
-    @Inject private IEmailLogic emailLogic;
     @Context private HttpServletResponse response;
     @QueryParam("page") private Integer page;
     @QueryParam("maxRecords") private Integer maxRecords;
@@ -73,21 +70,6 @@ public class ProductService {
         return questionLogic.createQuestion(dto);
     }
     
-    /**
-     * Servicio que actualiza las preguntas de los clientes
-     * Creado por ggonzalez10
-     * @param dto
-     * @return 
-     */
-    @POST
-    @Path("/emailMP/")
-    @StatusCreated
-    public EmailDTO createMessage(EmailDTO dto) {
-        dto.setDate(new java.util.Date());
-        return emailLogic.createMessage(dto);
-    }
-    
-
     
     /**
      * Servicio para establecer preguntas sobre un producto..

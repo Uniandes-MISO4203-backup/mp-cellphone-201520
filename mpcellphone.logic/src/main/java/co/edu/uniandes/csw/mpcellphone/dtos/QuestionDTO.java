@@ -19,8 +19,9 @@ public class QuestionDTO {
     private Long id;
     private String question;
     private Date date;
-    private Long client_id;
-    private Long product_id;
+    private ClientDTO client;
+    private ProductDTO product;
+    private ProviderDTO provider;
 
     public Long getId() {
         return id;
@@ -46,21 +47,30 @@ public class QuestionDTO {
         this.date = date;
     }
 
-    public Long getClient_id() {
-        return client_id;
+    public ClientDTO getClient() {
+        return client;
     }
 
-    public void setClient_id(Long client_id) {
-        this.client_id = client_id;
+    public void setClient(ClientDTO client) {
+        this.client = client;
     }
 
-    public Long getProduct_id() {
-        return product_id;
+    public ProductDTO getProduct() {
+        return product;
     }
 
-    public void setProduct_id(Long product_id) {
-        this.product_id = product_id;
+    public void setProduct(ProductDTO product) {
+        this.product = product;
     }
+
+    public ProviderDTO getProvider() {
+        return provider;
+    }
+
+    public void setProvider(ProviderDTO provider) {
+        this.provider = provider;
+    }
+
 
 
 }

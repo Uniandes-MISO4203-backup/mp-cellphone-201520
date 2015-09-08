@@ -5,11 +5,14 @@
  */
 package co.edu.uniandes.csw.mpcellphone.entities;
 
+import co.edu.uniandes.csw.mpcellphone.dtos.ClientDTO;
+import co.edu.uniandes.csw.mpcellphone.dtos.ProductDTO;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -28,9 +31,14 @@ public class QuestionEntity implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date date;
     
-    private Long client_id;
+    @ManyToOne
+    private ClientEntity client;
     
-    private Long product_id;
+    @ManyToOne
+    private ProductEntity product;
+
+    @ManyToOne
+    private ProviderEntity provider;
 
     public Long getId() {
         return id;
@@ -56,21 +64,28 @@ public class QuestionEntity implements Serializable {
         this.date = date;
     }
 
-    public Long getClient_id() {
-        return client_id;
+    public ClientEntity getClient() {
+        return client;
     }
 
-    public void setClient_id(Long client_id) {
-        this.client_id = client_id;
+    public void setClient(ClientEntity client) {
+        this.client = client;
     }
 
-    public Long getProduct_id() {
-        return product_id;
+    public ProductEntity getProduct() {
+        return product;
     }
 
-    public void setProduct_id(Long product_id) {
-        this.product_id = product_id;
+    public void setProduct(ProductEntity product) {
+        this.product = product;
     }
 
-    
+    public ProviderEntity getProvider() {
+        return provider;
+    }
+
+    public void setProvider(ProviderEntity provider) {
+        this.provider = provider;
+    }
+
 }
