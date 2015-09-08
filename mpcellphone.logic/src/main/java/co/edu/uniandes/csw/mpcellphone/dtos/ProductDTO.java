@@ -11,6 +11,7 @@ public class ProductDTO {
     private Long id;
     private String name;
     private Integer price;
+    private Integer discount;
     private CellPhoneDTO cellPhone;
     private ProviderDTO provider;
     /**
@@ -53,6 +54,14 @@ public class ProductDTO {
      */
     public void setPrice(Integer price) {
         this.price = price;
+    }
+
+    public Integer getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(Integer discount) {
+        this.discount = discount;
     }
 
     /**

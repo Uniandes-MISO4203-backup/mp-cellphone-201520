@@ -15,6 +15,11 @@
                 type: 'Integer',
                 required: true
             }, {
+                name: 'discount',
+                displayName: 'Discount',
+                type: 'Integer',
+                required: true
+            }, {
                 name: 'cellPhone',
                 displayName: 'CellPhone',
                 type: 'Reference',

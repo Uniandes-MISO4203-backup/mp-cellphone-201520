@@ -110,6 +110,7 @@
                     class: 'info',
                     fn: function (record)
                     {
+                        tmp = authSvc;
                         if (authSvc.getCurrentUser())
                         {
                             ProducSelComment = record;

@@ -28,8 +28,9 @@ public abstract class ProductConverter {
             dto.setId(entity.getId());
             dto.setName(entity.getName());
             dto.setPrice(entity.getPrice());
+            dto.setDiscount(entity.getDiscount());
             dto.setCellPhone(CellPhoneConverter.refEntity2DTO(entity.getCellPhone()));
-
+            dto.setProvider(ProviderConverter.refEntity2DTO(entity.getProvider()));
             return dto;
         } else {
             return null;
@@ -61,6 +62,7 @@ public abstract class ProductConverter {
             dto.setId(entity.getId());
             dto.setName(entity.getName());
             dto.setPrice(entity.getPrice());
+            dto.setDiscount(entity.getDiscount());
             dto.setCellPhone(CellPhoneConverter.refEntity2DTO(entity.getCellPhone()));
             dto.setProvider(ProviderConverter.refEntity2DTO(entity.getProvider()));
 
@@ -79,6 +81,7 @@ public abstract class ProductConverter {
             entity.setId(dto.getId());
             entity.setName(dto.getName());
             entity.setPrice(dto.getPrice());
+            entity.setDiscount(dto.getDiscount());
             entity.setCellPhone(CellPhoneConverter.refDTO2Entity(dto.getCellPhone()));
             entity.setProvider(ProviderConverter.refDTO2Entity(dto.getProvider()));
 

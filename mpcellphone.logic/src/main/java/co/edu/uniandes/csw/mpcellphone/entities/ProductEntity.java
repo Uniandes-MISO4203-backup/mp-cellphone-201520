@@ -26,6 +26,8 @@ public class ProductEntity implements Serializable {
     private String name;
 
     private Integer price;
+    
+    private Integer discount;
 
     @ManyToOne
     private CellPhoneEntity cellPhone;
@@ -74,6 +76,14 @@ public class ProductEntity implements Serializable {
         this.price = price;
     }
 
+    public Integer getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(Integer discount) {
+        this.discount = discount;
+    }
+
     /**
      * @generated
      */
@@ -88,18 +98,13 @@ public class ProductEntity implements Serializable {
         this.cellPhone = cellphone;
     }
 
-    /**
-     * @generated
-     */
     public ProviderEntity getProvider() {
         return provider;
     }
 
-    /**
-     * @generated
-     */
     public void setProvider(ProviderEntity provider) {
         this.provider = provider;
     }
+
 
 }
