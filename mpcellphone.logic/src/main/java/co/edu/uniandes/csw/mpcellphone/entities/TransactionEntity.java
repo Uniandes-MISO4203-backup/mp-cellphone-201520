@@ -43,7 +43,8 @@ public class TransactionEntity {
     
     private String totalTax;
     
-    private String payDate;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date payDate;
     
     private String bank;
     
@@ -107,11 +108,11 @@ public class TransactionEntity {
         this.totalTax = totalTax;
     }
 
-    public String getPayDate() {
+    public Date getPayDate() {
         return payDate;
     }
 
-    public void setPayDate(String payDate) {
+    public void setPayDate(Date payDate) {
         this.payDate = payDate;
     }
 

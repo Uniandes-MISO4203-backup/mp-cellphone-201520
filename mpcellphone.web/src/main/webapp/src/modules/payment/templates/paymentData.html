@@ -9,17 +9,18 @@
                   <tr>
                     <th>Product Name</th>
                     <th>Quantity</th>
-                    <th>Price</th>
                   </tr>
                 </thead>
                 <tbody ng-repeat="n in cartItems">
                   <tr>
                     <td>{{n.name}}</td>
                     <td>{{n.quantity}}</td>
-                    <td>{{n.price | currency}}</td>
                   </tr>
                 </tbody>
-            </table> 
+            </table>
+             <div class="form-group">
+                <label class="col-lg-10 col-lg-offset-2">Total Sale: {{totalCompra}} </label>
+            </div>
         </div>
     </div>
     

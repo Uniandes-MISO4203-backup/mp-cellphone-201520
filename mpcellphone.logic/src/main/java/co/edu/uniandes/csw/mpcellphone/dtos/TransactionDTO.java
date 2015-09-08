@@ -22,7 +22,7 @@ public class TransactionDTO {
     private String totalSale;
     private String totalDiscount;
     private String totalTax;
-    private String payDate;
+    private Date payDate;
     private Long numberCard;
     private String bank;
     private String expirationDate;
@@ -84,13 +84,15 @@ public class TransactionDTO {
         this.totalTax = totalTax;
     }
 
-    public String getPayDate() {
+    public Date getPayDate() {
         return payDate;
     }
 
-    public void setPayDate(String payDate) {
+    public void setPayDate(Date payDate) {
         this.payDate = payDate;
     }
+
+    
 
     public Long getNumberCard() {
         return numberCard;

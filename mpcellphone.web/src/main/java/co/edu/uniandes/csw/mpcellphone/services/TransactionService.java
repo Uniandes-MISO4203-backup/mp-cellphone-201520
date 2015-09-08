@@ -3,6 +3,7 @@ package co.edu.uniandes.csw.mpcellphone.services;
 import co.edu.uniandes.csw.mpcellphone.api.ITransactionLogic;
 import co.edu.uniandes.csw.mpcellphone.dtos.TransactionDTO;
 import co.edu.uniandes.csw.mpcellphone.providers.StatusCreated;
+import java.util.Date;
 import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
@@ -43,6 +44,7 @@ public class TransactionService {
     @POST
     @StatusCreated
     public TransactionDTO createTransaction(TransactionDTO dto) {
+        dto.setPayDate(new Date());
         return transactionLogic.createTransaction(dto);
     }
 

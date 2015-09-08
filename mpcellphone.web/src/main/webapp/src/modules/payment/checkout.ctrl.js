@@ -1,9 +1,9 @@
 (function (ng) {
     var mod = ng.module('paymentModule');
 
-    mod.controller('checkoutCtrl', ['CrudCreator', '$scope', 'authService', 'cartItemService'
+    mod.controller('checkoutCtrl', ['CrudCreator', '$scope', 'authService', 'cartItemService', '$location'
         , 'checkoutService', 'paymentService', 'shippingService', 'creditCardService',
-        function (CrudCreator, $scope, authSvc, ciSvc, chSvc, paySvc, shpSvc, ccSvc) {
+        function (CrudCreator, $scope, authSvc, ciSvc, $location, chSvc, paySvc, shpSvc, ccSvc) {
             var that = this;
             $scope.cartItems = [];
             $scope.payment = {};
@@ -102,6 +102,15 @@
                    });
                 });    
             }
+            
+            $scope.pay = function () {
+                console.log("entro");
+                $('#modalPay').modal('show');
+            };
+            
+            $scope.finish = function () {
+                $location.path('/catalog');
+            };
         }]);
 
 })(window.angular);

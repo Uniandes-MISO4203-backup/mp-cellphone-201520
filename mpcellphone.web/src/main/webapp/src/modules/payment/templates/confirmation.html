@@ -19,19 +19,19 @@
         </div>
         <div class="panel-body">
             <ul>
-                <li>Date: {{paymentData.payDate}}</li>
+                <!-- <li>Date: {{paymentData.payDate}}</li> -->
                 <li>Payment Method: {{paymentData.paymentMethod}}</li>
                 <li>Card Number: {{paymentData.numberCard}}</li>
                 <li>SVC: {{paymentData.svc}}</li>
                 <li>Bank: {{paymentData.bank}}</li>
-                <li>Total Tax: {{paymentData.totalTax}}</li>
-                <li>Total Sale: {{paymentData.totalSale}}</li>
+                <!-- <li>Total Tax: {{paymentData.totalTax}}</li> -->
+                <li>Total Sale: {{totalCompra}}</li>
             </ul> 
         </div>
     </div>
-    <button data-toggle="modal" data-target="#myModal">Pay</button>
+    <button style="margin-left: 50%; margin-top: 1%;" class="btn btn-info" ng-click="pay()">Pay</button>
       
-    <div class="modal">
+    <div class="modal" id="modalPay">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -42,7 +42,7 @@
                   <p>Payment Success</p>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="finish()">Ok!</button>
                 </div>
             </div>
         </div>
