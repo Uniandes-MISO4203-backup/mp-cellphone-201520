@@ -49,9 +49,28 @@
         <script src="src/modules/payment/checkout.mod.js"></script>
         <script src="src/modules/payment/checkout.svc.js"></script>
         <script src="src/modules/payment/checkout.ctrl.js"></script>
+        <style>
+        #notiShopping
+            {
+                position: absolute;
+                top:60px;
+                right: 10px;
+                width: 200px;
+                height: 80px;
+                background-color: rgba(0, 0, 0, 0.74);
+                color: white;
+                border-radius: 5px;
+                padding: 10px;
+                padding-bottom: 15px;
+                z-index: 10;
+                display: none;
+            }
+        </style>
         
+    
     </head>
     <body style="padding-top: 60px;">
+        <div id ="notiShopping"></div>
         <div class="container-fluid">
             <div class="col-md-12">
                 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">

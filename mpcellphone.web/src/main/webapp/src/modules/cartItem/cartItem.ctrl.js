@@ -54,7 +54,8 @@
                 }
             };//Realiza la validacion de la nueva cantidad asignada.
             $scope.checkout = function () {
-                self.showWarning("Not implemented yet");
+                //self.showWarning("Not implemented yet");
+                $location.path('/checkout');
             };
             $scope.subtotal = function(record){
                 return record.product.price * record.quantity;

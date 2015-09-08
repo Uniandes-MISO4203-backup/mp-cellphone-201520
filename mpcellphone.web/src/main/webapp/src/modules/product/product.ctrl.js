@@ -59,6 +59,7 @@
                     icon: 'shopping-cart',
                     class: 'primary',
                     fn: function (record) {
+                        $("#notiShopping").html("Se ha agregado " + record.cellPhone.name + ", a tu carrito de compras.").fadeIn("fast").delay(2000).fadeOut(300);
                         if (authSvc.getCurrentUser()) {
                             return cartItemSvc.addItem({
                                 product: record,
