@@ -18,5 +18,14 @@
                     console.log("Success");
                 });
             };
+            //Para listar el proveedor con el producto mas economico...
+            this.findItem = function(idProvider){
+                return this.api.one('cheapest', idProvider).get();
+            };
+            //Para listar el proveedor con el producto mas economico...
+            this.findItemProv = function(idcellPhone){
+                return this.api.one('cheapestProv', idcellPhone).get();
+            };
+
     }]);
 })(window.angular);

@@ -129,6 +129,10 @@ public class ProductService {
         productLogic.deleteProduct(id);
     }
     
+    /**
+     * Servicio para establecer filtros sobre los productos
+     * Creado por ma.olivares10
+     */
     @GET
     @Path("/cheapest/{id: \\d+}")
     public ProductDTO getCheapestProduct(@PathParam("id") Long idProvider) {
@@ -140,4 +144,5 @@ public class ProductService {
     public ProductDTO getCheapestProvider(@PathParam("id") Long idCellPhone) {
         return productLogic.getCheaperProvider(idCellPhone);
     }
+
 }

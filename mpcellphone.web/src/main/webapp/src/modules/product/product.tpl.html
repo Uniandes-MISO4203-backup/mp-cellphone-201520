@@ -41,6 +41,8 @@
                 <button ng-repeat="action in ctrl.recordActions" id="{{$parent.$index}}-{{action.name}}-btn" class="btn btn-{{action.class || 'default'}} btn-sm" ng-show="action.show()" ng-click="action.fn(record)"><span class="glyphicon glyphicon-{{action.icon}}"></span> {{action.displayName}}</button>
                 <button ng-repeat="action in ctrl.commentActions" id="{{$parent.$index}}-{{action.name}}-btn" class="btn btn-{{action.class || 'default'}} btn-sm" ng-show="action.show()" ng-click="action.fn(record)"><span class="glyphicon glyphicon-{{action.icon}}"></span> {{action.displayName}}</button>
                 <button ng-repeat="action in ctrl.questionActions" id="{{$parent.$index}}-{{action.name}}-btn" class="btn btn-{{action.class || 'default'}} btn-sm" ng-show="action.show()" ng-click="action.fn(record)"><span class="glyphicon glyphicon-{{action.icon}}"></span> {{action.displayName}}</button>
+                <button ng-repeat="action in ctrl.cheapestActions" id="{{$parent.$index}}-{{action.name}}-btn"                 class="btn btn-{{action.class || 'default'}} btn-sm" ng-show="action.show()" ng-click="action.fn(record)"><span class="glyphicon glyphicon-{{action.icon}}"></span> {{action.displayName}}</button>
+                <button ng-repeat="action in ctrl.cheapestProvActions" id="{{$parent.$index}}-{{action.name}}-btn"                 class="btn btn-{{action.class || 'default'}} btn-sm" ng-show="action.show()" ng-click="action.fn(record)"><span class="glyphicon glyphicon-{{action.icon}}"></span> {{action.displayName}}</button>
             </p>
         </div>
     </div>

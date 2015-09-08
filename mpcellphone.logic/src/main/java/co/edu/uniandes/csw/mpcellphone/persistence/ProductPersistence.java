@@ -44,10 +44,11 @@ public class ProductPersistence extends CrudPersistence<ProductEntity> {
             Map<String, Object> params = new HashMap<String, Object>();
             params.put("idCellPhone",idCellPhone);
             List<ProductEntity> list = new ArrayList<ProductEntity>();
-            list = executeListNamedQuery("Product.getCheaperProduct",params);
+            list = executeListNamedQuery("Product.getCheaperProvider",params);
             return list.get(0);
             } catch(NoResultException e){
                 return null;
             }
+
         }
 }

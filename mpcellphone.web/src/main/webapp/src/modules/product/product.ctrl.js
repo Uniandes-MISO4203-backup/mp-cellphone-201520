@@ -254,17 +254,18 @@
         
         var findItemProv = function(record)
             {
-                svc.findItem(record.cellPhone.id).then(function(cellPhone){
+                /*svc.findItem(record.cellPhone.id).then(function(cellPhone){
                    $scope.records = [];
                    $scope.records.push(cellPhone);
                    console.log(cellPhone);
-               });/*
+               });*/
                 svc.findItemProv(record.provider.id).then(function(provider){
                    $scope.records = [];
                    $scope.records.push(provider);
                    console.log(provider);
-               });*/
+               });
             };
+
          
 //      this.loadRefOptions();
         this.fetchRecords().then(function(data)
