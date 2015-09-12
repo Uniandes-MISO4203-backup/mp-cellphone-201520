@@ -10,7 +10,6 @@ import co.edu.uniandes.csw.mpcellphone.converters.QuestionConverter;
 import co.edu.uniandes.csw.mpcellphone.dtos.QuestionDTO;
 import co.edu.uniandes.csw.mpcellphone.entities.QuestionEntity;
 import co.edu.uniandes.csw.mpcellphone.persistence.QuestionPersistence;
-import java.io.FileInputStream;
 import java.util.List;
 import java.util.Properties;
 import java.util.logging.Level;
@@ -30,23 +29,30 @@ import javax.mail.internet.MimeMessage;
 @Stateless
 public class QuestionLogic implements IQuestionLogic {
     
-    @Inject private QuestionPersistence persistence;
+    // Lógica para generar el email
+    static Properties mailServerProperties;
+    static Session getMailSession;
+    static MimeMessage generateMailMessage;
 
+    @Inject private QuestionPersistence persistence;
+    
     /**
      * Metodo encargado de obtener las órdenes de un cliente
      * @param page
      * @param maxRecords
      * @return 
      */
+    @Override
     public List<QuestionDTO> getQuestions(Integer page, Integer maxRecords) {
         return QuestionConverter.listEntity2DTO(persistence.findAll(page, maxRecords));
     }
 
-    
+    @Override
     public QuestionDTO getQuestion(Long id) {
         return QuestionConverter.fullEntity2DTO(persistence.find(id));
     }
 
+    @Override
     public int countQuestion() {
         return persistence.count();
     }
@@ -55,6 +61,7 @@ public class QuestionLogic implements IQuestionLogic {
      * @param dto
      * @return 
      */
+    @Override
     public QuestionDTO createQuestion(QuestionDTO dto) {
         QuestionEntity entity = QuestionConverter.fullDTO2Entity(dto);
         persistence.create(entity);
@@ -72,38 +79,24 @@ public class QuestionLogic implements IQuestionLogic {
         return QuestionConverter.fullEntity2DTO(entity);
     }
 
-        // Lógica para generar el email
-    static Properties mailServerProperties;
-    static Session getMailSession;
-    static MimeMessage generateMailMessage;
-    
-
     public static void generateAndSendEmail(String message, String emailRecipient, String subject) {
-
         try {
             
-            //loadProperties();
-
             //Step1		
-            System.out.println("\n 1st ===> setup Mail Server Properties..");
             mailServerProperties = System.getProperties();
             mailServerProperties.put("mail.smtp.port", "587");
             mailServerProperties.put("mail.smtp.auth", "true");
             mailServerProperties.put("mail.smtp.starttls.enable", "true");
-            System.out.println("Mail Server Properties have been setup successfully..");
 
             //Step2		
-            System.out.println("\n\n 2nd ===> get Mail Session..");
             getMailSession = Session.getDefaultInstance(mailServerProperties, null);
             generateMailMessage = new MimeMessage(getMailSession);
             generateMailMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(emailRecipient));
             generateMailMessage.setSubject(subject);
             String emailBody = message;
             generateMailMessage.setContent(emailBody, "text/html");
-            System.out.println("Mail Session has been created successfully..");
 
             //Step3		
-            System.out.println("\n\n 3rd ===> Get Session and Send mail");
             Transport transport = getMailSession.getTransport("smtp");
 
             // Enter your correct gmail UserID and Password (XXXApp Shah@gmail.com)
@@ -116,21 +109,4 @@ public class QuestionLogic implements IQuestionLogic {
         }
     }
     
-    private static void loadProperties() {
-
-        Properties datos = new Properties( );
-        String data="";
-        try
-        {
-                FileInputStream input = new FileInputStream( "src/main/resources/admin_email.properties" );
-                datos.load( input );
-                //adminEmail=datos.getProperty("admin.email");
-        }
-        catch( Exception e )
-        {
-                Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
-        }
-
-    }
-
 }
