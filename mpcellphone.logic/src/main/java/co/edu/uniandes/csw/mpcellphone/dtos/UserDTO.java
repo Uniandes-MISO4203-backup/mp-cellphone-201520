@@ -10,14 +10,26 @@ package co.edu.uniandes.csw.mpcellphone.dtos;
  * @author Jonatan
  */
 public class UserDTO {
-
+    
+    private Long id;
     private String name;
-    private String userName;
+    private String role;
+    private String stormpath;
     private String password;
+    
+    private String userName;
     private String email;
     private boolean rememberMe;
-    private String role;
+    
+        
+    public Long getId() {
+        return id;
+    }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+    
     public String getName() {
         return name;
     }
@@ -26,6 +38,14 @@ public class UserDTO {
         this.name = name;
     }
 
+    public String getStormpath() {
+        return stormpath;
+    }
+
+    public void setStormpath(String stormpath) {
+        this.stormpath = stormpath;
+    }
+    
     public String getUserName() {
         return userName;
     }

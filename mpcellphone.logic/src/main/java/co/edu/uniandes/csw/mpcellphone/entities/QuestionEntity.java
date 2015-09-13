@@ -5,8 +5,6 @@
  */
 package co.edu.uniandes.csw.mpcellphone.entities;
 
-import co.edu.uniandes.csw.mpcellphone.dtos.ClientDTO;
-import co.edu.uniandes.csw.mpcellphone.dtos.ProductDTO;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;

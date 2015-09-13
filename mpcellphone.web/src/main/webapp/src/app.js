@@ -7,7 +7,6 @@
         'clientModule',
         'productModule',
         'providerModule',
-        'adminModule',
         'ngRoute',
         'ngCrud',
         'xeditable',
