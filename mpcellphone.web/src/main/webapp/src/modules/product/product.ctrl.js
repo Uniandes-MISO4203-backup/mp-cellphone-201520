@@ -39,6 +39,13 @@
                 $location.url('/catalog' + search);
             };
             
+            this.advancedSearch = function ()
+            {
+                //console.log("Ingresa a este punto...");
+                $('#myModalHorizontal').modal('show');
+                
+            };
+            
             $scope.priceItem = "";
             $scope.cheap = function(prov, price, record) 
             {
@@ -91,6 +98,7 @@
                             $("#comment").val("");
                             $('#myModal').modal('show');
                             $("#cantidad").html("<center>" + maximoCaracteres + "</center>");
+                            console.log("Ingresa");
                         }
                         else
                         {
@@ -216,7 +224,7 @@
                {
                     name: 'BestProvider',
                     displayName: 'Best Provider',
-                    icon: 'search',
+                    icon: 'thumbs-up',
                     class: 'warning',
                     fn: function (record) {
                             return findItem(record);
@@ -241,7 +249,7 @@
                {
                     name: 'BestPrice',
                     displayName: 'Best Price',
-                    icon: 'search',
+                    icon: 'usd',
                     class: 'warning',
                     fn: function (record) {
                             findItemProv(record);
