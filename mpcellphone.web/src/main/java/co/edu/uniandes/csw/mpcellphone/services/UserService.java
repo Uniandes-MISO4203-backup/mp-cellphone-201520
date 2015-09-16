@@ -60,6 +60,7 @@ public class UserService {
 
     @Inject
     private IAdminLogic adminLogic;
+    
 
     @Inject private IUserLogic userLogic;
     @Context private HttpServletResponse respon;
@@ -85,26 +86,27 @@ public class UserService {
                     currentUser.getSession().setAttribute("Provider", provider);
                     return Response.ok(provider).build();
                 } else {
-                    //jbdel10
+                    //jbdel1
                     AdminDTO admin = adminLogic.getAdminByUserId(currentUser.getPrincipal().toString());
-                if (admin != null) {
-                    currentUser.getSession().setAttribute("Admin", admin);
-                    return Response.ok(admin).build();
-                } else {
-                    return Response.status(Response.Status.BAD_REQUEST)
-                            .entity(" User is not registered")
-                            .type(MediaType.TEXT_PLAIN)
-                            .build();
-                        }
+                    if (admin != null) {
+                        currentUser.getSession().setAttribute("Admin", admin);
+                        return Response.ok(admin).build();
+                    } else {
+                        return Response.status(Response.Status.BAD_REQUEST)
+                                .entity(" User is not registered")
+                                .type(MediaType.TEXT_PLAIN)
+                                .build();
+                    }                
                 }
             }
                 
-        } catch (AuthenticationException e) {
+        } catch (AuthenticationException e) 
+        {
             return Response.status(Response.Status.BAD_REQUEST)
                     .entity(e.getMessage())
                     .type(MediaType.TEXT_PLAIN)
                     .build();
-        }
+        }    
     }
 
     @Path("/logout")
