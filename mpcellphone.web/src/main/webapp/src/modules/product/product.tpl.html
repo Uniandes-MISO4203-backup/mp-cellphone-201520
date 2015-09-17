@@ -1,19 +1,5 @@
-<div class="alert alert-info" role="alert">
-    <center>
-        <form class="form-inline">
-            <div class="form-group">
-                <label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
-                <div class="input-group">
-                    <div class="input-group-addon">$</div>
-                    <input ng-model="priceItem" type="number" class="form-control" id="exampleInputAmount" placeholder="Amount" step="100000">
-                    <div class="input-group-addon">.00</div>
-                </div>
-            </div>
-            <select data-ng-model="currentGroup" data-ng-options="group as group.Name for group in groups" class="btn btn-default"></select>
-        </form>   
-    </center>
-</div>
-<alert ng-repeat="alert in alerts" type="{{alert.type}}" close="ctrl.closeAlert($index)">{{alert.msg}}</alert>
+
+
 <div ng-hide="ctrl.editMode">
     <div class="col-sm-12">
         <div ng-repeat="record in records" ng-show = "cheap(currentGroup, priceItem, record)">

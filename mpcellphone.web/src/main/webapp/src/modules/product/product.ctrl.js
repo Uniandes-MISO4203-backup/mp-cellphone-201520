@@ -3,33 +3,11 @@
     var mod = ng.module('productModule');
     var maximoCaracteres = 255;
     var ProducSelComment = 0; //Para guardar el item que se está haciendo el comentario..
-    //Para guardar el dato al servicio de producto más barato...
-    /*
-    var cheapProduct = {
-                            provider  : 0, 
-                            product   : 0,
-                            lowprice  : 0, 
-                            highprice : 0
-                        };
-    */
+  
  
     mod.controller('productCtrl', ['CrudCreator', '$scope', 'productService', 'productModel', 'cartItemService', '$location', 'authService', function (CrudCreator, $scope, svc, model, cartItemSvc, $location, authSvc) {
             CrudCreator.extendController(this, svc, $scope, model, 'product', 'Products');
-               /*
-            $('#sl2').slider().on('slide', function(){
-                buscarCheap();
-            });
-            */
-           /*
-            $('#sl2').slider().val("200000,2000000").on('slide', function(event){
-                //buscarCheap();
-                //$('#sl2').val('0').trigger('change');
-                //$scope.priceItem = event;
-               //$("#priceItem").val(event.value.join(",")); 
-               console.log(event.value.join(","));
-            });
-            */
-           //$('#sl2').val();
+     
             
             this.searchByName = function (cellPhoneName) {
                 var search;
@@ -263,11 +241,7 @@
         
         var findItemProv = function(record)
             {
-                /*svc.findItem(record.cellPhone.id).then(function(cellPhone){
-                   $scope.records = [];
-                   $scope.records.push(cellPhone);
-                   console.log(cellPhone);
-               });*/
+               
                 svc.findItemProv(record.provider.id).then(function(provider){
                    $scope.records = [];
                    $scope.records.push(provider);
@@ -315,32 +289,8 @@
             }
             $scope.groups = groups;
             $scope.currentGroup = groups[0];
-            /*
-            $scope.$watch('currentGroup', function(value)
-            {
-                $scope.currentItem = value.Items[0] || 0;
-            });
             
-            $scope.$watch('currentItem', function(value)
-            {
-                if(value.Id !== 0)
-                {
-                    cheapProduct.provider = $scope.currentGroup.Id;
-                    cheapProduct.product = value.Id;
-                    //buscarCheap();
-                }
-            });
-            */
         });
-        /*
-        var buscarCheap = function()
-        {
-            var price = $('#sl2').val().split(",");
-            cheapProduct.lowprice = price[0] || 0 ;
-            cheapProduct.highprice = price[1] || 0;
-            console.log(cheapProduct);
-            //$location.url('/catalog?q=htc');
-        };
-        */
+        
     }]);
 })(window.angular);
