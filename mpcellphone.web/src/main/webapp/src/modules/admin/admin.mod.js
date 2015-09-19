@@ -1,8 +1,6 @@
 (function (ng) {
     var mod = ng.module('adminModule', ['ngCrud']);
-
-    mod.constant('adminContext', 'admin');
-
+    mod.constant('adminContext', 'users/AllUsers');
     mod.constant('adminModel', {
         fields: [{
                 name: 'name',
@@ -10,8 +8,8 @@
                 type: 'String',
                 required: true
             }, {
-                name: 'email',
-                displayName: 'E-mail',
+                name: 'id',
+                displayName: 'UserID',
                 type: 'String',
                 required: true
             }, 

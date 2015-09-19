@@ -212,7 +212,7 @@ public class UserService {
       
         List<UserDTO> listUsers;
         
-        if (user.getRole() == "admin") {
+        //if (user.getRole() == "admin") {
                                 
             if (page != null && maxRecords != null) {
                 this.respon.setIntHeader("X-Total-Count", userLogic.countUsers());
@@ -221,9 +221,9 @@ public class UserService {
             
             return listUsers;    
             
-        } else {
+       /* } else {
             return null;
-        }
+        }*/
     }
         
         

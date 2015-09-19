@@ -10,10 +10,12 @@
         'ngRoute',
         'ngCrud',
         'xeditable',
-        'paymentModule'
+        'paymentModule', 
+        'adminModule'
     ]);
 
     mainApp.config(['$routeProvider', 'CrudTemplateURL', 'CrudCtrlAlias', function ($routeProvider, tplUrl, alias) {
+            console.log(tplUrl);
             $routeProvider
                     .when('/cellPhone', {
                         templateUrl: tplUrl,
@@ -44,8 +46,11 @@
                 templateUrl: 'src/modules/payment/templates/Checkout.html',
                 controller: 'checkoutCtrl',
                 controllerAs: 'ctrl'
-            })
-                    .otherwise('/catalog');
+            }).when('/admin', {
+                templateUrl: tplUrl,
+                controller: 'adminCtrl',
+                controllerAs: alias
+            }).otherwise('/catalog');
         }]);
 
     mainApp.config(['authServiceProvider', function (auth) {
