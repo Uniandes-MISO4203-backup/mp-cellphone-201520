@@ -19,29 +19,41 @@ public class ClientLogic implements IClientLogic {
     private ClientPersistence persistence;
 
     /**
+     * @return 
      * @generated
      */
+    @Override
     public int countClients() {
         return persistence.count();
     }
 
     /**
+     * @param page
+     * @param maxRecords
+     * @return 
      * @generated
      */
+    @Override
     public List<ClientDTO> getClients(Integer page, Integer maxRecords) {
         return ClientConverter.listEntity2DTO(persistence.findAll(page, maxRecords));
     }
 
     /**
+     * @param id
+     * @return 
      * @generated
      */
+    @Override
     public ClientDTO getClient(Long id) {
         return ClientConverter.fullEntity2DTO(persistence.find(id));
     }
 
     /**
+     * @param dto
+     * @return 
      * @generated
      */
+    @Override
     public ClientDTO createClient(ClientDTO dto) {
         ClientEntity entity = ClientConverter.fullDTO2Entity(dto);
         persistence.create(entity);
@@ -49,27 +61,36 @@ public class ClientLogic implements IClientLogic {
     }
 
     /**
+     * @param dto
+     * @return 
      * @generated
      */
+    @Override
     public ClientDTO updateClient(ClientDTO dto) {
         ClientEntity entity = persistence.update(ClientConverter.fullDTO2Entity(dto));
         return ClientConverter.fullEntity2DTO(entity);
     }
 
     /**
+     * @param id
      * @generated
      */
+    @Override
     public void deleteClient(Long id) {
         persistence.delete(id);
     }
 
     /**
+     * @param name
+     * @return 
      * @generated
      */
+    @Override
     public List<ClientDTO> findByName(String name) {
         return ClientConverter.listEntity2DTO(persistence.findByName(name));
     }
 
+    @Override
     public ClientDTO getClientByUserId(String userId) {
         return ClientConverter.refEntity2DTO(persistence.getClientByUserId(userId));
     }

@@ -27,7 +27,13 @@ public abstract class ClientConverter {
             dto.setId(entity.getId());
             dto.setName(entity.getName());
             dto.setUserId(entity.getUserId());
-            //dto.setEmail(entity.getEmail());
+            dto.setEmail(entity.getEmail());
+            dto.setGivenName(entity.getGivenName());
+            dto.setSurname(entity.getSurname());
+            dto.setPhone(entity.getPhone());
+            dto.setAddress(entity.getAddress());
+            dto.setCity(entity.getCity());
+            dto.setCountry(entity.getCountry());
 
             return dto;
         } else {
@@ -60,7 +66,13 @@ public abstract class ClientConverter {
             dto.setId(entity.getId());
             dto.setName(entity.getName());
             dto.setUserId(entity.getUserId());
-           // dto.setEmail(entity.getEmail());
+            dto.setEmail(entity.getEmail());
+            dto.setGivenName(entity.getGivenName());
+            dto.setSurname(entity.getSurname());
+            dto.setPhone(entity.getPhone());
+            dto.setAddress(entity.getAddress());
+            dto.setCity(entity.getCity());
+            dto.setCountry(entity.getCountry());
 
             return dto;
         } else {
@@ -77,7 +89,13 @@ public abstract class ClientConverter {
             entity.setId(dto.getId());
             entity.setName(dto.getName());
             entity.setUserId(dto.getUserId());
-           // entity.setEmail(dto.getEmail());
+            entity.setEmail(dto.getEmail());
+            entity.setGivenName(dto.getGivenName());
+            entity.setSurname(dto.getSurname());
+            entity.setPhone(dto.getPhone());
+            entity.setAddress(dto.getAddress());
+            entity.setCity(dto.getCity());
+            entity.setCountry(dto.getCountry());
 
             return entity;
         } else {

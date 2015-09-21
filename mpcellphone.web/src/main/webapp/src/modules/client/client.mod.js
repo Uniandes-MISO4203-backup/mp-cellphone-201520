@@ -10,6 +10,36 @@
                 type: 'String',
                 required: true
             }, {
+                name: 'givenName',
+                displayName: 'Given Name',
+                type: 'String',
+                required: true
+            }, {
+                name: 'surname',
+                displayName: 'Surname',
+                type: 'String',
+                required: true
+            }, {
+                name: 'phone',
+                displayName: 'Phone',
+                type: 'String',
+                required: true
+            }, {
+                name: 'address',
+                displayName: 'Address',
+                type: 'String',
+                required: true
+            }, {
+                name: 'city',
+                displayName: 'City',
+                type: 'String',
+                required: true
+            }, {
+                name: 'country',
+                displayName: 'Country',
+                type: 'String',
+                required: true
+            }, {
                 name: 'userId',
                 displayName: 'UserId',
                 type: 'String',

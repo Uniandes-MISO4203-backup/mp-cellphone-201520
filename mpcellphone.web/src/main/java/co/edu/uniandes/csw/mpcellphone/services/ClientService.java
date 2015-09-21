@@ -32,6 +32,8 @@ public class ClientService {
     @QueryParam("maxRecords") private Integer maxRecords;
 
     /**
+     * @param dto
+     * @return 
      * @generated
      */
     @POST
@@ -41,6 +43,7 @@ public class ClientService {
     }
 
     /**
+     * @return 
      * @generated
      */
     @GET
@@ -52,6 +55,8 @@ public class ClientService {
     }
 
     /**
+     * @param id
+     * @return 
      * @generated
      */
     @GET
@@ -61,6 +66,9 @@ public class ClientService {
     }
 
     /**
+     * @param id
+     * @param dto
+     * @return 
      * @generated
      */
     @PUT
@@ -71,6 +79,7 @@ public class ClientService {
     }
 
     /**
+     * @param id
      * @generated
      */
     @DELETE
