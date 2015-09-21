@@ -11,16 +11,8 @@ import co.edu.uniandes.csw.mpcellphone.dtos.QuestionDTO;
 import co.edu.uniandes.csw.mpcellphone.entities.QuestionEntity;
 import co.edu.uniandes.csw.mpcellphone.persistence.QuestionPersistence;
 import java.util.List;
-import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.mail.Message;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 
 /**
  *
@@ -29,11 +21,6 @@ import javax.mail.internet.MimeMessage;
 @Stateless
 public class QuestionLogic implements IQuestionLogic {
     
-    // Lógica para generar el email
-    static Properties mailServerProperties;
-    static Session getMailSession;
-    static MimeMessage generateMailMessage;
-
     @Inject private QuestionPersistence persistence;
     
     /**
@@ -74,39 +61,10 @@ public class QuestionLogic implements IQuestionLogic {
                 "<br />Pregunta: "+entity.getQuestion() +
                 "<br /><br />Atentamente," + 
                 "<br /><br /><br />MarketPhone";
-        String subject = "Ha reibido un mensaje de MarketPhone";
-        generateAndSendEmail(emailMsg, dto.getProvider().getEmail(), subject);
+        String subject = "Ha recibido un mensaje de MarketPhone";
+        mailUtilsMP.sendEmailMP(emailMsg, dto.getProvider().getEmail(), subject);
         return QuestionConverter.fullEntity2DTO(entity);
     }
 
-    public static void generateAndSendEmail(String message, String emailRecipient, String subject) {
-        try {
-            
-            //Step1		
-            mailServerProperties = System.getProperties();
-            mailServerProperties.put("mail.smtp.port", "587");
-            mailServerProperties.put("mail.smtp.auth", "true");
-            mailServerProperties.put("mail.smtp.starttls.enable", "true");
-
-            //Step2		
-            getMailSession = Session.getDefaultInstance(mailServerProperties, null);
-            generateMailMessage = new MimeMessage(getMailSession);
-            generateMailMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(emailRecipient));
-            generateMailMessage.setSubject(subject);
-            String emailBody = message;
-            generateMailMessage.setContent(emailBody, "text/html");
-
-            //Step3		
-            Transport transport = getMailSession.getTransport("smtp");
-
-            // Enter your correct gmail UserID and Password (XXXApp Shah@gmail.com)
-            transport.connect("smtp.gmail.com", "marketphone201520@gmail.com", "Market2015");
-            transport.sendMessage(generateMailMessage, generateMailMessage.getAllRecipients());
-            transport.close();
-            
-        } catch (Exception e) {
-            Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
-        }
-    }
     
 }
