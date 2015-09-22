@@ -21,12 +21,11 @@
             {
                 //console.log("Ingresa a este punto...");
                 $('#myModalHorizontal').modal('show');
-             
             };
             $("#admin").hide();
             $("#carrito").hide();
             $("#products").hide();
-            $(".dropdown-menu").append("<li><a href = '/admin'><span class = 'glyphicon glyphicon-user'></span> My Profile</a></li>");
+            $(".dropdown-menu").prepend("<li><a href = '/admin'><span class = 'glyphicon glyphicon-user'></span> My Profile</a></li>");
             if (authSvc.getCurrentUser())
             {
                 adminService.darRole().then(function(data)
