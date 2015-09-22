@@ -26,6 +26,11 @@
             this.findItemProv = function(idcellPhone){
                 return this.api.one('cheapestProv', idcellPhone).get();
             };
+            
+            this.comments = function(idcellPhone){
+                //return this.api.one('allcomments', idcellPhone).get();
+                return this.api.one('allcomments').get();
+            };
 
     }]);
 })(window.angular);

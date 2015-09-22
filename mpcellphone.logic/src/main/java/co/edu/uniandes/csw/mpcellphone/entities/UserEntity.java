@@ -12,8 +12,11 @@ import javax.persistence.NamedQuery;
  */
 @Entity
 @NamedQueries({
-    @NamedQuery(name = "User.getUsers", query = "select u from UserEntity u")
+    @NamedQuery(name = "User.getUsers", query = "select u from UserEntity u"), 
+    @NamedQuery(name = "User.getUserByUserName", query = "select u from UserEntity u where u.name = :name")
 })
+
+
 public class UserEntity implements Serializable {
 
     @Id

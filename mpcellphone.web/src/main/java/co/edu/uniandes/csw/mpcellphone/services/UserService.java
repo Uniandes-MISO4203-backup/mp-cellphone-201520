@@ -131,6 +131,7 @@ public class UserService {
             user.setName(userAttributes.get("givenName") + " " + userAttributes.get("surname"));
             user.setEmail(userAttributes.get("email"));
             user.setUserName(userAttributes.get("username"));
+            user.setRole(userLogic.getUserByUserName(user.getUserName()).getRole());
             return Response.ok(user).build();
         } catch (AuthenticationException e) {
             return Response.status(Response.Status.BAD_REQUEST)

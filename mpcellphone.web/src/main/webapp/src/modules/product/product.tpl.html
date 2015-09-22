@@ -70,15 +70,17 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title" id = "titleProduct">Comment</h4>
             </div>
+            <div class = "modal-body" style = "height: 350px; overflow-y: auto;" id = "listComments">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi aut, quae possimus dolorem iste omnis fugit corporis facere voluptatem quis in dicta, perferendis earum tenetur. Fugit in at corporis deleniti.
+            </div>
             <form ng-repeat="action in ctrl.saveComment" id="loginForm" method="post" class="form-horizontal" ng-submit="action.fn()">
                 <div class="modal-body">
                     <div class="form-group">
-                        <div id = "nameUser"></div>
-                        <textarea ng-repeat="action in ctrl.keyActions" class="form-control" rows="4" id="comment" style = "width: 90%; margin: 0 auto;" ng-keyup = "action.fn()"></textarea>
+                        <textarea ng-repeat="action in ctrl.keyActions" class="form-control" rows="2" id="comment" style = "width: 95%; margin: 0 auto; resize:none;" ng-keyup = "action.fn()"></textarea>
                     </div>
-                    <div class="alert alert-info" role="alert" id = "cantidad"><center>265</center></div>          
                 </div>
                 <div class="modal-footer">
+                    <div style = "position: absolute; top: 550px; right: 165px; width: 30px; font-weight: bold;" id = "cantidad" align = "left">265</div>     
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-success">Send</button>
                 </div>

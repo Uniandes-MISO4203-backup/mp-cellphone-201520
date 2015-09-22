@@ -43,8 +43,10 @@
         <script src="src/modules/provider/provider.ctrl.js"></script>
         
         <!-- Para el slider //-->
+        <!-- 
         <link href="src/slider/slider.css" rel="stylesheet" type="text/css"/>
-        <script src="src/slider/bootstrap-slider.js"></script>
+            <script src="src/slider/bootstrap-slider.js"></script>
+        //-->
 
         <script src="src/modules/payment/checkout.mod.js"></script>
         <script src="src/modules/payment/checkout.svc.js"></script>
@@ -107,8 +109,13 @@
                                 <button type="button" class="btn btn-success" ng-click = "ctrl.advancedSearch()" ng-controller="productCtrl as ctrl"><span class="glyphicon glyphicon-search"></span> Advanced Search</button>
                             </form>
                             <ul class="nav navbar-nav navbar-right">
-                                <li><a href="#/shoppingCart"><span class="glyphicon glyphicon-shopping-cart" ></span> My Shopping Cart </a></li>
-                                <li><login-button></login-button></li>
+                                <li id = "carrito"><a href="#/shoppingCart"><span class="glyphicon glyphicon-shopping-cart" ></span> My Shopping Cart </a></li>
+                                <li id = "admin"><a href="#/admin"><span class="glyphicon glyphicon-shopping-cart" ></span> Admin </a></li>
+                                <li id = "products"><a href="#/products"><span class="glyphicon glyphicon-shopping-cart" ></span> Products </a></li>
+                                <li>
+                                    <login-button></login-button>
+                                </li>
+                                
                             </ul>
                         </div> <!-- /.navbar-collapse -->
                     </div> <!-- /.container-fluid -->

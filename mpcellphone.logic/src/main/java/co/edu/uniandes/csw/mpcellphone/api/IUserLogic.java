@@ -9,6 +9,7 @@ import java.util.List;
 public interface IUserLogic {
     public int countUsers();
     public List<UserDTO> getUsers(Integer page, Integer maxRecords);
+    public UserDTO getUserByUserName (String usernama);  
     /*
     public UserDTO getUser(Long id);
     public UserDTO createUser(UserDTO dto);

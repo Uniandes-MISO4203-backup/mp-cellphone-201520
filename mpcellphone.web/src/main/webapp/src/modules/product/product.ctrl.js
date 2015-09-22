@@ -5,7 +5,7 @@
     var ProducSelComment = 0; //Para guardar el item que se está haciendo el comentario..
   
  
-    mod.controller('productCtrl', ['CrudCreator', '$scope', 'productService', 'productModel', 'cartItemService', '$location', 'authService', function (CrudCreator, $scope, svc, model, cartItemSvc, $location, authSvc) {
+    mod.controller('productCtrl', ['CrudCreator', '$scope', 'productService', 'productModel', 'cartItemService', '$location', 'authService', 'adminService', function (CrudCreator, $scope, svc, model, cartItemSvc, $location, authSvc, adminService) {
             CrudCreator.extendController(this, svc, $scope, model, 'product', 'Products');
      
             
@@ -21,8 +21,39 @@
             {
                 //console.log("Ingresa a este punto...");
                 $('#myModalHorizontal').modal('show');
-                
+             
             };
+            $("#admin").hide();
+            $("#carrito").hide();
+            $("#products").hide();
+            $(".dropdown-menu").append("<li><a href = '/admin'><span class = 'glyphicon glyphicon-user'></span> My Profile</a></li>");
+            if (authSvc.getCurrentUser())
+            {
+                adminService.darRole().then(function(data)
+                {
+                    if(data.role === "admin")
+                    {
+                        $("#admin").show();
+                    }
+                    else
+                    {
+                        if(data.role === "provider")
+                        {
+                            $("#products").show();
+                        }
+                        else
+                        {
+                            $("#carrito").show();
+                        }
+                    }
+                });
+            }
+            
+            $(".dropdown-menu > li > a").click(function() {
+                $("#admin").hide();
+                $("#carrito").hide();
+                $("products").hide();
+            });
             
             $scope.priceItem = "";
             $scope.cheap = function(prov, price, record) 
@@ -68,15 +99,18 @@
                     class: 'warning',
                     fn: function (record)
                     {
+                        tmp = authSvc;
                         if (authSvc.getCurrentUser())
                         {
                             ProducSelComment = record;
-                            $('#nameUser').html("<center><b>" + authSvc.getCurrentUser().name + " Dice:</b></center><br>");
-                            $('#titleProduct').html("Cellphone: " + record.cellPhone.name);
-                            $("#comment").val("");
-                            $('#myModal').modal('show');
+                            $('#titleProduct').html("Comments: Cellphone - " + record.cellPhone.name);
+                            $("#comment").val("").attr("placeholder", authSvc.getCurrentUser().name + " Says: ");
                             $("#cantidad").html("<center>" + maximoCaracteres + "</center>");
-                            console.log("Ingresa");
+                            $('#myModal').modal('show').on('shown.bs.modal', function ()
+                            {
+                                $('#comment').focus();
+                            });
+                            getComments(record.id);  
                         }
                         else
                         {
@@ -87,6 +121,28 @@
                         return true;
                     }
              }];
+         
+            var getComments = function(id)
+            {
+                svc.comments(id).then(function(data)
+                {
+                    var txt = "";
+                    var cont = 0;
+                    for(var i = 0; i < data.length; i++)
+                    {
+                        if(Number(data[i].product_id) === Number(id))
+                        {
+                            if(txt !== "")
+                            {
+                                txt += "<hr>";
+                            }
+                            cont++;
+                            txt += cont + ". " + data[i].comment;
+                        }    
+                    }
+                    $("#listComments").html(cont !== 0 ? txt : "<center><b>No comments here, be the first to comment</b></center>");
+                });
+            };
             
             //Para las preguntas por producto...
             this.questionActions = [
@@ -147,8 +203,12 @@
                                                 client_id   : authSvc.getCurrentUser().id, 
                                                 date        : new Date().toISOString().substring(0, 10)
                                             }).then(function(){
-                                                alert("Su comentario ha sido enviado satisfactoriamente");  
-                                                $('#myModal').modal('hide');
+                                                //alert("Su comentario ha sido enviado satisfactoriamente");  
+                                                //$('#myModal').modal('hide');
+                                                getComments(ProducSelComment.id);
+                                                $("#comment").val("").attr("placeholder", authSvc.getCurrentUser().name + " Says: ");
+                                                $("#cantidad").html("<center>" + maximoCaracteres + "</center>");
+                                                $('#comment').focus();
                                             });
                         }
                         else
@@ -250,7 +310,7 @@
             };
 
          
-//      this.loadRefOptions();
+        //this.loadRefOptions();
         this.fetchRecords().then(function(data)
         {
             tmp = data;

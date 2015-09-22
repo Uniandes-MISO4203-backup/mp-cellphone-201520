@@ -22,7 +22,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="adminentity") 
 @NamedQueries({
-    @NamedQuery(name = "Admin.getByUserId", query = "select u from AdminEntity u WHERE u.user = :p_user"),
+    @NamedQuery(name = "Admin.getByUserId", query = "select u from AdminEntity u WHERE u.user.id = (select f.id from UserEntity f where f.stormpath = :p_user)"),
     @NamedQuery(name = "Admin.getByName", query = "select u from AdminEntity u WHERE u.name = :p_name"),
     @NamedQuery(name = "Admin.getAdmins", query = "select u from AdminEntity u") 
 })

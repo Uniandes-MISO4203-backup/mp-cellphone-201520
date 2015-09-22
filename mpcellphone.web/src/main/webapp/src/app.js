@@ -15,7 +15,6 @@
     ]);
 
     mainApp.config(['$routeProvider', 'CrudTemplateURL', 'CrudCtrlAlias', function ($routeProvider, tplUrl, alias) {
-            console.log(tplUrl);
             $routeProvider
                     .when('/cellPhone', {
                         templateUrl: tplUrl,

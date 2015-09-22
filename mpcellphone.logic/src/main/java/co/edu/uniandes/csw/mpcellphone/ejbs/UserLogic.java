@@ -35,5 +35,8 @@ public class UserLogic implements IUserLogic{
         return UserConverter.listEntity2DTO(persistence.findAll(page, maxRecords));
     }
     
+    public UserDTO getUserByUserName(String userName) {
+        return UserConverter.refEntity2DTO(persistence.getUserByUserName(userName));
+    }
 }
 

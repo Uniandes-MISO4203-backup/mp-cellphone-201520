@@ -144,5 +144,17 @@ public class ProductService {
     public ProductDTO getCheapestProvider(@PathParam("id") Long idCellPhone) {
         return productLogic.getCheaperProvider(idCellPhone);
     }
-
+    
+    @Path("/allcomments")    
+    @GET
+    public List<CommentDTO> getComments(CommentDTO user)
+    {
+        List<CommentDTO> listComments;
+        if (page != null && maxRecords != null)
+        {
+            this.response.setIntHeader("X-Total-Count", commentLogic.countComment());
+        }
+        listComments = commentLogic.getComments(page, maxRecords);
+        return listComments;
+    }
 }
