@@ -185,8 +185,30 @@ public class ProductService {
     @GET
     @Path("/getByModel/{model}")
     public List<ProductDTO> getByModel(@PathParam("model") String model) {
-        //public String model1; 
+         
         return productLogic.getByModel(model);
     }
    
+    /**
+     * Servicio para obtener la lista de marcas
+     * Creado por ma.olivares10
+     */
+    @GET
+    @Path("/getBrands")
+    public List<CellPhoneDTO> getCellPhoneBrand() {
+        
+        return cellPhoneLogic.getCellPhoneBrand();
+  
+    }
+    
+    /**
+     * Servicio para obtener la lista de modelos de un modelo especifico
+     * Creado por ma.olivares10
+     */
+    @GET
+    @Path("/getByBrand/{brand}")
+    public List<ProductDTO> getByBrand(@PathParam("brand") String brand) {
+         
+        return productLogic.getByBrand(brand);
+    }
 }

@@ -15,4 +15,5 @@ public interface IProductLogic {
     public ProductDTO getCheaperProduct(Long idProvider);
     public ProductDTO getCheaperProvider(Long idCellPhone);
     public List<ProductDTO> getByModel(String model);
+    public List<ProductDTO> getByBrand(String brand);
 }

@@ -14,6 +14,8 @@ import javax.persistence.NamedQuery;
 @NamedQueries({
     //Para Obtener la lista de Modelos, desarrollado por Miguel Olivares
     @NamedQuery(name = "CellPhone.getCellPhoneModel", query = "select Distinct u.model from CellPhoneEntity u"),
+    //Para Obtener la lista de Marcas, desarrollado por Miguel Olivares
+    @NamedQuery(name = "CellPhone.getCellPhoneBrand", query = "select Distinct u.brand from CellPhoneEntity u"),
     
 })
 public class CellPhoneEntity implements Serializable {

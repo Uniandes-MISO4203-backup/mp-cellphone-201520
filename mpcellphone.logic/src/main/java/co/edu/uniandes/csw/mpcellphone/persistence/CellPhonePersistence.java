@@ -39,5 +39,19 @@ public class CellPhonePersistence extends CrudPersistence<CellPhoneEntity> {
             }
     }
     
+    //Para Obtener la lista de Marcas desarrollado por Miguel Olivares
+    public List<String> getCellPhoneBrand() {
+        try{
+            
+            List<String> list = new ArrayList<String>();
+            list = executeListNamedQuery("CellPhone.getCellPhoneBrand");
+            
+            return list;
+            } catch(NoResultException e){
+                return null;
+                
+            }
+    }
+    
     
 }

@@ -84,4 +84,8 @@ public class ProductLogic implements IProductLogic {
     public List<ProductDTO> getByModel(String model) {
         return ProductConverter.listEntity2DTO(persistence.getByModel(model));
     }
+    //Para Obtener la lista de un modelo especifico, Desarrollado por Miguel Olivares
+    public List<ProductDTO> getByBrand(String brand) {
+        return ProductConverter.listEntity2DTO(persistence.getByBrand(brand));
+    }
 }

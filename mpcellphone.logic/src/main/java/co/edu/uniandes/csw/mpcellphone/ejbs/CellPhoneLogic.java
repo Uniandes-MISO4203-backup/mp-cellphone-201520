@@ -73,4 +73,9 @@ public class CellPhoneLogic implements ICellPhoneLogic {
         return CellPhoneConverter.listString2DTO(persistence.getCellPhoneModel());
         
     }
+    //Para Obtener la lista de Marcas, desarrollado por Miguel Olivares
+    public List<CellPhoneDTO> getCellPhoneBrand(){
+        return CellPhoneConverter.listString2DTO(persistence.getCellPhoneBrand());
+        
+    }
 }

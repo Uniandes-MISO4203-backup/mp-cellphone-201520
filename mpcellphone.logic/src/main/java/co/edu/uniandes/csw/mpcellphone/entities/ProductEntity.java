@@ -19,6 +19,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Product.getCheaperProvider", query = "select u from ProductEntity u WHERE u.provider.id = :idCellPhone order by u.price"),
     //Query para Obtener la lista de productos de un Modelo Especifico desarrollado por Miguel Olivares
     @NamedQuery(name = "Product.getByModel", query = "select u from ProductEntity u WHere u.cellPhone.model = :model"),
+    //Query para Obtener la lista de productos de un Modelo Especifico desarrollado por Miguel Olivares
+    @NamedQuery(name = "Product.getByBrand", query = "select u from ProductEntity u WHere u.cellPhone.brand = :brand"),
 })
 @XmlRootElement
 public class ProductEntity implements Serializable {

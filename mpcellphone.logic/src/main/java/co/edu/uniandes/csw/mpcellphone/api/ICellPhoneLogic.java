@@ -12,4 +12,5 @@ public interface ICellPhoneLogic {
     public void deleteCellPhone(Long id);
     public List<CellPhoneDTO> findByName(String name);
     public List<CellPhoneDTO> getCellPhoneModel();
+    public List<CellPhoneDTO> getCellPhoneBrand();
 }
