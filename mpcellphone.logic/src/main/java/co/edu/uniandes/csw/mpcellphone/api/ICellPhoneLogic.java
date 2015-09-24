@@ -11,4 +11,5 @@ public interface ICellPhoneLogic {
     public CellPhoneDTO updateCellPhone(CellPhoneDTO dto);
     public void deleteCellPhone(Long id);
     public List<CellPhoneDTO> findByName(String name);
+    public List<CellPhoneDTO> getCellPhoneModel();
 }

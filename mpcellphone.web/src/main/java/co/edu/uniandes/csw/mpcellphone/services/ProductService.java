@@ -5,11 +5,15 @@ import co.edu.uniandes.csw.mpcellphone.api.ICommentLogic;
 import co.edu.uniandes.csw.mpcellphone.api.IProductLogic;
 import co.edu.uniandes.csw.mpcellphone.api.IProviderLogic;
 import co.edu.uniandes.csw.mpcellphone.api.IQuestionLogic;
+import co.edu.uniandes.csw.mpcellphone.api.ICellPhoneLogic;
+import co.edu.uniandes.csw.mpcellphone.dtos.CellPhoneDTO;
 import co.edu.uniandes.csw.mpcellphone.dtos.ClientDTO;
 import co.edu.uniandes.csw.mpcellphone.dtos.CommentDTO;
 import co.edu.uniandes.csw.mpcellphone.dtos.ProductDTO;
 import co.edu.uniandes.csw.mpcellphone.dtos.ProviderDTO;
 import co.edu.uniandes.csw.mpcellphone.dtos.QuestionDTO;
+import co.edu.uniandes.csw.mpcellphone.ejbs.CellPhoneLogic;
+import co.edu.uniandes.csw.mpcellphone.persistence.CellPhonePersistence;
 import co.edu.uniandes.csw.mpcellphone.providers.StatusCreated;
 import java.util.List;
 import javax.inject.Inject;
@@ -40,13 +44,17 @@ public class ProductService {
     @Inject private IQuestionLogic questionLogic;
     @Inject private ICommentLogic commentLogic;
     @Inject private IClientLogic clientLogic;
+    @Inject private ICellPhoneLogic cellPhoneLogic;
+    @Inject private CellPhonePersistence cellPhonePersistence;
     @Context private HttpServletResponse response;
     @QueryParam("page") private Integer page;
     @QueryParam("maxRecords") private Integer maxRecords;
     @QueryParam("q")
     private String cellPhoneName;
+    private String cellPhoneModel;
     private ProviderDTO provider = (ProviderDTO) SecurityUtils.getSubject().getSession().getAttribute("Provider");
     private final ClientDTO client = (ClientDTO)SecurityUtils.getSubject().getSession().getAttribute("Client");
+    
     /**
      * @generated
      */
@@ -155,6 +163,30 @@ public class ProductService {
             this.response.setIntHeader("X-Total-Count", commentLogic.countComment());
         }
         listComments = commentLogic.getComments(page, maxRecords);
+        
         return listComments;
     }
+    /**
+     * Servicio para obtener la lista de modelos
+     * Creado por ma.olivares10
+     */
+    @GET
+    @Path("/getModels")
+    public List<CellPhoneDTO> getCellPhoneModel() {
+        
+        return cellPhoneLogic.getCellPhoneModel();
+        
+        
+    }
+    /**
+     * Servicio para obtener la lista de modelos de un modelo especifico
+     * Creado por ma.olivares10
+     */
+    @GET
+    @Path("/getByModel/{model}")
+    public List<ProductDTO> getByModel(@PathParam("model") String model) {
+        //public String model1; 
+        return productLogic.getByModel(model);
+    }
+   
 }

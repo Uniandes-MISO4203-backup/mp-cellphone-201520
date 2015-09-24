@@ -30,6 +30,7 @@ public class CellPhoneService {
     @Context private HttpServletResponse response;
     @QueryParam("page") private Integer page;
     @QueryParam("maxRecords") private Integer maxRecords;
+    //private String cellPhoneModel;
 
     /**
      * @generated
@@ -77,5 +78,8 @@ public class CellPhoneService {
     @Path("{id: \\d+}")
     public void deleteCellPhone(@PathParam("id") Long id) {
         cellPhoneLogic.deleteCellPhone(id);
+        
     }
+    
+    
 }

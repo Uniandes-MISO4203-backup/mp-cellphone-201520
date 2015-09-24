@@ -80,4 +80,8 @@ public class ProductLogic implements IProductLogic {
     public ProductDTO getCheaperProvider(Long idCellPhone){       
         return ProductConverter.fullEntity2DTO(persistence.getCheaperProvider(idCellPhone));
     }
+    //Para Obtener la lista de un modelo especifico, Desarrollado por Miguel Olivares
+    public List<ProductDTO> getByModel(String model) {
+        return ProductConverter.listEntity2DTO(persistence.getByModel(model));
+    }
 }

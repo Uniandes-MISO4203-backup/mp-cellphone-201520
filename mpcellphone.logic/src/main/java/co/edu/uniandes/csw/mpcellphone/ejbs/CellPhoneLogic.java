@@ -68,4 +68,9 @@ public class CellPhoneLogic implements ICellPhoneLogic {
     public List<CellPhoneDTO> findByName(String name) {
         return CellPhoneConverter.listEntity2DTO(persistence.findByName(name));
     }
+    //Para Obtener la lista de Modelos, desarrollado por Miguel Olivares
+    public List<CellPhoneDTO> getCellPhoneModel(){
+        return CellPhoneConverter.listString2DTO(persistence.getCellPhoneModel());
+        
+    }
 }

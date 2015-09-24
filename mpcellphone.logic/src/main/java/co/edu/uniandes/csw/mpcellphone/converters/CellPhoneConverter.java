@@ -144,5 +144,18 @@ public abstract class CellPhoneConverter {
         }
         return entities;
     }
+    //Para convertir de lista de String a Lista DTO
+    public static List<CellPhoneDTO> listString2DTO(List<String> Models) {
+        List<CellPhoneDTO> dtos = new ArrayList<CellPhoneDTO>();
+        if (Models != null) {
+            for (String name : Models) {
+                CellPhoneDTO dto = new CellPhoneDTO();
+                //dtos.add(basicEntity2DTO(Models));
+                dto.setModel(name);
+                dtos.add(dto);
+            }
+        }
+        return dtos;
+    }
 
 }

@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import javax.ejb.Stateless;
 import javax.persistence.NoResultException;
+import javax.persistence.Query;
 
 /**
  * @generated
@@ -21,7 +22,7 @@ public class ProductPersistence extends CrudPersistence<ProductEntity> {
         this.entityClass = ProductEntity.class;
     }
     
-     public List<ProductEntity> getByCellPhoneName(String name) {
+    public List<ProductEntity> getByCellPhoneName(String name) {
         Map<String, Object> params = new HashMap<String, Object>();
         params.put("name", "%" + name.toUpperCase() + "%");
         return executeListNamedQuery("Product.getByCellPhoneName", params);
@@ -51,4 +52,18 @@ public class ProductPersistence extends CrudPersistence<ProductEntity> {
             }
 
         }
+     //Para Obtener la lista de un modelo de producto desarrollado por Miguel Olivares
+    public List<ProductEntity> getByModel(String model) {
+    {
+        try{
+            Map<String, Object> params = new HashMap<String, Object>();
+            params.put("model",model);
+            
+            return  executeListNamedQuery("Product.getByModel", params);
+            } catch(NoResultException e){
+                return null;
+            }
+       
+    }
+    }
 }
