@@ -33,7 +33,7 @@ public class ProviderPersistence extends CrudPersistence<ProviderEntity> {
         try {
             Map<String, Object> params = new HashMap<String, Object>();
             params.put("email", email);
-            return this.executeSingleNamedQuery("Provider.getByUserEmail", params);
+            return this.executeSingleNamedQuery("Provider.getByEmail", params);
         } catch (NoResultException e) {
             return null;
         }

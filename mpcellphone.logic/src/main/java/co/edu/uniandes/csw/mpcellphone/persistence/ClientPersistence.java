@@ -33,7 +33,7 @@ public class ClientPersistence extends CrudPersistence<ClientEntity> {
         try {
             Map<String, Object> params = new HashMap<String, Object>();
             params.put("email", email);
-            return this.executeSingleNamedQuery("Client.getByUserEmail", params);
+            return this.executeSingleNamedQuery("Client.getByEmail", params);
         } catch (NoResultException e) {
             return null;
         }

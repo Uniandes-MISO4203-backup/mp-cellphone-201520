@@ -133,7 +133,7 @@ public class UserService {
             user.setUserName(userAttributes.get("username"));
             user.setRole(userLogic.getUserByUserName(user.getUserName()).getRole());
             switch (user.getRole()) {
-                case "user":
+                case "client":
                     user.setId(clientLogic.getClientByEmail(user.getEmail()).getId());
                     break;
                 case "provider":
