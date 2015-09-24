@@ -20,6 +20,11 @@
                 type: 'String',
                 required: true
             }, {
+                name: 'email',
+                displayName: 'Email',
+                type: 'String',
+                required: true
+            }, {
                 name: 'phone',
                 displayName: 'Phone',
                 type: 'String',

@@ -90,8 +90,23 @@ public class ClientLogic implements IClientLogic {
         return ClientConverter.listEntity2DTO(persistence.findByName(name));
     }
 
+    /**
+     * @param userId
+     * @return 
+     * @generated
+     */
     @Override
     public ClientDTO getClientByUserId(String userId) {
         return ClientConverter.refEntity2DTO(persistence.getClientByUserId(userId));
     }
+    
+    /**
+     * @param email
+     * @return 
+     * @generated
+     */
+    public ClientDTO getClientByEmail(String email) {
+        return ClientConverter.refEntity2DTO(persistence.getClientByEmail(email));
+    }
+
 }

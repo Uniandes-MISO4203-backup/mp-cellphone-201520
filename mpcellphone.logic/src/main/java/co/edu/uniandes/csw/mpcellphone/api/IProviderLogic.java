@@ -12,4 +12,5 @@ public interface IProviderLogic {
     public void deleteProvider(Long id);
     public List<ProviderDTO> findByName(String name);
     public ProviderDTO getProviderByUserId(String userId);
+    public ProviderDTO getProviderByEmail(String userId);
 }

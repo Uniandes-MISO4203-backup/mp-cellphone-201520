@@ -28,4 +28,15 @@ public class ClientPersistence extends CrudPersistence<ClientEntity> {
             return null;
         }
     }
+
+    public ClientEntity getClientByEmail(String email){
+        try {
+            Map<String, Object> params = new HashMap<String, Object>();
+            params.put("email", email);
+            return this.executeSingleNamedQuery("Client.getByUserEmail", params);
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
+
 }

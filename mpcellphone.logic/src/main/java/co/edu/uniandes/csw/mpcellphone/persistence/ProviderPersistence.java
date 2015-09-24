@@ -28,4 +28,15 @@ public class ProviderPersistence extends CrudPersistence<ProviderEntity> {
             return null;
         }
     }
+
+    public ProviderEntity getProviderByEmail(String email){
+        try {
+            Map<String, Object> params = new HashMap<String, Object>();
+            params.put("email", email);
+            return this.executeSingleNamedQuery("Provider.getByUserEmail", params);
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
+
 }

@@ -104,6 +104,8 @@ public abstract class ClientConverter {
     }
 
     /**
+     * @param entity
+     * @return 
      * @generated
      */
     public static ClientDTO fullEntity2DTO(ClientEntity entity) {
@@ -118,6 +120,8 @@ public abstract class ClientConverter {
     }
 
     /**
+     * @param dto
+     * @return 
      * @generated
      */
     public static ClientEntity fullDTO2Entity(ClientDTO dto) {
@@ -132,9 +136,10 @@ public abstract class ClientConverter {
     }
 
     /**
+     * @param entities
+     * @return 
      * @generated
      */
-
     public static List<ClientDTO> listEntity2DTO(List<ClientEntity> entities) {
         List<ClientDTO> dtos = new ArrayList<ClientDTO>();
         if (entities != null) {
@@ -146,6 +151,8 @@ public abstract class ClientConverter {
     }
 
     /**
+     * @param dtos
+     * @return 
      * @generated
      */
     public static List<ClientEntity> listDTO2Entity(List<ClientDTO> dtos) {

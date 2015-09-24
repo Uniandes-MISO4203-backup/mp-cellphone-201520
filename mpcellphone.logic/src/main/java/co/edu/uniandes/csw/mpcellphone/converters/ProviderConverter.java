@@ -28,6 +28,12 @@ public abstract class ProviderConverter {
             dto.setName(entity.getName());
             dto.setUserId(entity.getUserId());
             dto.setEmail(entity.getEmail());
+            dto.setGivenName(entity.getGivenName());
+            dto.setSurname(entity.getSurname());
+            dto.setPhone(entity.getPhone());
+            dto.setAddress(entity.getAddress());
+            dto.setCity(entity.getCity());
+            dto.setCountry(entity.getCountry());
 
             return dto;
         } else {
@@ -61,6 +67,12 @@ public abstract class ProviderConverter {
             dto.setName(entity.getName());
             dto.setUserId(entity.getUserId());
             dto.setEmail(entity.getEmail());
+            dto.setGivenName(entity.getGivenName());
+            dto.setSurname(entity.getSurname());
+            dto.setPhone(entity.getPhone());
+            dto.setAddress(entity.getAddress());
+            dto.setCity(entity.getCity());
+            dto.setCountry(entity.getCountry());
 
             return dto;
         } else {
@@ -78,6 +90,12 @@ public abstract class ProviderConverter {
             entity.setName(dto.getName());
             entity.setUserId(dto.getUserId());
             entity.setEmail(dto.getEmail());
+            entity.setGivenName(dto.getGivenName());
+            entity.setSurname(dto.getSurname());
+            entity.setPhone(dto.getPhone());
+            entity.setAddress(dto.getAddress());
+            entity.setCity(dto.getCity());
+            entity.setCountry(dto.getCountry());
 
             return entity;
         } else {
@@ -86,6 +104,8 @@ public abstract class ProviderConverter {
     }
 
     /**
+     * @param entity
+     * @return 
      * @generated
      */
     public static ProviderDTO fullEntity2DTO(ProviderEntity entity) {
@@ -99,6 +119,8 @@ public abstract class ProviderConverter {
     }
 
     /**
+     * @param dto
+     * @return 
      * @generated
      */
     public static ProviderEntity fullDTO2Entity(ProviderDTO dto) {
@@ -112,9 +134,10 @@ public abstract class ProviderConverter {
     }
 
     /**
+     * @param entities
+     * @return 
      * @generated
      */
-
     public static List<ProviderDTO> listEntity2DTO(List<ProviderEntity> entities) {
         List<ProviderDTO> dtos = new ArrayList<ProviderDTO>();
         if (entities != null) {
@@ -126,6 +149,8 @@ public abstract class ProviderConverter {
     }
 
     /**
+     * @param dtos
+     * @return 
      * @generated
      */
     public static List<ProviderEntity> listDTO2Entity(List<ProviderDTO> dtos) {
