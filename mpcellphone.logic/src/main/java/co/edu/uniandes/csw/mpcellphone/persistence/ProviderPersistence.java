@@ -1,7 +1,9 @@
 package co.edu.uniandes.csw.mpcellphone.persistence;
 
 import co.edu.uniandes.csw.mpcellphone.entities.ProviderEntity;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.ejb.Stateless;
 import javax.persistence.NoResultException;
@@ -37,6 +39,20 @@ public class ProviderPersistence extends CrudPersistence<ProviderEntity> {
         } catch (NoResultException e) {
             return null;
         }
+    }
+    
+    //Para Obtener la lista de Proveedores desarrollado por Miguel Olivares
+    public List<String> getProviders() {
+        try{
+            
+            List<String> list = new ArrayList<String>();
+            list = executeListNamedQuery("Provider.getProviders");
+            
+            return list;
+            } catch(NoResultException e){
+                return null;
+                
+            }
     }
 
 }

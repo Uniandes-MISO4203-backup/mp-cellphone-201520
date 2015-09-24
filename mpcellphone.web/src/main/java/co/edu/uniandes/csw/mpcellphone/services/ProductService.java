@@ -211,4 +211,22 @@ public class ProductService {
          
         return productLogic.getByBrand(brand);
     }
+    /**
+     * Servicio para obtener la lista de proveedores 
+     * Creado por ma.olivares10
+     */
+    @GET
+    @Path("/getProviders")
+    public List<ProviderDTO> getProviders() {
+        
+        return providerLogic.getProviders();
+  
+    }
+    
+    @GET
+    @Path("/getByProviderName/{name}")
+    public List<ProductDTO> getByProviderName(@PathParam("name") String name) {
+         
+        return productLogic.getByProviderName(name);
+    }
 }

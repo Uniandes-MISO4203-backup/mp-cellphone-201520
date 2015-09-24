@@ -13,4 +13,5 @@ public interface IProviderLogic {
     public List<ProviderDTO> findByName(String name);
     public ProviderDTO getProviderByUserId(String userId);
     public ProviderDTO getProviderByEmail(String userId);
+    public List<ProviderDTO> getProviders();
 }

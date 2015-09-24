@@ -78,4 +78,16 @@ public class ProductPersistence extends CrudPersistence<ProductEntity> {
             }
         }
     }
+    //Para Obtener la lista de un producto filtrado por marcas desarrollado por Miguel Olivares
+    public List<ProductEntity> getByProviderName(String name) {
+    {
+        try{
+            Map<String, Object> params = new HashMap<String, Object>();
+            params.put("name",name);
+            return  executeListNamedQuery("Product.getByProviderName", params);
+            } catch(NoResultException e){
+                return null;
+            }
+        }
+    }
 }

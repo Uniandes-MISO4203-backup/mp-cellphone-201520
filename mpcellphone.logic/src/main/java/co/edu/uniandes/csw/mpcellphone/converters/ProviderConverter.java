@@ -163,4 +163,17 @@ public abstract class ProviderConverter {
         return entities;
     }
 
+    //Para convertir de lista de String a Lista DTO desarrollado por Miguel Olivares
+    public static List<ProviderDTO> listString2DTO(List<String> Models) {
+        List<ProviderDTO> dtos = new ArrayList<ProviderDTO>();
+        if (Models != null) {
+            for (String name : Models) {
+                ProviderDTO dto = new ProviderDTO();
+                
+                dto.setName(name);
+                dtos.add(dto);
+            }
+        }
+        return dtos;
+    }
 }
