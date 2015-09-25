@@ -229,4 +229,21 @@ public class ProductService {
          
         return productLogic.getByProviderName(name);
     }
+    /**
+     * Servicio para obtener la lista de ciudades
+     * Creado por ma.olivares10
+     */
+    @GET
+    @Path("/getCities")
+    public List<ProviderDTO> getCities() {
+        
+        return providerLogic.getCities();
+    }
+    
+    @GET
+    @Path("/getByCity/{city}")
+    public List<ProductDTO> getByCity(@PathParam("city") String city) {
+         
+        return productLogic.getByCity(city);
+    }
 }

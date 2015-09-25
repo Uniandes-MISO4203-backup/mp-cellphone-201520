@@ -90,4 +90,17 @@ public class ProductPersistence extends CrudPersistence<ProductEntity> {
             }
         }
     }
+    
+    //Para Obtener la lista de un producto filtrado por ciudad desarrollado por Miguel Olivares
+    public List<ProductEntity> getByCity(String city) {
+    {
+        try{
+            Map<String, Object> params = new HashMap<String, Object>();
+            params.put("city",city);
+            return  executeListNamedQuery("Product.getByCity", params);
+            } catch(NoResultException e){
+                return null;
+            }
+        }
+    }
 }

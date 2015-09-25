@@ -84,12 +84,16 @@ public class ProductLogic implements IProductLogic {
     public List<ProductDTO> getByModel(String model) {
         return ProductConverter.listEntity2DTO(persistence.getByModel(model));
     }
-    //Para Obtener la lista de un modelo especifico, Desarrollado por Miguel Olivares
+    //Para Obtener la lista de un modelo especifico filtrado por marca, Desarrollado por Miguel Olivares
     public List<ProductDTO> getByBrand(String brand) {
         return ProductConverter.listEntity2DTO(persistence.getByBrand(brand));
     }
-    //Para Obtener la lista de un modelo especifico, Desarrollado por Miguel Olivares
+    //Para Obtener la lista de un modelo especifico de un proveedor, Desarrollado por Miguel Olivares
     public List<ProductDTO> getByProviderName(String name) {
         return ProductConverter.listEntity2DTO(persistence.getByProviderName(name));
+    }
+    //Para Obtener la lista de un modelo especifico filtrado por ciudad, Desarrollado por Miguel Olivares
+    public List<ProductDTO> getByCity(String city) {
+        return ProductConverter.listEntity2DTO(persistence.getByCity(city));
     }
 }

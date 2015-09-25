@@ -17,4 +17,5 @@ public interface IProductLogic {
     public List<ProductDTO> getByModel(String model);
     public List<ProductDTO> getByBrand(String brand);
     public List<ProductDTO> getByProviderName(String name);
+    public List<ProductDTO> getByCity(String city);
 }

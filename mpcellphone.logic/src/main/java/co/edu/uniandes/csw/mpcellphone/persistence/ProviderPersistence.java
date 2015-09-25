@@ -54,5 +54,19 @@ public class ProviderPersistence extends CrudPersistence<ProviderEntity> {
                 
             }
     }
+    
+    //Para Obtener la lista de Ciudades desarrollado por Miguel Olivares
+    public List<String> getCities() {
+        try{
+            
+            List<String> list = new ArrayList<String>();
+            list = executeListNamedQuery("Provider.getCities");
+            
+            return list;
+            } catch(NoResultException e){
+                return null;
+                
+            }
+    }
 
 }

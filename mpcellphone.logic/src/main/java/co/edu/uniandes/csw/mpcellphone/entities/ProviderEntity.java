@@ -17,7 +17,8 @@ import javax.persistence.NamedQuery;
 @NamedQueries({
     @NamedQuery(name = "Provider.getByUserId", query = "select u from ProviderEntity u WHERE u.userId = :user_id"),
     @NamedQuery(name = "Provider.getByEmail", query = "select u from ProviderEntity u WHERE u.email = :email"),
-    @NamedQuery(name = "Provider.getProviders", query = "select u.name from ProviderEntity u"),
+    @NamedQuery(name = "Provider.getProviders", query = "select u.name from ProviderEntity u Order By u.name"),
+    @NamedQuery(name = "Provider.getCities", query = "select Distinct u.city from ProviderEntity u Order By u.city"),
 })
 public class ProviderEntity implements Serializable {
 

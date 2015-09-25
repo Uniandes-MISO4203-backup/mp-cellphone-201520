@@ -108,9 +108,15 @@ public class ProviderLogic implements IProviderLogic {
         return ProviderConverter.refEntity2DTO(persistence.getProviderByEmail(email));
     }
     
-    //Para Obtener la lista de Modelos, desarrollado por Miguel Olivares
+    //Para Obtener la lista de Proveedores, desarrollado por Miguel Olivares
     public List<ProviderDTO> getProviders(){
         return ProviderConverter.listString2DTO(persistence.getProviders());
+        
+    }
+    
+    //Para Obtener la lista de Ciudades, desarrollado por Miguel Olivares
+    public List<ProviderDTO> getCities(){
+        return ProviderConverter.listString2DTO(persistence.getCities());
         
     }
 }
