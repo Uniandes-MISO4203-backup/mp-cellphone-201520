@@ -96,4 +96,8 @@ public class ProductLogic implements IProductLogic {
     public List<ProductDTO> getByCity(String city) {
         return ProductConverter.listEntity2DTO(persistence.getByCity(city));
     }
+    //Para Obtener la lista de un modelo especifico filtrado por ciudad, Desarrollado por Miguel Olivares
+    public List<ProductDTO> getByPriceRange(Integer minPrice, Integer maxPrice) {
+        return ProductConverter.listEntity2DTO(persistence.getByPriceRange(minPrice, maxPrice));
+    }
 }

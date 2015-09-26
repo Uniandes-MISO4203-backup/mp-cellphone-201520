@@ -110,4 +110,6 @@ public abstract class CrudPersistence<T> {
         q.setParameter("name", "%"+name+"%");
         return q.getResultList();
     }
+    
+    
 }

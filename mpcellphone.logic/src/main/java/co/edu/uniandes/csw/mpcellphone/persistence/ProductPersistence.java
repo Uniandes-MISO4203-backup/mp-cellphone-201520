@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.ejb.Stateless;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
+import javax.persistence.TemporalType;
 
 /**
  * @generated
@@ -98,6 +99,29 @@ public class ProductPersistence extends CrudPersistence<ProductEntity> {
             Map<String, Object> params = new HashMap<String, Object>();
             params.put("city",city);
             return  executeListNamedQuery("Product.getByCity", params);
+            } catch(NoResultException e){
+                return null;
+            }
+        }
+    }
+    
+    //Para Obtener la lista de un producto filtrado por rango de precios desarrollado por Miguel Olivares
+    public List<ProductEntity> getByPriceRange(Integer minPrice, Integer maxPrice) {
+    {   
+        
+        try{
+            /*Query q = em.createQuery("select u from ProductEntity u WHERE u.price "
+                    + ">= :minPrice "
+                   +"AND u.price <= :maxPrice order by u.price");*/
+            Query q = em.createNamedQuery("Product.getByPriceRange");
+            Object minPriceObj = (Integer) minPrice;
+            Object maxPriceObj = (Integer) maxPrice;
+            q.setParameter("minPrice", minPriceObj);
+            q.setParameter("maxPrice", maxPriceObj);
+            
+            
+            return q.getResultList();
+            //return  executeRangeListNamedQuery("Product.getByPriceRange", minPriceInt, maxPriceInt);
             } catch(NoResultException e){
                 return null;
             }

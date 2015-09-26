@@ -18,4 +18,5 @@ public interface IProductLogic {
     public List<ProductDTO> getByBrand(String brand);
     public List<ProductDTO> getByProviderName(String name);
     public List<ProductDTO> getByCity(String city);
+    public List<ProductDTO> getByPriceRange(Integer minPrice, Integer maxPrice);
 }

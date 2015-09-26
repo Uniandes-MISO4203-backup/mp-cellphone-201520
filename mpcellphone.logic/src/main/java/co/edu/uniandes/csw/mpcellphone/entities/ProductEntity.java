@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     //Query para Obtener la lista de productos en una ciudad Especifica desarrollado por Miguel Olivares
     @NamedQuery(name = "Product.getByCity", query = "select u from ProductEntity u WHere u.provider.city = :city"),
     //Query para Obtener la lista de productos en una rango de precio desarrollado por Miguel Olivares
-    @NamedQuery(name = "Product.getByPriceRange", query = "select u from ProductEntity u WHere u.price between :minPrice and :maxPrice"),
+    @NamedQuery(name = "Product.getByPriceRange", query = "select u from ProductEntity u WHERE u.price BETWEEN :minPrice AND :maxPrice")
 })
 @XmlRootElement
 public class ProductEntity implements Serializable {

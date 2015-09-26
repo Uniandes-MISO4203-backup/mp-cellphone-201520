@@ -246,4 +246,15 @@ public class ProductService {
          
         return productLogic.getByCity(city);
     }
+    
+    /**
+     * Servicio para obtener la lista de de filtro por precios
+     * Creado por ma.olivares10
+     */
+    @GET
+    @Path("/getByPriceRange/{minPrice}/{maxPrice}")
+    public List<ProductDTO> getByPriceRange(@PathParam("minPrice") Integer minPrice, @PathParam("maxPrixe") Integer maxPrice) {
+        
+        return productLogic.getByPriceRange(minPrice, maxPrice);
+    }
 }
