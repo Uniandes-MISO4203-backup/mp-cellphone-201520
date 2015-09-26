@@ -31,6 +31,7 @@ public abstract class ProductConverter {
             dto.setDiscount(entity.getDiscount());
             dto.setCellPhone(CellPhoneConverter.refEntity2DTO(entity.getCellPhone()));
             dto.setProvider(ProviderConverter.refEntity2DTO(entity.getProvider()));
+            dto.setCategory(entity.getCategory());
             return dto;
         } else {
             return null;
@@ -65,6 +66,7 @@ public abstract class ProductConverter {
             dto.setDiscount(entity.getDiscount());
             dto.setCellPhone(CellPhoneConverter.refEntity2DTO(entity.getCellPhone()));
             dto.setProvider(ProviderConverter.refEntity2DTO(entity.getProvider()));
+            dto.setCategory(entity.getCategory());
 
             return dto;
         } else {
@@ -84,6 +86,7 @@ public abstract class ProductConverter {
             entity.setDiscount(dto.getDiscount());
             entity.setCellPhone(CellPhoneConverter.refDTO2Entity(dto.getCellPhone()));
             entity.setProvider(ProviderConverter.refDTO2Entity(dto.getProvider()));
+            entity.setCategory(dto.getCategory());
 
             return entity;
         } else {

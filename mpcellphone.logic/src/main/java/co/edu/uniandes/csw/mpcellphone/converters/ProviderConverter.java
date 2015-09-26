@@ -34,6 +34,7 @@ public abstract class ProviderConverter {
             dto.setAddress(entity.getAddress());
             dto.setCity(entity.getCity());
             dto.setCountry(entity.getCountry());
+            dto.setCalification(entity.getCalification());
 
             return dto;
         } else {
@@ -73,6 +74,7 @@ public abstract class ProviderConverter {
             dto.setAddress(entity.getAddress());
             dto.setCity(entity.getCity());
             dto.setCountry(entity.getCountry());
+            dto.setCalification(entity.getCalification());
 
             return dto;
         } else {
@@ -96,6 +98,7 @@ public abstract class ProviderConverter {
             entity.setAddress(dto.getAddress());
             entity.setCity(dto.getCity());
             entity.setCountry(dto.getCountry());
+            entity.setCalification(dto.getCalification());
 
             return entity;
         } else {

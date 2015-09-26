@@ -49,6 +49,11 @@
                 displayName: 'UserId',
                 type: 'String',
                 required: true
+            }, {
+                name: 'calification',
+                displayName: 'calification',
+                type: 'Integer',
+                required: false
             }], 
         childs: [{
                 name: 'products',

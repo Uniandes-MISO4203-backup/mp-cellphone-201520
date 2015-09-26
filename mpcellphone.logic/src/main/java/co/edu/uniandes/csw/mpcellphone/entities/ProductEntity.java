@@ -46,6 +46,16 @@ public class ProductEntity implements Serializable {
     @ManyToOne
     private ProviderEntity provider;
     
+    private String category;
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+    
     /**
      * @generated
      */

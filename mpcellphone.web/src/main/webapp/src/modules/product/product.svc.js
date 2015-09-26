@@ -31,6 +31,10 @@
                 //return this.api.one('allcomments', idcellPhone).get();
                 return this.api.one('allcomments').get();
             };
+            
+            this.getModels = function(){
+                return this.api.one('getModels').get();
+            };
 
     }]);
 })(window.angular);

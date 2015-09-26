@@ -26,5 +26,10 @@
                 service: 'cellPhoneService',
                 options: [],
                 required: true
+            }, {
+                name: 'category',
+                displayName: 'Category',
+                type: 'String',
+                required: true
             }]});
 })(window.angular);

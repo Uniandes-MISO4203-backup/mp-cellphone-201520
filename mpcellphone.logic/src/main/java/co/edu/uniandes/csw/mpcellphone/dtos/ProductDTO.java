@@ -14,6 +14,15 @@ public class ProductDTO {
     private Integer discount;
     private CellPhoneDTO cellPhone;
     private ProviderDTO provider;
+    private String category;
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
     /**
      * @generated
      */

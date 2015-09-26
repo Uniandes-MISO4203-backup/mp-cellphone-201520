@@ -350,6 +350,61 @@
             $scope.currentGroup = groups[0];
             
         });
+        /*
+        //Para encontrar el Proveedor con el menor precio para un producto
+        this.ModelsList = [ 
+               {
+                    name: 'BestProvider',
+                    displayName: 'Best Provider',
+                    icon: 'thumbs-up',
+                    class: 'warning',
+                    fn: function (record) {
+                            record = getModels();
+                            return record;
+                            console.log(record);
+                            $('#myModal').modal('show').on('shown.bs.modal', function ()
+                            {
+                                $('#comment').focus();
+                            });
+                            getComments(record.id);  
+                    },
+                    show: function () {
+                        return true;
+                    }
+              }
+            ]
+            
+        //Para los comentarios por producto...
+            this.commentActions = [
+            {
+                    name: 'commet',
+                    displayName: 'Comment',
+                    icon: 'comment',
+                    class: 'warning',
+                    fn: function (record)
+                    {
+                        tmp = authSvc;
+                        if (authSvc.getCurrentUser())
+                        {
+                            ProducSelComment = record;
+                            $('#titleProduct').html("Comments: Cellphone - " + record.cellPhone.name);
+                            $("#comment").val("").attr("placeholder", authSvc.getCurrentUser().name + " Says: ");
+                            $("#cantidad").html("<center>" + maximoCaracteres + "</center>");
+                            $('#myModal').modal('show').on('shown.bs.modal', function ()
+                            {
+                                $('#comment').focus();
+                            });
+                            getComments(record.id);  
+                        }
+                        else
+                        {
+                            $location.path('/login');
+                        }
+                    },
+                    show: function () {
+                        return true;
+                    }
+             }];*/
         
     }]);
 })(window.angular);

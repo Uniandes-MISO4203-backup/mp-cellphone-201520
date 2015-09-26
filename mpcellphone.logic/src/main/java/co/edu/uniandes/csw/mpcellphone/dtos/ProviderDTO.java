@@ -20,6 +20,7 @@ public class ProviderDTO {
     private String city;
     private String country;
     private List<ProductDTO> products;
+    private Integer calification;
 
     /**
      * @return 
@@ -27,6 +28,14 @@ public class ProviderDTO {
      */
     public Long getId() {
         return id;
+    }
+
+    public Integer getCalification() {
+        return calification;
+    }
+
+    public void setCalification(Integer calification) {
+        this.calification = calification;
     }
 
     /**

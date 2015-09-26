@@ -43,6 +43,8 @@ public class ProviderEntity implements Serializable {
     private String city;
     
     private String country;
+    
+    private Integer calification;
 
     @OneToMany(mappedBy = "provider", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ProductEntity> products;
@@ -61,6 +63,14 @@ public class ProviderEntity implements Serializable {
      */
     public void setId(Long id){
         this.id = id;
+    }
+
+    public Integer getCalification() {
+        return calification;
+    }
+
+    public void setCalification(Integer calification) {
+        this.calification = calification;
     }
 
     /**
