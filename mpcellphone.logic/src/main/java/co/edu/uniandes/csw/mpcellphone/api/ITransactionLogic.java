@@ -9,6 +9,8 @@ import co.edu.uniandes.csw.mpcellphone.converters.OrderConverter;
 import co.edu.uniandes.csw.mpcellphone.dtos.OrderDTO;
 import co.edu.uniandes.csw.mpcellphone.dtos.TransactionDTO;
 import co.edu.uniandes.csw.mpcellphone.entities.OrderEntity;
+import com.itextpdf.text.DocumentException;
+import java.io.FileNotFoundException;
 import java.util.List;
 
 /**

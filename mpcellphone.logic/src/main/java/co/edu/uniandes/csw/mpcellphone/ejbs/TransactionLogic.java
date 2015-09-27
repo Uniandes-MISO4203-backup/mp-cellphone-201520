@@ -6,10 +6,15 @@
 package co.edu.uniandes.csw.mpcellphone.ejbs;
 
 import co.edu.uniandes.csw.mpcellphone.api.ITransactionLogic;
+import co.edu.uniandes.csw.mpcellphone.converters.QuestionConverter;
 import co.edu.uniandes.csw.mpcellphone.converters.TransactionConverter;
+import co.edu.uniandes.csw.mpcellphone.dtos.OrderDTO;
 import co.edu.uniandes.csw.mpcellphone.dtos.TransactionDTO;
 import co.edu.uniandes.csw.mpcellphone.entities.TransactionEntity;
+import co.edu.uniandes.csw.mpcellphone.pdf.GenerateFactura;
 import co.edu.uniandes.csw.mpcellphone.persistence.TransactionPersistence;
+import com.itextpdf.text.DocumentException;
+import java.io.FileNotFoundException;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -50,11 +55,30 @@ public class TransactionLogic implements ITransactionLogic {
     /**
      * Metodo que permite realizar la creación de una transaccion
      * @param dto
+     * @param order
      * @return 
+     * @throws java.io.FileNotFoundException 
+     * @throws com.itextpdf.text.DocumentException 
      */
-    public TransactionDTO createTransaction(TransactionDTO dto) {
+    public TransactionDTO createTransaction(TransactionDTO dto){
         TransactionEntity entity = TransactionConverter.fullDTO2Entity(dto);
         persistence.create(entity);
+        
+//        GenerateFactura factura= new GenerateFactura();
+//        String fact = factura.generate();
+//        
+        //Enviar factura por email
+        //Send email
+//        String emailMsg="<html><body><br />Señor(a) "+order.getClient().getName() +
+//                "<br /><br />" +
+//                "Los datos de su compra son: <br /><br /> " +
+//                "<br />Forma de Pago: " + dto.getPaymentMethod().getMethodName()+ 
+//                "<br />Valor Total de la compra: " + dto.getTotalSale() + 
+//                "<br /><br />Atentamente," + 
+//                "<br /><br /><br />MarketPhone";
+//        String subject = "Ha recibido un mensaje de MarketPhone";
+//        mailUtilsMP.sendEmailMPAttach(emailMsg, order.getClient().getEmail(), subject, fact);
+                
         return TransactionConverter.fullEntity2DTO(entity);
     }
 
