@@ -132,6 +132,7 @@ public class UserService {
             user.setEmail(userAttributes.get("email"));
             user.setUserName(userAttributes.get("username"));
             user.setRole(userLogic.getUserByUserName(user.getUserName()).getRole());
+            /*
             switch (user.getRole()) {
                 case "client":
                     user.setId(clientLogic.getClientByEmail(user.getEmail()).getId());
@@ -139,7 +140,7 @@ public class UserService {
                 case "provider":
                     user.setId(providerLogic.getProviderByEmail(user.getEmail()).getId());
                     break;
-            }
+            }*/
             return Response.ok(user).build();
         } catch (AuthenticationException e) {
             return Response.status(Response.Status.BAD_REQUEST)

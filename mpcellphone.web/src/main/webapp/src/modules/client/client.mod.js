@@ -5,10 +5,18 @@
 
     mod.constant('clientModel', {
         fields: [{
+                name: 'id',
+                displayName: 'ID',
+                type: 'String',
+                required: true, 
+                visible: true
+            },
+            {
                 name: 'name',
                 displayName: 'Name',
                 type: 'String',
-                required: true
+                required: true, 
+                visible: true
             }, {
                 name: 'givenName',
                 displayName: 'Given Name',
@@ -25,7 +33,8 @@
                 name: 'email',
                 displayName: 'Email',
                 type: 'String',
-                required: true
+                required: true, 
+                visible: true
             }, {
                 name: 'phone',
                 displayName: 'Phone',
@@ -42,12 +51,14 @@
                 name: 'city',
                 displayName: 'City',
                 type: 'String',
-                required: true
+                required: true, 
+                visible: true
             }, {
                 name: 'country',
                 displayName: 'Country',
                 type: 'String',
-                required: true
+                required: true, 
+                visible: true
             }, {
                 name: 'userId',
                 displayName: 'UserId',
