@@ -63,21 +63,26 @@ public class TransactionLogic implements ITransactionLogic {
     public TransactionDTO createTransaction(TransactionDTO dto){
         TransactionEntity entity = TransactionConverter.fullDTO2Entity(dto);
         persistence.create(entity);
+        String factura = null;
         
-//        GenerateFactura factura= new GenerateFactura();
-//        String fact = factura.generate();
-//        
+        try {
+            GenerateFactura p = new GenerateFactura();
+            factura = p.generate();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        
         //Enviar factura por email
         //Send email
-//        String emailMsg="<html><body><br />Señor(a) "+order.getClient().getName() +
-//                "<br /><br />" +
-//                "Los datos de su compra son: <br /><br /> " +
-//                "<br />Forma de Pago: " + dto.getPaymentMethod().getMethodName()+ 
-//                "<br />Valor Total de la compra: " + dto.getTotalSale() + 
-//                "<br /><br />Atentamente," + 
-//                "<br /><br /><br />MarketPhone";
-//        String subject = "Ha recibido un mensaje de MarketPhone";
-//        mailUtilsMP.sendEmailMPAttach(emailMsg, order.getClient().getEmail(), subject, fact);
+        String emailMsg="<html><body><br />Señor(a) "+"Cindy"+
+                "<br /><br />" +
+                "Los datos de su compra son: <br /><br /> " +
+                "<br />Forma de Pago: " + dto.getPaymentMethod().getMethodName()+ 
+                "<br />Valor Total de la compra: " + dto.getTotalSale() + 
+                "<br /><br />Atentamente," + 
+                "<br /><br /><br />MarketPhone";
+        String subject = "Ha recibido un mensaje de MarketPhone";
+        mailUtilsMP.sendEmailMPAttach(emailMsg, "cvho31@gmail.co", subject, factura);
                 
         return TransactionConverter.fullEntity2DTO(entity);
     }
