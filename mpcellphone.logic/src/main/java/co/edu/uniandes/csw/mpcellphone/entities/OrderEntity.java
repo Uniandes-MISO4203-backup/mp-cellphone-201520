@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.mpcellphone.entities;
 
+import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,7 +19,7 @@ import javax.persistence.TemporalType;
  * @author Cindy Hernandez - cv.hernandez10
  */
 @Entity
-public class OrderEntity {
+public class OrderEntity implements Serializable {
     
     @Id
     @GeneratedValue(generator = "Order")
@@ -32,9 +33,9 @@ public class OrderEntity {
     
     private String state;
     
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     private Date dateOrder;
-
+    
     public Long getId() {
         return id;
     }

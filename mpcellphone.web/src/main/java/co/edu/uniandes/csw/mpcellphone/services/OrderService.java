@@ -5,6 +5,7 @@ import co.edu.uniandes.csw.mpcellphone.api.IOrderLogic;
 import co.edu.uniandes.csw.mpcellphone.dtos.OrderDTO;
 import co.edu.uniandes.csw.mpcellphone.dtos.OrderDTO;
 import co.edu.uniandes.csw.mpcellphone.providers.StatusCreated;
+import java.util.Date;
 import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
@@ -45,6 +46,7 @@ public class OrderService {
     @POST
     @StatusCreated
     public OrderDTO createOrder(OrderDTO dto) {
+        dto.setDateOrder(new Date());
         return orderLogic.createOrder(dto);
     }
 

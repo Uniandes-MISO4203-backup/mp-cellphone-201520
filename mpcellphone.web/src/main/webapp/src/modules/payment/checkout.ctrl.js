@@ -65,17 +65,14 @@
             }
             
             $scope.submitPayment = function(){
-                var date = new Date().toISOString().substring(0, 10);
                 var order = {};
                 order.ship = $scope.shippingData;
-                order.dateOrder = date;
                 order.state = "En proceso";
                 order.client = authSvc.getCurrentUser();
-                
+                            
                 chSvc.saveRecord(order).then(function (data){
                    $scope.order = data;
                    var paymentData = {};
-                   paymentData.payDate = date;
                    paymentData.totalDiscount = 0;
                    paymentData.order = $scope.order;
                    paymentData.totalSale = $scope.totalCompra;
@@ -104,11 +101,11 @@
             }
             
             $scope.pay = function () {
-                console.log("entro");
                 $('#modalPay').modal('show');
             };
             
             $scope.finish = function () {
+                $('#modalPay').modal('hide');
                 $location.path('/catalog');
             };
         }]);

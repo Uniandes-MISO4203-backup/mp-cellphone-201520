@@ -5,7 +5,6 @@ import java.util.List;
 import co.edu.uniandes.csw.mpcellphone.entities.ClientEntity;
 import co.edu.uniandes.csw.mpcellphone.entities.OrderEntity;
 import co.edu.uniandes.csw.mpcellphone.dtos.OrderDTO;
-import java.sql.Date;
 
 /**
  * Converter para la entidad Order
@@ -83,7 +82,7 @@ public abstract class OrderConverter {
             entity.setShip(ShipConverter.refDTO2Entity(dto.getShip()));
             entity.setState(dto.getState());
             entity.setClient(ClientConverter.refDTO2Entity(dto.getClient()));
-            entity.setDateOrder((Date) dto.getDateOrder());
+            entity.setDateOrder(dto.getDateOrder());
 
             return entity;
         } else {

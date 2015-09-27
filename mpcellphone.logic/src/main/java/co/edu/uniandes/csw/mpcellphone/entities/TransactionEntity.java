@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.mpcellphone.entities;
 
+import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,7 +21,7 @@ import javax.persistence.TemporalType;
  * @author Cindy Hernandez - cv.hernandez10
  */
 @Entity
-public class TransactionEntity {
+public class TransactionEntity implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -43,7 +44,7 @@ public class TransactionEntity {
     
     private String totalTax;
     
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     private Date payDate;
     
     private String bank;
