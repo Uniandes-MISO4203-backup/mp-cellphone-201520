@@ -8,7 +8,7 @@
         {
             actual = authSvc;
             var self = this;
-            svc.getRoleSvc().then(function(data)
+            svc.getRoleCl().then(function(data)
             {
                 switch (data.role) 
                 {
@@ -22,26 +22,22 @@
                                    });
                                    break;
                     case "client": 
-                                    //debugger;
                                     self.fetchRecords().then(function(data)
                                     {
-                                      //debugger;
-                                       //tmp2 = data;
-                                       //console.log(data);
                                        var idActual = authSvc.getCurrentUser().id;
                                        for(var i = 0; i < data.length; i++)
                                        {
                                            if(Number(data[i].id) === Number(idActual))
                                            {
-                                               tmp2 = data[i];
-                                               console.log(data[i].name, data[i].id);
+                                               self.editRecord(data[i]);
+                                               break;
                                            }
                                        }
-                                       //debugger;
                                     });
-                                    //debugger;
                                     break;
-                    default: $location.path('/#/catalog'); 
+                    default: 
+                        $location.path('/#/catalog'); 
+                        break;
                 } 
             });
         }

@@ -5,13 +5,6 @@
 
     mod.constant('clientModel', {
         fields: [{
-                name: 'id',
-                displayName: 'ID',
-                type: 'String',
-                required: true, 
-                visible: true
-            },
-            {
                 name: 'name',
                 displayName: 'Name',
                 type: 'String',

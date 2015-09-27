@@ -3,7 +3,7 @@
     
     mod.service('providerService', ['CrudCreator','providerContext', function(CrudCreator, context){
             CrudCreator.extendService(this, context);
-            this.getRoleSvc = function() {
+            this.getRolePr = function() {
                 return this.api.one('../users/currentUser').get();   
             }
     }]);

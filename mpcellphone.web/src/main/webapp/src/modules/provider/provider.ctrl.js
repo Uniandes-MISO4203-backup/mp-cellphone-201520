@@ -14,14 +14,30 @@
                     switch (data.role) 
                     {
                         case "admin":
-                            self.fetchRecords();
+                            ocultaCampos("th");
+                            self.fetchRecords().then(function(){
+                                $scope.$watch(function(){
+                                    ocultaCampos("td");
+                                    //console.log("Ingresa");
+                                });
+                            });
                             break;
                         case "provider":
-                            //usar data.id
-                            self.fetchRecords();
+                            self.fetchRecords().then(function(data)
+                            {
+                               var idActual = authSvc.getCurrentUser().id;
+                               for(var i = 0; i < data.length; i++)
+                               {
+                                   if(Number(data[i].id) === Number(idActual))
+                                   {
+                                       self.editRecord(data[i]);
+                                       break;
+                                   }
+                               }
+                            });
                             break;
                         default:
-                            $location.path('/login');
+                            $location.path('/#/catalogo');
                             break;
                     } 
                 });
@@ -29,7 +45,18 @@
             else
             {
                 $location.path('/login');
-            }        }]);
+            }
+        var ocultaCampos = function(tipo)
+        {
+            for(var i = 1; i <= model.fields.length; i++)
+            {
+                if(!model.fields[i - 1].visible)
+                {
+                    $(tipo + ":nth-child("+i+")").css({"display" : "none"});
+                }
+            }
+        };
+        }]);
 
     mod.controller('productsCtrl', ['CrudCreator', '$scope', 'productService', 'productModel', function (CrudCreator, $scope, svc, model) {
             CrudCreator.extendController(this, svc, $scope, model, 'provider', 'Provider');

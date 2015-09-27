@@ -3,6 +3,9 @@ package co.edu.uniandes.csw.mpcellphone.services;
 import co.edu.uniandes.csw.mpcellphone.api.IProviderLogic;
 import co.edu.uniandes.csw.mpcellphone.dtos.ProviderDTO;
 import co.edu.uniandes.csw.mpcellphone.providers.StatusCreated;
+import com.stormpath.sdk.account.Account;
+import com.stormpath.sdk.client.Client;
+import com.stormpath.shiro.realm.ApplicationRealm;
 import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
@@ -17,6 +20,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.mgt.RealmSecurityManager;
 
 /**
  * @generated
@@ -60,12 +65,25 @@ public class ProviderService {
         return providerLogic.getProvider(id);
     }
 
+    private Account updateUser(ProviderDTO user) {
+        ApplicationRealm realm = ((ApplicationRealm) ((RealmSecurityManager) SecurityUtils.getSecurityManager()).getRealms());
+        Client client = realm.getClient();
+        Account acct = client.instantiate(Account.class);
+        acct.setEmail(user.getEmail());
+        acct.setGivenName(user.getGivenName());
+        acct.setSurname(user.getSurname());
+        acct.setUsername(user.getGivenName() + " " + user.getSurname());
+        return acct;
+    }
+
+    
     /**
      * @generated
      */
     @PUT
     @Path("{id: \\d+}")
     public ProviderDTO updateProvider(@PathParam("id") Long id, ProviderDTO dto) {
+        this.updateUser(dto);
         dto.setId(id);
         return providerLogic.updateProvider(dto);
     }
