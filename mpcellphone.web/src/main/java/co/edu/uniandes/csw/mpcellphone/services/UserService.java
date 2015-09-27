@@ -44,7 +44,7 @@ import org.apache.shiro.subject.Subject;
  *
  * @author Jhonatan
  * 
- * jbdel10: Se agrega la lógica para Admin
+ * jbdel10: Se agrega la logica para Admin
  * 
  */
 @Path("/users")
