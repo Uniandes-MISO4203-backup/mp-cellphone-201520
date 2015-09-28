@@ -5,11 +5,11 @@
         name="mpcellphone_pool"
         datasource-classname="org.postgresql.ds.PGConnectionPoolDataSource"
         res-type="javax.sql.ConnectionPoolDataSource">
-        <property name="serverName" value="localhost"/>
+        <property name="serverName" value="157.253.238.75"/>
         <property name="portNumber" value="5432"/>
-        <property name="databaseName" value="mp-phone"/>
-        <property name="User" value="postgres"/>
-        <property name="Password" value="root"/>
+        <property name="databaseName" value="mp-phones"/>
+        <property name="User" value="grupo4"/>
+        <property name="Password" value="Grupo4"/>
     </jdbc-connection-pool>
     <jdbc-resource enabled="true" jndi-name="java:app/jdbc/mpcellphone" object-type="user" pool-name="mpcellphone_pool"/>
 </resources>
