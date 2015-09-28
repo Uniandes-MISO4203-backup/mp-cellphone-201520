@@ -92,7 +92,7 @@ public class mailUtilsMP {
 
             //Construir el mensaje con el archivo adjunto
             generateBodyPartMessage = new MimeBodyPart();
-            generateBodyPartMessage.setText(message);
+            generateBodyPartMessage.setContent(message, "text/html"); 
             generateBodyPartAttach = new MimeBodyPart();
             generateBodyPartAttach.setDataHandler(new DataHandler(new FileDataSource(fileAttach)));
             generateBodyPartAttach.setFileName(fileAttach);
@@ -103,7 +103,7 @@ public class mailUtilsMP {
             generateMailMessage = new MimeMessage(getMailSession);
             generateMailMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(emailRecipient));
             generateMailMessage.setSubject(subject);
-            generateMailMessage.setContent(generateMultiPartMessage, "text/html"); 
+            generateMailMessage.setContent(generateMultiPartMessage); 
             
             //Enviar mensaje
             Transport transport = getMailSession.getTransport("smtp");

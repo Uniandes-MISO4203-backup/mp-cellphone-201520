@@ -68,7 +68,7 @@ public class OrderLogic implements IOrderLogic {
             e.printStackTrace();
         }
         
-        System.out.println("nombre" + dto.getClient().getName() + "email " + dto.getClient().getEmail());
+        System.out.println("nombre: " + dto.getClient().getName() + " email: " + dto.getClient().getEmail());
         
         String emailMsg = "<html><body><br />Señor(a) Cindy" //+ dto.getClient().getName() 
                 + "<br /><br />"
