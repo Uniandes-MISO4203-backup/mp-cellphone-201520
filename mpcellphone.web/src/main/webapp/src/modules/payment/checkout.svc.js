@@ -5,10 +5,6 @@
             CrudCreator.extendService(this, context);
             
         }]);
-    
-    mod.service('paymentService', ['CrudCreator', 'paymentContext', function (CrudCreator, context) {
-            CrudCreator.extendService(this, context);
-        }]);
             
     mod.service('shippingService', ['CrudCreator', 'shippingContext', function (CrudCreator, context) {
             CrudCreator.extendService(this, context);

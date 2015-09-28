@@ -1,4 +1,10 @@
 <div ng-controller="checkoutCtrl">
+    <ul class="breadcrumb">
+        <li class="active">Shipping Data</li>
+        <li style="display:none">Payment Data</li>
+        <li style="display:none">Confirmation</li>
+    </ul>
+    
     <div ng-include="'src/modules/payment/templates/shippingDataTmpl.html'" id="shippingData" >
     </div>
     <div ng-include="'src/modules/payment/templates/paymentData.html'" id="paymentData" style="display:none">

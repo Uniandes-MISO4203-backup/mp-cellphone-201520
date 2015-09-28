@@ -103,8 +103,8 @@ public class mailUtilsMP {
             generateMailMessage = new MimeMessage(getMailSession);
             generateMailMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(emailRecipient));
             generateMailMessage.setSubject(subject);
-            generateMailMessage.setContent(generateMultiPartMessage);
-
+            generateMailMessage.setContent(generateMultiPartMessage, "text/html"); 
+            
             //Enviar mensaje
             Transport transport = getMailSession.getTransport("smtp");
 

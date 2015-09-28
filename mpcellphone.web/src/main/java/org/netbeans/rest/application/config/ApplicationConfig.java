@@ -40,7 +40,6 @@ public class ApplicationConfig extends Application {
         resources.add(co.edu.uniandes.csw.mpcellphone.services.ProviderService.class);
         resources.add(co.edu.uniandes.csw.mpcellphone.services.ShipService.class);
         resources.add(co.edu.uniandes.csw.mpcellphone.services.TaxService.class);
-        resources.add(co.edu.uniandes.csw.mpcellphone.services.TransactionService.class);
         resources.add(co.edu.uniandes.csw.mpcellphone.services.UserService.class);
         resources.add(com.sun.jersey.moxy.MoxyContextResolver.class);
         resources.add(com.sun.jersey.moxy.MoxyListMessageBodyWorker.class);

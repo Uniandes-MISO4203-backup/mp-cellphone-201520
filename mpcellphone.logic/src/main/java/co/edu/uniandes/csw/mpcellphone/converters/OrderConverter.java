@@ -29,6 +29,13 @@ public abstract class OrderConverter {
             dto.setId(entity.getId());
             dto.setState(entity.getState());
             dto.setDateOrder(entity.getDateOrder());
+            dto.setBank(entity.getBank());
+            dto.setExpirationDate(entity.getExpirationDate());
+            dto.setNumberCard(entity.getNumberCard());
+            dto.setSvc(entity.getSvc());
+            dto.setTotalDiscount(entity.getTotalDiscount());
+            dto.setTotalSale(entity.getTotalSale());
+            dto.setTotalTax(entity.getTotalTax());
 
             return dto;
         } else {
@@ -64,6 +71,15 @@ public abstract class OrderConverter {
             dto.setState(entity.getState());
             dto.setClient(ClientConverter.refEntity2DTO(entity.getClient()));
             dto.setDateOrder(entity.getDateOrder());
+            dto.setBank(entity.getBank());
+            dto.setExpirationDate(entity.getExpirationDate());
+            dto.setNumberCard(entity.getNumberCard());
+            dto.setSvc(entity.getSvc());
+            dto.setTotalDiscount(entity.getTotalDiscount());
+            dto.setTotalSale(entity.getTotalSale());
+            dto.setTotalTax(entity.getTotalTax());
+            dto.setPaymentMethod(PaymentMethodConverter.refEntity2DTO(entity.getPaymentMethod()));
+            dto.setTax(TaxConverter.refEntity2DTO(entity.getTax()));
 
             return dto;
         } else {
@@ -83,7 +99,16 @@ public abstract class OrderConverter {
             entity.setState(dto.getState());
             entity.setClient(ClientConverter.refDTO2Entity(dto.getClient()));
             entity.setDateOrder(dto.getDateOrder());
-
+            entity.setBank(dto.getBank());
+            entity.setExpirationDate(dto.getExpirationDate());
+            entity.setNumberCard(dto.getNumberCard());
+            entity.setSvc(dto.getSvc());
+            entity.setTotalDiscount(dto.getTotalDiscount());
+            entity.setTotalSale(dto.getTotalSale());
+            entity.setTotalTax(dto.getTotalTax());
+            entity.setPaymentMethod(PaymentMethodConverter.refDTO2Entity(dto.getPaymentMethod()));
+            entity.setTax(TaxConverter.refDTO2Entity(dto.getTax()));
+            
             return entity;
         } else {
             return null;

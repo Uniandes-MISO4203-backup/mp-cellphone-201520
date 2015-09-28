@@ -1,5 +1,6 @@
 package co.edu.uniandes.csw.mpcellphone.pdf;
 
+import co.edu.uniandes.csw.mpcellphone.dtos.OrderDTO;
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Element;
@@ -10,7 +11,6 @@ import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfPTable;
 
 import java.io.File;
-import java.io.IOException;
 import java.io.FileOutputStream;
 
 import java.text.SimpleDateFormat;
@@ -20,7 +20,7 @@ import java.util.Calendar;
 
 public class GenerateFactura {
 
-    public String generate() throws Exception {
+    public String generate(OrderDTO order) throws Exception {
         Document document = new Document();
         Calendar cal = Calendar.getInstance();
         Date fecha = new Date(cal.getTimeInMillis());
@@ -38,15 +38,15 @@ public class GenerateFactura {
 
         PdfPTable datos = new PdfPTable(2);
         datos.addCell("Nombre: ");
-        datos.addCell("Nombre de la persona");
+        datos.addCell(order.getClient().getName());
         datos.addCell("Correo electrónico");
-        datos.addCell("Correo de la persona");
+        datos.addCell(order.getClient().getEmail());
         datos.addCell("Valor Impuestos");
-        datos.addCell("Total Tax");
+        datos.addCell(order.getTotalTax());
         datos.addCell("Valor de Descuentos");
-        datos.addCell("Total Discount");
+        datos.addCell(order.getTotalDiscount());
         datos.addCell("Valor Total de la compra");
-        datos.addCell("Total Sale");  
+        datos.addCell(order.getTotalSale());  
 
         File temp = File.createTempFile("recibo", ".pdf");
         PdfWriter.getInstance(document, new FileOutputStream(temp));
@@ -60,17 +60,8 @@ public class GenerateFactura {
         document.add(datos);
         
         document.close();
-        System.out.println("Temp file : " + temp.getAbsolutePath());
+        
         return temp.getAbsolutePath();
-    }
-
-    public static void main(String args[]) {
-        try {
-            GenerateFactura p = new GenerateFactura();
-            p.generate();
-        } catch (Exception e) {
-            System.out.println(e);
-        }
     }
 }
 

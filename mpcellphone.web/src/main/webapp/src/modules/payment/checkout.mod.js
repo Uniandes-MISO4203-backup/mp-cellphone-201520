@@ -2,7 +2,6 @@
     var mod = ng.module('paymentModule', ['ngCrud']);
 
     mod.constant('checkoutContext', 'orders');
-    mod.constant('paymentContext', 'pay');
     mod.constant('shippingContext', 'ship');
     mod.constant('creditCardContext', 'payment_method');
 /*
