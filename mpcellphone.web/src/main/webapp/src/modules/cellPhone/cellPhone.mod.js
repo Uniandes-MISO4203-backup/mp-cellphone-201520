@@ -33,6 +33,6 @@
                 name: 'image',
                 displayName: 'Image',
                 type: 'String',
-                required: true
+                required: false
             }]});
 })(window.angular);

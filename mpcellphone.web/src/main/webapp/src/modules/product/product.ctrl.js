@@ -5,7 +5,9 @@
     var ProducSelComment = 0; //Para guardar el item que se está haciendo el comentario..
   
  
-    mod.controller('productCtrl', ['CrudCreator', '$scope', 'productService', 'productModel', 'cartItemService', '$location', 'authService', 'adminService', function (CrudCreator, $scope, svc, model, cartItemSvc, $location, authSvc, adminService) {
+    mod.controller('productCtrl', ['CrudCreator', '$scope', 'productService', 'productModel', 'cartItemService', '$location', 'authService', 'adminService', 
+                            function (CrudCreator, $scope, svc, model, cartItemSvc, $location, authSvc, adminService) {
+            
             CrudCreator.extendController(this, svc, $scope, model, 'product', 'Products');
      
             
@@ -437,6 +439,8 @@
                         return true;
                     }
              }];*/
-        
+            
+        // Para guardar los datos actualizados de un producto
+
     }]);
 })(window.angular);

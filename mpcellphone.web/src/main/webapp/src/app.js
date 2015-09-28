@@ -16,18 +16,18 @@
 
     mainApp.config(['$routeProvider', 'CrudTemplateURL', 'CrudCtrlAlias', function ($routeProvider, tplUrl, alias) {
             $routeProvider
-                    .when('/cellPhone', {
-                        templateUrl: tplUrl,
-                        controller: 'cellPhoneCtrl',
-                        controllerAs: alias
-                    })
-                    .when('/client', {
-                        templateUrl: tplUrl,
-                        controller: 'clientCtrl',
-                        controllerAs: alias
-                    }).when('/products', {
+            .when('/cellPhone', {
+                templateUrl: 'src/modules/cellPhone/cellphoneTmpl.html', //tplUrl, Se cambiar tplUrl por la nueva plantilla
+                controller: 'cellPhoneCtrl', 
+                controllerAs: alias
+            })
+            .when('/client', {
                 templateUrl: tplUrl,
-                controller: 'productsCtrl',
+                controller: 'clientCtrl',
+                controllerAs: alias
+            }).when('/products', {
+                templateUrl: tplUrl, //
+                controller: 'productsCtrl', 
                 controllerAs: alias
             }).when('/provider', {
                 templateUrl: tplUrl,
