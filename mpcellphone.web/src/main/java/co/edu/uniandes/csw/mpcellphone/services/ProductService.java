@@ -257,4 +257,26 @@ public class ProductService {
         
         return productLogic.getByPriceRange(minPrice, maxPrice);
     }
+    
+    /**
+     * Servicio para obtener la lista de ciudades
+     * Creado por ma.olivares10
+     */
+    @GET
+    @Path("/getDiscount")
+    public List<ProductDTO> getByDiscount() {
+        
+        return productLogic.getByDiscount();
+    }
+    
+    /**
+     * Servicio para obtener la lista de ciudades
+     * Creado por ma.olivares10
+     */
+    @GET
+    @Path("/getCategory/{category}")
+    public List<ProductDTO> getByDiscount(@PathParam("category") String category) {
+        
+        return productLogic.getByCategory(category);
+    }
 }

@@ -20,16 +20,16 @@
                 type: 'Integer',
                 required: true
             }, {
+                name: 'category',
+                displayName: 'Category',
+                type: 'String',
+                required: true
+            }, {    
                 name: 'cellPhone',
                 displayName: 'CellPhone',
                 type: 'Reference',
                 service: 'cellPhoneService',
                 options: [],
-                required: true
-            }, {
-                name: 'category',
-                displayName: 'Category',
-                type: 'String',
-                required: true
+                required: true   
             }]});
 })(window.angular);

@@ -53,7 +53,7 @@
                 name: 'calification',
                 displayName: 'calification',
                 type: 'Integer',
-                required: false
+                required: true
             }], 
         childs: [{
                 name: 'products',

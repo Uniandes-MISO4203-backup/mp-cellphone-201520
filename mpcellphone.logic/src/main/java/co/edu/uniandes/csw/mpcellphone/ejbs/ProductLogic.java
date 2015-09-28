@@ -100,4 +100,12 @@ public class ProductLogic implements IProductLogic {
     public List<ProductDTO> getByPriceRange(Integer minPrice, Integer maxPrice) {
         return ProductConverter.listEntity2DTO(persistence.getByPriceRange(minPrice, maxPrice));
     }
+    //Para Obtener la lista de un modelo especifico filtrado por descuento, Desarrollado por Miguel Olivares
+    public List<ProductDTO> getByDiscount(){
+        return ProductConverter.listEntity2DTO(persistence.getByDiscount());
+    }
+    //Para Obtener la lista de un modelo especifico filtrado por ciudad, Desarrollado por Miguel Olivares
+    public List<ProductDTO> getByCategory(String category) {
+        return ProductConverter.listEntity2DTO(persistence.getByCategory(category));
+    }
 }
