@@ -17,10 +17,42 @@
                 $location.url('/catalog' + search);
             };
             
+            var serviceSearch = [{
+                                    service : "getModels", 
+                                    select  : "model", 
+                                    campo   : "model"
+                                 },
+                                {
+                                    service : "getCities", 
+                                    select  : "cities", 
+                                    campo   : "name"
+                                 },
+                                {
+                                    service : "getProviders", 
+                                    select  : "providers", 
+                                    campo   : "name"
+                                 }];
+                             
             this.advancedSearch = function ()
             {
-                //console.log("Ingresa a este punto...");
                 $('#myModalHorizontal').modal('show');
+                for(var i = 0; i < serviceSearch.length; i++)
+                {
+                    advancedSearchFields(i);
+                }
+            };
+            
+            var advancedSearchFields = function (indice)
+            {
+                svc.cargaCombos(serviceSearch[indice].service).then(function(data)
+                {
+                    var $select = $('#' + serviceSearch[indice].select); 
+                    $select.find('option').remove();
+                    $.each(data, function(i) 
+                    {
+                        $select.append('<option value=' + data[i].model + '>' + data[i][serviceSearch[indice].campo] + '</option>');
+                    });
+                });
             };
             $("#admin").hide();
             $("#carrito").hide();

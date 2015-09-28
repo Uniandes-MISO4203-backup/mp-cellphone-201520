@@ -6,7 +6,6 @@
         CrudCreator.extendController(this, svc, $scope, model, 'client', 'Client');
         if (authSvc.getCurrentUser())
         {
-            actual = authSvc;
             var self = this;
             svc.getRoleCl().then(function(data)
             {
@@ -17,11 +16,11 @@
                                    self.fetchRecords().then(function(){
                                        $scope.$watch(function(){
                                            ocultaCampos("td");
-                                           //console.log("Ingresa");
                                        });
                                    });
                                    break;
                     case "client": 
+                                    self.itemsPerPage = 100;
                                     self.fetchRecords().then(function(data)
                                     {
                                        var idActual = authSvc.getCurrentUser().id;

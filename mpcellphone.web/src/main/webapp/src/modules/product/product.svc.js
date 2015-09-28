@@ -32,9 +32,9 @@
                 return this.api.one('allcomments').get();
             };
             
-            this.getModels = function(){
-                return this.api.one('getModels').get();
+            this.cargaCombos = function(service)
+            {
+                return this.api.one(service).get();
             };
-
     }]);
 })(window.angular);
