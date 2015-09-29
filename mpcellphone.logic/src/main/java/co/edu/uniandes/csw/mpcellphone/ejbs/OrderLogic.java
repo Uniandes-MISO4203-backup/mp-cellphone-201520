@@ -70,11 +70,7 @@ public class OrderLogic implements IOrderLogic {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
-        System.out.println("Cliente: " + dto.getClient().getEmail());
-        
-        
-        String emailMsg = "<html><body><br />Señor(a) Cindy" //+ dto.getClient().getName() 
+        String emailMsg = "<html><body><br />Señor(a)" + dto.getClient().getName() 
                 + "<br /><br />"
                 + "Los datos de su compra son: <br /><br /> "
                 + "<br />Forma de Pago: " + dto.getPaymentMethod().getMethodName()
@@ -82,7 +78,7 @@ public class OrderLogic implements IOrderLogic {
                 + "<br /><br />Atentamente,"
                 + "<br /><br /><br />MarketPhone";
         String subject = "Factura de su Compra en MarketPhone";
-        mailUtilsMP.sendEmailMPAttach(emailMsg, "cvho31@gmail.com", subject, factura);
+        mailUtilsMP.sendEmailMPAttach(emailMsg, dto.getClient().getEmail(), subject, factura);
 
         return OrderConverter.fullEntity2DTO(entity);
     }
