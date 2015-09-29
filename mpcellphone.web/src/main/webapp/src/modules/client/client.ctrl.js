@@ -33,7 +33,15 @@
                                            }
                                        }
                                     });
-                                    //$location.path('/#/catalog'); 
+                                    
+                                    $("#save-client").click(function(){
+                                        $("#notiShopping").html("Se han actulizado los datos satisfactoriamente").fadeIn("fast").delay(2000).fadeOut(300);
+                                        $location.path('/#/catalog');
+                                    });
+                                    
+                                    $("#cancel-client").click(function(){
+                                        $location.path('/#/catalog');
+                                    });
                                     break;
                     default: 
                         $location.path('/#/catalog'); 

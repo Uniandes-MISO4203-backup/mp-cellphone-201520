@@ -131,7 +131,10 @@
             $("#admin").hide();
             $("#carrito").hide();
             $("#products").hide();
-            //$(".dropdown-menu").prepend("<li><a href = '/admin'><span class = 'glyphicon glyphicon-user'></span> My Profile</a></li>");
+            if(!$('#profile').length)
+            {
+                $(".dropdown-menu").prepend("<li><a href = '#' id = 'profile'><span class = 'glyphicon glyphicon-user'></span> My Profile</a></li>");
+            }
             if (authSvc.getCurrentUser())
             {
                 adminService.darRole().then(function(data)
@@ -139,16 +142,19 @@
                     if(data.role === "admin")
                     {
                         $("#admin").show();
+                        $("#profile").attr("href", "#/client");
                     }
                     else
                     {
                         if(data.role === "provider")
                         {
                             $("#products").show();
+                            $("#profile").attr("href", "#/provider");
                         }
                         else
                         {
                             $("#carrito").show();
+                            $("#profile").attr("href", "#/client");
                         }
                     }
                 });

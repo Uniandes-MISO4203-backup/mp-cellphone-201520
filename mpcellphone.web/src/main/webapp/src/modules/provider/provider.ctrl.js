@@ -38,6 +38,14 @@
                                    }
                                }
                             });
+                            $("#save-provider").click(function(){
+                                $("#notiShopping").html("Se han actulizado los datos satisfactoriamente").fadeIn("fast").delay(2000).fadeOut(300);
+                                $location.path('/#/catalog');
+                            });
+
+                            $("#cancel-provider").click(function(){
+                                $location.path('/#/catalog');
+                            });
                             //$location.path('/#/catalog');
                             break;
                         default:
