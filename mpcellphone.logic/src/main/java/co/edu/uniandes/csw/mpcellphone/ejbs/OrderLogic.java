@@ -8,8 +8,10 @@ package co.edu.uniandes.csw.mpcellphone.ejbs;
 import co.edu.uniandes.csw.mpcellphone.api.IOrderLogic;
 import co.edu.uniandes.csw.mpcellphone.converters.OrderConverter;
 import co.edu.uniandes.csw.mpcellphone.dtos.OrderDTO;
+import co.edu.uniandes.csw.mpcellphone.entities.ClientEntity;
 import co.edu.uniandes.csw.mpcellphone.entities.OrderEntity;
 import co.edu.uniandes.csw.mpcellphone.pdf.GenerateFactura;
+import co.edu.uniandes.csw.mpcellphone.persistence.ClientPersistence;
 import co.edu.uniandes.csw.mpcellphone.persistence.OrderPersistence;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -25,6 +27,9 @@ public class OrderLogic implements IOrderLogic {
 
     @Inject
     private OrderPersistence persistence;
+    
+    @Inject
+    private ClientPersistence clientPersistence;
 
     public int countOrder() {
         return persistence.count();
@@ -69,6 +74,8 @@ public class OrderLogic implements IOrderLogic {
         }
         
         System.out.println("nombre: " + dto.getClient().getName() + " email: " + dto.getClient().getEmail());
+        System.out.println("Cliente: " + dto.getClient().getId());
+        
         
         String emailMsg = "<html><body><br />Señor(a) Cindy" //+ dto.getClient().getName() 
                 + "<br /><br />"

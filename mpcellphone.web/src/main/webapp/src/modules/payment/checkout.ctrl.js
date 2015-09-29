@@ -73,7 +73,7 @@
                 var order = {};
                 order.ship = $scope.shippingData;
                 order.state = "En proceso";
-                order.client = authSvc.getCurrentUser().id;
+                order.client = authSvc.getCurrentUser();
                 order.totalDiscount = 0;
                 order.totalSale = $scope.totalCompra;
 
