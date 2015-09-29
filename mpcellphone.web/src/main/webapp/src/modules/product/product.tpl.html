@@ -1,5 +1,6 @@
 
 
+
 <div ng-hide="ctrl.editMode">
     <div class="col-sm-12">
         <div ng-repeat="record in records" ng-show = "cheap(currentGroup, priceItem, record)">
@@ -146,7 +147,7 @@
                     <label class="col-sm-2 control-label"
                           for="inputPassword3" >City</label>
                     <div class="col-sm-10">
-                        <select  class="form-control" id = "cities">
+                        <select  class="form-control" id = "cities" title="test">
                         </select>
                     </div>
                   </div>
@@ -162,7 +163,8 @@
                     <label class="col-sm-2 control-label"
                           for="inputPassword3" >Category</label>
                     <div class="col-sm-10">
-                        <select  class="form-control">
+                        <select class="form-control" id = "categories" >
+                            
                         </select>
                     </div>
                   </div>
@@ -175,9 +177,8 @@
                         data-dismiss="modal">
                             Close
                 </button>
-                <button type="button" class="btn btn-primary">
-                    Search
-                </button>
+                <button type="submit" class="btn btn-primary">Search
+                 </button>          
             </div>
         </div>
     </div>
