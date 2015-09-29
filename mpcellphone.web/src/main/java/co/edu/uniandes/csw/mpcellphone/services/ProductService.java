@@ -183,7 +183,7 @@ public class ProductService {
      * Creado por ma.olivares10
      */
     @GET
-    @Path("/getByModel/{model}")
+    @Path("/getModels/{model}")
     public List<ProductDTO> getByModel(@PathParam("model") String model) {
          
         return productLogic.getByModel(model);
@@ -206,7 +206,7 @@ public class ProductService {
      * Creado por ma.olivares10
      */
     @GET
-    @Path("/getByBrand/{brand}")
+    @Path("/getBrands/{brand}")
     public List<ProductDTO> getByBrand(@PathParam("brand") String brand) {
          
         return productLogic.getByBrand(brand);
@@ -224,7 +224,7 @@ public class ProductService {
     }
     
     @GET
-    @Path("/getByProviderName/{name}")
+    @Path("/getProviders/{name}")
     public List<ProductDTO> getByProviderName(@PathParam("name") String name) {
          
         return productLogic.getByProviderName(name);
@@ -241,7 +241,7 @@ public class ProductService {
     }
     
     @GET
-    @Path("/getByCity/{city}")
+    @Path("/getCities/{city}")
     public List<ProductDTO> getByCity(@PathParam("city") String city) {
          
         return productLogic.getByCity(city);
@@ -285,7 +285,7 @@ public class ProductService {
      * Creado por ma.olivares10
      */
     @GET
-    @Path("/getCategory/{category}")
+    @Path("/getCategories/{category}")
     public List<ProductDTO> getByDiscount(@PathParam("category") String category) {
         
         return productLogic.getByCategory(category);
