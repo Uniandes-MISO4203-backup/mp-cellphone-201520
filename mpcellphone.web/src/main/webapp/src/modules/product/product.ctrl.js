@@ -22,35 +22,74 @@
             var serviceSearch = [{
                                     service : "getModels", 
                                     select  : "model", 
-                                    campo   : "model"
+                                    campo   : "model", 
+                                    search  : "servicioBusca"
                                  },
                                 {
                                     service : "getCities", 
                                     select  : "cities", 
-                                    campo   : "name"
+                                    campo   : "name", 
+                                    search  : "servicioBusca"
                                  },
                                 {
                                     service : "getProviders", 
                                     select  : "providers", 
-                                    campo   : "name"
+                                    campo   : "name", 
+                                    search  : "servicioBusca"
                                 },
                                 {
                                     service : "getCategories", 
                                     select  : "categories", 
-                                    campo   : "category"
+                                    campo   : "category",
+                                    search  : "servicioBusca"
                                  }];
-                             
+            
+            $("#advancedForm").click(function(event)
+            {
+                //console.log("Ingresa al formulario");
+                //event.preventDefault();
+                var ingresa = false;
+                var nomServicio = "";
+                for(var i = 0; i < serviceSearch.length; i++)
+                {
+                    if($("#" + serviceSearch[i].select).val() !== "0")
+                    {
+                        console.log("Seleccionado es: ", $("#" + serviceSearch[i].select).val());
+                        nomServicio = serviceSearch[i].search;
+                        ingresa = true;
+                        break;
+                    }
+                }
+                if(ingresa)
+                {
+                    console.log("Servicio a llamar: ", nomServicio);
+                    //$('#myModalHorizontal').modal('hide');
+                }
+            });
+
             this.advancedSearch = function ()
             {
                 $('#myModalHorizontal').modal('show');
                 for(var i = 0; i < serviceSearch.length; i++)
                 {
                     advancedSearchFields(i);
+                    $("#" + serviceSearch[i].select).change(function()
+                    {
+                        for(var i = 0; i < serviceSearch.length; i++)
+                        {
+                            if(serviceSearch[i].select !== this.id)
+                            {
+                                $("#" + serviceSearch[i].select).val("0");
+                            }
+                        }
+                    });
                 }
+                /*
                 $('#myModalHorizontal').change(function () {
                     var selectedText = $(this).find("option.selected").text();
                     $(".test").text(selectedText);
                 });
+                */
                 
             };
             this.searchActions = [ 
@@ -82,9 +121,10 @@
                 {
                     var $select = $('#' + serviceSearch[indice].select); 
                     $select.find('option').remove();
+                    $select.append("<option value = '0'>Select</option>");
                     $.each(data, function(i) 
                     {
-                        $select.append('<option value=' + data[i].model + '>' + data[i][serviceSearch[indice].campo] + '</option>');
+                        $select.append('<option value=' + data[i][serviceSearch[indice].campo] + '>' + data[i][serviceSearch[indice].campo] + '</option>');
                     });
                 });
             };

@@ -36,5 +36,6 @@
             {
                 return this.api.one(service).get();
             };
+
     }]);
 })(window.angular);
