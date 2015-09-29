@@ -2,8 +2,8 @@
     var mod = ng.module('paymentModule');
 
     mod.controller('checkoutCtrl', ['CrudCreator', '$scope', 'authService', 'cartItemService', '$location'
-                , 'checkoutService', 'shippingService', 'creditCardService', 'clientService',
-        function (CrudCreator, $scope, authSvc, ciSvc, $location, chSvc, shpSvc, ccSvc, clSvc) {
+                , 'checkoutService', 'shippingService', 'creditCardService',
+        function (CrudCreator, $scope, authSvc, ciSvc, $location, chSvc, shpSvc, ccSvc) {
             var that = this;
             $scope.cartItems = [];
             $scope.payment = {};
@@ -73,9 +73,7 @@
                 var order = {};
                 order.ship = $scope.shippingData;
                 order.state = "En proceso";
-                console.log(clSvc.getRoleCl());
-                order.client = clSvc.getRoleCl().$object;
-                console.log(clSvc.getRoleCl().$object);
+                order.client = authSvc.getCurrentUser();
                 order.totalDiscount = 0;
                 order.totalSale = $scope.totalCompra;
 
@@ -97,7 +95,6 @@
                 chSvc.saveRecord(order).then(function (data) {
                     $scope.order = data;
                     var pestana = $('li.active');
-                    console.log(data);
                     document.querySelector('#paymentData').style.display = "none";
                     document.querySelector('#confirmationTmpl').style.display = "block";
                     pestana.next('li').addClass('active').show();

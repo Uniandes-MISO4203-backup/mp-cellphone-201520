@@ -1,11 +1,18 @@
 package co.edu.uniandes.csw.mpcellphone.services;
 
 import co.edu.uniandes.csw.mpcellphone.api.IOrderLogic;
+import co.edu.uniandes.csw.mpcellphone.dtos.ClientDTO;
 import co.edu.uniandes.csw.mpcellphone.dtos.OrderDTO;
 import co.edu.uniandes.csw.mpcellphone.providers.StatusCreated;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import java.util.Properties;
 import javax.inject.Inject;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -18,9 +25,12 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 
 /**
  * Servicio REST de Order
+ *
  * @author Cindy Hernandez - cv.hernandez10
  */
 @Path("/orders")
@@ -28,29 +38,39 @@ import javax.ws.rs.core.MediaType;
 @Produces(MediaType.APPLICATION_JSON)
 public class OrderService {
 
-    @Inject 
+    @Inject
     private IOrderLogic orderLogic;
-    @Context 
+    @Context
     private HttpServletResponse response;
-    
-    @QueryParam("page") private Integer page;
-    @QueryParam("maxRecords") private Integer maxRecords;
+
+    @QueryParam("page")
+    private Integer page;
+    @QueryParam("maxRecords")
+    private Integer maxRecords;
+
+    private ClientDTO client = (ClientDTO) SecurityUtils.getSubject().getSession().getAttribute("Client");
+    @javax.ws.rs.core.Context
+    private ServletContext context;
 
     /**
      * Metodo POST del servicio, para crear datos
+     *
      * @param dto
-     * @return 
+     * @return
      */
     @POST
     @StatusCreated
     public OrderDTO createOrder(OrderDTO dto) {
         dto.setDateOrder(new Date());
+        ClientDTO client = (ClientDTO) SecurityUtils.getSubject().getSession().getAttribute("Client");
+        dto.setClient(client);
         return orderLogic.createOrder(dto);
     }
 
     /**
      * Metodo GET, para obtener el listado de ordenes
-     * @return 
+     *
+     * @return
      */
     @GET
     public List<OrderDTO> getOrders() {
@@ -61,9 +81,11 @@ public class OrderService {
     }
 
     /**
-     * Metodo GET, para obtener un dato especifico al enviar un parametro por URL
+     * Metodo GET, para obtener un dato especifico al enviar un parametro por
+     * URL
+     *
      * @param id
-     * @return 
+     * @return
      */
     @GET
     @Path("{id: \\d+}")
@@ -73,9 +95,10 @@ public class OrderService {
 
     /**
      * Metodo PUT, encargado de actualizar informacion de la orden
+     *
      * @param id
      * @param dto
-     * @return 
+     * @return
      */
     @PUT
     @Path("{id: \\d+}")
@@ -86,7 +109,8 @@ public class OrderService {
 
     /**
      * Metodo DELETE, encargado de eliminar una orden
-     * @param id 
+     *
+     * @param id
      */
     @DELETE
     @Path("{id: \\d+}")

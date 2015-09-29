@@ -10,10 +10,7 @@
     mod.service('creditCardService', ['CrudCreator', 'creditCardContext', function (CrudCreator, context) {
             CrudCreator.extendService(this, context);
         }]);
-    mod.service('clientService', ['CrudCreator', 'clientContext', function (CrudCreator, context) {
+    mod.service('userService', ['CrudCreator', 'userContext', function (CrudCreator, context) {
             CrudCreator.extendService(this, context);
-            this.getRoleCl = function () {
-                return this.api.one('../users/currentUser').get();
-            }
         }]);
 })(window.angular);
