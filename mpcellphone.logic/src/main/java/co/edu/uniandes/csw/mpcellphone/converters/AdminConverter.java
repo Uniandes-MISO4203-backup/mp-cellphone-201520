@@ -26,7 +26,6 @@ public abstract class AdminConverter {
     public static AdminDTO refEntity2DTO(AdminEntity entity) {
         if (entity != null) {
             AdminDTO dto = new AdminDTO();
-            UserDTO udto = new UserDTO();
             
             dto.setId(entity.getId());
             dto.setName(entity.getName());

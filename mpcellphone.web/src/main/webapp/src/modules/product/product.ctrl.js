@@ -3,14 +3,12 @@
     var mod = ng.module('productModule');
     var maximoCaracteres = 255;
     var ProducSelComment = 0; //Para guardar el item que se está haciendo el comentario..
-  
- 
-    mod.controller('productCtrl', ['CrudCreator', '$scope', 'productService', 'productModel', 'cartItemService', '$location', 'authService', 'adminService', 
-                            function (CrudCreator, $scope, svc, model, cartItemSvc, $location, authSvc, adminService) {
-            
+
+
+    mod.controller('productCtrl', ['CrudCreator', '$scope', 'productService', 'productModel', 'cartItemService', '$location', 'authService', 'adminService',
+        function (CrudCreator, $scope, svc, model, cartItemSvc, $location, authSvc, adminService) {
+
             CrudCreator.extendController(this, svc, $scope, model, 'product', 'Products');
-     
-            
             this.searchByName = function (cellPhoneName) {
                 var search;
                 if (cellPhoneName) {
@@ -18,41 +16,38 @@
                 }
                 $location.url('/catalog' + search);
             };
-            
             var serviceSearch = [{
-                                    service : "getModels", 
-                                    select  : "model", 
-                                    campo   : "model", 
-                                    search  : "servicioBusca"
-                                 },
-                                {
-                                    service : "getCities", 
-                                    select  : "cities", 
-                                    campo   : "name", 
-                                    search  : "servicioBusca"
-                                 },
-                                {
-                                    service : "getProviders", 
-                                    select  : "providers", 
-                                    campo   : "name", 
-                                    search  : "servicioBusca"
-                                },
-                                {
-                                    service : "getCategories", 
-                                    select  : "categories", 
-                                    campo   : "category",
-                                    search  : "servicioBusca"
-                                 }];
-            
-            $("#advancedForm").click(function(event)
-            {
+                    service: "getModels",
+                    select: "model",
+                    campo: "model",
+                    search: "servicioBusca"
+                },
+                {
+                    service: "getCities",
+                    select: "cities",
+                    campo: "name",
+                    search: "servicioBusca"
+                },
+                {
+                    service: "getProviders",
+                    select: "providers",
+                    campo: "name",
+                    search: "servicioBusca"
+                },
+                {
+                    service: "getCategories",
+                    select: "categories",
+                    campo: "category",
+                    search: "servicioBusca"
+                }];
+            $("#advancedForm").click(function (event){
                 //console.log("Ingresa al formulario");
                 //event.preventDefault();
                 var ingresa = false;
                 var nomServicio = "";
-                for(var i = 0; i < serviceSearch.length; i++)
+                for (var i = 0; i < serviceSearch.length; i++)
                 {
-                    if($("#" + serviceSearch[i].select).val() !== "0")
+                    if ($("#" + serviceSearch[i].select).val() !== "0")
                     {
                         console.log("Seleccionado es: ", $("#" + serviceSearch[i].select).val());
                         nomServicio = serviceSearch[i].search;
@@ -60,24 +55,22 @@
                         break;
                     }
                 }
-                if(ingresa)
+                if (ingresa)
                 {
                     console.log("Servicio a llamar: ", nomServicio);
                     //$('#myModalHorizontal').modal('hide');
                 }
             });
-
-            this.advancedSearch = function ()
-            {
+            this.advancedSearch = function (){
                 $('#myModalHorizontal').modal('show');
-                for(var i = 0; i < serviceSearch.length; i++)
+                for (var i = 0; i < serviceSearch.length; i++)
                 {
                     advancedSearchFields(i);
-                    $("#" + serviceSearch[i].select).change(function()
+                    $("#" + serviceSearch[i].select).change(function ()
                     {
-                        for(var i = 0; i < serviceSearch.length; i++)
+                        for (var i = 0; i < serviceSearch.length; i++)
                         {
-                            if(serviceSearch[i].select !== this.id)
+                            if (serviceSearch[i].select !== this.id)
                             {
                                 $("#" + serviceSearch[i].select).val("0");
                             }
@@ -85,44 +78,38 @@
                     });
                 }
                 /*
-                $('#myModalHorizontal').change(function () {
-                    var selectedText = $(this).find("option.selected").text();
-                    $(".test").text(selectedText);
-                });
-                */
-                
+                 $('#myModalHorizontal').change(function () {
+                 var selectedText = $(this).find("option.selected").text();
+                 $(".test").text(selectedText);
+                 });
+                 */
             };
-            this.searchActions = [ 
-               {
-                    
+            this.searchActions = [
+                {
                     fn: function (record) {
-                            console.log(record);
-                            return findByModel(record);
-                            
+                        console.log(record);
+                        return findByModel(record);
+
                     },
                     show: function () {
                         return true;
                     }
-              }
+                }
             ]
-            
-            var findBymodel = function(record)
-            {
-               svc.findItem(record).then(function(cellPhone){
-                   $scope.records = [];
-                   $scope.records.push(cellPhone);
-                   console.log(cellPhone);
-               });
+            var findBymodel = function (record){
+                svc.findItem(record).then(function (cellPhone) {
+                    $scope.records = [];
+                    $scope.records.push(cellPhone);
+                    console.log(cellPhone);
+                });
             };
-            
-            var advancedSearchFields = function (indice)
-            {
-                svc.cargaCombos(serviceSearch[indice].service).then(function(data)
+            var advancedSearchFields = function (indice){
+                svc.cargaCombos(serviceSearch[indice].service).then(function (data)
                 {
-                    var $select = $('#' + serviceSearch[indice].select); 
+                    var $select = $('#' + serviceSearch[indice].select);
                     $select.find('option').remove();
                     $select.append("<option value = '0'>Select</option>");
-                    $.each(data, function(i) 
+                    $.each(data, function (i)
                     {
                         $select.append('<option value=' + data[i][serviceSearch[indice].campo] + '>' + data[i][serviceSearch[indice].campo] + '</option>');
                     });
@@ -131,22 +118,17 @@
             $("#admin").hide();
             $("#carrito").hide();
             $("#products").hide();
-            if(!$('#profile').length)
-            {
+            if (!$('#profile').length){
                 $(".dropdown-menu").prepend("<li><a href = '#' id = 'profile'><span class = 'glyphicon glyphicon-user'></span> My Profile</a></li>");
             }
-            if (authSvc.getCurrentUser())
-            {
-                adminService.darRole().then(function(data)
-                {
-                    if(data.role === "admin")
-                    {
+            if (authSvc.getCurrentUser()){
+                adminService.darRole().then(function (data){
+                    if (data.role === "admin"){
                         $("#admin").show();
                         $("#profile").attr("href", "#/client");
                     }
-                    else
-                    {
-                        if(data.role === "provider")
+                    else {
+                        if (data.role === "provider")
                         {
                             $("#products").show();
                             $("#profile").attr("href", "#/provider");
@@ -159,27 +141,22 @@
                     }
                 });
             }
-            
-            $(".dropdown-menu > li > a").click(function() {
+
+            $(".dropdown-menu > li > a").click(function () {
                 $("#admin").hide();
                 $("#carrito").hide();
                 $("products").hide();
             });
-            
             $scope.priceItem = "";
-            $scope.cheap = function(prov, price, record) 
-            {
+            $scope.cheap = function (prov, price, record){
                 price = price || 0;
-                if(Number(record.provider.id) === Number(prov.Id) || prov.Id === 0)
-                {
+                if (Number(record.provider.id) === Number(prov.Id) || prov.Id === 0){
                     return prov.Id === 0 ? true : Number(record.price) <= Number(price) || Number(price) === 0 ? true : false;
                 }
-                else
-                {
+                else{
                     return false;
                 }
             };
-            
             this.recordActions = [{
                     name: 'addToCart',
                     displayName: 'Add to Cart',
@@ -200,10 +177,9 @@
                         return true;
                     }
                 }];
-            
             //Para los comentarios por producto...
             this.commentActions = [
-            {
+                {
                     name: 'commet',
                     displayName: 'Comment',
                     icon: 'comment',
@@ -221,7 +197,7 @@
                             {
                                 $('#comment').focus();
                             });
-                            getComments(record.id);  
+                            getComments(record.id);
                         }
                         else
                         {
@@ -231,39 +207,34 @@
                     show: function () {
                         return true;
                     }
-             }];
-         
-            var getComments = function(id)
-            {
-                svc.comments(id).then(function(data)
+                }];
+            var getComments = function (id){
+                svc.comments(id).then(function (data)
                 {
                     var txt = "";
                     var cont = 0;
-                    for(var i = 0; i < data.length; i++)
+                    for (var i = 0; i < data.length; i++)
                     {
-                        if(Number(data[i].product_id) === Number(id))
+                        if (Number(data[i].product_id) === Number(id))
                         {
-                            if(txt !== "")
+                            if (txt !== "")
                             {
                                 txt += "<hr>";
                             }
                             cont++;
                             txt += cont + ". " + data[i].comment;
-                        }    
+                        }
                     }
                     $("#listComments").html(cont !== 0 ? txt : "<center><b>No comments here, be the first to comment</b></center>");
                 });
             };
-            
             //Para las preguntas por producto...
-            this.questionActions = [
-            {
+            this.questionActions = [{
                     name: 'question',
                     displayName: 'Question',
                     icon: 'question-sign',
                     class: 'info',
-                    fn: function (record)
-                    {
+                    fn: function (record){
                         tmp = authSvc;
                         if (authSvc.getCurrentUser())
                         {
@@ -271,7 +242,7 @@
                             $('#modalQuestion').modal('show');
                             $('#nameUserQuestion').html("<center><b>" + authSvc.getCurrentUser().name + " Says:</b></center><br>");
                             $('#titleProductQuestion').html("Cellphone: " + record.cellPhone.name);
-                            $("#question").val(""); 
+                            $("#question").val("");
                         }
                         else
                         {
@@ -281,244 +252,220 @@
                     show: function () {
                         return true;
                     }
-             }];
-         
-             //Para limitar el número de carácteres...
-            this.keyActions  = [
-            {   
-                fn: function ()
-                {
-                   //event, $event.keyCode
-                    var queda = maximoCaracteres - $("#comment").val().length;
-                    if(queda < 0)
+                }];
+            //Para limitar el número de carácteres...
+            this.keyActions = [{
+                    fn: function ()
                     {
-                        $("#comment").val($("#comment").val().substr(0, maximoCaracteres));
-                        queda = 0;
-                    }
-                    $("#cantidad").html("<center>" + queda + "</center>");
-                }
-             }];
-         
-            //Para salvar el comentario...
-            this.saveComment = [
-            {   
-                fn: function ()
-                {
-                    if (authSvc.getCurrentUser())
-                    {
-                        if($("#comment").val().length !== 0)
+                        //event, $event.keyCode
+                        var queda = maximoCaracteres - $("#comment").val().length;
+                        if (queda < 0)
                         {
-                            svc.saveComment({
-                                                comment     : $("#comment").val(), 
-                                                product_id  : ProducSelComment.id, 
-                                                client_id   : authSvc.getCurrentUser().id, 
-                                                date        : new Date().toISOString().substring(0, 10)
-                                            }).then(function(){
-                                                //alert("Su comentario ha sido enviado satisfactoriamente");  
-                                                //$('#myModal').modal('hide');
-                                                getComments(ProducSelComment.id);
-                                                $("#comment").val("").attr("placeholder", authSvc.getCurrentUser().name + " Says: ");
-                                                $("#cantidad").html("<center>" + maximoCaracteres + "</center>");
-                                                $('#comment').focus();
-                                            });
+                            $("#comment").val($("#comment").val().substr(0, maximoCaracteres));
+                            queda = 0;
                         }
-                        else
-                        {
-                            alert("Por favor escribe tu comentario");
-                        }
+                        $("#cantidad").html("<center>" + queda + "</center>");
                     }
-                    else
-                    {
-                        $location.path('/login');
-                    }
-                }
-             }];
-         
-            this.saveQuestion = [
-            {   
-                fn: function ()
-                {
-                    if (authSvc.getCurrentUser())
-                    {
-                        if($("#question").val().length !== 0)
-                        {
-                            var objEnvia = {
-                                question : $("#question").val(), 
-                                product  : ProducSelComment.cellPhone,
-                                client   : authSvc.getCurrentUser(),
-                                provider : ProducSelComment.provider
+                }];
 
-                            };
-                            console.log(objEnvia);
-                            svc.saveQuestion(objEnvia).then(function()
-                            {
-                                alert("La pregunta ha sido enviada satisfactoriamente");
-                                $('#modalQuestion').modal('hide');
-                            });
+            //Para salvar el comentario...
+            this.saveComment = [{
+                    fn: function (){
+                        if (authSvc.getCurrentUser()){
+                            if ($("#comment").val().length !== 0){
+                                svc.saveComment({
+                                    comment: $("#comment").val(),
+                                    product_id: ProducSelComment.id,
+                                    client_id: authSvc.getCurrentUser().id,
+                                    date: new Date().toISOString().substring(0, 10)
+                                }).then(function () {
+                                    //alert("Su comentario ha sido enviado satisfactoriamente");  
+                                    //$('#myModal').modal('hide');
+                                    getComments(ProducSelComment.id);
+                                    $("#comment").val("").attr("placeholder", authSvc.getCurrentUser().name + " Says: ");
+                                    $("#cantidad").html("<center>" + maximoCaracteres + "</center>");
+                                    $('#comment').focus();
+                                });
+                            }
+                            else{
+                                alert("Por favor escribe tu comentario");
+                            }
                         }
-                        else
-                        {
-                            alert("Por favor escribe tu pregunta");
+                        else{
+                            $location.path('/login');
                         }
                     }
-                    else
-                    {
-                        $location.path('/login');
+                }];
+
+            this.saveQuestion = [{
+                    fn: function (){
+                        if (authSvc.getCurrentUser()){
+                            if ($("#question").val().length !== 0){
+                                var objEnvia = {
+                                    question: $("#question").val(),
+                                    product: ProducSelComment.cellPhone,
+                                    client: authSvc.getCurrentUser(),
+                                    provider: ProducSelComment.provider
+
+                                };
+                                console.log(objEnvia);
+                                svc.saveQuestion(objEnvia).then(function ()
+                                {
+                                    alert("La pregunta ha sido enviada satisfactoriamente");
+                                    $('#modalQuestion').modal('hide');
+                                });
+                            }
+                            else{
+                                alert("Por favor escribe tu pregunta");
+                            }
+                        }
+                        else{
+                            $location.path('/login');
+                        }
                     }
-                }
-             }];
-         
-         //Para encontrar el Proveedor con el menor precio para un producto
-        this.cheapestActions = [ 
-               {
+                }];
+            //Para encontrar el Proveedor con el menor precio para un producto
+            this.cheapestActions = [{
                     name: 'BestProvider',
                     displayName: 'Best Provider',
                     icon: 'thumbs-up',
                     class: 'warning',
                     fn: function (record) {
-                            return findItem(record);
-                            console.log(record);
+                        return findItem(record);
+                        console.log(record);
                     },
                     show: function () {
                         return true;
                     }
-              }
+                }
             ]
-        
-        var findItem = function(record)
+            var findItem = function (record)
             {
-               svc.findItem(record.cellPhone.id).then(function(cellPhone){
-                   $scope.records = [];
-                   $scope.records.push(cellPhone);
-                   console.log(cellPhone);
-               });
+                svc.findItem(record.cellPhone.id).then(function (cellPhone) {
+                    $scope.records = [];
+                    $scope.records.push(cellPhone);
+                    console.log(cellPhone);
+                });
             };
-        //Para encontrar el menor precio de un Proveedor
-        this.cheapestProvActions = [ 
-               {
+            //Para encontrar el menor precio de un Proveedor
+            this.cheapestProvActions = [
+                {
                     name: 'BestPrice',
                     displayName: 'Best Price',
                     icon: 'usd',
                     class: 'warning',
                     fn: function (record) {
-                            findItemProv(record);
-                            console.log(record);
+                        findItemProv(record);
+                        console.log(record);
                     },
                     show: function () {
                         return true;
                     }
-              }
+                }
             ]
-        
-        var findItemProv = function(record)
-            {
-               
-                svc.findItemProv(record.provider.id).then(function(provider){
-                   $scope.records = [];
-                   $scope.records.push(provider);
-                   console.log(provider);
-               });
+            var findItemProv = function (record){
+                svc.findItemProv(record.provider.id).then(function (provider) {
+                    $scope.records = [];
+                    $scope.records.push(provider);
+                    console.log(provider);
+                });
             };
+            //this.loadRefOptions();
+            this.fetchRecords().then(function (data){
+                tmp = data;
+                var groups = [{
+                        "Id": 0,
+                        "Name": "Seleccionar Proveedor",
+                        "Items": [{
+                                "Id": 0,
+                                "Name": "Seleccione Producto"
+                            }]}];
+                var existe = false;
+                for (var i = 0; i < data.length; i++)
+                {
+                    //Saber que el proveedor no esté ya relacionado...
+                    existe = false;
+                    for (var c = 0; c < groups.length; c++)
+                    {
+                        if (Number(groups[c].Id) === Number(data[i].provider.id))
+                        {
+                            groups[c].Items.push({
+                                "Id": data[i].id,
+                                "Name": data[i].name
+                            });
+                            existe = true;
+                            break;
+                        }
+                    }
+                    if (!existe)
+                    {
+                        groups.push({
+                            "Id": data[i].provider.id,
+                            "Name": data[i].provider.name,
+                            "Items": []
+                        });
+                    }
+                }
+                $scope.groups = groups;
+                $scope.currentGroup = groups[0];
 
-         
-        //this.loadRefOptions();
-        this.fetchRecords().then(function(data)
-        {
-            tmp = data;
-            var groups = [{
-                            "Id"    : 0, 
-                            "Name"  : "Seleccionar Proveedor",  
-                            "Items" : [{
-                                        "Id": 0,
-                                        "Name": "Seleccione Producto"
-                                      }]}];
-            var existe = false;
-            for(var i = 0; i < data.length; i++)
-            {
-                //Saber que el proveedor no esté ya relacionado...
-                existe = false;
-                for(var c = 0; c < groups.length; c++)
-                {
-                    if(Number(groups[c].Id) === Number(data[i].provider.id))
-                    {
-                        groups[c].Items.push({
-                                                   "Id"     : data[i].id,
-                                                   "Name"   : data[i].name
-                                              });
-                        existe = true;
-                        break;
-                    }
-                }
-                if(!existe)
-                {
-                    groups.push({
-                                    "Id"    : data[i].provider.id, 
-                                    "Name"  : data[i].provider.name, 
-                                    "Items" : []
-                                });
-                }
-            }
-            $scope.groups = groups;
-            $scope.currentGroup = groups[0];
-            
-        });
-        /*
-        //Para encontrar el Proveedor con el menor precio para un producto
-        this.ModelsList = [ 
-               {
-                    name: 'BestProvider',
-                    displayName: 'Best Provider',
-                    icon: 'thumbs-up',
-                    class: 'warning',
-                    fn: function (record) {
-                            record = getModels();
-                            return record;
-                            console.log(record);
-                            $('#myModal').modal('show').on('shown.bs.modal', function ()
-                            {
-                                $('#comment').focus();
-                            });
-                            getComments(record.id);  
-                    },
-                    show: function () {
-                        return true;
-                    }
-              }
-            ]
-            
-        //Para los comentarios por producto...
-            this.commentActions = [
-            {
-                    name: 'commet',
-                    displayName: 'Comment',
-                    icon: 'comment',
-                    class: 'warning',
-                    fn: function (record)
-                    {
-                        tmp = authSvc;
-                        if (authSvc.getCurrentUser())
-                        {
-                            ProducSelComment = record;
-                            $('#titleProduct').html("Comments: Cellphone - " + record.cellPhone.name);
-                            $("#comment").val("").attr("placeholder", authSvc.getCurrentUser().name + " Says: ");
-                            $("#cantidad").html("<center>" + maximoCaracteres + "</center>");
-                            $('#myModal').modal('show').on('shown.bs.modal', function ()
-                            {
-                                $('#comment').focus();
-                            });
-                            getComments(record.id);  
-                        }
-                        else
-                        {
-                            $location.path('/login');
-                        }
-                    },
-                    show: function () {
-                        return true;
-                    }
+            });
+            /*
+             //Para encontrar el Proveedor con el menor precio para un producto
+             this.ModelsList = [ 
+             {
+             name: 'BestProvider',
+             displayName: 'Best Provider',
+             icon: 'thumbs-up',
+             class: 'warning',
+             fn: function (record) {
+             record = getModels();
+             return record;
+             console.log(record);
+             $('#myModal').modal('show').on('shown.bs.modal', function ()
+             {
+             $('#comment').focus();
+             });
+             getComments(record.id);  
+             },
+             show: function () {
+             return true;
+             }
+             }
+             ]
+             
+             //Para los comentarios por producto...
+             this.commentActions = [
+             {
+             name: 'commet',
+             displayName: 'Comment',
+             icon: 'comment',
+             class: 'warning',
+             fn: function (record)
+             {
+             tmp = authSvc;
+             if (authSvc.getCurrentUser())
+             {
+             ProducSelComment = record;
+             $('#titleProduct').html("Comments: Cellphone - " + record.cellPhone.name);
+             $("#comment").val("").attr("placeholder", authSvc.getCurrentUser().name + " Says: ");
+             $("#cantidad").html("<center>" + maximoCaracteres + "</center>");
+             $('#myModal').modal('show').on('shown.bs.modal', function ()
+             {
+             $('#comment').focus();
+             });
+             getComments(record.id);  
+             }
+             else
+             {
+             $location.path('/login');
+             }
+             },
+             show: function () {
+             return true;
+             }
              }];*/
-            
-        // Para guardar los datos actualizados de un producto
 
-    }]);
+            // Para guardar los datos actualizados de un producto
+        }]);
 })(window.angular);

@@ -4,7 +4,6 @@
     mod.controller('cartItemCtrl', ['CrudCreator', '$scope', 'cartItemService', 'cartItemModel', '$location', 'authService', function (CrudCreator, $scope, svc, model, $location, authSvc) {
             CrudCreator.extendController(this, svc, $scope, model, 'cartItem', 'My Shopping Cart');
             var self = this;
-            
             var oldFetch = this.fetchRecords;
             this.fetchRecords = function(){
                 return oldFetch.call(this).then(function(data){
@@ -38,11 +37,13 @@
                     $scope.total += $scope.records[i].product.price * $scope.records[i].quantity;
                 }
             };
-
+            
+            //guarda la cantidad anterior
             $scope.verify = function (quantity) {
                 $scope.lastQuantity = quantity;
-            };//guarda la cantidad anterior
-
+            };
+            
+            //Realiza la validacion de la nueva cantidad asignada.
             $scope.postVerify = function (record) {
                 var patron = /^\d*$/; //^[0-9]{3}$
                 if (patron.test(record.quantity) && record.quantity > 0) {
@@ -52,9 +53,9 @@
                     record.quantity = $scope.lastQuantity;
                     $scope.currentRecord = record;
                 }
-            };//Realiza la validacion de la nueva cantidad asignada.
+            };
+            
             $scope.checkout = function () {
-                //self.showWarning("Not implemented yet");
                 $location.path('/checkout');
             };
             $scope.subtotal = function(record){
