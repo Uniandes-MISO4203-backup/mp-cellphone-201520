@@ -3,10 +3,8 @@ package co.edu.uniandes.csw.mpcellphone.converters;
 import co.edu.uniandes.csw.mpcellphone.dtos.AdminDTO;
 import co.edu.uniandes.csw.mpcellphone.dtos.UserDTO;
 import co.edu.uniandes.csw.mpcellphone.entities.AdminEntity;
-import co.edu.uniandes.csw.mpcellphone.entities.UserEntity;
 import java.util.ArrayList;
 import java.util.List;
-import static org.eclipse.persistence.expressions.ExpressionOperator.Cast;
 
 /**
  * @generated

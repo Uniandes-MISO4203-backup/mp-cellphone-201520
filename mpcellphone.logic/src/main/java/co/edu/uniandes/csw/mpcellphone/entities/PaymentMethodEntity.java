@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.mpcellphone.entities;
 
+import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,7 +16,7 @@ import javax.persistence.Id;
  * @author Cindy Hernandez - cv.hernandez10
  */
 @Entity
-public class PaymentMethodEntity {
+public class PaymentMethodEntity implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

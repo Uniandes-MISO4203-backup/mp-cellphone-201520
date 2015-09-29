@@ -12,7 +12,6 @@ import co.edu.uniandes.csw.mpcellphone.dtos.CommentDTO;
 import co.edu.uniandes.csw.mpcellphone.dtos.ProductDTO;
 import co.edu.uniandes.csw.mpcellphone.dtos.ProviderDTO;
 import co.edu.uniandes.csw.mpcellphone.dtos.QuestionDTO;
-import co.edu.uniandes.csw.mpcellphone.ejbs.CellPhoneLogic;
 import co.edu.uniandes.csw.mpcellphone.persistence.CellPhonePersistence;
 import co.edu.uniandes.csw.mpcellphone.providers.StatusCreated;
 import java.util.List;

@@ -19,15 +19,21 @@ public class AdminLogic implements IAdminLogic {
     private AdminPersistence persistence;
 
     /**
+     * @return 
      * @generated
      */
+    @Override
     public int countAdmins() {
         return persistence.count();
     }
 
     /**
+     * @param page
+     * @param maxRecords
+     * @return 
      * @generated
      */
+    @Override
     public List<AdminDTO> getAdmins(Integer page, Integer maxRecords) {
         return AdminConverter.listEntity2DTO(persistence.findAll(page, maxRecords));
     }
@@ -69,7 +75,8 @@ public class AdminLogic implements IAdminLogic {
     public List<AdminDTO> findByName(String name) {
         return AdminConverter.listEntity2DTO(persistence.findByName(name));
     }
-
+    
+    @Override
     public AdminDTO getAdminByUserId(String userId) {
         return AdminConverter.refEntity2DTO(persistence.getAdminByUserId(userId));
     }

@@ -1,8 +1,6 @@
 package co.edu.uniandes.csw.mpcellphone.services;
 
 import co.edu.uniandes.csw.mpcellphone.api.IShipLogic;
-import co.edu.uniandes.csw.mpcellphone.api.IShipLogic;
-import co.edu.uniandes.csw.mpcellphone.dtos.ShipDTO;
 import co.edu.uniandes.csw.mpcellphone.dtos.ShipDTO;
 import co.edu.uniandes.csw.mpcellphone.providers.StatusCreated;
 import java.util.List;

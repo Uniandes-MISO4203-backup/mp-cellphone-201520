@@ -13,18 +13,12 @@ import com.itextpdf.text.pdf.PdfPTable;
 import java.io.File;
 import java.io.FileOutputStream;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Calendar;
 
 
 public class GenerateFactura {
 
     public String generate(OrderDTO order) throws Exception {
         Document document = new Document();
-        Calendar cal = Calendar.getInstance();
-        Date fecha = new Date(cal.getTimeInMillis());
-        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 
         Paragraph title = new Paragraph("Factura de Compra",
                 FontFactory.getFont("Comic Sans MS", 20, Font.BOLD));

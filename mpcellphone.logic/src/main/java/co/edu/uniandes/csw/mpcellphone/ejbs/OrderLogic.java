@@ -8,7 +8,6 @@ package co.edu.uniandes.csw.mpcellphone.ejbs;
 import co.edu.uniandes.csw.mpcellphone.api.IOrderLogic;
 import co.edu.uniandes.csw.mpcellphone.converters.OrderConverter;
 import co.edu.uniandes.csw.mpcellphone.dtos.OrderDTO;
-import co.edu.uniandes.csw.mpcellphone.entities.ClientEntity;
 import co.edu.uniandes.csw.mpcellphone.entities.OrderEntity;
 import co.edu.uniandes.csw.mpcellphone.pdf.GenerateFactura;
 import co.edu.uniandes.csw.mpcellphone.persistence.ClientPersistence;
@@ -42,6 +41,7 @@ public class OrderLogic implements IOrderLogic {
      * @param maxRecords
      * @return
      */
+    @Override
     public List<OrderDTO> getOrders(Integer page, Integer maxRecords) {
         return OrderConverter.listEntity2DTO(persistence.findAll(page, maxRecords));
     }
@@ -52,6 +52,7 @@ public class OrderLogic implements IOrderLogic {
      * @param id
      * @return
      */
+    @Override
     public OrderDTO getOrder(Long id) {
         return OrderConverter.fullEntity2DTO(persistence.find(id));
     }
@@ -62,6 +63,7 @@ public class OrderLogic implements IOrderLogic {
      * @param dto
      * @return
      */
+    @Override
     public OrderDTO createOrder(OrderDTO dto) {
         OrderEntity entity = OrderConverter.fullDTO2Entity(dto);
         persistence.create(entity);
@@ -96,6 +98,7 @@ public class OrderLogic implements IOrderLogic {
      * @param dto
      * @return
      */
+    @Override
     public OrderDTO updateOrder(OrderDTO dto) {
         OrderEntity entity = persistence.update(OrderConverter.fullDTO2Entity(dto));
         return OrderConverter.fullEntity2DTO(entity);
@@ -106,6 +109,7 @@ public class OrderLogic implements IOrderLogic {
      *
      * @param id
      */
+    @Override
     public void deleteOrder(Long id) {
         persistence.delete(id);
     }

@@ -8,7 +8,6 @@ import java.util.Map;
 import javax.ejb.Stateless;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
-import javax.persistence.TemporalType;
 
 /**
  * @generated

@@ -20,6 +20,7 @@ public class ProductLogic implements IProductLogic {
     /**
      * @generated
      */
+    @Override
     public int countProducts() {
         return persistence.count();
     }
@@ -27,6 +28,7 @@ public class ProductLogic implements IProductLogic {
     /**
      * @generated
      */
+    @Override
     public List<ProductDTO> getProducts(Integer page, Integer maxRecords) {
         return ProductConverter.listEntity2DTO(persistence.findAll(page, maxRecords));
     }
@@ -34,6 +36,7 @@ public class ProductLogic implements IProductLogic {
     /**
      * @generated
      */
+    @Override
     public ProductDTO getProduct(Long id) {
         return ProductConverter.fullEntity2DTO(persistence.find(id));
     }
@@ -41,6 +44,7 @@ public class ProductLogic implements IProductLogic {
     /**
      * @generated
      */
+    @Override
     public ProductDTO createProduct(ProductDTO dto) {
         ProductEntity entity = ProductConverter.fullDTO2Entity(dto);
         persistence.create(entity);
@@ -50,6 +54,7 @@ public class ProductLogic implements IProductLogic {
     /**
      * @generated
      */
+    @Override
     public ProductDTO updateProduct(ProductDTO dto) {
         ProductEntity entity = persistence.update(ProductConverter.fullDTO2Entity(dto));
         return ProductConverter.fullEntity2DTO(entity);
@@ -58,6 +63,7 @@ public class ProductLogic implements IProductLogic {
     /**
      * @generated
      */
+    @Override
     public void deleteProduct(Long id) {
         persistence.delete(id);
     }
@@ -65,30 +71,38 @@ public class ProductLogic implements IProductLogic {
     /**
      * @generated
      */
+    @Override
     public List<ProductDTO> findByName(String name) {
         return ProductConverter.listEntity2DTO(persistence.findByName(name));
     }
     
+    @Override
     public List<ProductDTO> getByCellPhoneName(String name){
         return ProductConverter.listEntity2DTO(persistence.getByCellPhoneName(name));
     }
     
+    @Override
     public ProductDTO getCheaperProduct(Long idProvider){       
         return ProductConverter.fullEntity2DTO(persistence.getCheaperProduct(idProvider));
     }
     
+    @Override
     public ProductDTO getCheaperProvider(Long idCellPhone){       
         return ProductConverter.fullEntity2DTO(persistence.getCheaperProvider(idCellPhone));
     }
     //Para Obtener la lista de un modelo especifico, Desarrollado por Miguel Olivares
+    @Override
     public List<ProductDTO> getByModel(String model) {
         return ProductConverter.listEntity2DTO(persistence.getByModel(model));
     }
     //Para Obtener la lista de un modelo especifico filtrado por marca, Desarrollado por Miguel Olivares
+    @Override
     public List<ProductDTO> getByBrand(String brand) {
         return ProductConverter.listEntity2DTO(persistence.getByBrand(brand));
     }
+    
     //Para Obtener la lista de un modelo especifico de un proveedor, Desarrollado por Miguel Olivares
+    @Override
     public List<ProductDTO> getByProviderName(String name) {
         return ProductConverter.listEntity2DTO(persistence.getByProviderName(name));
     }
@@ -97,19 +111,23 @@ public class ProductLogic implements IProductLogic {
         return ProductConverter.listEntity2DTO(persistence.getByCity(city));
     }
     //Para Obtener la lista de un modelo especifico filtrado por ciudad, Desarrollado por Miguel Olivares
+    @Override
     public List<ProductDTO> getByPriceRange(Integer minPrice, Integer maxPrice) {
         return ProductConverter.listEntity2DTO(persistence.getByPriceRange(minPrice, maxPrice));
     }
     //Para Obtener la lista de un modelo especifico filtrado por descuento, Desarrollado por Miguel Olivares
+    @Override
     public List<ProductDTO> getByDiscount(){
         return ProductConverter.listEntity2DTO(persistence.getByDiscount());
     }
     //Para Obtener la lista de un modelo especifico filtrado por ciudad, Desarrollado por Miguel Olivares
+    @Override
     public List<ProductDTO> getByCategory(String category) {
         return ProductConverter.listEntity2DTO(persistence.getByCategory(category));
     }
     
     //Para Obtener la lista de categorias, desarrollado por Miguel Olivares
+    @Override
     public List<ProductDTO> getCategories(){
         return ProductConverter.listString2DTO(persistence.getCategories());
         

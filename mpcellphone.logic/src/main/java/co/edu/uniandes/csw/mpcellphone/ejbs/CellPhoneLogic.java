@@ -20,6 +20,7 @@ public class CellPhoneLogic implements ICellPhoneLogic {
     /**
      * @generated
      */
+    @Override
     public int countCellPhones() {
         return persistence.count();
     }
@@ -27,6 +28,7 @@ public class CellPhoneLogic implements ICellPhoneLogic {
     /**
      * @generated
      */
+    @Override
     public List<CellPhoneDTO> getCellPhones(Integer page, Integer maxRecords) {
         return CellPhoneConverter.listEntity2DTO(persistence.findAll(page, maxRecords));
     }
@@ -34,6 +36,7 @@ public class CellPhoneLogic implements ICellPhoneLogic {
     /**
      * @generated
      */
+    @Override
     public CellPhoneDTO getCellPhone(Long id) {
         return CellPhoneConverter.fullEntity2DTO(persistence.find(id));
     }
@@ -41,6 +44,7 @@ public class CellPhoneLogic implements ICellPhoneLogic {
     /**
      * @generated
      */
+    @Override
     public CellPhoneDTO createCellPhone(CellPhoneDTO dto) {
         CellPhoneEntity entity = CellPhoneConverter.fullDTO2Entity(dto);
         persistence.create(entity);
@@ -50,6 +54,7 @@ public class CellPhoneLogic implements ICellPhoneLogic {
     /**
      * @generated
      */
+    @Override
     public CellPhoneDTO updateCellPhone(CellPhoneDTO dto) {
         CellPhoneEntity entity = persistence.update(CellPhoneConverter.fullDTO2Entity(dto));
         return CellPhoneConverter.fullEntity2DTO(entity);
@@ -58,6 +63,7 @@ public class CellPhoneLogic implements ICellPhoneLogic {
     /**
      * @generated
      */
+    @Override
     public void deleteCellPhone(Long id) {
         persistence.delete(id);
     }
@@ -65,15 +71,19 @@ public class CellPhoneLogic implements ICellPhoneLogic {
     /**
      * @generated
      */
+    @Override
     public List<CellPhoneDTO> findByName(String name) {
         return CellPhoneConverter.listEntity2DTO(persistence.findByName(name));
     }
+    
     //Para Obtener la lista de Modelos, desarrollado por Miguel Olivares
+    @Override
     public List<CellPhoneDTO> getCellPhoneModel(){
         return CellPhoneConverter.listString2DTO(persistence.getCellPhoneModel());
         
     }
     //Para Obtener la lista de Marcas, desarrollado por Miguel Olivares
+    @Override
     public List<CellPhoneDTO> getCellPhoneBrand(){
         return CellPhoneConverter.listString2DTO(persistence.getCellPhoneBrand());
         

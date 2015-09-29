@@ -1,7 +1,6 @@
 package co.edu.uniandes.csw.mpcellphone.dtos;
 
 import javax.xml.bind.annotation.XmlRootElement;
-import java.util.List;
 
 /*
     Entidad para dominios de cada entidad (Categorias, Tipos, Estados, etc)

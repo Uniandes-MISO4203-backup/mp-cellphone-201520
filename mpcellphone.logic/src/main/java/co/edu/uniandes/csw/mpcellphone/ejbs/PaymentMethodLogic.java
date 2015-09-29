@@ -10,7 +10,6 @@ import co.edu.uniandes.csw.mpcellphone.converters.PaymentMethodConverter;
 import co.edu.uniandes.csw.mpcellphone.dtos.PaymentMethodDTO;
 import co.edu.uniandes.csw.mpcellphone.entities.PaymentMethodEntity;
 import co.edu.uniandes.csw.mpcellphone.persistence.PaymentMethodPersistence;
-import co.edu.uniandes.csw.mpcellphone.persistence.PaymentMethodPersistence;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -25,6 +24,7 @@ public class PaymentMethodLogic implements IPaymentMethodLogic {
     @Inject
     private PaymentMethodPersistence persistence; 
     
+    @Override
     public int countPaymentMethod() {
         return persistence.count();
     }
@@ -35,6 +35,7 @@ public class PaymentMethodLogic implements IPaymentMethodLogic {
      * @param maxRecords
      * @return 
      */
+    @Override
     public List<PaymentMethodDTO> getPaymentMethods(Integer page, Integer maxRecords) {
         return PaymentMethodConverter.listEntity2DTO(persistence.findAll(page, maxRecords));
     }
@@ -44,6 +45,7 @@ public class PaymentMethodLogic implements IPaymentMethodLogic {
      * @param id
      * @return 
      */
+    @Override
     public PaymentMethodDTO getPaymentMethod(Long id) {
         return PaymentMethodConverter.fullEntity2DTO(persistence.find(id));
     }
@@ -53,6 +55,7 @@ public class PaymentMethodLogic implements IPaymentMethodLogic {
      * @param dto
      * @return 
      */
+    @Override
     public PaymentMethodDTO createPaymentMethod(PaymentMethodDTO dto) {
         PaymentMethodEntity entity = PaymentMethodConverter.fullDTO2Entity(dto);
         persistence.create(entity);
@@ -64,6 +67,7 @@ public class PaymentMethodLogic implements IPaymentMethodLogic {
      * @param dto
      * @return 
      */
+    @Override
     public PaymentMethodDTO updatePaymentMethod(PaymentMethodDTO dto) {
         PaymentMethodEntity entity = persistence.update(PaymentMethodConverter.fullDTO2Entity(dto));
         return PaymentMethodConverter.fullEntity2DTO(entity);
@@ -73,6 +77,7 @@ public class PaymentMethodLogic implements IPaymentMethodLogic {
      * Metodo que permite eliminar una orden
      * @param id 
      */
+    @Override
     public void deletePaymentMethod(Long id) {
         persistence.delete(id);
     }

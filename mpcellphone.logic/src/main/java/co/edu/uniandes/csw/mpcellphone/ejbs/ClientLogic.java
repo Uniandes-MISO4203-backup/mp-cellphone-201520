@@ -105,6 +105,7 @@ public class ClientLogic implements IClientLogic {
      * @return 
      * @generated
      */
+    @Override
     public ClientDTO getClientByEmail(String email) {
         return ClientConverter.refEntity2DTO(persistence.getClientByEmail(email));
     }

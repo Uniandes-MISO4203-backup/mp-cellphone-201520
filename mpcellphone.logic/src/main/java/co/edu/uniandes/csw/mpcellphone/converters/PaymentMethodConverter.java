@@ -2,12 +2,8 @@ package co.edu.uniandes.csw.mpcellphone.converters;
 
 import java.util.ArrayList;
 import java.util.List;
-import co.edu.uniandes.csw.mpcellphone.entities.ClientEntity;
-import co.edu.uniandes.csw.mpcellphone.entities.PaymentMethodEntity;
-import co.edu.uniandes.csw.mpcellphone.dtos.PaymentMethodDTO;
 import co.edu.uniandes.csw.mpcellphone.dtos.PaymentMethodDTO;
 import co.edu.uniandes.csw.mpcellphone.entities.PaymentMethodEntity;
-import java.sql.Date;
 
 /**
  * Converter para la entidad PaymentMethod

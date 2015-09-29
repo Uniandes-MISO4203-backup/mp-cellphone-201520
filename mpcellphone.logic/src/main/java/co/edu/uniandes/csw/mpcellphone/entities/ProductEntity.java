@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * @generated
@@ -36,7 +35,6 @@ import javax.xml.bind.annotation.XmlRootElement;
         
         
 })
-@XmlRootElement
 public class ProductEntity implements Serializable {
 
     @Id

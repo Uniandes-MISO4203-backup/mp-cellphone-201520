@@ -1,8 +1,6 @@
 package co.edu.uniandes.csw.mpcellphone.services;
 
 import co.edu.uniandes.csw.mpcellphone.api.IOrderLogic;
-import co.edu.uniandes.csw.mpcellphone.api.IOrderLogic;
-import co.edu.uniandes.csw.mpcellphone.dtos.OrderDTO;
 import co.edu.uniandes.csw.mpcellphone.dtos.OrderDTO;
 import co.edu.uniandes.csw.mpcellphone.providers.StatusCreated;
 import java.util.Date;

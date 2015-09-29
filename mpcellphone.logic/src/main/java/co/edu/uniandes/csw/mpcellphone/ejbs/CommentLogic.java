@@ -29,15 +29,17 @@ public class CommentLogic implements ICommentLogic {
      * @param maxRecords
      * @return 
      */
+    @Override
     public List<CommentDTO> getComments(Integer page, Integer maxRecords) {
         return CommentConverter.listEntity2DTO(persistence.findAll(page, maxRecords));
     }
 
-    
+    @Override
     public CommentDTO getComment(Long id) {
         return CommentConverter.fullEntity2DTO(persistence.find(id));
     }
 
+    @Override
     public int countComment() {
         return persistence.count();
     }
@@ -46,6 +48,7 @@ public class CommentLogic implements ICommentLogic {
      * @param dto
      * @return 
      */
+    @Override
     public CommentDTO createComment(CommentDTO dto) {
         CommentEntity entity = CommentConverter.fullDTO2Entity(dto);
         persistence.create(entity);
