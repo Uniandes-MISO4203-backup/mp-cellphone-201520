@@ -2,8 +2,8 @@
     var mod = ng.module('paymentModule');
 
     mod.controller('checkoutCtrl', ['CrudCreator', '$scope', 'authService', 'cartItemService', '$location'
-                , 'checkoutService', 'shippingService', 'creditCardService',
-        function (CrudCreator, $scope, authSvc, ciSvc, $location, chSvc, shpSvc, ccSvc) {
+                , 'checkoutService', 'shippingService', 'creditCardService', 'clientService',
+        function (CrudCreator, $scope, authSvc, ciSvc, $location, chSvc, shpSvc, ccSvc, clSvc) {
             var that = this;
             $scope.cartItems = [];
             $scope.payment = {};
@@ -73,7 +73,9 @@
                 var order = {};
                 order.ship = $scope.shippingData;
                 order.state = "En proceso";
-                order.client = authSvc.getCurrentUser();
+                console.log(clSvc.getRoleCl());
+                order.client = clSvc.getRoleCl().$object;
+                console.log(clSvc.getRoleCl().$object);
                 order.totalDiscount = 0;
                 order.totalSale = $scope.totalCompra;
 
