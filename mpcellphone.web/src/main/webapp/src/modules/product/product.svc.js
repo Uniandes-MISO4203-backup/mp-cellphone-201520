@@ -28,13 +28,22 @@
             };
             
             this.comments = function(idcellPhone){
-                //return this.api.one('allcomments', idcellPhone).get();
                 return this.api.one('allcomments').get();
             };
             
             this.cargaCombos = function(service)
             {
                 return this.api.one(service).get();
+            };
+            
+            this.getBy = function(service, name)
+            {
+                return this.api.one(service, name).get();
+            };
+            
+            this.getByDiscount = function()
+            {
+                return this.api.one("getDiscount").get();
             };
 
     }]);

@@ -40,25 +40,27 @@
                     campo: "category",
                     search: "servicioBusca"
                 }];
-            $("#advancedForm").click(function (event){
+            $("#advancedForm").click(function(event)
+            {
                 //console.log("Ingresa al formulario");
                 //event.preventDefault();
                 var ingresa = false;
                 var nomServicio = "";
-                for (var i = 0; i < serviceSearch.length; i++)
+                var criterio = "";
+                for(var i = 0; i < serviceSearch.length; i++)
                 {
-                    if ($("#" + serviceSearch[i].select).val() !== "0")
+                    if($("#" + serviceSearch[i].select).val() !== "0")
                     {
-                        console.log("Seleccionado es: ", $("#" + serviceSearch[i].select).val());
-                        nomServicio = serviceSearch[i].search;
+                        criterio = ($("#" + serviceSearch[i].select).val());
+                        nomServicio = serviceSearch[i].service + "/";
                         ingresa = true;
                         break;
                     }
                 }
-                if (ingresa)
+                if(ingresa)
                 {
-                    console.log("Servicio a llamar: ", nomServicio);
-                    //$('#myModalHorizontal').modal('hide');
+                    findBy(nomServicio, criterio);
+                    $('#myModalHorizontal').modal('hide');
                 }
             });
             this.advancedSearch = function (){
@@ -77,30 +79,12 @@
                         }
                     });
                 }
-                /*
-                 $('#myModalHorizontal').change(function () {
-                 var selectedText = $(this).find("option.selected").text();
-                 $(".test").text(selectedText);
-                 });
-                 */
             };
-            this.searchActions = [
-                {
-                    fn: function (record) {
-                        console.log(record);
-                        return findByModel(record);
-
-                    },
-                    show: function () {
-                        return true;
-                    }
-                }
-            ]
-            var findBymodel = function (record){
-                svc.findItem(record).then(function (cellPhone) {
-                    $scope.records = [];
-                    $scope.records.push(cellPhone);
-                    console.log(cellPhone);
+            
+            var findBy = function(servicio, criterio)
+            {
+               svc.getBy(servicio, criterio).then(function(data){
+                   $scope.records = data;
                 });
             };
             var advancedSearchFields = function (indice){
@@ -111,7 +95,7 @@
                     $select.append("<option value = '0'>Select</option>");
                     $.each(data, function (i)
                     {
-                        $select.append('<option value=' + data[i][serviceSearch[indice].campo] + '>' + data[i][serviceSearch[indice].campo] + '</option>');
+                        $select.append("<option value='" + data[i][serviceSearch[indice].campo] + "'>" + data[i][serviceSearch[indice].campo] + "</option>");
                     });
                 });
             };
@@ -410,62 +394,26 @@
                 $scope.currentGroup = groups[0];
 
             });
-            /*
-             //Para encontrar el Proveedor con el menor precio para un producto
-             this.ModelsList = [ 
-             {
-             name: 'BestProvider',
-             displayName: 'Best Provider',
-             icon: 'thumbs-up',
-             class: 'warning',
-             fn: function (record) {
-             record = getModels();
-             return record;
-             console.log(record);
-             $('#myModal').modal('show').on('shown.bs.modal', function ()
-             {
-             $('#comment').focus();
-             });
-             getComments(record.id);  
-             },
-             show: function () {
-             return true;
-             }
-             }
-             ]
-             
-             //Para los comentarios por producto...
-             this.commentActions = [
-             {
-             name: 'commet',
-             displayName: 'Comment',
-             icon: 'comment',
-             class: 'warning',
-             fn: function (record)
-             {
-             tmp = authSvc;
-             if (authSvc.getCurrentUser())
-             {
-             ProducSelComment = record;
-             $('#titleProduct').html("Comments: Cellphone - " + record.cellPhone.name);
-             $("#comment").val("").attr("placeholder", authSvc.getCurrentUser().name + " Says: ");
-             $("#cantidad").html("<center>" + maximoCaracteres + "</center>");
-             $('#myModal').modal('show').on('shown.bs.modal', function ()
-             {
-             $('#comment').focus();
-             });
-             getComments(record.id);  
-             }
-             else
-             {
-             $location.path('/login');
-             }
-             },
-             show: function () {
-             return true;
-             }
-             }];*/
-
-            // Para guardar los datos actualizados de un producto
+            //Para listar por descuento Desarrollado por Miguel Olivares
+            this.discountActions = [{
+                    name: 'BestDiscounts',
+                    displayName: 'Best Discounts',
+                    icon: 'usd',
+                    class: 'warning',
+                    fn: function (record) {
+                        return findByDiscount();
+                    },
+                    show: function () {
+                        return true;
+                    }
+                }
+            ]
+            
+            var findByDiscount = function()
+            {
+               svc.getByDiscount().then(function(data){
+                   $scope.records = data;
+            });
+        };
         }]);
 })(window.angular);

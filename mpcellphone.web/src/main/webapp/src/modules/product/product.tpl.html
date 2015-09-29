@@ -49,6 +49,11 @@
                                     <span class="glyphicon glyphicon-{{action.icon}}"></span> {{action.displayName}}
                                 </a>
                             </li>
+                            <li>
+                                <a href="javascript:;" ng-repeat="action in ctrl.discountActions" id="{{$parent.$index}}-{{action.name}}-btn" ng-show="action.show()" ng-click="action.fn(record)">
+                                    <span class="glyphicon glyphicon-{{action.icon}}"></span> {{action.displayName}}
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </p>
