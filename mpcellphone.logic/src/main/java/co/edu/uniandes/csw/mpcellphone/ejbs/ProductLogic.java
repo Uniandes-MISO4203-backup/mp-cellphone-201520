@@ -108,4 +108,10 @@ public class ProductLogic implements IProductLogic {
     public List<ProductDTO> getByCategory(String category) {
         return ProductConverter.listEntity2DTO(persistence.getByCategory(category));
     }
+    
+    //Para Obtener la lista de categorias, desarrollado por Miguel Olivares
+    public List<ProductDTO> getCategories(){
+        return ProductConverter.listString2DTO(persistence.getCategories());
+        
+    }
 }

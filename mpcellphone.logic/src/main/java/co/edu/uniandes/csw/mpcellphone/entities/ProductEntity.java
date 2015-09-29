@@ -30,7 +30,10 @@ import javax.xml.bind.annotation.XmlRootElement;
     //Query para Obtener la lista de productos en orden de descuento desarrollado por Miguel Olivares
     @NamedQuery(name = "Product.getByDiscount", query = "select u from ProductEntity u WHERE u.discount > 0 order by u.discount DESC"),
     //Query para Obtener la lista de productos por categoria desarrollado por Miguel Olivares
-    @NamedQuery(name = "Product.getByCategory", query = "select u from ProductEntity u WHERE u.category = :category")
+    @NamedQuery(name = "Product.getByCategory", query = "select u from ProductEntity u WHERE u.category = :category"),
+    //Query para Obtener la lista de productos por categoria desarrollado por Miguel Olivares
+    @NamedQuery(name = "Product.getCategories", query = "select Distinct u.category from ProductEntity u")
+        
         
 })
 @XmlRootElement

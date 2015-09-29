@@ -67,8 +67,8 @@ public class ProviderService {
 
     private Account updateUser(ProviderDTO user) {
         ApplicationRealm realm = ((ApplicationRealm) ((RealmSecurityManager) SecurityUtils.getSecurityManager()).getRealms());
-        Client client = realm.getClient();
-        Account acct = client.instantiate(Account.class);
+        Client clientPr = realm.getClient();
+        Account acct = clientPr.instantiate(Account.class);
         acct.setEmail(user.getEmail());
         acct.setGivenName(user.getGivenName());
         acct.setSurname(user.getSurname());

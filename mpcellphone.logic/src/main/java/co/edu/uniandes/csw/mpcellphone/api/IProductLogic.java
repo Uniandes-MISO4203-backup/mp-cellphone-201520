@@ -21,4 +21,5 @@ public interface IProductLogic {
     public List<ProductDTO> getByPriceRange(Integer minPrice, Integer maxPrice);
     public List<ProductDTO> getByDiscount();
     public List<ProductDTO> getByCategory(String category);
+    public List<ProductDTO> getCategories();
 }
