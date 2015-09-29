@@ -33,6 +33,7 @@
                                            }
                                        }
                                     });
+                                    //$location.path('/#/catalog'); 
                                     break;
                     default: 
                         $location.path('/#/catalog'); 

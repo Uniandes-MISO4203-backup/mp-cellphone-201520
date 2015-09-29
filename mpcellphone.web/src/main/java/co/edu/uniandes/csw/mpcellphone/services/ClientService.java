@@ -4,6 +4,7 @@ import co.edu.uniandes.csw.mpcellphone.api.IClientLogic;
 import co.edu.uniandes.csw.mpcellphone.dtos.ClientDTO;
 import co.edu.uniandes.csw.mpcellphone.providers.StatusCreated;
 import com.stormpath.sdk.account.Account;
+import com.stormpath.sdk.account.AccountStatus;
 import com.stormpath.sdk.client.Client;
 import com.stormpath.shiro.realm.ApplicationRealm;
 import java.util.List;
@@ -35,7 +36,6 @@ public class ClientService {
     @Context private HttpServletResponse response;
     @QueryParam("page") private Integer page;
     @QueryParam("maxRecords") private Integer maxRecords;
-    private Object client;
 
     /**
      * @param dto
@@ -80,6 +80,7 @@ public class ClientService {
         acct.setGivenName(user.getGivenName());
         acct.setSurname(user.getSurname());
         acct.setUsername(user.getGivenName() + " " + user.getSurname());
+        acct.setStatus(AccountStatus.ENABLED);
         return acct;
     }
 
@@ -93,7 +94,7 @@ public class ClientService {
     @PUT
     @Path("{id: \\d+}")
     public ClientDTO updateClient(@PathParam("id") Long id, ClientDTO dto) {
-        this.updateUser(dto);
+        //this.updateUser(dto);
         dto.setId(id);
         return clientLogic.updateClient(dto);
     }

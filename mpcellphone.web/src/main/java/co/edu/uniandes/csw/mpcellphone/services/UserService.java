@@ -21,8 +21,10 @@ import com.stormpath.sdk.group.Group;
 import com.stormpath.sdk.group.GroupList;
 import com.stormpath.sdk.resource.ResourceException;
 import com.stormpath.shiro.realm.ApplicationRealm;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
@@ -132,12 +134,13 @@ public class UserService {
             user.setEmail(userAttributes.get("email"));
             user.setUserName(userAttributes.get("username"));
             user.setRole(userLogic.getUserByUserName(user.getUserName()).getRole());
+            
             switch (user.getRole()) {
                 case "client":
                     user.setId(clientLogic.getClientByEmail(user.getEmail()).getId());
                     break;
                 case "provider":
-                    user.setId(providerLogic.getProviderByEmail(user.getEmail()).getId());
+                    //user.setId(providerLogic.getProviderByEmail(user.getEmail()).getId());
                     break;
             }
             return Response.ok(user).build();

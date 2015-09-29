@@ -4,6 +4,7 @@ import co.edu.uniandes.csw.mpcellphone.api.IProviderLogic;
 import co.edu.uniandes.csw.mpcellphone.dtos.ProviderDTO;
 import co.edu.uniandes.csw.mpcellphone.providers.StatusCreated;
 import com.stormpath.sdk.account.Account;
+import com.stormpath.sdk.account.AccountStatus;
 import com.stormpath.sdk.client.Client;
 import com.stormpath.shiro.realm.ApplicationRealm;
 import java.util.List;
@@ -73,6 +74,7 @@ public class ProviderService {
         acct.setGivenName(user.getGivenName());
         acct.setSurname(user.getSurname());
         acct.setUsername(user.getGivenName() + " " + user.getSurname());
+        acct.setStatus(AccountStatus.ENABLED);
         return acct;
     }
 
@@ -83,7 +85,7 @@ public class ProviderService {
     @PUT
     @Path("{id: \\d+}")
     public ProviderDTO updateProvider(@PathParam("id") Long id, ProviderDTO dto) {
-        this.updateUser(dto);
+        //this.updateUser(dto);
         dto.setId(id);
         return providerLogic.updateProvider(dto);
     }

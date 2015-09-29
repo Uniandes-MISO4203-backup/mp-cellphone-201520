@@ -3,14 +3,16 @@
 (function (ng) {
     var mod = ng.module('providerModule');
 
-    mod.controller('providerCtrl', ['CrudCreator', '$scope', 'providerService', 'providerModel', function (CrudCreator, $scope, svc, model) {
+    mod.controller('providerCtrl', ['CrudCreator', '$scope', 'providerService', 'providerModel', '$location', 'authService', function (CrudCreator, $scope, svc, model, $location, authSvc) {
             CrudCreator.extendController(this, svc, $scope, model, 'provider', 'Provider');
-            this.fetchRecords();
+            //this.fetchRecords();
             if (authSvc.getCurrentUser())
             {
                 var self = this;
-                svc.getRoleSvc().then(function(data)
+                console.log('Ingresó rol');
+                svc.getRolePr().then(function(data)
                 {
+                    console.log(data.role);
                     switch (data.role) 
                     {
                         case "admin":
@@ -23,6 +25,7 @@
                             });
                             break;
                         case "provider":
+                            self.itemsPerPage = 100;
                             self.fetchRecords().then(function(data)
                             {
                                var idActual = authSvc.getCurrentUser().id;
@@ -35,16 +38,17 @@
                                    }
                                }
                             });
+                            //$location.path('/#/catalog');
                             break;
                         default:
-                            $location.path('/#/catalogo');
+                            $location.path('/#/catalog');
                             break;
                     } 
                 });
             }
             else
             {
-                $location.path('/login');
+                $location.path('/#/catalog');
             }
         var ocultaCampos = function(tipo)
         {
@@ -58,9 +62,11 @@
         };
         }]);
 
+/*
     mod.controller('productsCtrl', ['CrudCreator', '$scope', 'productService', 'productModel', function (CrudCreator, $scope, svc, model) {
             CrudCreator.extendController(this, svc, $scope, model, 'provider', 'Provider');
             this.loadRefOptions();
             this.fetchRecords();
         }]);
+        */
 })(window.angular);
