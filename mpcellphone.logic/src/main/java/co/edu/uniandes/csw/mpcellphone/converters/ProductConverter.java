@@ -167,5 +167,19 @@ public abstract class ProductConverter {
         return entities;
     }
     
+    //Para convertir de lista de String a Lista DTO
+    public static List<ProductDTO> listString2DTO(List<String> Models) {
+        List<ProductDTO> dtos = new ArrayList<ProductDTO>();
+        if (Models != null) {
+            for (String name : Models) {
+                ProductDTO dto = new ProductDTO();
+                //dtos.add(basicEntity2DTO(Models));
+                dto.setCategory(name);
+                dtos.add(dto);
+            }
+        }
+        return dtos;
+    }
+    
     
 }

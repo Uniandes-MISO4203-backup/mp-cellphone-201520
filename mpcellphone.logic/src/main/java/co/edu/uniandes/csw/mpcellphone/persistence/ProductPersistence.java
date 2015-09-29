@@ -150,4 +150,18 @@ public class ProductPersistence extends CrudPersistence<ProductEntity> {
             }
         }
     }
+    
+    //Para Obtener la lista de Marcas desarrollado por Miguel Olivares
+    public List<String> getCategories() {
+        try{
+            
+            List<String> list = new ArrayList<String>();
+            list = executeListNamedQuery("Product.getCategories");
+            
+            return list;
+            } catch(NoResultException e){
+                return null;
+                
+            }
+    }
 }

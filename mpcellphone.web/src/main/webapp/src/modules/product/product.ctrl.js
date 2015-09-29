@@ -33,6 +33,11 @@
                                     service : "getProviders", 
                                     select  : "providers", 
                                     campo   : "name"
+                                },
+                                {
+                                    service : "getCategories", 
+                                    select  : "categories", 
+                                    campo   : "category"
                                  }];
                              
             this.advancedSearch = function ()
@@ -42,6 +47,33 @@
                 {
                     advancedSearchFields(i);
                 }
+                $('#myModalHorizontal').change(function () {
+                    var selectedText = $(this).find("option.selected").text();
+                    $(".test").text(selectedText);
+                });
+                
+            };
+            this.searchActions = [ 
+               {
+                    
+                    fn: function (record) {
+                            console.log(record);
+                            return findByModel(record);
+                            
+                    },
+                    show: function () {
+                        return true;
+                    }
+              }
+            ]
+            
+            var findBymodel = function(record)
+            {
+               svc.findItem(record).then(function(cellPhone){
+                   $scope.records = [];
+                   $scope.records.push(cellPhone);
+                   console.log(cellPhone);
+               });
             };
             
             var advancedSearchFields = function (indice)

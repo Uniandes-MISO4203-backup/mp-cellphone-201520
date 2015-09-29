@@ -274,6 +274,17 @@ public class ProductService {
      * Creado por ma.olivares10
      */
     @GET
+    @Path("/getCategories")
+    public List<ProductDTO> getCategories() {
+        
+        return productLogic.getCategories();
+    }
+    
+    /**
+     * Servicio para obtener la lista de ciudades
+     * Creado por ma.olivares10
+     */
+    @GET
     @Path("/getCategory/{category}")
     public List<ProductDTO> getByDiscount(@PathParam("category") String category) {
         
