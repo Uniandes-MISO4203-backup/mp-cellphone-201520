@@ -8,28 +8,33 @@
                 name: 'name',
                 displayName: 'Name',
                 type: 'String',
-                required: true
+                required: true,
+                visible: true
             }, {
                 name: 'price',
                 displayName: 'Price',
                 type: 'Integer',
-                required: true
+                required: true,
+                visible: true
             }, {
                 name: 'discount',
                 displayName: 'Discount',
                 type: 'Integer',
-                required: true
+                required: true,
+                visible: true
             }, {
                 name: 'category',
                 displayName: 'Category',
                 type: 'String',
-                required: true
+                required: true,
+                visible: true
             }, {    
                 name: 'cellPhone',
                 displayName: 'CellPhone',
                 type: 'Reference',
                 service: 'cellPhoneService',
                 options: [],
-                required: true   
+                required: true,
+                visible: true   
             }]});
 })(window.angular);

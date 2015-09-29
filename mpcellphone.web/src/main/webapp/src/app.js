@@ -17,7 +17,8 @@
     mainApp.config(['$routeProvider', 'CrudTemplateURL', 'CrudCtrlAlias', function ($routeProvider, tplUrl, alias) {
             $routeProvider
             .when('/cellPhone', {
-                templateUrl: 'src/modules/cellPhone/cellphoneTmpl.html', //tplUrl, Se cambiar tplUrl por la nueva plantilla
+                //templateUrl: 'src/modules/cellPhone/cellphoneTmpl.html', //tplUrl, Se cambiar tplUrl por la nueva plantilla
+                templateUrl: tplUrl,
                 controller: 'cellPhoneCtrl', 
                 controllerAs: alias
             })

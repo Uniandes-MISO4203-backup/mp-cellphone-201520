@@ -8,31 +8,37 @@
                 name: 'name',
                 displayName: 'Name',
                 type: 'String',
-                required: true
+                required: true,
+                visible: true
             }, {
                 name: 'description',
                 displayName: 'Description',
                 type: 'String',
-                required: true
+                required: true,
+                visible: false
             }, {
                 name: 'model',
                 displayName: 'Model',
                 type: 'String',
-                required: true
+                required: true,
+                visible: true
             }, {
                 name: 'imei',
                 displayName: 'Imei',
                 type: 'String',
-                required: true
+                required: true,
+                visible: true
             }, {
                 name: 'brand',
                 displayName: 'Brand',
                 type: 'String',
-                required: true
+                required: true,
+                visible: true
             }, {
                 name: 'image',
                 displayName: 'Image',
                 type: 'String',
-                required: false
+                required: false,
+                visible: false
             }]});
 })(window.angular);

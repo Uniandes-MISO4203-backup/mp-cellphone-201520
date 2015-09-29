@@ -7,6 +7,7 @@
         {
             CrudCreator.extendController(this, svc, $scope, model, 'cellPhone', 'CellPhone');
             this.fetchRecords();
+            /*
                   //$scope.product = {};
            
             $scope.cellphone = {};
@@ -19,7 +20,7 @@
                 productData.name = $scope.product.name;
                 productData.price = $scope.product.price;
                 productData.discount = $scope.product.discount;
-                */
+               
                //datos celulars
                 cellphoneData.brand = $scope.cellphone.brand;
                 cellphoneData.model = $scope.cellphone.model;
@@ -32,6 +33,7 @@
                     $scope.cellphoneData = data;
                 });
             };
+            */
          }]);
              
 })(window.angular);
