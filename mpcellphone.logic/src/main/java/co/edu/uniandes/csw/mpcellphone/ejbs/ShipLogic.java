@@ -24,6 +24,7 @@ public class ShipLogic implements IShipLogic {
     @Inject
     private ShipPersistence persistence; 
     
+    @Override
     public int countShip() {
         return persistence.count();
     }
@@ -34,6 +35,7 @@ public class ShipLogic implements IShipLogic {
      * @param maxRecords
      * @return 
      */
+    @Override
     public List<ShipDTO> getShips(Integer page, Integer maxRecords) {
         return ShipConverter.listEntity2DTO(persistence.findAll(page, maxRecords));
     }
@@ -43,6 +45,7 @@ public class ShipLogic implements IShipLogic {
      * @param id
      * @return 
      */
+    @Override
     public ShipDTO getShip(Long id) {
         return ShipConverter.fullEntity2DTO(persistence.find(id));
     }
@@ -52,6 +55,7 @@ public class ShipLogic implements IShipLogic {
      * @param dto
      * @return 
      */
+    @Override
     public ShipDTO createShip(ShipDTO dto) {
         ShipEntity entity = ShipConverter.fullDTO2Entity(dto);
         persistence.create(entity);
@@ -63,6 +67,7 @@ public class ShipLogic implements IShipLogic {
      * @param dto
      * @return 
      */
+    @Override
     public ShipDTO updateShip(ShipDTO dto) {
         ShipEntity entity = persistence.update(ShipConverter.fullDTO2Entity(dto));
         return ShipConverter.fullEntity2DTO(entity);
@@ -72,6 +77,7 @@ public class ShipLogic implements IShipLogic {
      * Metodo que permite eliminar una orden
      * @param id 
      */
+    @Override
     public void deleteShip(Long id) {
         persistence.delete(id);
     }

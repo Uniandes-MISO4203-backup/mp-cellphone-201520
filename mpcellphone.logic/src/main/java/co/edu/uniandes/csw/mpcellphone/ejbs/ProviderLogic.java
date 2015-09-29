@@ -104,17 +104,20 @@ public class ProviderLogic implements IProviderLogic {
      * @return 
      * @generated
      */
+    @Override
     public ProviderDTO getProviderByEmail(String email) {
         return ProviderConverter.refEntity2DTO(persistence.getProviderByEmail(email));
     }
     
     //Para Obtener la lista de Proveedores, desarrollado por Miguel Olivares
+    @Override
     public List<ProviderDTO> getProviders(){
         return ProviderConverter.listString2DTO(persistence.getProviders());
         
     }
     
     //Para Obtener la lista de Ciudades, desarrollado por Miguel Olivares
+    @Override
     public List<ProviderDTO> getCities(){
         return ProviderConverter.listString2DTO(persistence.getCities());
         

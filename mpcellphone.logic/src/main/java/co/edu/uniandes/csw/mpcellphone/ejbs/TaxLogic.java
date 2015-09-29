@@ -24,6 +24,7 @@ public class TaxLogic implements ITaxLogic {
     @Inject
     private TaxPersistence persistence; 
     
+    @Override
     public int countTax() {
         return persistence.count();
     }
@@ -34,6 +35,7 @@ public class TaxLogic implements ITaxLogic {
      * @param maxRecords
      * @return 
      */
+    @Override
     public List<TaxDTO> getTaxs(Integer page, Integer maxRecords) {
         return TaxConverter.listEntity2DTO(persistence.findAll(page, maxRecords));
     }
@@ -43,6 +45,7 @@ public class TaxLogic implements ITaxLogic {
      * @param id
      * @return 
      */
+    @Override
     public TaxDTO getTax(Long id) {
         return TaxConverter.fullEntity2DTO(persistence.find(id));
     }
@@ -52,6 +55,7 @@ public class TaxLogic implements ITaxLogic {
      * @param dto
      * @return 
      */
+    @Override
     public TaxDTO createTax(TaxDTO dto) {
         TaxEntity entity = TaxConverter.fullDTO2Entity(dto);
         persistence.create(entity);
@@ -63,6 +67,7 @@ public class TaxLogic implements ITaxLogic {
      * @param dto
      * @return 
      */
+    @Override
     public TaxDTO updateTax(TaxDTO dto) {
         TaxEntity entity = persistence.update(TaxConverter.fullDTO2Entity(dto));
         return TaxConverter.fullEntity2DTO(entity);
@@ -72,6 +77,7 @@ public class TaxLogic implements ITaxLogic {
      * Metodo que permite eliminar una orden
      * @param id 
      */
+    @Override
     public void deleteTax(Long id) {
         persistence.delete(id);
     }

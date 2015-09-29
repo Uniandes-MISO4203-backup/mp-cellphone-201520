@@ -22,6 +22,7 @@ public class UserLogic implements IUserLogic{
     
     @Inject private UserPersistence persistence;
 
+    @Override
     public int countUsers() {
         return persistence.count();
     }
@@ -31,10 +32,12 @@ public class UserLogic implements IUserLogic{
      * @param maxRecords
      * @return 
      */
+    @Override
     public List<UserDTO> getUsers(Integer page, Integer maxRecords) {
         return UserConverter.listEntity2DTO(persistence.findAll(page, maxRecords));
     }
     
+    @Override
     public UserDTO getUserByUserName(String userName) {
         return UserConverter.refEntity2DTO(persistence.getUserByUserName(userName));
     }
