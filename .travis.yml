@@ -1,3 +1,11 @@
 language: java
+language: java
+before_install:
+ - "export DISPLAY=:99.0"
+ - "sh -e /etc/init.d/xvfb start"
+addons:
+ - firefox: "38.0.1"
+
+script: "mvn verify"
 after_success:
- - mvn sonar:sonar -Dsonar.jdbc.url=$sonar_jdbc_url -Dsonar.jdbc.driver=$sonar_jdbc_driver -Dsonar.host.url=$sonar_host_url -Dsonar.jdbc.username=$sonar_jdbc_username -Dsonar.jdbc.password=$sonar_jdbc_password
+ - mvn sonar:sonar
