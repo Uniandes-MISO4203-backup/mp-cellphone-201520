@@ -21,8 +21,10 @@ import com.stormpath.sdk.group.Group;
 import com.stormpath.sdk.group.GroupList;
 import com.stormpath.sdk.resource.ResourceException;
 import com.stormpath.shiro.realm.ApplicationRealm;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
@@ -177,6 +179,7 @@ public class UserService {
     @POST
     public Response setUser(UserDTO user) {
 
+        String rolC;
         try {
             switch (user.getRole()) {
                 case "user":
@@ -186,6 +189,16 @@ public class UserService {
                     newClient.setUserId(acctClient.getHref());
                     newClient.setEmail(acctClient.getEmail());
                     newClient = clientLogic.createClient(newClient);
+                    rolC="client";
+                    UserDTO userC = new UserDTO();
+                    userC.setName(user.getName());
+                    userC.setRole(rolC);
+                    userC.setStormpath(acctClient.getHref());
+                    userC.setPassword(user.getPassword());
+                    userC.setUserName(acctClient.getFullName());
+                    userC.setEmail(user.getEmail());
+                    userC.setRememberMe(user.isRememberMe());
+                    userC = userLogic.createUser(userC);
                     break;
 
                 case "provider":
@@ -195,6 +208,16 @@ public class UserService {
                     newProvider.setUserId(acctProvider.getHref());
                     newProvider.setEmail(acctProvider.getEmail());
                     newProvider = providerLogic.createProvider(newProvider);
+                    rolC="provider";
+                    UserDTO userP = new UserDTO();
+                    userP.setName(user.getName());
+                    userP.setRole(rolC);
+                    userP.setStormpath(acctProvider.getHref());
+                    userP.setPassword(user.getPassword());
+                    userP.setUserName(acctProvider.getFullName());
+                    userP.setEmail(user.getEmail());
+                    userP.setRememberMe(user.isRememberMe());
+                    userP = userLogic.createUser(userP);
                     break;  
                 //jdelchiaro -- 09/09/2015
                 case "admin":
@@ -204,6 +227,16 @@ public class UserService {
                     //newAdmin.setUserId(acctAdmin.getHref());
                     newAdmin.setEmail(acctAdmin.getEmail());
                     newAdmin = adminLogic.createAdmin(newAdmin);                    
+                    rolC="admin";
+                    UserDTO userA = new UserDTO();
+                    userA.setName(user.getName());
+                    userA.setRole(rolC);
+                    userA.setStormpath(acctAdmin.getHref());
+                    userA.setPassword(user.getPassword());
+                    userA.setUserName(acctAdmin.getFullName());
+                    userA.setEmail(user.getEmail());
+                    userA.setRememberMe(user.isRememberMe());
+                    userA = userLogic.createUser(userA);
                     break;
                 
             }

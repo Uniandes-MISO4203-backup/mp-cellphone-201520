@@ -8,6 +8,7 @@ package co.edu.uniandes.csw.mpcellphone.ejbs;
 import co.edu.uniandes.csw.mpcellphone.api.IUserLogic;
 import co.edu.uniandes.csw.mpcellphone.converters.UserConverter;
 import co.edu.uniandes.csw.mpcellphone.dtos.UserDTO;
+import co.edu.uniandes.csw.mpcellphone.entities.UserEntity;
 import co.edu.uniandes.csw.mpcellphone.persistence.UserPersistence;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -40,6 +41,17 @@ public class UserLogic implements IUserLogic{
     @Override
     public UserDTO getUserByUserName(String userName) {
         return UserConverter.refEntity2DTO(persistence.getUserByUserName(userName));
+    }
+/**
+     * @param dto
+     * @return 
+     * @generated
+     */
+    @Override
+    public UserDTO createUser(UserDTO dto) {
+        UserEntity entity = UserConverter.refDTO2Entity(dto);
+        persistence.create(entity);
+        return UserConverter.refEntity2DTO(entity);
     }
 }
 

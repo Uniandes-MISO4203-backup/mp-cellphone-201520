@@ -31,6 +31,11 @@ public class UserEntity implements Serializable {
     
     private String password;
     
+    private String userName;
+
+    private String email;
+    
+    private boolean rememberMe;
         
     public Long getId(){
         return id;
@@ -71,4 +76,30 @@ public class UserEntity implements Serializable {
     public void setPassword(String pass){
         this.password = pass;
     }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public boolean isRememberMe() {
+        return rememberMe;
+    }
+
+    public void setRememberMe(boolean rememberMe) {
+        this.rememberMe = rememberMe;
+    }
+
+    
 }
