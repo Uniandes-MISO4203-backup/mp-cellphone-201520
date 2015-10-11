@@ -1,6 +1,5 @@
 package co.edu.uniandes.csw.mpcellphone.dtos;
 
-import java.util.List;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -16,10 +15,7 @@ public class CellPhoneDTO {
     private String imei;
     private String brand;
     private String image;
-    private List<PhotoDTO> photos;
-    
     /**
-     * @return
      * @generated
      */
     public Long getId() {
@@ -27,7 +23,6 @@ public class CellPhoneDTO {
     }
 
     /**
-     * @param id
      * @generated
      */
     public void setId(Long id) {
@@ -35,7 +30,6 @@ public class CellPhoneDTO {
     }
 
     /**
-     * @return
      * @generated
      */
     public String getName() {
@@ -43,7 +37,6 @@ public class CellPhoneDTO {
     }
 
     /**
-     * @param name
      * @generated
      */
     public void setName(String name) {
@@ -51,7 +44,6 @@ public class CellPhoneDTO {
     }
 
     /**
-     * @return
      * @generated
      */
     public String getDescription() {
@@ -59,7 +51,6 @@ public class CellPhoneDTO {
     }
 
     /**
-     * @param description
      * @generated
      */
     public void setDescription(String description) {
@@ -67,7 +58,6 @@ public class CellPhoneDTO {
     }
 
     /**
-     * @return
      * @generated
      */
     public String getModel() {
@@ -75,7 +65,6 @@ public class CellPhoneDTO {
     }
 
     /**
-     * @param model
      * @generated
      */
     public void setModel(String model) {
@@ -83,7 +72,6 @@ public class CellPhoneDTO {
     }
 
     /**
-     * @return
      * @generated
      */
     public String getImei() {
@@ -91,7 +79,6 @@ public class CellPhoneDTO {
     }
 
     /**
-     * @param imei
      * @generated
      */
     public void setImei(String imei) {
@@ -99,7 +86,6 @@ public class CellPhoneDTO {
     }
 
     /**
-     * @return
      * @generated
      */
     public String getBrand() {
@@ -107,7 +93,6 @@ public class CellPhoneDTO {
     }
 
     /**
-     * @param brand
      * @generated
      */
     public void setBrand(String brand) {
@@ -115,7 +100,6 @@ public class CellPhoneDTO {
     }
 
     /**
-     * @return
      * @generated
      */
     public String getImage() {
@@ -123,29 +107,10 @@ public class CellPhoneDTO {
     }
 
     /**
-     * @param image
      * @generated
      */
     public void setImage(String image) {
         this.image = image;
     }
-
-    /**
-     * @return
-     * @generated
-     */
-    public List<PhotoDTO> getPhotos() {
-        return photos;
-    }
-
-    /**
-     * @param photos
-     * @generated
-     */
-    public void setPhotos(List<PhotoDTO> photos) {
-        this.photos = photos;
-    }
-    
-    
 
 }

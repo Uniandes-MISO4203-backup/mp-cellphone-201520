@@ -29,7 +29,7 @@ public abstract class PhotoConverter {
             PhotoDTO dto = new PhotoDTO();
             dto.setId(entity.getId());
             dto.setName(entity.getName());
-            dto.setCellPhone(CellPhoneConverter.refEntity2DTO(entity.getCellPhone()));
+            dto.setProduct(ProductConverter.refEntity2DTO(entity.getProduct()));
 
             return dto;
         } else {
@@ -63,7 +63,7 @@ public abstract class PhotoConverter {
             PhotoDTO dto = new PhotoDTO();
             dto.setId(entity.getId());
             dto.setName(entity.getName());
-            dto.setCellPhone(CellPhoneConverter.refEntity2DTO(entity.getCellPhone()));
+            dto.setProduct(ProductConverter.refEntity2DTO(entity.getProduct()));
 
             return dto;
         } else {
@@ -81,7 +81,7 @@ public abstract class PhotoConverter {
             PhotoEntity entity = new PhotoEntity();
             entity.setId(dto.getId());
             entity.setName(dto.getName());
-            entity.setCellPhone(CellPhoneConverter.refDTO2Entity(dto.getCellPhone()));
+            entity.setProduct(ProductConverter.refDTO2Entity(dto.getProduct()));
 
             return entity;
         } else {

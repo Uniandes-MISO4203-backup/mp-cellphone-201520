@@ -1,14 +1,11 @@
 package co.edu.uniandes.csw.mpcellphone.entities;
 
 import java.io.Serializable;
-import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Entity;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 
 /**
  * @generated
@@ -38,12 +35,8 @@ public class CellPhoneEntity implements Serializable {
     private String brand;
 
     private String image;
-    
-    @OneToMany(mappedBy = "cellPhone", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<PhotoEntity> photos;
 
     /**
-     * @return
      * @generated
      */
     public Long getId(){
@@ -51,7 +44,6 @@ public class CellPhoneEntity implements Serializable {
     }
 
     /**
-     * @param id
      * @generated
      */
     public void setId(Long id){
@@ -59,7 +51,6 @@ public class CellPhoneEntity implements Serializable {
     }
 
     /**
-     * @return
      * @generated
      */
     public String getName(){
@@ -67,7 +58,6 @@ public class CellPhoneEntity implements Serializable {
     }
 
     /**
-     * @param name
      * @generated
      */
     public void setName(String name){
@@ -82,7 +72,6 @@ public class CellPhoneEntity implements Serializable {
     }
 
     /**
-     * @param description
      * @generated
      */
     public void setDescription(String description){
@@ -90,7 +79,6 @@ public class CellPhoneEntity implements Serializable {
     }
 
     /**
-     * @return
      * @generated
      */
     public String getModel(){
@@ -98,7 +86,6 @@ public class CellPhoneEntity implements Serializable {
     }
 
     /**
-     * @param model
      * @generated
      */
     public void setModel(String model){
@@ -106,7 +93,6 @@ public class CellPhoneEntity implements Serializable {
     }
 
     /**
-     * @return
      * @generated
      */
     public String getImei(){
@@ -114,7 +100,6 @@ public class CellPhoneEntity implements Serializable {
     }
 
     /**
-     * @param imei
      * @generated
      */
     public void setImei(String imei){
@@ -122,7 +107,6 @@ public class CellPhoneEntity implements Serializable {
     }
 
     /**
-     * @return
      * @generated
      */
     public String getBrand(){
@@ -130,7 +114,6 @@ public class CellPhoneEntity implements Serializable {
     }
 
     /**
-     * @param brand
      * @generated
      */
     public void setBrand(String brand){
@@ -138,7 +121,6 @@ public class CellPhoneEntity implements Serializable {
     }
 
     /**
-     * @return
      * @generated
      */
     public String getImage(){
@@ -146,29 +128,10 @@ public class CellPhoneEntity implements Serializable {
     }
 
     /**
-     * @param image
      * @generated
      */
     public void setImage(String image){
         this.image = image;
     }
-    
-    /**
-     * @return
-     * @generated
-     */
-    public List<PhotoEntity> getPhotos() {
-        return photos;
-    }
-    
-    /**
-     * @param photos
-     * @generated
-     */
-    public void setPhotos(List<PhotoEntity> photos) {
-        this.photos = photos;
-    }
-    
-    
 
 }

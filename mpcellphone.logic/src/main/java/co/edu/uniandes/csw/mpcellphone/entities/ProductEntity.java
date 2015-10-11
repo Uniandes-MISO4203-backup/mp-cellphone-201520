@@ -1,12 +1,15 @@
 package co.edu.uniandes.csw.mpcellphone.entities;
 
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 
 /**
  * @generated
@@ -49,20 +52,36 @@ public class ProductEntity implements Serializable {
 
     @ManyToOne
     private CellPhoneEntity cellPhone;
+    
     @ManyToOne
     private ProviderEntity provider;
     
     private String category;
+    
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<PhotoEntity> photos;
+    
+    @ManyToOne
+    private CityEntity city;
 
+    /**
+     * @return
+     * @generated
+     */
     public String getCategory() {
         return category;
     }
 
+    /**
+     * @param category
+     * @generated
+     */
     public void setCategory(String category) {
         this.category = category;
     }
     
     /**
+     * @return
      * @generated
      */
     public Long getId(){
@@ -70,6 +89,7 @@ public class ProductEntity implements Serializable {
     }
 
     /**
+     * @param id
      * @generated
      */
     public void setId(Long id){
@@ -77,6 +97,7 @@ public class ProductEntity implements Serializable {
     }
 
     /**
+     * @return
      * @generated
      */
     public String getName(){
@@ -84,6 +105,7 @@ public class ProductEntity implements Serializable {
     }
 
     /**
+     * @param name
      * @generated
      */
     public void setName(String name){
@@ -91,6 +113,7 @@ public class ProductEntity implements Serializable {
     }
 
     /**
+     * @return
      * @generated
      */
     public Integer getPrice(){
@@ -98,21 +121,31 @@ public class ProductEntity implements Serializable {
     }
 
     /**
+     * @param price
      * @generated
      */
     public void setPrice(Integer price){
         this.price = price;
     }
 
+    /**
+     * @return
+     * @generated
+     */
     public Integer getDiscount() {
         return discount;
     }
 
+    /**
+     * @param discount
+     * @generated
+     */
     public void setDiscount(Integer discount) {
         this.discount = discount;
     }
 
     /**
+     * @return
      * @generated
      */
     public CellPhoneEntity getCellPhone() {
@@ -120,19 +153,59 @@ public class ProductEntity implements Serializable {
     }
 
     /**
+     * @param cellphone
      * @generated
      */
     public void setCellPhone(CellPhoneEntity cellphone) {
         this.cellPhone = cellphone;
     }
-
+    
+    /**
+     * @return
+     * @generated
+     */
     public ProviderEntity getProvider() {
         return provider;
     }
 
+    /**
+     * @param provider
+     * @generated
+     */
     public void setProvider(ProviderEntity provider) {
         this.provider = provider;
     }
-
+    
+    /**
+     * @return
+     * @generated
+     */
+    public List<PhotoEntity> getPhotos() {
+        return photos;
+    }
+    
+    /**
+     * @param photos
+     * @generated
+     */
+    public void setPhotos(List<PhotoEntity> photos) {
+        this.photos = photos;
+    }
+    
+    /**
+     * @return
+     * @generated
+     */
+    public CityEntity getCity() {
+        return city;
+    }
+    
+    /**
+     * @param city
+     * @generated
+     */
+    public void setCity(CityEntity city) {
+        this.city = city;
+    }
 
 }

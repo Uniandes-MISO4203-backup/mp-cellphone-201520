@@ -31,7 +31,6 @@ public abstract class CellPhoneConverter {
             dto.setImei(entity.getImei());
             dto.setBrand(entity.getBrand());
             dto.setImage(entity.getImage());
-            dto.setPhotos(PhotoConverter.listEntity2DTO(entity.getPhotos()));
 
             return dto;
         } else {
@@ -70,7 +69,6 @@ public abstract class CellPhoneConverter {
             dto.setImei(entity.getImei());
             dto.setBrand(entity.getBrand());
             dto.setImage(entity.getImage());
-            dto.setPhotos(PhotoConverter.listEntity2DTO(entity.getPhotos()));
 
             return dto;
         } else {
@@ -93,7 +91,6 @@ public abstract class CellPhoneConverter {
             entity.setImei(dto.getImei());
             entity.setBrand(dto.getBrand());
             entity.setImage(dto.getImage());
-            entity.setPhotos(PhotoConverter.listDTO2Entity(dto.getPhotos()));
 
             return entity;
         } else {

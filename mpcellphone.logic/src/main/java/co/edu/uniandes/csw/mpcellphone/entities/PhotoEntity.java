@@ -26,7 +26,7 @@ public class PhotoEntity  implements Serializable {
 
     
     @ManyToOne
-    private CellPhoneEntity cellPhone;
+    private ProductEntity product;
     /**
      * @return 
      * @generated
@@ -79,16 +79,16 @@ public class PhotoEntity  implements Serializable {
      * @return 
      * @generated
      */
-    public CellPhoneEntity getCellPhone() {
-        return cellPhone;
+    public ProductEntity getProduct() {
+        return product;
     }
 
     /**
-     * @param cellPhone
+     * @param product
      * @generated
      */
-    public void setCellPhone(CellPhoneEntity cellPhone) {
-        this.cellPhone = cellPhone;
+    public void setProduct(ProductEntity product) {
+        this.product = product;
     }
     
     

@@ -13,7 +13,7 @@ public class PhotoDTO {
 
     private Long id;
     private String name;
-    private CellPhoneDTO cellPhone;
+    private ProductDTO product;
 
     /**
      * @return 
@@ -51,16 +51,16 @@ public class PhotoDTO {
      * @return 
      * @generated
      */
-    public CellPhoneDTO getCellPhone() {
-        return cellPhone;
+    public ProductDTO getProduct() {
+        return product;
     }
     
     /**
-     * @param cellPhone
+     * @param product
      * @generated
      */
-    public void setCellPhone(CellPhoneDTO cellPhone) {
-        this.cellPhone = cellPhone;
+    public void setProduct(ProductDTO product) {
+        this.product = product;
     }
     
     
