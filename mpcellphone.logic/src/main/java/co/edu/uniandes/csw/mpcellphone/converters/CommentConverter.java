@@ -81,7 +81,7 @@ public abstract class CommentConverter {
             CommentEntity entity = new CommentEntity();
             entity.setId(dto.getId());
             entity.setComment(dto.getComment());
-            dto.setDate(entity.getDate());
+            entity.setDate(dto.getDate());
             entity.setClient_id(dto.getClient_id());
             entity.setProduct_id(dto.getProduct_id());
 

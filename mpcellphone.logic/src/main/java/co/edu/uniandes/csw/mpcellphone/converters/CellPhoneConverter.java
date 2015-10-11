@@ -31,6 +31,7 @@ public abstract class CellPhoneConverter {
             dto.setImei(entity.getImei());
             dto.setBrand(entity.getBrand());
             dto.setImage(entity.getImage());
+            dto.setPhotos(PhotoConverter.listEntity2DTO(entity.getPhotos()));
 
             return dto;
         } else {
@@ -55,6 +56,8 @@ public abstract class CellPhoneConverter {
     }
 
     /**
+     * @param entity
+     * @return 
      * @generated
      */
     private static CellPhoneDTO basicEntity2DTO(CellPhoneEntity entity) {
@@ -67,6 +70,7 @@ public abstract class CellPhoneConverter {
             dto.setImei(entity.getImei());
             dto.setBrand(entity.getBrand());
             dto.setImage(entity.getImage());
+            dto.setPhotos(PhotoConverter.listEntity2DTO(entity.getPhotos()));
 
             return dto;
         } else {
@@ -75,6 +79,8 @@ public abstract class CellPhoneConverter {
     }
 
     /**
+     * @param dto
+     * @return 
      * @generated
      */
     private static CellPhoneEntity basicDTO2Entity(CellPhoneDTO dto) {
@@ -87,6 +93,7 @@ public abstract class CellPhoneConverter {
             entity.setImei(dto.getImei());
             entity.setBrand(dto.getBrand());
             entity.setImage(dto.getImage());
+            entity.setPhotos(PhotoConverter.listDTO2Entity(dto.getPhotos()));
 
             return entity;
         } else {
@@ -95,6 +102,8 @@ public abstract class CellPhoneConverter {
     }
 
     /**
+     * @param entity 
+     * @return 
      * @generated
      */
     public static CellPhoneDTO fullEntity2DTO(CellPhoneEntity entity) {
@@ -107,6 +116,8 @@ public abstract class CellPhoneConverter {
     }
 
     /**
+     * @param dto 
+     * @return
      * @generated
      */
     public static CellPhoneEntity fullDTO2Entity(CellPhoneDTO dto) {
@@ -119,9 +130,10 @@ public abstract class CellPhoneConverter {
     }
 
     /**
+     * @param entities 
+     * @return 
      * @generated
      */
-
     public static List<CellPhoneDTO> listEntity2DTO(List<CellPhoneEntity> entities) {
         List<CellPhoneDTO> dtos = new ArrayList<CellPhoneDTO>();
         if (entities != null) {
@@ -133,6 +145,8 @@ public abstract class CellPhoneConverter {
     }
 
     /**
+     * @param dtos
+     * @return
      * @generated
      */
     public static List<CellPhoneEntity> listDTO2Entity(List<CellPhoneDTO> dtos) {
@@ -144,7 +158,14 @@ public abstract class CellPhoneConverter {
         }
         return entities;
     }
-    //Para convertir de lista de String a Lista DTO
+    
+    
+    /**
+     * @param Models
+     * @return
+     * Para convertir de lista de String a Lista DTO
+     * 
+     */
     public static List<CellPhoneDTO> listString2DTO(List<String> Models) {
         List<CellPhoneDTO> dtos = new ArrayList<CellPhoneDTO>();
         if (Models != null) {
