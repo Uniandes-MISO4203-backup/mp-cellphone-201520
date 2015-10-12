@@ -5,8 +5,9 @@
     var ProducSelComment = 0; //Para guardar el item que se est� haciendo el comentario..
 
 
-    mod.controller('productCtrl', ['CrudCreator', '$scope', 'productService', 'productModel', 'cartItemService', '$location', 'authService', 'adminService',
-        function (CrudCreator, $scope, svc, model, cartItemSvc, $location, authSvc, adminService) {
+    mod.controller('productCtrl', 
+        ['CrudCreator', '$scope', 'productService', 'productModel', 'cartItemService', '$location', 'authService', 'adminService','$filter',
+        function (CrudCreator, $scope, svc, model, cartItemSvc, $location, authSvc, adminService,$filter) {
 
             CrudCreator.extendController(this, svc, $scope, model, 'product', 'Products');
             this.searchByName = function (cellPhoneName) {
@@ -161,10 +162,37 @@
                         return true;
                     }
                 }];
+            //Para la información adicional del producto
+            this.prodductInfoActions = [
+                {
+                    name: 'productInfo',
+                    class: 'warning', 
+                    fn: function (record){
+                        var price = $filter('currency')(record.price);
+                        var discount = $filter('number')(record.discount,1);
+                        $('#productInfo').modal('show');
+                        $("#image").html("<img src='"+record.cellPhone.image+"' width='100%'>");
+                        $("#image").html("<img src='"+record.cellPhone.image+"' width='100%'>");
+                        $("#info").html("<p><strong>Cellphone:</strong>"+record.cellPhone.name+"</p>"+
+                                "<p><strong>Price:</strong>"+price+"</p>"+
+                                "<p><strong>Discount:</strong>"+discount+" %</p>"+
+                                "<p><strong>Provider:</strong>"+record.provider.name+"</p>");
+                        var text = "";
+                        if(record.photos.length > 0){
+                            for (var i = 0; i < record.photos.length; i++){
+                                text += "<li><img src='"+record.photos[i].image+"' alt='"+record.photos[i].image+"' style='max-width: 100%; vertical-align: middle;'/></li>";
+                            }
+                        }
+                        $("#slider-ul").html(text);
+                    },
+                    show: function () {
+                        return true;
+                    }
+                }];
             //Para los comentarios por producto...
             this.commentActions = [
                 {
-                    name: 'commet',
+                    name: 'comment',
                     displayName: 'Comment',
                     icon: 'comment',
                     class: 'warning',

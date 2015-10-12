@@ -20,6 +20,7 @@ public class ShipDTO {
     private String city;
     private String address;
     private Long stimatedTime;
+    private ShippingTypeDTO shipType;
 
     public Long getId() {
         return id;
@@ -68,7 +69,13 @@ public class ShipDTO {
     public void setStimatedTime(Long stimatedTime) {
         this.stimatedTime = stimatedTime;
     }
-    
-    
+
+    public ShippingTypeDTO getShipType() {
+        return shipType;
+    }
+
+    public void setShipType(ShippingTypeDTO shipType) {
+        this.shipType = shipType;
+    }
 
 }

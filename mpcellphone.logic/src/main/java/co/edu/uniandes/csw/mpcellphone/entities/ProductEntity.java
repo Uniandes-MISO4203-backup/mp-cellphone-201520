@@ -62,6 +62,8 @@ public class ProductEntity implements Serializable {
     
     private String category;
     
+    private String productState;
+    
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PhotoEntity> photos;
     
@@ -219,7 +221,6 @@ public class ProductEntity implements Serializable {
     public void setCity(CityEntity city) {
         this.city = city;
     }
-
     public String getDescription() {
         return description;
     }
@@ -244,5 +245,19 @@ public class ProductEntity implements Serializable {
         this.imei = imei;
     }
 
-    
+    /**
+     * Get estado del producto
+     * @return 
+     */
+    public String getProductState() {
+        return productState;
+    }
+
+    /**
+     * Set estado del producto
+     * @param productState 
+     */
+    public void setProductState(String productState) {
+        this.productState = productState;
+    }
 }

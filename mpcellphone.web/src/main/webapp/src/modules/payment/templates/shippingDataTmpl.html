@@ -8,37 +8,47 @@
                     <input class="form-control" type="text" id="state" placeholder="State" ng-model="shipping.state" ng-required>
                 </div>
             </div>
-            
+
             <div class="form-group">
                 <label class="col-lg-2 control-label" for="country">Country</label>
                 <div class="col-lg-10">
                     <input class="form-control" type="text" id="country" placeholder="Country" ng-model="shipping.country">
                 </div>
             </div>
-            
+
             <div class="form-group">
                 <label class="col-lg-2 control-label" for="city">City</label>
                 <div class="col-lg-10">
                     <input class="form-control" type="text" id="city" placeholder="City" ng-model="shipping.city">
                 </div>
             </div>
-            
+
             <div class="form-group">
                 <label class="col-lg-2 control-label" for="address">Address</label>
                 <div class="col-lg-10">
                     <input class="form-control" type="text" id="address" placeholder="Address" ng-model="shipping.address">
                 </div>
             </div>
-            
+
+            <div class="form-group">
+                <label class="col-lg-2 control-label" for="creditCard">Shipping Type</label>
+                <div class="col-lg-10">
+                    <select class="form-control" ng-model="shipping.shippingTypeHolders">
+                        <option>Select a Shipping Type</option>
+                        <option ng-repeat="ship in shippingTypeHolders" value="{{ship.id}}">{{ship.name}}</option>
+                    </select>
+                </div>
+            </div>
+
             <div class="form-group">
                 <label class="col-lg-10 col-lg-offset-2">Estimated shipping time: {{shipping.time}} </label>
             </div>
-            
+
             <div class="form-group">
-              <div class="col-lg-10 col-lg-offset-2">
-                <button type="reset" class="btn btn-default">Clean Data</button>
-                <button type="submit" class="btn btn-primary" ng-click="submitShippingData()">Next</button>
-              </div>
+                <div class="col-lg-10 col-lg-offset-2">
+                    <button type="reset" class="btn btn-default">Clean Data</button>
+                    <button type="submit" class="btn btn-primary" ng-click="submitShippingData()">Next</button>
+                </div>
             </div>
         </fieldset>
     </form>

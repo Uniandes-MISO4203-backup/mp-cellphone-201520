@@ -5,18 +5,20 @@
  */
 package co.edu.uniandes.csw.mpcellphone.converters;
 
-import co.edu.uniandes.csw.mpcellphone.dtos.PhotoDTO;
-import co.edu.uniandes.csw.mpcellphone.entities.PhotoEntity;
+import co.edu.uniandes.csw.mpcellphone.dtos.ShippingTypeDTO;
+import co.edu.uniandes.csw.mpcellphone.entities.ShippingTypeEntity;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
- * @author m.amaya11
+ * Converter para los tipos de envio
+ * @author Cindy
  */
-public abstract class PhotoConverter {
-
-    private PhotoConverter() {
+public class ShippingTypeConverter {
+    /**
+     * Constructor del converter
+     */
+    private ShippingTypeConverter() {
     }
 
     /**
@@ -24,13 +26,12 @@ public abstract class PhotoConverter {
      * @return
      * @generated
      */
-    public static PhotoDTO refEntity2DTO(PhotoEntity entity) {
+    public static ShippingTypeDTO refEntity2DTO(ShippingTypeEntity entity) {
         if (entity != null) {
-            PhotoDTO dto = new PhotoDTO();
+            ShippingTypeDTO dto = new ShippingTypeDTO();
             dto.setId(entity.getId());
             dto.setName(entity.getName());
-            dto.setImage(entity.getImage());
-            dto.setProduct(ProductConverter.refEntity2DTO(entity.getProduct()));
+            dto.setValueType(entity.getValueType());
 
             return dto;
         } else {
@@ -43,9 +44,9 @@ public abstract class PhotoConverter {
      * @return
      * @generated
      */
-    public static PhotoDTO refDTO2Entity(PhotoDTO dto) {
+    public static ShippingTypeEntity refDTO2Entity(ShippingTypeDTO dto) {
         if (dto != null) {
-            PhotoDTO entity = new PhotoDTO();
+            ShippingTypeEntity entity = new ShippingTypeEntity();
             entity.setId(dto.getId());
 
             return entity;
@@ -56,15 +57,14 @@ public abstract class PhotoConverter {
 
     /**
      * @param entity
-     * @generated
-     * @return
+     * @return 
      */
-    private static PhotoDTO basicEntity2DTO(PhotoEntity entity) {
+    private static ShippingTypeDTO basicEntity2DTO(ShippingTypeEntity entity) {
         if (entity != null) {
-            PhotoDTO dto = new PhotoDTO();
+            ShippingTypeDTO dto = new ShippingTypeDTO();
             dto.setId(entity.getId());
             dto.setName(entity.getName());
-            dto.setImage(entity.getImage());
+            dto.setValueType(entity.getValueType());
 
             return dto;
         } else {
@@ -74,16 +74,14 @@ public abstract class PhotoConverter {
 
     /**
      * @param dto
-     * @generated
-     * @return
+     * @return 
      */
-    private static PhotoEntity basicDTO2Entity(PhotoDTO dto) {
+    private static ShippingTypeEntity basicDTO2Entity(ShippingTypeDTO dto) {
         if (dto != null) {
-            PhotoEntity entity = new PhotoEntity();
+            ShippingTypeEntity entity = new ShippingTypeEntity();
             entity.setId(dto.getId());
             entity.setName(dto.getName());
-            entity.setImage(dto.getImage());
-            entity.setProduct(ProductConverter.refDTO2Entity(dto.getProduct()));
+            entity.setValueType(dto.getValueType());
 
             return entity;
         } else {
@@ -93,12 +91,11 @@ public abstract class PhotoConverter {
 
     /**
      * @param entity
-     * @return
-     * @generated
+     * @return 
      */
-    public static PhotoDTO fullEntity2DTO(PhotoEntity entity) {
+    public static ShippingTypeDTO fullEntity2DTO(ShippingTypeEntity entity) {
         if (entity != null) {
-            PhotoDTO dto = basicEntity2DTO(entity);
+            ShippingTypeDTO dto = basicEntity2DTO(entity);
             return dto;
         } else {
             return null;
@@ -107,12 +104,11 @@ public abstract class PhotoConverter {
 
     /**
      * @param dto
-     * @return
-     * @generated
+     * @return 
      */
-    public static PhotoEntity fullDTO2Entity(PhotoDTO dto) {
+    public static ShippingTypeEntity fullDTO2Entity(ShippingTypeDTO dto) {
         if (dto != null) {
-            PhotoEntity entity = basicDTO2Entity(dto);
+            ShippingTypeEntity entity = basicDTO2Entity(dto);
             return entity;
         } else {
             return null;
@@ -121,13 +117,12 @@ public abstract class PhotoConverter {
 
     /**
      * @param entities
-     * @return
-     * @generated
+     * @return 
      */
-    public static List<PhotoDTO> listEntity2DTO(List<PhotoEntity> entities) {
-        List<PhotoDTO> dtos = new ArrayList<PhotoDTO>();
+    public static List<ShippingTypeDTO> listEntity2DTO(List<ShippingTypeEntity> entities) {
+        List<ShippingTypeDTO> dtos = new ArrayList<ShippingTypeDTO>();
         if (entities != null) {
-            for (PhotoEntity entity : entities) {
+            for (ShippingTypeEntity entity : entities) {
                 dtos.add(basicEntity2DTO(entity));
             }
         }
@@ -136,17 +131,15 @@ public abstract class PhotoConverter {
 
     /**
      * @param dtos
-     * @return
-     * @generated
+     * @return 
      */
-    public static List<PhotoEntity> listDTO2Entity(List<PhotoDTO> dtos) {
-        List<PhotoEntity> entities = new ArrayList<PhotoEntity>();
+    public static List<ShippingTypeEntity> listDTO2Entity(List<ShippingTypeDTO> dtos) {
+        List<ShippingTypeEntity> entities = new ArrayList<ShippingTypeEntity>();
         if (dtos != null) {
-            for (PhotoDTO dto : dtos) {
+            for (ShippingTypeDTO dto : dtos) {
                 entities.add(basicDTO2Entity(dto));
             }
         }
         return entities;
     }
-
 }
