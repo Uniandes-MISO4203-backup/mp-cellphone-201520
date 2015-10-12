@@ -29,6 +29,7 @@ public abstract class PhotoConverter {
             PhotoDTO dto = new PhotoDTO();
             dto.setId(entity.getId());
             dto.setName(entity.getName());
+            dto.setImage(entity.getImage());
             dto.setProduct(ProductConverter.refEntity2DTO(entity.getProduct()));
 
             return dto;
@@ -63,7 +64,7 @@ public abstract class PhotoConverter {
             PhotoDTO dto = new PhotoDTO();
             dto.setId(entity.getId());
             dto.setName(entity.getName());
-            dto.setProduct(ProductConverter.refEntity2DTO(entity.getProduct()));
+            dto.setImage(entity.getImage());
 
             return dto;
         } else {
@@ -81,6 +82,7 @@ public abstract class PhotoConverter {
             PhotoEntity entity = new PhotoEntity();
             entity.setId(dto.getId());
             entity.setName(dto.getName());
+            entity.setImage(dto.getImage());
             entity.setProduct(ProductConverter.refDTO2Entity(dto.getProduct()));
 
             return entity;

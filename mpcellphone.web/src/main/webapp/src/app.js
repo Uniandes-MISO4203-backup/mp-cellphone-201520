@@ -10,25 +10,25 @@
         'ngRoute',
         'ngCrud',
         'xeditable',
-        'paymentModule', 
+        'paymentModule',
         'adminModule'
     ]);
 
     mainApp.config(['$routeProvider', 'CrudTemplateURL', 'CrudCtrlAlias', function ($routeProvider, tplUrl, alias) {
             $routeProvider
-            .when('/cellPhone', {
-                //templateUrl: 'src/modules/cellPhone/cellphoneTmpl.html', //tplUrl, Se cambiar tplUrl por la nueva plantilla
-                templateUrl: tplUrl,
-                controller: 'cellPhoneCtrl', 
-                controllerAs: alias
-            })
-            .when('/client', {
-                templateUrl: tplUrl,
-                controller: 'clientCtrl',
-                controllerAs: alias
-            }).when('/products', {
+                    .when('/cellPhone', {
+                        //templateUrl: 'src/modules/cellPhone/cellphoneTmpl.html', //tplUrl, Se cambiar tplUrl por la nueva plantilla
+                        templateUrl: tplUrl,
+                        controller: 'cellPhoneCtrl',
+                        controllerAs: alias
+                    })
+                    .when('/client', {
+                        templateUrl: tplUrl,
+                        controller: 'clientCtrl',
+                        controllerAs: alias
+                    }).when('/products', {
                 templateUrl: tplUrl, //
-                controller: 'productsCtrl', 
+                controller: 'productsCtrl',
                 controllerAs: alias
             }).when('/provider', {
                 templateUrl: tplUrl,

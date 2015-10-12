@@ -2,11 +2,12 @@
 (function (ng) {
     var mod = ng.module('productModule');
     var maximoCaracteres = 255;
-    var ProducSelComment = 0; //Para guardar el item que se está haciendo el comentario..
+    var ProducSelComment = 0; //Para guardar el item que se estï¿½ haciendo el comentario..
 
 
-    mod.controller('productCtrl', ['CrudCreator', '$scope', 'productService', 'productModel', 'cartItemService', '$location', 'authService', 'adminService',
-        function (CrudCreator, $scope, svc, model, cartItemSvc, $location, authSvc, adminService) {
+    mod.controller('productCtrl', 
+        ['CrudCreator', '$scope', 'productService', 'productModel', 'cartItemService', '$location', 'authService', 'adminService','$filter',
+        function (CrudCreator, $scope, svc, model, cartItemSvc, $location, authSvc, adminService,$filter) {
 
             CrudCreator.extendController(this, svc, $scope, model, 'product', 'Products');
             this.searchByName = function (cellPhoneName) {
@@ -161,10 +162,37 @@
                         return true;
                     }
                 }];
+            //Para la informaciÃ³n adicional del producto
+            this.prodductInfoActions = [
+                {
+                    name: 'productInfo',
+                    class: 'warning', 
+                    fn: function (record){
+                        var price = $filter('currency')(record.price);
+                        var discount = $filter('number')(record.discount,1);
+                        $('#productInfo').modal('show');
+                        $("#image").html("<img src='"+record.cellPhone.image+"' width='100%'>");
+                        $("#image").html("<img src='"+record.cellPhone.image+"' width='100%'>");
+                        $("#info").html("<p><strong>Cellphone:</strong>"+record.cellPhone.name+"</p>"+
+                                "<p><strong>Price:</strong>"+price+"</p>"+
+                                "<p><strong>Discount:</strong>"+discount+" %</p>"+
+                                "<p><strong>Provider:</strong>"+record.provider.name+"</p>");
+                        var text = "";
+                        if(record.photos.length > 0){
+                            for (var i = 0; i < record.photos.length; i++){
+                                text += "<li><img src='"+record.photos[i].image+"' alt='"+record.photos[i].image+"' style='max-width: 100%; vertical-align: middle;'/></li>";
+                            }
+                        }
+                        $("#slider-ul").html(text);
+                    },
+                    show: function () {
+                        return true;
+                    }
+                }];
             //Para los comentarios por producto...
             this.commentActions = [
                 {
-                    name: 'commet',
+                    name: 'comment',
                     displayName: 'Comment',
                     icon: 'comment',
                     class: 'warning',
@@ -237,7 +265,7 @@
                         return true;
                     }
                 }];
-            //Para limitar el número de carácteres...
+            //Para limitar el nï¿½mero de carï¿½cteres...
             this.keyActions = [{
                     fn: function ()
                     {
@@ -367,7 +395,7 @@
                 var existe = false;
                 for (var i = 0; i < data.length; i++)
                 {
-                    //Saber que el proveedor no esté ya relacionado...
+                    //Saber que el proveedor no estï¿½ ya relacionado...
                     existe = false;
                     for (var c = 0; c < groups.length; c++)
                     {

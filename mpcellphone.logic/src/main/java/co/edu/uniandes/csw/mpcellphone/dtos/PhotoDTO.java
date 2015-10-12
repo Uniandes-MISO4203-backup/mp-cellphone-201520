@@ -13,6 +13,7 @@ public class PhotoDTO {
 
     private Long id;
     private String name;
+    private String image;
     private ProductDTO product;
 
     /**
@@ -62,6 +63,24 @@ public class PhotoDTO {
     public void setProduct(ProductDTO product) {
         this.product = product;
     }
+    
+   /**
+     * @return 
+     * @generated
+     */
+    public String getImage() {
+        return image;
+    }
+
+    /**
+     * @param image
+     * @generated
+     */
+    public void setImage(String image) {
+        this.image = image;
+    }
+    
+    
     
     
 }
