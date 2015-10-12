@@ -127,4 +127,26 @@ public abstract class UserConverter {
         return entities;
     }
 
+    public static UserDTO fullEntity2DTO(UserEntity entity) {
+        if (entity != null) {
+            UserDTO dto = basicEntity2DTO(entity);
+            return dto;
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * @param dto
+     * @return 
+     * @generated
+     */
+    public static UserEntity fullDTO2Entity(UserDTO dto) {
+        if (dto != null) {
+            UserEntity entity = basicDTO2Entity(dto);
+            return entity;
+        } else {
+            return null;
+        }
+    }
 }

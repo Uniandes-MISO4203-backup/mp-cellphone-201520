@@ -49,9 +49,9 @@ public class UserLogic implements IUserLogic{
      */
     @Override
     public UserDTO createUser(UserDTO dto) {
-        UserEntity entity = UserConverter.refDTO2Entity(dto);
+        UserEntity entity = UserConverter.fullDTO2Entity(dto);
         persistence.create(entity);
-        return UserConverter.refEntity2DTO(entity);
+        return UserConverter.fullEntity2DTO(entity);
     }
 }
 
