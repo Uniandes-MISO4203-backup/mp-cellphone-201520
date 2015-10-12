@@ -17,6 +17,7 @@ public class ProductDTO {
     private ProviderDTO provider;
     private String category;
     private List<PhotoDTO> photos;
+    private String productState;
 
     /**
      * @return 
@@ -145,6 +146,23 @@ public class ProductDTO {
     public void setPhotos(List<PhotoDTO> photos) {
         this.photos = photos;
     }
+
+    /**
+     * Get estado del producto
+     * @return 
+     */
+    public String getProductState() {
+        return productState;
+    }
+
+    /**
+     * Set estado del producto
+     * @param productState 
+     */
+    public void setProductState(String productState) {
+        this.productState = productState;
+    }
+    
     
 
 }

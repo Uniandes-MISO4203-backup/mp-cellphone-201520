@@ -33,6 +33,7 @@ public abstract class ProductConverter {
             dto.setProvider(ProviderConverter.refEntity2DTO(entity.getProvider()));
             dto.setCategory(entity.getCategory());
             dto.setPhotos(PhotoConverter.listEntity2DTO(entity.getPhotos()));
+            dto.setProductState(entity.getProductState());
             
             return dto;
         } else {
@@ -72,6 +73,7 @@ public abstract class ProductConverter {
             dto.setProvider(ProviderConverter.refEntity2DTO(entity.getProvider()));
             dto.setCategory(entity.getCategory());
             dto.setPhotos(PhotoConverter.listEntity2DTO(entity.getPhotos()));
+            dto.setProductState(entity.getProductState());
 
             return dto;
         } else {
@@ -95,6 +97,7 @@ public abstract class ProductConverter {
             entity.setProvider(ProviderConverter.refDTO2Entity(dto.getProvider()));
             entity.setCategory(dto.getCategory());
             entity.setPhotos(PhotoConverter.listDTO2Entity(dto.getPhotos()));
+            entity.setProductState(dto.getProductState());
 
             return entity;
         } else {
