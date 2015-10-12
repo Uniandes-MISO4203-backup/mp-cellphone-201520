@@ -2,7 +2,7 @@
 (function (ng) {
     var mod = ng.module('productModule');
     var maximoCaracteres = 255;
-    var ProducSelComment = 0; //Para guardar el item que se está haciendo el comentario..
+    var ProducSelComment = 0; //Para guardar el item que se estï¿½ haciendo el comentario..
 
 
     mod.controller('productCtrl', ['CrudCreator', '$scope', 'productService', 'productModel', 'cartItemService', '$location', 'authService', 'adminService',
@@ -147,11 +147,11 @@
                     icon: 'shopping-cart',
                     class: 'primary',
                     fn: function (record) {
-                        $("#notiShopping").html("Se ha agregado " + record.cellPhone.name + ", a tu carrito de compras.").fadeIn("fast").delay(2000).fadeOut(300);
+                        $("#notiShopping").html("Se ha agregado " + record.name + ", a tu carrito de compras.").fadeIn("fast").delay(2000).fadeOut(300);
                         if (authSvc.getCurrentUser()) {
                             return cartItemSvc.addItem({
                                 product: record,
-                                name: record.cellPhone.name,
+                                name: record.name,
                                 quantity: 1});
                         } else {
                             $location.path('/login');
@@ -174,7 +174,7 @@
                         if (authSvc.getCurrentUser())
                         {
                             ProducSelComment = record;
-                            $('#titleProduct').html("Comments: Cellphone - " + record.cellPhone.name);
+                            $('#titleProduct').html("Comments: Cellphone - " + record.name);
                             $("#comment").val("").attr("placeholder", authSvc.getCurrentUser().name + " Says: ");
                             $("#cantidad").html("<center>" + maximoCaracteres + "</center>");
                             $('#myModal').modal('show').on('shown.bs.modal', function ()
@@ -225,7 +225,7 @@
                             ProducSelComment = record;
                             $('#modalQuestion').modal('show');
                             $('#nameUserQuestion').html("<center><b>" + authSvc.getCurrentUser().name + " Says:</b></center><br>");
-                            $('#titleProductQuestion').html("Cellphone: " + record.cellPhone.name);
+                            $('#titleProductQuestion').html("Cellphone: " + record.name);
                             $("#question").val("");
                         }
                         else
@@ -237,7 +237,7 @@
                         return true;
                     }
                 }];
-            //Para limitar el número de carácteres...
+            //Para limitar el nï¿½mero de carï¿½cteres...
             this.keyActions = [{
                     fn: function ()
                     {
@@ -325,7 +325,7 @@
             ]
             var findItem = function (record)
             {
-                svc.findItem(record.cellPhone.id).then(function (cellPhone) {
+                svc.findItem(record.id).then(function (cellPhone) {
                     $scope.records = [];
                     $scope.records.push(cellPhone);
                     console.log(cellPhone);
@@ -367,7 +367,7 @@
                 var existe = false;
                 for (var i = 0; i < data.length; i++)
                 {
-                    //Saber que el proveedor no esté ya relacionado...
+                    //Saber que el proveedor no estï¿½ ya relacionado...
                     existe = false;
                     for (var c = 0; c < groups.length; c++)
                     {

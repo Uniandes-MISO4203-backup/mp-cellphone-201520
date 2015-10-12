@@ -32,7 +32,11 @@ public abstract class ProductConverter {
             dto.setCellPhone(CellPhoneConverter.refEntity2DTO(entity.getCellPhone()));
             dto.setProvider(ProviderConverter.refEntity2DTO(entity.getProvider()));
             dto.setCategory(entity.getCategory());
-            dto.setPhotos(PhotoConverter.listEntity2DTO(entity.getPhotos()));
+            //dto.setPhotos(PhotoConverter.listEntity2DTO(entity.getPhotos()));
+            
+            dto.setDescription(entity.getDescription());
+            dto.setImage(entity.getImage());
+            dto.setImei(entity.getImei());
             
             return dto;
         } else {
@@ -72,6 +76,10 @@ public abstract class ProductConverter {
             dto.setProvider(ProviderConverter.refEntity2DTO(entity.getProvider()));
             dto.setCategory(entity.getCategory());
             dto.setPhotos(PhotoConverter.listEntity2DTO(entity.getPhotos()));
+            
+            dto.setDescription(entity.getDescription());
+            dto.setImage(entity.getImage());
+            dto.setImei(entity.getImei());
 
             return dto;
         } else {
@@ -95,6 +103,10 @@ public abstract class ProductConverter {
             entity.setProvider(ProviderConverter.refDTO2Entity(dto.getProvider()));
             entity.setCategory(dto.getCategory());
             entity.setPhotos(PhotoConverter.listDTO2Entity(dto.getPhotos()));
+            
+            entity.setDescription(dto.getDescription());
+            entity.setImage(dto.getImage());
+            entity.setImei(dto.getImei());
 
             return entity;
         } else {

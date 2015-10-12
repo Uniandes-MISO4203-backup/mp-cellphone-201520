@@ -60,6 +60,12 @@ public class ProductService {
     @POST
     @StatusCreated
     public ProductDTO createProduct(ProductDTO dto) {
+        dto.setProvider(provider);
+        if(dto.getCellPhone()==null){
+            
+            CellPhoneDTO cellDto = cellPhoneLogic.getCellPhone(151L);
+            dto.setCellPhone(cellDto);
+        }
         return productLogic.createProduct(dto);
     }
 
@@ -95,7 +101,10 @@ public class ProductService {
     @GET
     public List<ProductDTO> getProducts() {
         if (provider != null) {
-            return providerLogic.getProvider(provider.getId()).getProducts();
+            if (page != null && maxRecords != null) {
+                this.response.setIntHeader("X-Total-Count", productLogic.countProductsByProvider(provider.getId()));
+            }
+            return productLogic.getProductsByProvider(page, maxRecords,provider.getId());
         } else {
             if (cellPhoneName != null) {
                 return productLogic.getByCellPhoneName(cellPhoneName);

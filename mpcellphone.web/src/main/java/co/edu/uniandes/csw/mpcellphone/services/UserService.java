@@ -188,7 +188,7 @@ public class UserService {
                     newClient.setName(user.getUserName());
                     newClient.setUserId(acctClient.getHref());
                     newClient.setEmail(acctClient.getEmail());
-                    newClient = clientLogic.createClient(newClient);
+                    clientLogic.createClient(newClient);
                     rolC="client";
                     UserDTO userC = new UserDTO();
                     userC.setName(user.getName());
@@ -198,7 +198,7 @@ public class UserService {
                     userC.setUserName(acctClient.getFullName());
                     userC.setEmail(user.getEmail());
                     userC.setRememberMe(user.isRememberMe());
-                    userC = userLogic.createUser(userC);
+                    userLogic.createUser(userC);
                     break;
 
                 case "provider":
@@ -207,7 +207,7 @@ public class UserService {
                     newProvider.setName(user.getUserName());
                     newProvider.setUserId(acctProvider.getHref());
                     newProvider.setEmail(acctProvider.getEmail());
-                    newProvider = providerLogic.createProvider(newProvider);
+                    providerLogic.createProvider(newProvider);
                     rolC="provider";
                     UserDTO userP = new UserDTO();
                     userP.setName(user.getName());
@@ -217,7 +217,7 @@ public class UserService {
                     userP.setUserName(acctProvider.getFullName());
                     userP.setEmail(user.getEmail());
                     userP.setRememberMe(user.isRememberMe());
-                    userP = userLogic.createUser(userP);
+                    userLogic.createUser(userP);
                     break;  
                 //jdelchiaro -- 09/09/2015
                 case "admin":
@@ -226,7 +226,7 @@ public class UserService {
                     newAdmin.setName(user.getUserName());
                     //newAdmin.setUserId(acctAdmin.getHref());
                     newAdmin.setEmail(acctAdmin.getEmail());
-                    newAdmin = adminLogic.createAdmin(newAdmin);                    
+                    adminLogic.createAdmin(newAdmin);                    
                     rolC="admin";
                     UserDTO userA = new UserDTO();
                     userA.setName(user.getName());
@@ -236,7 +236,7 @@ public class UserService {
                     userA.setUserName(acctAdmin.getFullName());
                     userA.setEmail(user.getEmail());
                     userA.setRememberMe(user.isRememberMe());
-                    userA = userLogic.createUser(userA);
+                    userLogic.createUser(userA);
                     break;
                 
             }

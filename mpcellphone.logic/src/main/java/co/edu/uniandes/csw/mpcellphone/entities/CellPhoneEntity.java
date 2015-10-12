@@ -13,7 +13,7 @@ import javax.persistence.NamedQuery;
 @Entity
 @NamedQueries({
     //Para Obtener la lista de Modelos, desarrollado por Miguel Olivares
-    @NamedQuery(name = "CellPhone.getCellPhoneModel", query = "select Distinct u.model from CellPhoneEntity u"),
+    @NamedQuery(name = "CellPhone.getCellPhoneModel", query = "select Distinct u.name from CellPhoneEntity u"),
     //Para Obtener la lista de Marcas, desarrollado por Miguel Olivares
     @NamedQuery(name = "CellPhone.getCellPhoneBrand", query = "select Distinct u.brand from CellPhoneEntity u"),
     
@@ -26,15 +26,8 @@ public class CellPhoneEntity implements Serializable {
 
     private String name;
 
-    private String description;
-
-    private String model;
-
-    private String imei;
-
     private String brand;
 
-    private String image;
 
     /**
      * @generated
@@ -49,63 +42,7 @@ public class CellPhoneEntity implements Serializable {
     public void setId(Long id){
         this.id = id;
     }
-
-    /**
-     * @generated
-     */
-    public String getName(){
-        return name;
-    }
-
-    /**
-     * @generated
-     */
-    public void setName(String name){
-        this.name = name;
-    }
-
-    /**
-     * @generated
-     */
-    public String getDescription(){
-        return description;
-    }
-
-    /**
-     * @generated
-     */
-    public void setDescription(String description){
-        this.description = description;
-    }
-
-    /**
-     * @generated
-     */
-    public String getModel(){
-        return model;
-    }
-
-    /**
-     * @generated
-     */
-    public void setModel(String model){
-        this.model = model;
-    }
-
-    /**
-     * @generated
-     */
-    public String getImei(){
-        return imei;
-    }
-
-    /**
-     * @generated
-     */
-    public void setImei(String imei){
-        this.imei = imei;
-    }
-
+    
     /**
      * @generated
      */
@@ -120,18 +57,13 @@ public class CellPhoneEntity implements Serializable {
         this.brand = brand;
     }
 
-    /**
-     * @generated
-     */
-    public String getImage(){
-        return image;
+    public String getName() {
+        return name;
     }
 
-    /**
-     * @generated
-     */
-    public void setImage(String image){
-        this.image = image;
+    public void setName(String name) {
+        this.name = name;
     }
 
+    
 }

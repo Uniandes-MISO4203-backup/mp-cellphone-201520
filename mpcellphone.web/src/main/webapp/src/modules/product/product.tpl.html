@@ -6,14 +6,14 @@
         <div ng-repeat="record in records" ng-show = "cheap(currentGroup, priceItem, record)">
             <div class="col-sm-4 well text-center">
                 <div class="col-md-12">
-                    <div class="img-thumbnail" id="cover" ng-if="record.cellPhone.image">
-                        <a ng-href="{{record.cellPhone.image}}" target="_blank">
-                            <img class="img-responsive" style="height: 20vw;" ng-src="{{record.cellPhone.image}}" alt="{{record.cellPhone.image}}">
+                    <div class="img-thumbnail" id="cover" ng-if="record.image">
+                        <a ng-href="{{record.image}}" target="_blank">
+                            <img class="img-responsive" style="height: 20vw;" ng-src="{{record.image}}" alt="{{record.image}}">
                         </a>
                     </div>
                 </div>
                 <div class="caption" >
-                    <p><strong>Cellphone:</strong> {{record.cellPhone.name}}</p>
+                    <p><strong>Cellphone:</strong> {{record.name}}</p>
                     <p><strong>Price:</strong> {{record.price | currency}}</p>
                     <p><strong>Discount</strong> {{record.discount | number:1}} %</p>
                     <p><strong>Provider:</strong> {{record.provider.name}}</p>
@@ -119,7 +119,7 @@
     </div>
 </div>
 
-<!-- Para búsqueda avanzada //-->
+<!-- Para bï¿½squeda avanzada //-->
 <div class="modal fade" id="myModalHorizontal" tabindex="-1" role="dialog" 
      aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">

@@ -103,11 +103,7 @@ public class CellPhoneLogicTest {
         for (int i = 0; i < 3; i++) {
             CellPhoneEntity entity = new CellPhoneEntity();
         	entity.setName(generateRandom(String.class));
-        	entity.setDescription(generateRandom(String.class));
-        	entity.setModel(generateRandom(String.class));
-        	entity.setImei(generateRandom(String.class));
         	entity.setBrand(generateRandom(String.class));
-        	entity.setImage(generateRandom(String.class));
             em.persist(entity);
             data.add(entity);
         }
@@ -120,24 +116,15 @@ public class CellPhoneLogicTest {
     public void createCellPhoneTest() {
         CellPhoneDTO dto = new CellPhoneDTO();
         dto.setName(generateRandom(String.class));
-        dto.setDescription(generateRandom(String.class));
-        dto.setModel(generateRandom(String.class));
-        dto.setImei(generateRandom(String.class));
         dto.setBrand(generateRandom(String.class));
-        dto.setImage(generateRandom(String.class));
 
         CellPhoneDTO result = cellPhoneLogic.createCellPhone(dto);
 
         Assert.assertNotNull(result);
 
         CellPhoneEntity entity = em.find(CellPhoneEntity.class, result.getId());
-
         Assert.assertEquals(dto.getName(), entity.getName());
-        Assert.assertEquals(dto.getDescription(), entity.getDescription());
-        Assert.assertEquals(dto.getModel(), entity.getModel());
-        Assert.assertEquals(dto.getImei(), entity.getImei());
         Assert.assertEquals(dto.getBrand(), entity.getBrand());
-        Assert.assertEquals(dto.getImage(), entity.getImage());
     }
 
     /**
@@ -167,11 +154,7 @@ public class CellPhoneLogicTest {
         CellPhoneDTO dto = cellPhoneLogic.getCellPhone(entity.getId());
         Assert.assertNotNull(dto);
         Assert.assertEquals(entity.getName(), dto.getName());
-        Assert.assertEquals(entity.getDescription(), dto.getDescription());
-        Assert.assertEquals(entity.getModel(), dto.getModel());
-        Assert.assertEquals(entity.getImei(), dto.getImei());
         Assert.assertEquals(entity.getBrand(), dto.getBrand());
-        Assert.assertEquals(entity.getImage(), dto.getImage());
     }
 
     /**
@@ -196,22 +179,14 @@ public class CellPhoneLogicTest {
 
         dto.setId(entity.getId());
         dto.setName(generateRandom(String.class));
-        dto.setDescription(generateRandom(String.class));
-        dto.setModel(generateRandom(String.class));
-        dto.setImei(generateRandom(String.class));
         dto.setBrand(generateRandom(String.class));
-        dto.setImage(generateRandom(String.class));
 
         cellPhoneLogic.updateCellPhone(dto);
 
         CellPhoneEntity resp = em.find(CellPhoneEntity.class, entity.getId());
 
         Assert.assertEquals(dto.getName(), resp.getName());
-        Assert.assertEquals(dto.getDescription(), resp.getDescription());
-        Assert.assertEquals(dto.getModel(), resp.getModel());
-        Assert.assertEquals(dto.getImei(), resp.getImei());
         Assert.assertEquals(dto.getBrand(), resp.getBrand());
-        Assert.assertEquals(dto.getImage(), resp.getImage());
     }
 
     /**
@@ -247,34 +222,5 @@ public class CellPhoneLogicTest {
             }
             Assert.assertTrue(found);
         }
-    }
-
-    /**
-     * @generated
-     */
-    @Test
-    public void findByName() {
-        String name = data.get(0).getName();
-        List<CellPhoneEntity> cache = new ArrayList<CellPhoneEntity>();
-        List<CellPhoneDTO> list = cellPhoneLogic.findByName(name);
-
-        for (CellPhoneEntity entity : data) {
-            if (entity.getName().equals(name)) {
-                cache.add(entity);
-            }
-        }
-        Assert.assertEquals(cache.size(), list.size());
-        for (CellPhoneDTO dto : list) {
-            boolean found = false;
-            for (CellPhoneEntity cacheEntity : cache) {
-                if (cacheEntity.getName().equals(dto.getName())) {
-                    found = true;
-                    break;
-                }
-            }
-            if (!found) {
-                Assert.fail();
-            }
-        }
-    }
+    }    
 }

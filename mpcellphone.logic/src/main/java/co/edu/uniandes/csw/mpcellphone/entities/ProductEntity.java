@@ -16,11 +16,11 @@ import javax.persistence.OneToMany;
  */
 @Entity
 @NamedQueries({
-    @NamedQuery(name = "Product.getByCellPhoneName", query = "select u from ProductEntity u WHERE UPPER(u.cellPhone.name) like :name"),
+    @NamedQuery(name = "Product.getByCellPhoneName", query = "select u from ProductEntity u WHERE UPPER(u.name) like :name"),
     @NamedQuery(name = "Product.getCheaperProduct", query = "select u from ProductEntity u WHERE u.cellPhone.id = :idProvider order by u.price"),
     @NamedQuery(name = "Product.getCheaperProvider", query = "select u from ProductEntity u WHERE u.provider.id = :idCellPhone order by u.price"),
     //Query para Obtener la lista de productos de un Modelo Especifico desarrollado por Miguel Olivares
-    @NamedQuery(name = "Product.getByModel", query = "select u from ProductEntity u WHere u.cellPhone.model = :model"),
+    @NamedQuery(name = "Product.getByModel", query = "select u from ProductEntity u WHere u.cellPhone.name = :model"),
     //Query para Obtener la lista de productos de una Marca Especifico desarrollado por Miguel Olivares
     @NamedQuery(name = "Product.getByBrand", query = "select u from ProductEntity u WHere u.cellPhone.brand = :brand"),
     //Query para Obtener la lista de productos de un Proveedor Especifico desarrollado por Miguel Olivares
@@ -34,8 +34,12 @@ import javax.persistence.OneToMany;
     //Query para Obtener la lista de productos por categoria desarrollado por Miguel Olivares
     @NamedQuery(name = "Product.getByCategory", query = "select u from ProductEntity u WHERE u.category = :category"),
     //Query para Obtener la lista de productos por categoria desarrollado por Miguel Olivares
-    @NamedQuery(name = "Product.getCategories", query = "select Distinct u.category from ProductEntity u")
-        
+    @NamedQuery(name = "Product.getCategories", query = "select Distinct u.category from ProductEntity u"),
+    //Query para obtener la lista de productos de un Proveedor   
+    @NamedQuery(name = "Product.getProductsByProvider", query = "select u from ProductEntity u where u.provider.id =:idProvider"),
+    //Query para obtener el conteo de productos de un proveedor
+    @NamedQuery(name = "Product.getCountProductsByProvider", query = "select count(u) from ProductEntity u where u.provider.id =:idProvider ")    
+   
         
 })
 public class ProductEntity implements Serializable {
@@ -63,6 +67,14 @@ public class ProductEntity implements Serializable {
     
     @ManyToOne
     private CityEntity city;
+    
+    //Fields added to correct double entity Cesar Forero
+    
+    private String imei;    
+    
+    private String description;
+        
+    private String image;
 
     /**
      * @return
@@ -208,4 +220,29 @@ public class ProductEntity implements Serializable {
         this.city = city;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getImei() {
+        return imei;
+    }
+
+    public void setImei(String imei) {
+        this.imei = imei;
+    }
+
+    
 }

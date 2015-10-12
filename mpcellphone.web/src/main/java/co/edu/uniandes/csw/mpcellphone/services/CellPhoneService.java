@@ -1,7 +1,9 @@
 package co.edu.uniandes.csw.mpcellphone.services;
 
 import co.edu.uniandes.csw.mpcellphone.api.ICellPhoneLogic;
+import co.edu.uniandes.csw.mpcellphone.api.IProductLogic;
 import co.edu.uniandes.csw.mpcellphone.dtos.CellPhoneDTO;
+import co.edu.uniandes.csw.mpcellphone.dtos.ProductDTO;
 import co.edu.uniandes.csw.mpcellphone.dtos.ProviderDTO;
 import co.edu.uniandes.csw.mpcellphone.providers.StatusCreated;
 import java.util.List;
@@ -29,11 +31,12 @@ import org.apache.shiro.SecurityUtils;
 public class CellPhoneService {
 
     @Inject private ICellPhoneLogic cellPhoneLogic;
+    @Inject private IProductLogic productLogic;
     @Context private HttpServletResponse response;
     @QueryParam("page") private Integer page;
     @QueryParam("maxRecords") private Integer maxRecords;
     
-    private ProviderDTO provider = (ProviderDTO) SecurityUtils.getSubject().getSession().getAttribute("Client");
+    private ProviderDTO provider = (ProviderDTO) SecurityUtils.getSubject().getSession().getAttribute("Provider");
     //private String cellPhoneModel;
 
     /**
@@ -41,8 +44,8 @@ public class CellPhoneService {
      */
     @POST
     @StatusCreated
-    public CellPhoneDTO createCellPhone(CellPhoneDTO dto) {
-        return cellPhoneLogic.createCellPhone(dto, provider.getId());
+    public CellPhoneDTO createCellPhone(CellPhoneDTO dto) { 
+        return cellPhoneLogic.createCellPhone(dto);
     }
 
     /**
@@ -51,9 +54,9 @@ public class CellPhoneService {
     @GET
     public List<CellPhoneDTO> getCellPhones() {
         if (page != null && maxRecords != null) {
-            this.response.setIntHeader("X-Total-Count", cellPhoneLogic.countCellPhones(provider.getId()));
+            this.response.setIntHeader("X-Total-Count", cellPhoneLogic.countCellPhones());
         }
-        return cellPhoneLogic.getCellPhones(page, maxRecords, provider.getId());
+        return cellPhoneLogic.getCellPhones(page, maxRecords);
     }
 
     /**
@@ -62,7 +65,7 @@ public class CellPhoneService {
     @GET
     @Path("{id: \\d+}")
     public CellPhoneDTO getCellPhone(@PathParam("id") Long id) {
-        return cellPhoneLogic.getCellPhone(id, provider.getId());
+        return cellPhoneLogic.getCellPhone(id);
     }
 
     /**
@@ -71,8 +74,7 @@ public class CellPhoneService {
     @PUT
     @Path("{id: \\d+}")
     public CellPhoneDTO updateCellPhone(@PathParam("id") Long id, CellPhoneDTO dto) {
-        dto.setId(id);
-        return cellPhoneLogic.updateCellPhone(dto, provider.getId());
+        return cellPhoneLogic.createCellPhone(dto);
     }
 
     /**
@@ -81,9 +83,7 @@ public class CellPhoneService {
     @DELETE
     @Path("{id: \\d+}")
     public void deleteCellPhone(@PathParam("id") Long id) {
-        cellPhoneLogic.deleteCellPhone(id, provider.getId());
-        
+        cellPhoneLogic.deleteCellPhone(id);        
     }
-    
     
 }

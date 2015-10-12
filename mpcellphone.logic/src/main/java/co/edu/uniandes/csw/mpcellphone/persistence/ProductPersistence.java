@@ -35,10 +35,10 @@ public class ProductPersistence extends CrudPersistence<ProductEntity> {
             List<ProductEntity> list = new ArrayList<ProductEntity>();
             list = executeListNamedQuery("Product.getCheaperProduct",params);
             return list.get(0);
-            } catch(NoResultException e){
-                return null;
-            }
+        } catch(NoResultException e){
+            return null;
         }
+    }
      
      public ProductEntity getCheaperProvider (Long idCellPhone){
         try{
@@ -47,47 +47,40 @@ public class ProductPersistence extends CrudPersistence<ProductEntity> {
             List<ProductEntity> list = new ArrayList<ProductEntity>();
             list = executeListNamedQuery("Product.getCheaperProvider",params);
             return list.get(0);
-            } catch(NoResultException e){
-                return null;
-            }
-
+        } catch(NoResultException e){
+            return null;
         }
+
+    }
      //Para Obtener la lista de un modelo de producto desarrollado por Miguel Olivares
     public List<ProductEntity> getByModel(String model) {
-    {
         try{
             Map<String, Object> params = new HashMap<String, Object>();
             params.put("model",model);
             
             return  executeListNamedQuery("Product.getByModel", params);
-            } catch(NoResultException e){
-                return null;
-            }
-       
-    }
+        } catch(NoResultException e){
+            return null;
+        }
     }
     //Para Obtener la lista de un producto filtrado por marcas desarrollado por Miguel Olivares
     public List<ProductEntity> getByBrand(String brand) {
-    {
         try{
             Map<String, Object> params = new HashMap<String, Object>();
             params.put("brand",brand);
             return  executeListNamedQuery("Product.getByBrand", params);
-            } catch(NoResultException e){
-                return null;
-            }
+        } catch(NoResultException e){
+            return null;
         }
     }
     //Para Obtener la lista de un producto filtrado por marcas desarrollado por Miguel Olivares
     public List<ProductEntity> getByProviderName(String name) {
-    {
         try{
             Map<String, Object> params = new HashMap<String, Object>();
             params.put("name",name);
             return  executeListNamedQuery("Product.getByProviderName", params);
-            } catch(NoResultException e){
-                return null;
-            }
+        } catch(NoResultException e){
+            return null;
         }
     }
     
@@ -158,9 +151,34 @@ public class ProductPersistence extends CrudPersistence<ProductEntity> {
             list = executeListNamedQuery("Product.getCategories");
             
             return list;
-            } catch(NoResultException e){
-                return null;
-                
-            }
+        } catch(NoResultException e){
+            return null;
+
+        }
+    }
+    /**
+     * Metodo para obtener el listado de productos de un proveedor
+     * @param idProvider
+     * @return Lista de productos de un proveeedor
+     */
+    public List<ProductEntity> getProductsByProvider(Integer page, Integer maxRecords,Long idProvider){
+        Map<String, Object> params = new HashMap<String, Object>();
+        params.put("limit", maxRecords);
+        params.put("offset", maxRecords*page);
+        params.put("idProvider", idProvider);
+        Query q = em.createNamedQuery("Product.getProductsByProvider");
+            q.setParameter("idProvider", idProvider);
+            
+        return q.setFirstResult(maxRecords*page).setMaxResults(maxRecords).getResultList();
+    }
+    /**
+     * Ejecuta consulta para tener el total de productos de un proveedor.
+     * @param idProvider
+     * @return 
+     */
+    public int getCountProductsByProvider(Long idProvider){
+        Map<String, Object> params = new HashMap<String, Object>();
+        params.put("idProvider", idProvider);
+        return ((Long) executeSingleNamedQuery("Product.getCountProductsByProvider", params)).intValue();
     }
 }

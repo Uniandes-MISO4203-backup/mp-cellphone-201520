@@ -132,4 +132,34 @@ public class ProductLogic implements IProductLogic {
         return ProductConverter.listString2DTO(persistence.getCategories());
         
     }
+    /**
+     * 
+     * @param page
+     * @param maxRecords
+     * @param idProvider
+     * @return 
+     */
+    public List<ProductDTO> getProductsByProvider(Integer page, Integer maxRecords, Long idProvider) {
+        return ProductConverter.listEntity2DTO(persistence.getProductsByProvider(page, maxRecords, idProvider));
+    }
+    /**
+     * 
+     * @param idProvider
+     * @return 
+     */
+    public int countProductsByProvider(Long idProvider) {
+        return persistence.getCountProductsByProvider(idProvider);
+    }
+
+    public ProductDTO getProductByProvider(Long id, Long idProvider) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public ProductDTO updateProductByProvider(ProductDTO dto, Long idProvider) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void deleteProductByProvider(Long id, Long idProvider) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

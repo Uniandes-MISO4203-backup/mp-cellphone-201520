@@ -1,16 +1,10 @@
 package co.edu.uniandes.csw.mpcellphone.persistence;
 
 import co.edu.uniandes.csw.mpcellphone.entities.CellPhoneEntity;
-import java.sql.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
-import static java.util.Collections.list;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import javax.ejb.Stateless;
 import javax.persistence.NoResultException;
-import javax.persistence.Query;
 
 /**
  * @generated

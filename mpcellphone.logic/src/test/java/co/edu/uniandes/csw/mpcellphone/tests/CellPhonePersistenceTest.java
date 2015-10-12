@@ -95,11 +95,7 @@ public class CellPhonePersistenceTest {
         for (int i = 0; i < 3; i++) {
             CellPhoneEntity entity = new CellPhoneEntity();
             entity.setName(generateRandom(String.class));
-            entity.setDescription(generateRandom(String.class));
-            entity.setModel(generateRandom(String.class));
-            entity.setImei(generateRandom(String.class));
             entity.setBrand(generateRandom(String.class));
-            entity.setImage(generateRandom(String.class));
             em.persist(entity);
             data.add(entity);
         }
@@ -112,11 +108,7 @@ public class CellPhonePersistenceTest {
     public void createCellPhoneTest() {
         CellPhoneEntity newEntity = new CellPhoneEntity();
         newEntity.setName(generateRandom(String.class));
-        newEntity.setDescription(generateRandom(String.class));
-        newEntity.setModel(generateRandom(String.class));
-        newEntity.setImei(generateRandom(String.class));
         newEntity.setBrand(generateRandom(String.class));
-        newEntity.setImage(generateRandom(String.class));
 
         CellPhoneEntity result = cellPhonePersistence.create(newEntity);
 
@@ -125,11 +117,7 @@ public class CellPhonePersistenceTest {
         CellPhoneEntity entity = em.find(CellPhoneEntity.class, result.getId());
 
         Assert.assertEquals(newEntity.getName(), entity.getName());
-        Assert.assertEquals(newEntity.getDescription(), entity.getDescription());
-        Assert.assertEquals(newEntity.getModel(), entity.getModel());
-        Assert.assertEquals(newEntity.getImei(), entity.getImei());
         Assert.assertEquals(newEntity.getBrand(), entity.getBrand());
-        Assert.assertEquals(newEntity.getImage(), entity.getImage());
     }
 
     /**
@@ -159,11 +147,7 @@ public class CellPhonePersistenceTest {
         CellPhoneEntity newEntity = cellPhonePersistence.find(entity.getId());
         Assert.assertNotNull(newEntity);
         Assert.assertEquals(entity.getName(), newEntity.getName());
-        Assert.assertEquals(entity.getDescription(), newEntity.getDescription());
-        Assert.assertEquals(entity.getModel(), newEntity.getModel());
-        Assert.assertEquals(entity.getImei(), newEntity.getImei());
         Assert.assertEquals(entity.getBrand(), newEntity.getBrand());
-        Assert.assertEquals(entity.getImage(), newEntity.getImage());
     }
 
     /**
@@ -188,22 +172,14 @@ public class CellPhonePersistenceTest {
 
         newEntity.setId(entity.getId());
         newEntity.setName(generateRandom(String.class));
-        newEntity.setDescription(generateRandom(String.class));
-        newEntity.setModel(generateRandom(String.class));
-        newEntity.setImei(generateRandom(String.class));
         newEntity.setBrand(generateRandom(String.class));
-        newEntity.setImage(generateRandom(String.class));
 
         cellPhonePersistence.update(newEntity);
 
         CellPhoneEntity resp = em.find(CellPhoneEntity.class, entity.getId());
 
         Assert.assertEquals(newEntity.getName(), resp.getName());
-        Assert.assertEquals(newEntity.getDescription(), resp.getDescription());
-        Assert.assertEquals(newEntity.getModel(), resp.getModel());
-        Assert.assertEquals(newEntity.getImei(), resp.getImei());
         Assert.assertEquals(newEntity.getBrand(), resp.getBrand());
-        Assert.assertEquals(newEntity.getImage(), resp.getImage());
     }
 
     /**
@@ -241,32 +217,4 @@ public class CellPhonePersistenceTest {
         }
     }
 
-    /**
-     * @generated
-     */
-    @Test
-    public void findByName() {
-        String name = data.get(0).getName();
-        List<CellPhoneEntity> cache = new ArrayList<CellPhoneEntity>();
-        List<CellPhoneEntity> list = cellPhonePersistence.findByName(name);
-
-        for (CellPhoneEntity entity : data) {
-            if (entity.getName().equals(name)) {
-                cache.add(entity);
-            }
-        }
-        Assert.assertEquals(list.size(), cache.size());
-        for (CellPhoneEntity ent : list) {
-            boolean found = false;
-            for (CellPhoneEntity cacheEntity : cache) {
-                if (cacheEntity.getName().equals(ent.getName())) {
-                    found = true;
-                    break;
-                }
-            }
-            if (!found) {
-                Assert.fail();
-            }
-        }
-    }
 }

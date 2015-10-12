@@ -22,4 +22,10 @@ public interface IProductLogic {
     public List<ProductDTO> getByDiscount();
     public List<ProductDTO> getByCategory(String category);
     public List<ProductDTO> getCategories();
+    
+    public List<ProductDTO> getProductsByProvider(Integer page, Integer maxRecords, Long idProvider);
+    public int countProductsByProvider(Long idProvider);
+    public ProductDTO getProductByProvider(Long id, Long idProvider);
+    public ProductDTO updateProductByProvider(ProductDTO dto, Long idProvider);
+    public void deleteProductByProvider(Long id, Long idProvider);
 }

@@ -17,6 +17,12 @@ public class ProductDTO {
     private ProviderDTO provider;
     private String category;
     private List<PhotoDTO> photos;
+    
+    //Fields added to correct double entity Cesar Forero
+    
+    private String imei;       
+    private String description;       
+    private String image;
 
     /**
      * @return 
@@ -145,6 +151,28 @@ public class ProductDTO {
     public void setPhotos(List<PhotoDTO> photos) {
         this.photos = photos;
     }
-    
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getImei() {
+        return imei;
+    }
+
+    public void setImei(String imei) {
+        this.imei = imei;
+    }
 }

@@ -26,11 +26,7 @@ public abstract class CellPhoneConverter {
             CellPhoneDTO dto = new CellPhoneDTO();
             dto.setId(entity.getId());
             dto.setName(entity.getName());
-            dto.setDescription(entity.getDescription());
-            dto.setModel(entity.getModel());
-            dto.setImei(entity.getImei());
             dto.setBrand(entity.getBrand());
-            dto.setImage(entity.getImage());
 
             return dto;
         } else {
@@ -64,12 +60,7 @@ public abstract class CellPhoneConverter {
             CellPhoneDTO dto = new CellPhoneDTO();
             dto.setId(entity.getId());
             dto.setName(entity.getName());
-            dto.setDescription(entity.getDescription());
-            dto.setModel(entity.getModel());
-            dto.setImei(entity.getImei());
             dto.setBrand(entity.getBrand());
-            dto.setImage(entity.getImage());
-
             return dto;
         } else {
             return null;
@@ -86,12 +77,7 @@ public abstract class CellPhoneConverter {
             CellPhoneEntity entity = new CellPhoneEntity();
             entity.setId(dto.getId());
             entity.setName(dto.getName());
-            entity.setDescription(dto.getDescription());
-            entity.setModel(dto.getModel());
-            entity.setImei(dto.getImei());
             entity.setBrand(dto.getBrand());
-            entity.setImage(dto.getImage());
-
             return entity;
         } else {
             return null;
@@ -169,7 +155,7 @@ public abstract class CellPhoneConverter {
             for (String name : Models) {
                 CellPhoneDTO dto = new CellPhoneDTO();
                 //dtos.add(basicEntity2DTO(Models));
-                dto.setModel(name);
+                dto.setName(name);
                 dtos.add(dto);
             }
         }
