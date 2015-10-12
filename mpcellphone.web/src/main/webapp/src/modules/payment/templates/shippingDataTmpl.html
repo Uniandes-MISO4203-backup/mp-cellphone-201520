@@ -1,3 +1,10 @@
+<div class="alert alert-dismissible alert-success hidden">
+  <button type="button" class="close" data-dismiss="alert">×</button>
+  <strong>Ten en cuenta: </strong>
+  <span ng-if="shippingTypeValue>0"> El costo de tu env&iacute;o es: {{shippingTypeValue}} </span> 
+  <span ng-if="shippingTypeValue==0"> Tu env&iacute;o no tiene costo. </span>
+</div>
+
 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
     <form class="form-horizontal">
         <fieldset>
@@ -31,11 +38,11 @@
             </div>
 
             <div class="form-group">
-                <label class="col-lg-2 control-label" for="creditCard">Shipping Type</label>
+                <label class="col-lg-2 control-label">Shipping Type</label>
                 <div class="col-lg-10">
-                    <select class="form-control" ng-model="shipping.shippingTypeHolders">
+                    <select id="shippingType" class="form-control" ng-model="shipping.shippingTypeHolders" ng-change="onShippingChange()">
                         <option>Select a Shipping Type</option>
-                        <option ng-repeat="ship in shippingTypeHolders" value="{{ship.id}}">{{ship.name}}</option>
+                        <option ng-repeat="ship in shippingTypeHolders" data-price="{{ship.valueType}}" value="{{ship.id}}">{{ship.name}}</option>
                     </select>
                 </div>
             </div>

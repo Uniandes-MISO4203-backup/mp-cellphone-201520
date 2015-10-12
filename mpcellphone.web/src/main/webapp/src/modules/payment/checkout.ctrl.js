@@ -2,8 +2,8 @@
     var mod = ng.module('paymentModule');
 
     mod.controller('checkoutCtrl', ['CrudCreator', '$scope', 'authService', 'cartItemService', '$location'
-                , 'checkoutService', 'shippingService', 'creditCardService', 'shippingTypeService',
-        function (CrudCreator, $scope, authSvc, ciSvc, $location, chSvc, shpSvc, ccSvc, stSvc) {
+                , 'checkoutService', 'shippingService', 'creditCardService', 'shippingTypeService', '$log',
+        function (CrudCreator, $scope, authSvc, ciSvc, $location, chSvc, shpSvc, ccSvc, stSvc, $log) {
             var that = this;
             $scope.cartItems = [];
             $scope.payment = {};
@@ -19,7 +19,7 @@
                     }
                 }
             });
-            
+
             /*------------ Shipping Type ----------*/
             $scope.shippingTypeHolders = [];
 
@@ -29,7 +29,16 @@
                         $scope.shippingTypeHolders.push(data[i]);
                     }
                 }
+                $log.log($scope.shippingTypeHolders);
             });
+
+            $scope.onShippingChange = function () {
+                $scope.shippingType = $('#shippingType').val();
+                var e = document.getElementById("shippingType");
+                $scope.shippingTypeValue = $(e.options[e.selectedIndex]).attr('data-price');
+                $('.alert.alert-dismissible.alert-success.hidden').removeClass('hidden');
+            };
+
 
             /*-------------- Shipping ------------*/
             $scope.shipping = {};
@@ -42,7 +51,7 @@
                 shippingData.city = $scope.shipping.city;
                 shippingData.address = $scope.shipping.address;
                 shippingData.stimatedTime = $scope.shipping.time;
-                
+
                 var shippingType = {};
                 var data = $scope.shipping.shippingTypeHolders;
                 for (var i = 0; i < $scope.shippingTypeHolders.length; i++) {
@@ -51,12 +60,14 @@
                         break;
                     }
                 }
+                console.log(shippingType);
                 shippingData.shipType = shippingType;
 
                 if (shippingData.state && shippingData.country && shippingData.city
                         && shippingData.address) {
                     shpSvc.saveRecord(shippingData).then(function (data) {
                         $scope.shippingData = data;
+                        console.log(data);
                         var pestana = $('li.active');
                         document.getElementById('shippingData').style.display = "none";
                         document.getElementById('paymentData').style.display = "block";
