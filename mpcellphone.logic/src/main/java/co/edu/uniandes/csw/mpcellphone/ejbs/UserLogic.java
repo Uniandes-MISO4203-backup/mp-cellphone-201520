@@ -42,7 +42,8 @@ public class UserLogic implements IUserLogic{
     public UserDTO getUserByUserName(String userName) {
         return UserConverter.refEntity2DTO(persistence.getUserByUserName(userName));
     }
-/**
+
+    /**
      * @param dto
      * @return 
      * @generated
@@ -52,6 +53,25 @@ public class UserLogic implements IUserLogic{
         UserEntity entity = UserConverter.fullDTO2Entity(dto);
         persistence.create(entity);
         return UserConverter.fullEntity2DTO(entity);
+    }
+
+    /**
+     * @param dto
+     * @return 
+     * @generated
+     */
+    @Override
+    public UserDTO updateUser(UserDTO dto) {
+        UserEntity entity = persistence.update(UserConverter.fullDTO2Entity(dto));
+        return UserConverter.fullEntity2DTO(entity);
+    }
+    /**
+     * @param id
+     * @generated
+     */
+    @Override
+    public void deleteUser(Long id) {
+        persistence.delete(id);
     }
 }
 

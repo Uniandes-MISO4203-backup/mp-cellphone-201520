@@ -36,4 +36,13 @@ public class UserPersistence extends CrudPersistence<UserEntity> {
             return null;
         }
     }
+    public UserEntity getUserByUserId(String userId){
+        Map<String, Object> parametros = new HashMap<String, Object>();
+        parametros.put("stormpath", userId);
+        try {
+            return this.executeSingleNamedQuery("User.getUserByUserId", parametros);
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
 }

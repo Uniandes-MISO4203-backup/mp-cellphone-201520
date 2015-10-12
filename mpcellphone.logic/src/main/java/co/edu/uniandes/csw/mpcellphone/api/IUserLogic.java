@@ -11,10 +11,10 @@ public interface IUserLogic {
     public List<UserDTO> getUsers(Integer page, Integer maxRecords);
     public UserDTO getUserByUserName (String usernama);  
     public UserDTO createUser(UserDTO dto);
-    /*
-    public UserDTO getUser(Long id);
     public UserDTO updateUser(UserDTO dto);
     public void deleteUser(Long id);
+    /*
+    public UserDTO getUser(Long id);
     public List<UserDTO> findByName(String name);
     */
 }
