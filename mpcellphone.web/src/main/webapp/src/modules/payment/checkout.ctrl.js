@@ -2,8 +2,8 @@
     var mod = ng.module('paymentModule');
 
     mod.controller('checkoutCtrl', ['CrudCreator', '$scope', 'authService', 'cartItemService', '$location'
-                , 'checkoutService', 'shippingService', 'creditCardService',
-        function (CrudCreator, $scope, authSvc, ciSvc, $location, chSvc, shpSvc, ccSvc) {
+                , 'checkoutService', 'shippingService', 'creditCardService', 'shippingTypeService',
+        function (CrudCreator, $scope, authSvc, ciSvc, $location, chSvc, shpSvc, ccSvc, stSvc) {
             var that = this;
             $scope.cartItems = [];
             $scope.payment = {};
@@ -19,6 +19,17 @@
                     }
                 }
             });
+            
+            /*------------ Shipping Type ----------*/
+            $scope.shippingTypeHolders = [];
+
+            stSvc.fetchRecords().then(function (data) {
+                for (var i = 0, l = data.length; i < l; i++) {
+                    if (data[i].name) {
+                        $scope.shippingTypeHolders.push(data[i]);
+                    }
+                }
+            });
 
             /*-------------- Shipping ------------*/
             $scope.shipping = {};
@@ -31,6 +42,16 @@
                 shippingData.city = $scope.shipping.city;
                 shippingData.address = $scope.shipping.address;
                 shippingData.stimatedTime = $scope.shipping.time;
+                
+                var shippingType = {};
+                var data = $scope.shipping.shippingTypeHolders;
+                for (var i = 0; i < $scope.shippingTypeHolders.length; i++) {
+                    shippingType = $scope.shippingTypeHolders[i];
+                    if ($scope.shippingTypeHolders[i].id == data) {
+                        break;
+                    }
+                }
+                shippingData.shipType = shippingType;
 
                 if (shippingData.state && shippingData.country && shippingData.city
                         && shippingData.address) {
@@ -69,6 +90,7 @@
                 }
             }
 
+            /*------------ Order ----------*/
             $scope.submitPayment = function () {
                 var order = {};
                 order.ship = $scope.shippingData;
