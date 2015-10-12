@@ -31,7 +31,8 @@ public abstract class ShipConverter {
             dto.setCity(entity.getCity());
             dto.setCountry(entity.getCountry());
             dto.setStimatedTime(entity.getStimatedTime());
-
+            dto.setShipType(ShippingTypeConverter.refEntity2DTO(entity.getShipType()));
+            
             return dto;
         } else {
             return null;
@@ -67,6 +68,7 @@ public abstract class ShipConverter {
             dto.setCity(entity.getCity());
             dto.setCountry(entity.getCountry());
             dto.setStimatedTime(entity.getStimatedTime());
+            dto.setShipType(ShippingTypeConverter.refEntity2DTO(entity.getShipType()));
 
             return dto;
         } else {
@@ -87,6 +89,7 @@ public abstract class ShipConverter {
             entity.setCity(dto.getCity());
             entity.setCountry(dto.getCountry());
             entity.setStimatedTime(dto.getStimatedTime());
+            entity.setShipType(ShippingTypeConverter.refDTO2Entity(dto.getShipType()));
 
             return entity;
         } else {
