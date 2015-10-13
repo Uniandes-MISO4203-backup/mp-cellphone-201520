@@ -1,6 +1,7 @@
 package co.edu.uniandes.csw.mpcellphone.ejbs;
 
 import co.edu.uniandes.csw.mpcellphone.api.IClientLogic;
+import co.edu.uniandes.csw.mpcellphone.api.IUserLogic;
 import co.edu.uniandes.csw.mpcellphone.converters.ClientConverter;
 import co.edu.uniandes.csw.mpcellphone.dtos.ClientDTO;
 import co.edu.uniandes.csw.mpcellphone.dtos.UserDTO;
@@ -16,11 +17,9 @@ import javax.inject.Inject;
 @Stateless
 public class ClientLogic implements IClientLogic {
 
-    @Inject 
-    private ClientPersistence persistence;
+    @Inject private ClientPersistence persistence;
     
-    @Inject
-    private UserLogic userLogic;
+    @Inject private IUserLogic userLogic;
 
     /**
      * @return 

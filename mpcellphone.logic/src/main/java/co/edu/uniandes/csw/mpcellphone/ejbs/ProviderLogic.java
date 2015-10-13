@@ -1,6 +1,7 @@
 package co.edu.uniandes.csw.mpcellphone.ejbs;
 
 import co.edu.uniandes.csw.mpcellphone.api.IProviderLogic;
+import co.edu.uniandes.csw.mpcellphone.api.IUserLogic;
 import co.edu.uniandes.csw.mpcellphone.converters.ProviderConverter;
 import co.edu.uniandes.csw.mpcellphone.dtos.ProviderDTO;
 import co.edu.uniandes.csw.mpcellphone.dtos.UserDTO;
@@ -18,7 +19,7 @@ public class ProviderLogic implements IProviderLogic {
 
     @Inject private ProviderPersistence persistence;
     
-    @Inject private UserLogic userLogic;
+    @Inject private IUserLogic userLogic;
 
     /**
      * @return 
