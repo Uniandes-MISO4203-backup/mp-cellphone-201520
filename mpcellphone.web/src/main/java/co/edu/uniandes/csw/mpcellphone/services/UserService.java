@@ -133,7 +133,14 @@ public class UserService {
             user.setName(userAttributes.get("givenName") + " " + userAttributes.get("surname"));
             user.setEmail(userAttributes.get("email"));
             user.setUserName(userAttributes.get("username"));
-            user.setRole(userLogic.getUserByUserName(user.getUserName()).getRole());
+            if(currentUser.getSession().getAttribute("Client")!=null){
+                user.setRole("client");
+            }else if(currentUser.getSession().getAttribute("Provider")!=null){
+                user.setRole("provider");
+            }else if(currentUser.getSession().getAttribute("Admin")!=null){
+                user.setRole("admin");
+            }
+            //user.setRole(userLogic.getUserByUserName(user.getUserName()).getRole());
             /*
             switch (user.getRole()) {
                 case "client":

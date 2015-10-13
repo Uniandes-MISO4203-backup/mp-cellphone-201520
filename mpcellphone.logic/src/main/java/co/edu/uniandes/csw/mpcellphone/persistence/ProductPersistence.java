@@ -165,7 +165,7 @@ public class ProductPersistence extends CrudPersistence<ProductEntity> {
         Query q = em.createNamedQuery("Product.getProductsByProvider");
             q.setParameter("idProvider", idProvider);
             
-        return q.setMaxResults(maxRecords).setFirstResult(page).getResultList();
+        return q.setFirstResult(maxRecords * (page-1)).setMaxResults(maxRecords).getResultList();
     }
     /**
      * Ejecuta consulta para tener el total de productos de un proveedor.

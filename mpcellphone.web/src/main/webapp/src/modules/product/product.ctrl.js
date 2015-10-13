@@ -123,7 +123,9 @@
             if (!$('#profile').length){
                 $(".dropdown-menu").prepend("<li><a href = '#' id = 'profile'><span class = 'glyphicon glyphicon-user'></span> My Profile</a></li>");
             }
-            if (authSvc.getCurrentUser()){
+            
+            var currentUser = authSvc.getCurrentUser();
+            if (currentUser){
                 adminService.darRole().then(function (data){
                     if (data.role === "admin"){
                         $("#admin").show();
@@ -159,6 +161,7 @@
                     return false;
                 }
             };
+            
             this.recordActions = [{
                     name: 'addToCart',
                     displayName: 'Add to Cart',
