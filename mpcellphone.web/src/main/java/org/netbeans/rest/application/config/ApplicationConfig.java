@@ -39,6 +39,7 @@ public class ApplicationConfig extends Application {
         resources.add(co.edu.uniandes.csw.mpcellphone.services.PaymentMethodService.class);
         resources.add(co.edu.uniandes.csw.mpcellphone.services.ProductService.class);
         resources.add(co.edu.uniandes.csw.mpcellphone.services.ProviderService.class);
+        resources.add(co.edu.uniandes.csw.mpcellphone.services.SaleService.class);
         resources.add(co.edu.uniandes.csw.mpcellphone.services.ShipService.class);
         resources.add(co.edu.uniandes.csw.mpcellphone.services.ShippingTypeService.class);
         resources.add(co.edu.uniandes.csw.mpcellphone.services.TaxService.class);
