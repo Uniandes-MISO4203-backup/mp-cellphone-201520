@@ -29,6 +29,8 @@ public abstract class CityConverter {
             CityDTO dto = new CityDTO();
             dto.setId(entity.getId());
             dto.setName(entity.getName());
+            dto.setLatitude(entity.getLatitude());
+            dto.setLongitude(entity.getLongitude());
             dto.setState(StateConverter.refEntity2DTO(entity.getState()));
 
             return dto;
@@ -42,9 +44,9 @@ public abstract class CityConverter {
      * @return
      * @generated
      */
-    public static CityDTO refDTO2Entity(CityDTO dto) {
+    public static CityEntity refDTO2Entity(CityDTO dto) {
         if (dto != null) {
-            CityDTO entity = new CityDTO();
+            CityEntity entity = new CityEntity();
             entity.setId(dto.getId());
 
             return entity;
@@ -63,6 +65,8 @@ public abstract class CityConverter {
             CityDTO dto = new CityDTO();
             dto.setId(entity.getId());
             dto.setName(entity.getName());
+            dto.setLatitude(entity.getLatitude());
+            dto.setLongitude(entity.getLongitude());
             dto.setState(StateConverter.refEntity2DTO(entity.getState()));
 
             return dto;
@@ -81,6 +85,8 @@ public abstract class CityConverter {
             CityEntity entity = new CityEntity();
             entity.setId(dto.getId());
             entity.setName(dto.getName());
+            entity.setLatitude(dto.getLatitude());
+            entity.setLongitude(dto.getLongitude());
             entity.setState(StateConverter.refDTO2Entity(dto.getState()));
 
             return entity;

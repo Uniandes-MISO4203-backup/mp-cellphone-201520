@@ -37,6 +37,7 @@ public abstract class ProductConverter {
             dto.setImei(entity.getImei());
             dto.setPhotos(PhotoConverter.listEntity2DTO(entity.getPhotos()));
             dto.setProductState(entity.getProductState());
+            dto.setCity(CityConverter.refEntity2DTO(entity.getCity()));
             
             return dto;
         } else {
@@ -80,6 +81,7 @@ public abstract class ProductConverter {
             dto.setImage(entity.getImage());
             dto.setImei(entity.getImei());
             dto.setProductState(entity.getProductState());
+            dto.setCity(CityConverter.refEntity2DTO(entity.getCity()));
 
             return dto;
         } else {
@@ -107,6 +109,7 @@ public abstract class ProductConverter {
             entity.setImage(dto.getImage());
             entity.setImei(dto.getImei());
             entity.setProductState(dto.getProductState());
+            entity.setCity(CityConverter.refDTO2Entity(dto.getCity()));
 
             return entity;
         } else {

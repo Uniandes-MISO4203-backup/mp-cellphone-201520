@@ -27,6 +27,8 @@ public class CityEntity  implements Serializable {
     @GeneratedValue(generator = "City")
     private Long id;
     private String name;
+    private Double longitude;
+    private Double latitude;
 
     
     @ManyToOne
@@ -79,5 +81,36 @@ public class CityEntity  implements Serializable {
         this.state = state;
     }
     
+    /**
+     * @return 
+     * @generated
+     */
+    public Double getLongitude() {
+        return longitude;
+    }
+    
+    /**
+     * @param longitude
+     * @generated
+     */
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
+    }
+    
+    /**
+     * @return 
+     * @generated
+     */
+    public Double getLatitude() {
+        return latitude;
+    }
+    
+    /**
+     * @param latitude
+     * @generated
+     */
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
     
 }

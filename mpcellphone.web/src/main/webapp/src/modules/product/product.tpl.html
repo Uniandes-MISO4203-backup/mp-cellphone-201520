@@ -1,47 +1,47 @@
 <script>
-    jQuery(document).ready(function ($) {
+jQuery(document).ready(function ($) {
+    setInterval(
+    function () {
+        moveRight();
+    }, 5000
+    );
 
-        $('#checkbox').change(function () {
-            setInterval(function () {
-                moveRight();
-            }, 3000);
+    var slideWidth = $('#slider ul li').width();
+    var slideHeight = $('#slider ul li').height();
+
+    $('#slider').css({width: slideWidth, height: slideHeight});
+
+    $('#slider ul li:last-child').prependTo('#slider ul');
+
+    function moveLeft() {
+        $('#slider ul').animate({
+            left: +slideWidth
+        }, 200, function () {
+            $('#slider ul li:last-child').prependTo('#slider ul');
+            $('#slider ul').css('left', '');
         });
-        var slideWidth = $('#slider ul li').width();
-        var slideHeight = $('#slider ul li').height();
+    }
+    ;
 
-        $('#slider').css({width: slideWidth, height: slideHeight});
-
-        $('#slider ul li:last-child').prependTo('#slider ul');
-
-        function moveLeft() {
-            $('#slider ul').animate({
-                left: +slideWidth
-            }, 200, function () {
-                $('#slider ul li:last-child').prependTo('#slider ul');
-                $('#slider ul').css('left', '');
-            });
-        }
-        ;
-
-        function moveRight() {
-            $('#slider ul').animate({
-                left: -slideWidth
-            }, 200, function () {
-                $('#slider ul li:first-child').appendTo('#slider ul');
-                $('#slider ul').css('left', '');
-            });
-        }
-        ;
-
-        $('a.control_prev').click(function () {
-            moveLeft();
+    function moveRight() {
+        $('#slider ul').animate({
+            left: -slideWidth
+        }, 200, function () {
+            $('#slider ul li:first-child').appendTo('#slider ul');
+            $('#slider ul').css('left', '');
         });
+    }
+    ;
 
-        $('a.control_next').click(function () {
-            moveRight();
-        });
-
+    $('a.control_prev').click(function () {
+        moveLeft();
     });
+
+    $('a.control_next').click(function () {
+        moveRight();
+    });
+
+});
 </script>
 <div ng-hide="ctrl.editMode">
     <div class="col-sm-12">
@@ -184,14 +184,10 @@
                     <div class="col-md-8">
                         <div class="panel panel-default" >
                             <div id="slider" style="width: 100%; ">
-                               <a href="" class='control_next'>>></a>
-                               <a href="" class='control_prev'><<</a>
-                               <ul id="slider-ul" style="text-align: center;"></ul>
+                                <a href="" class='control_next'>>></a>
+                                <a href="" class='control_prev'><<</a>
+                                <ul id="slider-ul" style="text-align: center;"></ul>
                             </div>
-                            <div class="slider_option">
-                                <input type="checkbox" id="checkbox">
-                                <label for="checkbox">Autoplay</label>
-                            </div> 
                         </div>
                     </div>
                 </div>

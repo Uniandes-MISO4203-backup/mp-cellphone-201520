@@ -18,6 +18,7 @@ public class ProductDTO {
     private String category;
     private List<PhotoDTO> photos;
     private String productState;
+    private CityDTO city;
     //Fields added to correct double entity Cesar Forero
     
     private String imei;       
@@ -191,4 +192,14 @@ public class ProductDTO {
     public void setImei(String imei) {
         this.imei = imei;
     }
+
+    public CityDTO getCity() {
+        return city;
+    }
+
+    public void setCity(CityDTO city) {
+        this.city = city;
+    }
+    
+    
 }

@@ -176,17 +176,25 @@
                         $("#info").html("<p><strong>Cellphone:</strong>"+record.cellPhone.name+"</p>"+
                                 "<p><strong>Price:</strong>"+price+"</p>"+
                                 "<p><strong>Discount:</strong>"+discount+" %</p>"+
-                                "<p><strong>Provider:</strong>"+record.provider.name+"</p>");
+                                "<p><strong>Provider:</strong>"+record.provider.name+"</p>"+
+                                "<p><strong>Available in:</strong>"+record.city.name+"</p>");
                         var text = "";
                         if(record.photos.length > 0){
                             for (var i = 0; i < record.photos.length; i++){
                                 text += "<li><div class='slider-container'>"
                                         +"<div id='element-slider'>"
+                                        +"<a href='"+record.photos[i].image+"' target='_blank' "
+                                        +" >"
                                         +"<img src='"+record.photos[i].image
-                                        +"' alt='"+record.photos[i].image
+                                        +"' alt='Click to watch more' "
                                         +"' style='max-width: 100%; vertical-align: middle;'/>"
-                                        +"</div></div></li>";
+                                        +"</a></div></div></li>";
                             }
+                        }
+                        else{
+                            text += "<li style='width: 100%;'><div class='slider-container' style='width: 100%;'>"
+                                        +"<div id='element-slider' style='width: 100%;'>"
+                                        +"No pictures</div></div></li>";
                         }
                         $("#slider-ul").html(text);
                     },
