@@ -3,6 +3,7 @@ package co.edu.uniandes.csw.mpcellphone.ejbs;
 import co.edu.uniandes.csw.mpcellphone.api.IClientLogic;
 import co.edu.uniandes.csw.mpcellphone.converters.ClientConverter;
 import co.edu.uniandes.csw.mpcellphone.dtos.ClientDTO;
+import co.edu.uniandes.csw.mpcellphone.dtos.UserDTO;
 import co.edu.uniandes.csw.mpcellphone.entities.ClientEntity;
 import co.edu.uniandes.csw.mpcellphone.persistence.ClientPersistence;
 import java.util.List;
@@ -15,8 +16,11 @@ import javax.inject.Inject;
 @Stateless
 public class ClientLogic implements IClientLogic {
 
-    @Inject
+    @Inject 
     private ClientPersistence persistence;
+    
+    @Inject
+    private UserLogic userLogic;
 
     /**
      * @return 
@@ -68,6 +72,10 @@ public class ClientLogic implements IClientLogic {
     @Override
     public ClientDTO updateClient(ClientDTO dto) {
         ClientEntity entity = persistence.update(ClientConverter.fullDTO2Entity(dto));
+        UserDTO dtoU = userLogic.getUserByUserId(dto.getUserId());
+        dtoU.setName(dto.getName());
+        dtoU.setEmail(dto.getEmail());
+        dtoU = userLogic.updateUser(dtoU);
         return ClientConverter.fullEntity2DTO(entity);
     }
 
