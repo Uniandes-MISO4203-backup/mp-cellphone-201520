@@ -50,7 +50,10 @@ jQuery(document).ready(function ($) {
                 <div class="col-md-12">
                     <div class="img-thumbnail" id="cover" ng-if="record.image">
                         <a href="javascript:;" ng-repeat="action in ctrl.prodductInfoActions" id="{{$parent.$index}}-{{action.name}}-btn" ng-show="action.show()" ng-click="action.fn(record)">
-                            <img class="img-responsive" style="height: 20vw;" ng-src="{{record.image}}" alt="{{record.image}}">
+                            <div>
+                                <img class="img-responsive" style="height: 20vw;" ng-src="{{record.image}}" alt="{{record.image}}">
+                            </div>
+                            <div style="width: 100%; margin: auto;">Click to watch more</div>
                         </a>
                     </div>
                 </div>

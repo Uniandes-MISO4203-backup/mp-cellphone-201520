@@ -5,6 +5,7 @@
     mod.constant('shippingContext', 'ship');
     mod.constant('creditCardContext', 'payment_method');
     mod.constant('shippingTypeContext', 'shipping_type');
+    mod.constant('saleContext', 'sale');
 /*
     mod.constant('checkoutModel', {
         fields: [{

@@ -43,6 +43,11 @@ public class UserLogic implements IUserLogic{
         return UserConverter.refEntity2DTO(persistence.getUserByUserName(userName));
     }
 
+    @Override
+    public UserDTO getUserByUserId(String userId) {
+        return UserConverter.refEntity2DTO(persistence.getUserByUserId(userId));
+    }
+
     /**
      * @param dto
      * @return 

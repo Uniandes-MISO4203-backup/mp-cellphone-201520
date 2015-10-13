@@ -13,8 +13,8 @@ import javax.persistence.NamedQuery;
 @Entity
 @NamedQueries({
     @NamedQuery(name = "User.getUsers", query = "select u from UserEntity u"), 
-    @NamedQuery(name = "User.getUserByUserName", query = "select u from UserEntity u where u.name = :name"),
-    @NamedQuery(name = "User.getUserByUserId", query = "select u from UserEntity u where u.stormpath = :userid")
+    @NamedQuery(name = "User.getUserByUserName", query = "select u from UserEntity u where u.name = ':name'"),
+    @NamedQuery(name = "User.getUserByUserId", query = "select u from UserEntity u where u.stormpath = ':userid'")
 })
 
 

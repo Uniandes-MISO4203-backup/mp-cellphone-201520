@@ -12,6 +12,9 @@
     mod.service('shippingTypeService', ['CrudCreator', 'shippingTypeContext', function (CrudCreator, context) {
             CrudCreator.extendService(this, context);
         }]);
+    mod.service('saleService', ['CrudCreator', 'saleContext', function (CrudCreator, context) {
+            CrudCreator.extendService(this, context);
+        }]);
     mod.service('userService', ['CrudCreator', 'userContext', function (CrudCreator, context) {
             CrudCreator.extendService(this, context);
         }]);

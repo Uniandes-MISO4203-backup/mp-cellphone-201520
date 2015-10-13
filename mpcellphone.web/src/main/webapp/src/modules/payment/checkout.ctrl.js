@@ -3,11 +3,13 @@
 
     mod.controller('checkoutCtrl', ['CrudCreator', '$scope', 'authService', 'cartItemService', '$location'
                 , 'checkoutService', 'shippingService', 'creditCardService', 'shippingTypeService', '$log',
-        function (CrudCreator, $scope, authSvc, ciSvc, $location, chSvc, shpSvc, ccSvc, stSvc, $log) {
+        'saleService',
+        function (CrudCreator, $scope, authSvc, ciSvc, $location, chSvc, shpSvc, ccSvc, stSvc, $log, saleSvc) {
             var that = this;
             $scope.cartItems = [];
             $scope.payment = {};
             $scope.totalCompra = 0;
+            $scope.totalC = 0;
 
             ciSvc.fetchRecords().then(function (data) {
                 for (var i = 0, l = data.length; i < l; i++) {
@@ -29,7 +31,6 @@
                         $scope.shippingTypeHolders.push(data[i]);
                     }
                 }
-                $log.log($scope.shippingTypeHolders);
             });
 
             $scope.onShippingChange = function () {
@@ -38,7 +39,6 @@
                 $scope.shippingTypeValue = $(e.options[e.selectedIndex]).attr('data-price');
                 $('.alert.alert-dismissible.alert-success.hidden').removeClass('hidden');
             };
-
 
             /*-------------- Shipping ------------*/
             $scope.shipping = {};
@@ -60,14 +60,13 @@
                         break;
                     }
                 }
-                console.log(shippingType);
+
                 shippingData.shipType = shippingType;
 
                 if (shippingData.state && shippingData.country && shippingData.city
                         && shippingData.address) {
                     shpSvc.saveRecord(shippingData).then(function (data) {
                         $scope.shippingData = data;
-                        console.log(data);
                         var pestana = $('li.active');
                         document.getElementById('shippingData').style.display = "none";
                         document.getElementById('paymentData').style.display = "block";
@@ -75,7 +74,11 @@
                         pestana.removeClass('active');
                     });
                 }
+
+                $scope.totalC = parseInt($scope.totalCompra) + parseInt($scope.shippingTypeValue);
             }
+
+
             /*------------ Credit card ----------*/
 
             $scope.creditCardHolders = [];
@@ -108,7 +111,7 @@
                 order.state = "En proceso";
                 order.client = authSvc.getCurrentUser();
                 order.totalDiscount = 0;
-                order.totalSale = $scope.totalCompra;
+                order.totalSale = $scope.totalC;
 
                 var creditCard = {};
                 var data = $scope.payment.creditCardHolder;
@@ -127,16 +130,73 @@
 
                 chSvc.saveRecord(order).then(function (data) {
                     $scope.order = data;
-                    var pestana = $('li.active');
-                    document.querySelector('#paymentData').style.display = "none";
-                    document.querySelector('#confirmationTmpl').style.display = "block";
-                    pestana.next('li').addClass('active').show();
-                    pestana.removeClass('active');
+                    $scope.submitOrderData();
                 });
             }
 
+            $scope.changeView = function () {
+                var pestana = $('li.active');
+                document.querySelector('#paymentData').style.display = "none";
+                document.querySelector('#confirmationTmpl').style.display = "block";
+                pestana.next('li').addClass('active').show();
+                pestana.removeClass('active');
+            }
+
+            /** Productos **/
+            $scope.productSale = function (cartI) {
+                $scope.cartItems[i].product.productState = 'Vendido';
+                $.ajax({
+                    url: '/mpcellphone.web/webresources/product',
+                    method: 'PUT',
+                    data: {id: cartI.product.id,
+                        product: cartI.product},
+                    dataType: 'json',
+                    contentType: "application/json"
+                }).success(function (data) {
+                    $log.log("Request success");
+                    $.ajax({
+                        url: '/mpcellphone.web/webresources/cartItems',
+                        method: 'DELETE',
+                        data: {id: cartI.id},
+                        dataType: 'json',
+                        contentType: "application/json"
+                    }).success(function (data) {
+                        $log.log("Request success");
+                    }).fail(function (jqXHR, textStatus) {
+                        $log.log("Request failed: " + textStatus);
+                    })
+                }).fail(function (jqXHR, textStatus) {
+                    $log.log("Request failed: " + textStatus);
+                })
+            }
+
+            /** Compendio de orden **/
+            $scope.submitOrderData = function () {
+                for (var i = 0, l = $scope.cartItems.length; i < l; i++) {
+                    $.ajax({
+                        url: '/mpcellphone.web/webresources/sale',
+                        method: 'POST',
+                        data: JSON.stringify({productId: $scope.cartItems[i].id,
+                            orderId: $scope.order.id,
+                            providerId: $scope.cartItems[i].product.provider.id}),
+                        dataType: 'json',
+                        contentType: "application/json"
+                    }).success(function (data) {
+                        $log.log("Request success");
+                        $scope.productSale($scope.cartItems[i]);
+                        if(i==(l-1)){
+                            $('.mask').remove();
+                            $('#modalPay').modal('show');
+                        }
+                    }).fail(function (jqXHR, textStatus) {
+                        $log.log("Request failed: " + textStatus);
+                    })
+                }
+            }
+
             $scope.pay = function () {
-                $('#modalPay').modal('show');
+                $('body').append('<div class="mask">');
+                $scope.submitPayment();
             };
 
             $scope.finish = function () {
