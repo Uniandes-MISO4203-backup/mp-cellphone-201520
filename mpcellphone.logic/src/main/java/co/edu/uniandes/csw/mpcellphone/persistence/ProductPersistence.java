@@ -98,7 +98,7 @@ public class ProductPersistence extends CrudPersistence<ProductEntity> {
     }
     
     //Para Obtener la lista de un producto filtrado por rango de precios desarrollado por Miguel Olivares
-    public List<ProductEntity> getByPriceRange(Integer minPrice, Integer maxPrice) {
+    public List<ProductEntity> getByPriceRange(Long minPrice, Long maxPrice) {
     {   
         
         try{
@@ -106,8 +106,8 @@ public class ProductPersistence extends CrudPersistence<ProductEntity> {
                     + ">= :minPrice "
                    +"AND u.price <= :maxPrice order by u.price");*/
             Query q = em.createNamedQuery("Product.getByPriceRange");
-            Object minPriceObj = (Integer) minPrice;
-            Object maxPriceObj = (Integer) maxPrice;
+            Object minPriceObj = (Long) minPrice;
+            Object maxPriceObj = (Long) maxPrice;
             q.setParameter("minPrice", minPriceObj);
             q.setParameter("maxPrice", maxPriceObj);
             

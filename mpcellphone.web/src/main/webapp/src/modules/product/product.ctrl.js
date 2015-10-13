@@ -2,14 +2,14 @@
 (function (ng) {
     var mod = ng.module('productModule');
     var maximoCaracteres = 255;
-    var ProducSelComment = 0; //Para guardar el item que se est� haciendo el comentario..
-
+    var ProducSelComment = 0; //Para guardar el item que se esta haciendo el comentario..
 
     mod.controller('productCtrl', 
         ['CrudCreator', '$scope', 'productService', 'productModel', 'cartItemService', '$location', 'authService', 'adminService','$filter',
         function (CrudCreator, $scope, svc, model, cartItemSvc, $location, authSvc, adminService,$filter) {
 
             CrudCreator.extendController(this, svc, $scope, model, 'product', 'Products');
+            
             this.searchByName = function (cellPhoneName) {
                 var search;
                 if (cellPhoneName) {
@@ -17,53 +17,68 @@
                 }
                 $location.url('/catalog' + search);
             };
+            
             var serviceSearch = [{
-                    service: "getModels",
-                    select: "model",
-                    campo: "model",
-                    search: "servicioBusca"
-                },
-                {
-                    service: "getCities",
-                    select: "cities",
-                    campo: "name",
-                    search: "servicioBusca"
-                },
-                {
-                    service: "getProviders",
-                    select: "providers",
-                    campo: "name",
-                    search: "servicioBusca"
-                },
-                {
-                    service: "getCategories",
-                    select: "categories",
-                    campo: "category",
-                    search: "servicioBusca"
-                }];
-            $("#advancedForm").click(function(event)
+                service: "getModels",
+                select: "model",
+                campo: "name",
+                search: "servicioBusca"
+            },
             {
+                service: "getCities",
+                select: "cities",
+                campo: "name",
+                search: "servicioBusca"
+            },
+            {
+                service: "getProviders",
+                select: "providers",
+                campo: "name",
+                search: "servicioBusca"
+            },
+            {
+                service: "getCategories",
+                select: "categories",
+                campo: "category",
+                search: "servicioBusca"
+            }];
+
+            $("#advancedForm").click(function(event) {
                 //console.log("Ingresa al formulario");
                 //event.preventDefault();
                 var ingresa = false;
                 var nomServicio = "";
                 var criterio = "";
-                for(var i = 0; i < serviceSearch.length; i++)
+                
+                //jb.del10 Pregunta si hay rango de precios
+                if (($("#price1").val().length !== 0) || ($("#price2").val().length !== 0))
                 {
-                    if($("#" + serviceSearch[i].select).val() !== "0")
+                    nomServicio = "getByPriceRange"; 
+                            //+ $("#price1").val() + "/" + $("#price2").val();
+                    criterio = [$("#price1").val(),$("#price2").val()];
+                    ingresa = true;
+                    
+                }else{
+                    for(var i = 0; i < serviceSearch.length; i++)
                     {
-                        criterio = ($("#" + serviceSearch[i].select).val());
-                        nomServicio = serviceSearch[i].service + "/";
-                        ingresa = true;
-                        break;
+                        if($("#" + serviceSearch[i].select).val() !== "0")
+                        {
+                            criterio = ($("#" + serviceSearch[i].select).val());
+                            nomServicio = serviceSearch[i].service + "/";
+                            ingresa = true;
+                            break;
+                        }
                     }
                 }
+                    
                 if(ingresa)
                 {
+                    console.log(nomServicio, criterio);
                     findBy(nomServicio, criterio);
                     $('#myModalHorizontal').modal('hide');
                 }
             });
+            
             this.advancedSearch = function (){
                 $('#myModalHorizontal').modal('show');
                 for (var i = 0; i < serviceSearch.length; i++)
@@ -91,6 +106,8 @@
             var advancedSearchFields = function (indice){
                 svc.cargaCombos(serviceSearch[indice].service).then(function (data)
                 {
+                    //debugger;
+                    console.log(data);
                     var $select = $('#' + serviceSearch[indice].select);
                     $select.find('option').remove();
                     $select.append("<option value = '0'>Select</option>");

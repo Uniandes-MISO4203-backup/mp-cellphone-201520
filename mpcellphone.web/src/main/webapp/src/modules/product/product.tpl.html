@@ -208,46 +208,52 @@ jQuery(document).ready(function ($) {
                     <span aria-hidden="true">&times;</span>
                     <span class="sr-only">Close</span>
                 </button>
-                <h4 class="modal-title" id="myModalLabel">
-                    Advanced Search
-                </h4>
+                <h4 class="modal-title" id="myModalLabel">Advanced Search</h4>
             </div>
 
             <!-- Modal Body -->
             <div class="modal-body">
-
                 <form class="form-horizontal" role="form" >
+                    <!--Filtro modelo -->
                     <div class="form-group">
-                        <label  class="col-sm-2 control-label"
-                                for="inputEmail3">Model</label>
+                        <label  class="col-sm-2 control-label" for="model">Model</label>
                         <div class="col-sm-10">
-                            <select  class="form-control" id = "model">
-                            </select>
+                            <select  class="form-control" id="model"></select>
                         </div>
                     </div>
+                    <!--Filtro Ciudad -->
                     <div class="form-group">
-                        <label class="col-sm-2 control-label"
-                               for="inputPassword3" >City</label>
+                        <label class="col-sm-2 control-label" for="city" >City</label>
                         <div class="col-sm-10">
-                            <select  class="form-control" id = "cities" title="test">
-                            </select>
+                            <select  class="form-control" id="cities"></select>
                         </div>
                     </div>
+                    <!--Filtro Proveedor -->
                     <div class="form-group">
-                        <label class="col-sm-2 control-label"
-                               for="inputPassword3" >Provider</label>
-                        <div class="col-sm-10">
-                            <select  class="form-control" id = "providers">
-                            </select>
+                        <label class="col-sm-2 control-label" for="provider" >Provider</label>
+                        <div class="col-sm-10"> 
+                            <select class="form-control" id="providers"></select>
                         </div>
                     </div>
+                    <!--Filtro Precio inferior -->
                     <div class="form-group">
-                        <label class="col-sm-2 control-label"
-                               for="inputPassword3" >Category</label>
+                        <label class="col-sm-2 control-label" for="price1" >Price $</label>
                         <div class="col-sm-10">
-                            <select class="form-control" id = "categories" >
-
-                            </select>
+                            <input type="number" class="form-control" id="price1" step="50000" min="100000">
+                        </div>
+                    </div>
+                    <!--Filtro Precio superior -->
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="price2" >To $</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" id="price2" step="50000">
+                        </div>
+                    </div>
+                    <!--Filtro Categoria -->
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="category" >Category</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" id = "categories" ></select>
                         </div>
                     </div>
                 </form>
@@ -255,12 +261,8 @@ jQuery(document).ready(function ($) {
 
             <!-- Modal Footer -->
             <div class="modal-footer">
-                <button type="button" class="btn btn-default"
-                        data-dismiss="modal">submit
-                    Close
-                </button>
-                <button type="submit" class="btn btn-primary" id = "advancedForm">Search
-                </button>          
+                <button type="button" class="btn btn-default" data-dismiss="modal">Submit Close</button>
+                <button type="submit" class="btn btn-primary" id="advancedForm">Search</button>          
             </div>
         </div>
     </div>

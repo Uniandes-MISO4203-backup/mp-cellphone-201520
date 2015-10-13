@@ -38,7 +38,13 @@
             
             this.getBy = function(service, name)
             {
-                return this.api.one(service, name).get();
+                //Se edita la función getBy, porque es una busqueda alterna
+                if (service !== "getByPriceRange"){
+                    return this.api.one(service, name).get();
+                }else{
+                    return this.api.one(service+"/"+name[0]+"/"+name[1]).get();
+                }
+                
             };
             
             this.getByDiscount = function()

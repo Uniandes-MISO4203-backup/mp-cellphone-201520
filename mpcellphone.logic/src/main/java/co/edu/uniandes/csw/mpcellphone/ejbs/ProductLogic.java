@@ -112,7 +112,7 @@ public class ProductLogic implements IProductLogic {
     }
     //Para Obtener la lista de un modelo especifico filtrado por ciudad, Desarrollado por Miguel Olivares
     @Override
-    public List<ProductDTO> getByPriceRange(Integer minPrice, Integer maxPrice) {
+    public List<ProductDTO> getByPriceRange(Long minPrice, Long maxPrice) {
         return ProductConverter.listEntity2DTO(persistence.getByPriceRange(minPrice, maxPrice));
     }
     //Para Obtener la lista de un modelo especifico filtrado por descuento, Desarrollado por Miguel Olivares

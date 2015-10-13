@@ -50,7 +50,7 @@ public class ProductEntity implements Serializable {
 
     private String name;
 
-    private Integer price;
+    private Long price;
     
     private Integer discount;
 
@@ -130,7 +130,7 @@ public class ProductEntity implements Serializable {
      * @return
      * @generated
      */
-    public Integer getPrice(){
+    public Long getPrice(){
         return price;
     }
 
@@ -138,7 +138,7 @@ public class ProductEntity implements Serializable {
      * @param price
      * @generated
      */
-    public void setPrice(Integer price){
+    public void setPrice(Long price){
         this.price = price;
     }
 

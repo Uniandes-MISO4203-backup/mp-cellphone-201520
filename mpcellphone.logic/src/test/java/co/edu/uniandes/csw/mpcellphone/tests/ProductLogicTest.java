@@ -103,7 +103,7 @@ public class ProductLogicTest {
         for (int i = 0; i < 3; i++) {
             ProductEntity entity = new ProductEntity();
         	entity.setName(generateRandom(String.class));
-        	entity.setPrice(generateRandom(Integer.class));
+        	entity.setPrice(generateRandom(Long.class));
             em.persist(entity);
             data.add(entity);
         }
@@ -116,7 +116,7 @@ public class ProductLogicTest {
     public void createProductTest() {
         ProductDTO dto = new ProductDTO();
         dto.setName(generateRandom(String.class));
-        dto.setPrice(generateRandom(Integer.class));
+        dto.setPrice(generateRandom(Long.class));
 
         ProductDTO result = productLogic.createProduct(dto);
 
@@ -180,7 +180,7 @@ public class ProductLogicTest {
 
         dto.setId(entity.getId());
         dto.setName(generateRandom(String.class));
-        dto.setPrice(generateRandom(Integer.class));
+        dto.setPrice(generateRandom(Long.class));
 
         productLogic.updateProduct(dto);
 

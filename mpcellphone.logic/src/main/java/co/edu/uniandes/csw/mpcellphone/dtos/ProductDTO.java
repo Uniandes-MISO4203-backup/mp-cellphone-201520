@@ -11,7 +11,7 @@ public class ProductDTO {
 
     private Long id;
     private String name;
-    private Integer price;
+    private Long price;
     private Integer discount;
     private CellPhoneDTO cellPhone;
     private ProviderDTO provider;
@@ -77,7 +77,7 @@ public class ProductDTO {
      * @return 
      * @generated
      */
-    public Integer getPrice() {
+    public Long getPrice() {
         return price;
     }
 
@@ -85,7 +85,7 @@ public class ProductDTO {
      * @param price
      * @generated
      */
-    public void setPrice(Integer price) {
+    public void setPrice(Long price) {
         this.price = price;
     }
 

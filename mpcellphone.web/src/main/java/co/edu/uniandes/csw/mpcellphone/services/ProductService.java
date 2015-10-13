@@ -258,10 +258,11 @@ public class ProductService {
     /**
      * Servicio para obtener la lista de de filtro por precios
      * Creado por ma.olivares10
+     * @param minPrice
      */
     @GET
     @Path("/getByPriceRange/{minPrice}/{maxPrice}")
-    public List<ProductDTO> getByPriceRange(@PathParam("minPrice") Integer minPrice, @PathParam("maxPrixe") Integer maxPrice) {
+    public List<ProductDTO> getByPriceRange(@PathParam("minPrice") Long minPrice, @PathParam("maxPrice") Long maxPrice) {
         
         return productLogic.getByPriceRange(minPrice, maxPrice);
     }

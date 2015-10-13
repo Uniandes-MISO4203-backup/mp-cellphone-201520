@@ -95,7 +95,7 @@ public class ProductPersistenceTest {
         for (int i = 0; i < 3; i++) {
             ProductEntity entity = new ProductEntity();
             entity.setName(generateRandom(String.class));
-            entity.setPrice(generateRandom(Integer.class));
+            entity.setPrice(generateRandom(Long.class));
             em.persist(entity);
             data.add(entity);
         }
@@ -108,7 +108,7 @@ public class ProductPersistenceTest {
     public void createProductTest() {
         ProductEntity newEntity = new ProductEntity();
         newEntity.setName(generateRandom(String.class));
-        newEntity.setPrice(generateRandom(Integer.class));
+        newEntity.setPrice(generateRandom(Long.class));
 
         ProductEntity result = productPersistence.create(newEntity);
 
@@ -172,7 +172,7 @@ public class ProductPersistenceTest {
 
         newEntity.setId(entity.getId());
         newEntity.setName(generateRandom(String.class));
-        newEntity.setPrice(generateRandom(Integer.class));
+        newEntity.setPrice(generateRandom(Long.class));
 
         productPersistence.update(newEntity);
 
