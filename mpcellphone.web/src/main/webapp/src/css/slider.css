@@ -3,8 +3,8 @@
 #slider {
   position: relative;
   overflow: hidden;
-  margin: 20px auto 0 auto;
   border-radius: 4px;
+  height: 400px; 
 }
 
 #slider ul {
@@ -13,7 +13,6 @@
   padding: 0;
   height: 400px;
   list-style: none;
-  vertical-align: middle;
 }
 
 #slider ul li {
@@ -24,7 +23,6 @@
   padding: 0;
   height: 100%;
   background: #ccc;
-  line-height: 200px;
 }
 
 a.control_prev, a.control_next {
@@ -63,4 +61,23 @@ a.control_next {
   margin: 10px auto;
   width: 160px;
   font-size: 18px;
+}
+
+.slider-container {
+    height: 400px;
+    text-align: center;  
+    font: 0/0 a;         
+}
+
+.slider-container:before {    
+    content: ' ';
+    display: inline-block;
+    vertical-align: middle;  
+    height: 100%;
+}
+
+#element-slider {
+    display: inline-block;
+    vertical-align: middle;  
+    font: 16px/1 Arial sans-serif;
 }

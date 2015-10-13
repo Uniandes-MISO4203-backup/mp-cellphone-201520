@@ -171,8 +171,8 @@
                         var price = $filter('currency')(record.price);
                         var discount = $filter('number')(record.discount,1);
                         $('#productInfo').modal('show');
-                        $("#image").html("<img src='"+record.cellPhone.image+"' width='100%'>");
-                        $("#image").html("<img src='"+record.cellPhone.image+"' width='100%'>");
+                        $("#image").html("<img src='"+record.image+"' width='100%'>");
+                        $("#image").html("<img src='"+record.image+"' width='100%'>");
                         $("#info").html("<p><strong>Cellphone:</strong>"+record.cellPhone.name+"</p>"+
                                 "<p><strong>Price:</strong>"+price+"</p>"+
                                 "<p><strong>Discount:</strong>"+discount+" %</p>"+
@@ -180,7 +180,12 @@
                         var text = "";
                         if(record.photos.length > 0){
                             for (var i = 0; i < record.photos.length; i++){
-                                text += "<li><img src='"+record.photos[i].image+"' alt='"+record.photos[i].image+"' style='max-width: 100%; vertical-align: middle;'/></li>";
+                                text += "<li><div class='slider-container'>"
+                                        +"<div id='element-slider'>"
+                                        +"<img src='"+record.photos[i].image
+                                        +"' alt='"+record.photos[i].image
+                                        +"' style='max-width: 100%; vertical-align: middle;'/>"
+                                        +"</div></div></li>";
                             }
                         }
                         $("#slider-ul").html(text);
