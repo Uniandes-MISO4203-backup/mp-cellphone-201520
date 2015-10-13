@@ -17,8 +17,8 @@ import javax.persistence.OneToMany;
 @Entity
 @NamedQueries({
     @NamedQuery(name = "Product.getByCellPhoneName", query = "select u from ProductEntity u WHERE UPPER(u.name) like :name"),
-    @NamedQuery(name = "Product.getCheaperProduct", query = "select u from ProductEntity u WHERE u.cellPhone.id = :idProvider order by u.price"),
-    @NamedQuery(name = "Product.getCheaperProvider", query = "select u from ProductEntity u WHERE u.provider.id = :idCellPhone order by u.price"),
+    @NamedQuery(name = "Product.getCheaperProduct", query = "select u from ProductEntity u WHERE u.cellPhone.id = :idCellPhone order by u.price"),
+    @NamedQuery(name = "Product.getCheaperProvider", query = "select u from ProductEntity u WHERE u.provider.id = :idProvider order by u.price"),
     //Query para Obtener la lista de productos de un Modelo Especifico desarrollado por Miguel Olivares
     @NamedQuery(name = "Product.getByModel", query = "select u from ProductEntity u WHere u.cellPhone.name = :model"),
     //Query para Obtener la lista de productos de una Marca Especifico desarrollado por Miguel Olivares

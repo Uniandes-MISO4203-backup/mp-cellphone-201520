@@ -14,6 +14,7 @@ import java.util.List;
  */
 public interface ICityLogic {
     public int countCities();
+    public List<CityDTO> getAllCities();
     public List<CityDTO> getCities(Integer page, Integer maxRecords);
     public CityDTO getCity(Long id);
     public CityDTO createCity(CityDTO dto);

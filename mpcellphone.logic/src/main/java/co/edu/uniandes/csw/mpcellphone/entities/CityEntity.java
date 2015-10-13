@@ -20,6 +20,7 @@ import javax.persistence.NamedQuery;
 @Entity
 @NamedQueries({
     @NamedQuery(name = "Product.getByState", query = "select c from CityEntity c WHERE c.state.id = :id"),
+    @NamedQuery(name = "City.getAll", query = "select c from CityEntity c"),
 })
 public class CityEntity  implements Serializable {
     

@@ -63,4 +63,11 @@ public class CityLogic implements ICityLogic {
         persistence.create(entity);
         return CityConverter.fullEntity2DTO(entity);
     }
+    /**
+     * Metodo encargado de retornar todas las ciudades
+     * @return 
+     */
+    public List<CityDTO> getAllCities() {
+        return CityConverter.listEntity2DTO(persistence.findAll());
+    }
 }

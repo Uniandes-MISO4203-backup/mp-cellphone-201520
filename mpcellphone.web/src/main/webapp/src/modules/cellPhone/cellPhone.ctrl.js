@@ -7,6 +7,7 @@
         {
             CrudCreator.extendController(this, svc, $scope, model, 'cellPhone', 'CellPhone');
             this.fetchRecords();
+            this.loadRefOptions();
           
          }]);
              

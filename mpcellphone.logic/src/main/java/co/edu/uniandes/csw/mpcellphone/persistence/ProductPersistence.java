@@ -162,14 +162,10 @@ public class ProductPersistence extends CrudPersistence<ProductEntity> {
      * @return Lista de productos de un proveeedor
      */
     public List<ProductEntity> getProductsByProvider(Integer page, Integer maxRecords,Long idProvider){
-        Map<String, Object> params = new HashMap<String, Object>();
-        params.put("limit", maxRecords);
-        params.put("offset", maxRecords*page);
-        params.put("idProvider", idProvider);
         Query q = em.createNamedQuery("Product.getProductsByProvider");
             q.setParameter("idProvider", idProvider);
             
-        return q.setFirstResult(maxRecords*page).setMaxResults(maxRecords).getResultList();
+        return q.setMaxResults(maxRecords).setFirstResult(page).getResultList();
     }
     /**
      * Ejecuta consulta para tener el total de productos de un proveedor.

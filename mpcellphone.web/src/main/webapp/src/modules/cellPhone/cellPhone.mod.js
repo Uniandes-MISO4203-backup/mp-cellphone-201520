@@ -3,7 +3,8 @@
 
     mod.constant('cellPhoneContext', 'products');
     mod.constant('cellPhoneModelContext', 'cellPhones');
-
+    mod.constant('cellPhoneCityContext', 'cities');
+    
     mod.constant('cellPhoneModel', {
         fields: [{
                 name: 'name',
@@ -45,7 +46,14 @@
                 type: 'Reference',
                 service: 'cellPhoneModelService',
                 options: [],
-                required: false
+                required: true
+            }, {
+                name: 'city',
+                displayName: 'City',
+                type: 'Reference',
+                service: 'cellPhoneCityService',
+                options: [],
+                required: true
             }, {
                 name: 'category',
                 displayName: 'Category',

@@ -28,6 +28,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import org.apache.shiro.SecurityUtils;
 
 /**
@@ -61,11 +62,6 @@ public class ProductService {
     @StatusCreated
     public ProductDTO createProduct(ProductDTO dto) {
         dto.setProvider(provider);
-        if(dto.getCellPhone()==null){
-            
-            CellPhoneDTO cellDto = cellPhoneLogic.getCellPhone(151L);
-            dto.setCellPhone(cellDto);
-        }
         return productLogic.createProduct(dto);
     }
 
@@ -132,8 +128,12 @@ public class ProductService {
     @PUT
     @Path("{id: \\d+}")
     public ProductDTO updateProduct(@PathParam("id") Long id, ProductDTO dto) {
-        dto.setId(id);
-        return productLogic.updateProduct(dto);
+        if(provider!=null){            
+            dto.setId(id);
+            return productLogic.updateProduct(dto);
+        }else{
+             return null;
+        }
     }
 
     /**
@@ -142,7 +142,9 @@ public class ProductService {
     @DELETE
     @Path("{id: \\d+}")
     public void deleteProduct(@PathParam("id") Long id) {
-        productLogic.deleteProduct(id);
+        if(provider!=null){
+            productLogic.deleteProduct(id);
+        }
     }
     
     /**

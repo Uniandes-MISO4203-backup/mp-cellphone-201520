@@ -6,6 +6,8 @@
 package co.edu.uniandes.csw.mpcellphone.persistence;
 
 import co.edu.uniandes.csw.mpcellphone.entities.CityEntity;
+import java.util.List;
+import javax.persistence.NoResultException;
 
 /**
  *
@@ -14,5 +16,13 @@ import co.edu.uniandes.csw.mpcellphone.entities.CityEntity;
 public class CityPersistence extends CrudPersistence<CityEntity>{
     public CityPersistence(){
         this.entityClass = CityEntity.class;
+    }
+    
+    public List<CityEntity> findAll(){
+        try{
+            return  executeListNamedQuery("City.getAll");
+        } catch(NoResultException e){
+            return null;
+        }
     }
 }
