@@ -64,7 +64,6 @@ public class ProductPersistence extends CrudPersistence<ProductEntity> {
         try{
             Map<String, Object> params = new HashMap<String, Object>();
             params.put("model",model);
-            
             return  executeListNamedQuery("Product.getByModel", params);
         } catch(NoResultException e){
             Logger.getLogger(ProductPersistence.class.getName()).log(Level.SEVERE, null, e);
@@ -102,7 +101,7 @@ public class ProductPersistence extends CrudPersistence<ProductEntity> {
             return  executeListNamedQuery("Product.getByCity", params);
         } catch(NoResultException e){
             Logger.getLogger(ProductPersistence.class.getName()).log(Level.SEVERE, null, e);
-                return Collections.emptyList();
+            return Collections.emptyList();
         }
     }
     
@@ -116,8 +115,8 @@ public class ProductPersistence extends CrudPersistence<ProductEntity> {
             q.setParameter("maxPrice", maxPriceObj);
             return q.getResultList();
         } catch(NoResultException e){
-                Logger.getLogger(ProductPersistence.class.getName()).log(Level.SEVERE, null, e);
-                return Collections.emptyList();
+            Logger.getLogger(ProductPersistence.class.getName()).log(Level.SEVERE, null, e);
+            return Collections.emptyList();
         }
     }
     
@@ -126,8 +125,8 @@ public class ProductPersistence extends CrudPersistence<ProductEntity> {
         try{
             return  executeListNamedQuery("Product.getByDiscount");
         } catch(NoResultException e){
-                Logger.getLogger(ProductPersistence.class.getName()).log(Level.SEVERE, null, e);
-                return Collections.emptyList();
+            Logger.getLogger(ProductPersistence.class.getName()).log(Level.SEVERE, null, e);
+            return Collections.emptyList();
         }
     }
     //Para Obtener la lista de un producto filtrado por Categoria  desarrollado por Miguel Olivares
@@ -137,8 +136,8 @@ public class ProductPersistence extends CrudPersistence<ProductEntity> {
             params.put("category",category);
             return  executeListNamedQuery("Product.getByCategory", params);
         } catch(NoResultException e){
-                Logger.getLogger(ProductPersistence.class.getName()).log(Level.SEVERE, null, e);
-                return Collections.emptyList();
+            Logger.getLogger(ProductPersistence.class.getName()).log(Level.SEVERE, null, e);
+            return Collections.emptyList();
         }
     }
     
@@ -149,6 +148,7 @@ public class ProductPersistence extends CrudPersistence<ProductEntity> {
             list = executeListNamedQuery("Product.getCategories");
             return list;
         } catch(NoResultException e){
+            Logger.getLogger(ProductPersistence.class.getName()).log(Level.SEVERE, null, e);
             return Collections.emptyList();
         }
     }
