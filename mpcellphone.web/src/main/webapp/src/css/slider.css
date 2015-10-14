@@ -7,7 +7,8 @@
 .slider ul {
     position: relative;
     margin: 0;
-    padding: 0;
+    padding: 0px;
+    box-sizing: border-box;    
     height: 400px;
     list-style: none;
 }
@@ -16,12 +17,14 @@
     display: block;
     float: left;
     margin: 0;
-    padding: 0;
+    padding: 0px;
+    box-sizing: border-box;
     height: 100%;
     background: #ccc;
 }
 a.controlprev, a.controlnext {
     position: absolute;
+    box-sizing: border-box;
     top: 40%;
     z-index: 999;
     display: block;
@@ -33,7 +36,7 @@ a.controlprev, a.controlnext {
     text-decoration: none;
     font-weight: 600;
     font-size: 18px;
-    opacity: 0.8;
+    opacity: .8;
     cursor: pointer;
 }
 a.controlprev:hover, a.controlnext:hover {
