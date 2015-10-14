@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package co.edu.uniandes.csw.mpcellphone.services;
-
 import co.edu.uniandes.csw.mpcellphone.api.IAdminLogic;
 import co.edu.uniandes.csw.mpcellphone.api.IClientLogic;
 import co.edu.uniandes.csw.mpcellphone.api.IProviderLogic;
@@ -41,43 +40,31 @@ import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.mgt.RealmSecurityManager;
 import org.apache.shiro.subject.Subject;
-
 /**
- *
  * @author Jhonatan
- * 
  * jbdel10: Se agrega la logica para Admin
- * 
  */
 @Path("/users")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class UserService {
-
     @Inject
     private IClientLogic clientLogic;
-
     @Inject
     private IProviderLogic providerLogic;
-
     @Inject
     private IAdminLogic adminLogic;
-    
-
     @Inject private IUserLogic userLogic;
     @Context private HttpServletResponse respon;
     @QueryParam("page") private Integer page;
     @QueryParam("maxRecords") private Integer maxRecords;
-
     @Path("/login")
     @POST
     public Response login(UserDTO user) {
-        
         try {
             UsernamePasswordToken token = new UsernamePasswordToken(user.getUserName(), user.getPassword(), user.isRememberMe());
             Subject currentUser = SecurityUtils.getSubject();
             currentUser.login(token);
-            
             ClientDTO client = clientLogic.getClientByUserId(currentUser.getPrincipal().toString());
             if (client != null) {
                 currentUser.getSession().setAttribute("Client", client);
@@ -87,8 +74,7 @@ public class UserService {
                 if (provider != null) {
                     currentUser.getSession().setAttribute("Provider", provider);
                     return Response.ok(provider).build();
-                } else {
-                    //jbdel1
+                } else { //jbdel10
                     AdminDTO admin = adminLogic.getAdminByUserId(currentUser.getPrincipal().toString());
                     if (admin != null) {
                         currentUser.getSession().setAttribute("Admin", admin);
@@ -100,17 +86,14 @@ public class UserService {
                                 .build();
                     }                
                 }
-            }
-                
-        } catch (AuthenticationException e) 
-        {
+            }   
+        } catch (AuthenticationException e){
             return Response.status(Response.Status.BAD_REQUEST)
                     .entity(e.getMessage())
                     .type(MediaType.TEXT_PLAIN)
                     .build();
         }    
     }
-
     @Path("/logout")
     @GET
     public Response logout() {
@@ -122,7 +105,6 @@ public class UserService {
             return Response.status(Response.Status.BAD_REQUEST).build();
         }
     }
-
     @Path("/currentUser")
     @GET
     public Response getCurrentUser() {
@@ -158,9 +140,7 @@ public class UserService {
                     .build();
         }
     }
-
-    private Account createUser(UserDTO user) {
-    
+    private Account createUser(UserDTO user) { 
         ApplicationRealm realm = ((ApplicationRealm) ((RealmSecurityManager) SecurityUtils.getSecurityManager()).getRealms().iterator().next());
         Client client = realm.getClient();
         Application application = client.getResource(realm.getApplicationRestUrl(), Application.class);
@@ -180,12 +160,10 @@ public class UserService {
             }
         }
         return acct;
-    }
-        
+    } 
     @Path("/register")
     @POST
     public Response setUser(UserDTO user) {
-
         String rolC;
         try {
             switch (user.getRole()) {
@@ -207,7 +185,6 @@ public class UserService {
                     userC.setRememberMe(user.isRememberMe());
                     userLogic.createUser(userC);
                     break;
-
                 case "provider":
                     Account acctProvider = this.createUser(user);
                     ProviderDTO newProvider = new ProviderDTO();
@@ -226,8 +203,7 @@ public class UserService {
                     userP.setRememberMe(user.isRememberMe());
                     userLogic.createUser(userP);
                     break;  
-                //jdelchiaro -- 09/09/2015
-                case "admin":
+                case "admin": //jdelchiaro -- 09/09/2015
                     Account acctAdmin = this.createUser(user);
                     AdminDTO newAdmin = new AdminDTO();
                     newAdmin.setName(user.getUserName());
@@ -245,7 +221,6 @@ public class UserService {
                     userA.setRememberMe(user.isRememberMe());
                     userLogic.createUser(userA);
                     break;
-                
             }
             return Response.ok().build();
         } catch (ResourceException e) {
@@ -255,27 +230,14 @@ public class UserService {
                     .build();
         }
     }
-    
     @Path("/AllUsers")    
     @GET
     public List<UserDTO> getUsers(UserDTO user) {
-      
-        List<UserDTO> listUsers;
-        
-        //if (user.getRole() == "admin") {
-                                
+        List<UserDTO> listUsers;                                
             if (page != null && maxRecords != null) {
                 this.respon.setIntHeader("X-Total-Count", userLogic.countUsers());
             }
             listUsers = userLogic.getUsers(page, maxRecords);
-            
             return listUsers;    
-            
-       /* } else {
-            return null;
-        }*/
-    }
-
-
-        
+    }       
 }

@@ -170,7 +170,7 @@
                             }
                         }else{
                             text += "<li style='width: 100%;'><div class='slider-container' style='width: 100%;'>"
-                                        +"<div id='element-slider' style='width: 100%;'>"
+                                        +"<div id='element-slider' style='width: 100%;' class='element-slider'>"
                                         +"No pictures</div></div></li>";
                         }
                         $("#slider-ul").html(text);

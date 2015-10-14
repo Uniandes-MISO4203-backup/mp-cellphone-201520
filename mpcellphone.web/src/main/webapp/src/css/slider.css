@@ -4,7 +4,6 @@
     border-radius: 4px;
     height: 400px; 
 }
-
 .slider ul {
     position: relative;
     margin: 0;
@@ -12,7 +11,6 @@
     height: 400px;
     list-style: none;
 }
-
 .slider ul li {
     position: relative;
     display: block;
@@ -22,8 +20,7 @@
     height: 100%;
     background: #ccc;
 }
-
-a.controlPrev, a.controlNext {
+a.controlprev, a.controlnext {
     position: absolute;
     top: 40%;
     z-index: 999;
@@ -39,41 +36,28 @@ a.controlPrev, a.controlNext {
     opacity: 0.8;
     cursor: pointer;
 }
-
-a.controlPrev:hover, a.controlNext:hover {
+a.controlprev:hover, a.controlnext:hover {
     opacity: 1;
     -webkit-transition: all 0.2s ease;
 }
-
-a.controlPrev {
+a.controlprev {
     border-radius: 0 2px 2px 0;
 }
-
-a.controlNext {
+a.controlnext {
     right: 0;
     border-radius: 2px 0 0 2px;
 }
-
-.slider_option {
-    position: relative;
-    margin: 10px auto;
-    width: 160px;
-    font-size: 18px;
-}
-
 .slider-container {
     height: 400px;
     text-align: center;  
     font: 0/0 a;         
 }
-
 .slider-container:before {    
     content: ' ';
     display: inline-block;
     vertical-align: middle;  
     height: 100%;
 }
-
 .element-slider {
     display: inline-block;
     vertical-align: middle;  
