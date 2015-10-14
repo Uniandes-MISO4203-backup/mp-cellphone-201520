@@ -1,8 +1,8 @@
 (function (ng) {
     var mod = ng.module('productModule');
     var maximoCaracteres = 255;
-    var ProducSelComment = 0; 
-    mod.controller('productCtrl', 
+    var ProducSelComment = 0;
+    mod.controller('productCtrl',
         ['CrudCreator', '$scope', 'productService', 'productModel', 'cartItemService', '$location', 'authService', 'adminService','$filter',
         function (CrudCreator, $scope, svc, model, cartItemSvc, $location, authSvc, adminService,$filter) {
             CrudCreator.extendController(this, svc, $scope, model, 'product', 'Products');
@@ -34,6 +34,11 @@
                 campo: "category",
                 search: "servicioBusca"
             }];
+            var findBy = function(servicio, criterio){
+               svc.getBy(servicio, criterio).then(function(data){
+                   $scope.records = data;
+                });
+            };
             $("#advancedForm").click(function(event) {
                 var ingresa = false;
                 var nomServicio = "";
@@ -50,12 +55,22 @@
                             ingresa = true; break;
                         }
                     }
-                }   
+                }
                 if(ingresa){
                     findBy(nomServicio, criterio);
                     $('#myModalHorizontal').modal('hide');
                 }
             });
+            var advancedSearchFields = function (indice){
+                svc.cargaCombos(serviceSearch[indice].service).then(function (data){
+                    var $select = $('#' + serviceSearch[indice].select);
+                    $select.find('option').remove();
+                    $select.append("<option value = '0'>Select</option>");
+                    $.each(data, function (i){
+                        $select.append("<option value='" + data[i][serviceSearch[indice].campo] + "'>" + data[i][serviceSearch[indice].campo] + "</option>");
+                    });
+                });
+            };
             this.advancedSearch = function (){
                 $('#myModalHorizontal').modal('show');
                 for (var i = 0; i < serviceSearch.length; i++){
@@ -68,21 +83,6 @@
                         }
                     });
                 }
-            };
-            var findBy = function(servicio, criterio){
-               svc.getBy(servicio, criterio).then(function(data){
-                   $scope.records = data;
-                });
-            };
-            var advancedSearchFields = function (indice){
-                svc.cargaCombos(serviceSearch[indice].service).then(function (data){
-                    var $select = $('#' + serviceSearch[indice].select);
-                    $select.find('option').remove();
-                    $select.append("<option value = '0'>Select</option>");
-                    $.each(data, function (i){
-                        $select.append("<option value='" + data[i][serviceSearch[indice].campo] + "'>" + data[i][serviceSearch[indice].campo] + "</option>");
-                    });
-                });
             };
             $("#admin").hide();
             $("#carrito").hide();
@@ -144,7 +144,7 @@
             //Para la información adicional del producto
             this.prodductInfoActions = [{
                     name: 'productInfo',
-                    class: 'warning', 
+                    class: 'warning',
                     fn: function (record){
                         var price = $filter('currency')(record.price);
                         var discount = $filter('number')(record.discount,1);
@@ -179,7 +179,24 @@
                         return true;
                     }
                 }];
-            this.commentActions = [{  //Para los comentarios por producto...
+            var getComments = function (id){
+                svc.comments(id).then(function (data){
+                    var txt = "";
+                    var cont = 0;
+                    for (var i = 0; i < data.length; i++){
+                        if (Number(data[i].product_id) === Number(id)){
+                            if (txt !== ""){
+                                txt += "<hr>";
+                            }
+                            cont++;
+                            txt += cont + ". " + data[i].comment;
+                        }
+                    }
+                    $("#listComments").html(cont !== 0 ? txt : "<center><b>No comments here, be the first to comment</b></center>");
+                });
+            };
+            //Para los comentarios por producto...
+            this.commentActions = [{
                     name: 'comment',
                     displayName: 'Comment',
                     icon: 'comment',
@@ -203,23 +220,8 @@
                         return true;
                     }
                 }];
-            var getComments = function (id){
-                svc.comments(id).then(function (data){
-                    var txt = "";
-                    var cont = 0;
-                    for (var i = 0; i < data.length; i++){
-                        if (Number(data[i].product_id) === Number(id)){
-                            if (txt !== ""){
-                                txt += "<hr>";
-                            }
-                            cont++;
-                            txt += cont + ". " + data[i].comment;
-                        }
-                    }
-                    $("#listComments").html(cont !== 0 ? txt : "<center><b>No comments here, be the first to comment</b></center>");
-                });
-            };
-            this.questionActions = [{ //Para las preguntas por producto...
+            //Para las preguntas por producto...
+            this.questionActions = [{
                     name: 'question',
                     displayName: 'Question',
                     icon: 'question-sign',
@@ -240,7 +242,8 @@
                         return true;
                     }
                 }];
-            this.keyActions = [{ //Para limitar el n�mero de car�cteres...
+            //Para limitar el numero de caracteres...
+            this.keyActions = [{
                     fn: function (){
                         var queda = maximoCaracteres - $("#comment").val().length;
                         if (queda < 0){
@@ -250,7 +253,8 @@
                         $("#cantidad").html("<center>" + queda + "</center>");
                     }
                 }];
-            this.saveComment = [{ //Para salvar el comentario...
+            //Para salvar el comentario...
+            this.saveComment = [{
                     fn: function (){
                         if (authSvc.getCurrentUser()){
                             if ($("#comment").val().length !== 0){
@@ -295,7 +299,14 @@
                         }
                     }
                 }];
-            this.cheapestActions = [{ //Para encontrar el Proveedor con el menor precio para un producto
+            var findItem = function (record){
+                svc.findItem(record.id).then(function (cellPhone) {
+                    $scope.records = [];
+                    $scope.records.push(cellPhone);
+                });
+            };
+            //Para encontrar el Proveedor con el menor precio para un producto
+            this.cheapestActions = [{
                     name: 'BestProvider',
                     displayName: 'Best Provider',
                     icon: 'thumbs-up',
@@ -308,10 +319,10 @@
                     }
                 }
             ]
-            var findItem = function (record){
-                svc.findItem(record.id).then(function (cellPhone) {
+            var findItemProv = function (record){
+                svc.findItemProv(record.provider.id).then(function (provider) {
                     $scope.records = [];
-                    $scope.records.push(cellPhone);
+                    $scope.records.push(provider);
                 });
             };
             this.cheapestProvActions = [{ //Para encontrar el menor precio de un Proveedor
@@ -327,12 +338,6 @@
                     }
                 }
             ]
-            var findItemProv = function (record){
-                svc.findItemProv(record.provider.id).then(function (provider) {
-                    $scope.records = [];
-                    $scope.records.push(provider);
-                });
-            };
             this.fetchRecords().then(function (data){
                 tmp = data;
                 var groups = [{
@@ -344,7 +349,8 @@
                             }]}];
                 var existe = false;
                 for (var i = 0; i < data.length; i++){
-                    existe = false; //Saber que el proveedor no est� ya relacionado...
+                    //Saber que el proveedor no est� ya relacionado...
+                    existe = false;
                     for (var c = 0; c < groups.length; c++){
                         if (Number(groups[c].Id) === Number(data[i].provider.id)){
                             groups[c].Items.push({
@@ -366,7 +372,12 @@
                 $scope.groups = groups;
                 $scope.currentGroup = groups[0];
             });
-            this.discountActions = [{ //Para listar por descuento Desarrollado por Miguel Olivares
+            var findByDiscount = function(){
+               svc.getByDiscount().then(function(data){
+                   $scope.records = data;
+            });
+            //Para listar por descuento Desarrollado por Miguel Olivares
+            this.discountActions = [{
                     name: 'BestDiscounts',
                     displayName: 'Best Discounts',
                     icon: 'usd',
@@ -379,10 +390,6 @@
                     }
                 }
             ]
-            var findByDiscount = function(){
-               svc.getByDiscount().then(function(data){
-                   $scope.records = data;
-            });
         };
     }]);
 })(window.angular);
