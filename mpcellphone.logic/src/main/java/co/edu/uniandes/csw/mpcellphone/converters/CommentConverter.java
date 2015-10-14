@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package co.edu.uniandes.csw.mpcellphone.converters;
 
 import co.edu.uniandes.csw.mpcellphone.dtos.CommentDTO;
@@ -30,8 +25,8 @@ public abstract class CommentConverter {
             dto.setId(entity.getId());
             dto.setComment(entity.getComment());
             dto.setDate(entity.getDate());
-            dto.setProduct_id(entity.getProduct_id());
-            dto.setClient_id(entity.getClient_id());
+            dto.setProductId(entity.getProductId());
+            dto.setClientId(entity.getClientId());
 
             return dto;
         } else {
@@ -64,8 +59,8 @@ public abstract class CommentConverter {
             dto.setId(entity.getId());
             dto.setComment(entity.getComment());
             dto.setDate(entity.getDate());
-            dto.setClient_id(entity.getClient_id());
-            dto.setProduct_id(entity.getProduct_id());
+            dto.setClientId(entity.getClientId());
+            dto.setProductId(entity.getProductId());
 
             return dto;
         } else {
@@ -82,8 +77,8 @@ public abstract class CommentConverter {
             entity.setId(dto.getId());
             entity.setComment(dto.getComment());
             entity.setDate(dto.getDate());
-            entity.setClient_id(dto.getClient_id());
-            entity.setProduct_id(dto.getProduct_id());
+            entity.setClientId(dto.getClientId());
+            entity.setProductId(dto.getProductId());
 
             return entity;
         } else {
