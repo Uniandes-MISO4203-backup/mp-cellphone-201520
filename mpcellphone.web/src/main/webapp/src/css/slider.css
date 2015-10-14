@@ -1,66 +1,64 @@
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,600);	
-
 .slider {
-  position: relative;
-  overflow: hidden;
-  border-radius: 4px;
-  height: 400px; 
+    position: relative;
+    overflow: hidden;
+    border-radius: 4px;
+    height: 400px; 
 }
 
 .slider ul {
-  position: relative;
-  margin: 0;
-  padding: 0;
-  height: 400px;
-  list-style: none;
+    position: relative;
+    margin: 0;
+    padding: 0;
+    height: 400px;
+    list-style: none;
 }
 
 .slider ul li {
-  position: relative;
-  display: block;
-  float: left;
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  background: #ccc;
+    position: relative;
+    display: block;
+    float: left;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: #ccc;
 }
 
-a.control_prev, a.control_next {
-  position: absolute;
-  top: 40%;
-  z-index: 999;
-  display: block;
-  padding: 4% 3%;
-  width: auto;
-  height: auto;
-  background: #2a2a2a;
-  color: #fff;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 18px;
-  opacity: 0.8;
-  cursor: pointer;
+a.controlPrev, a.controlNext {
+    position: absolute;
+    top: 40%;
+    z-index: 999;
+    display: block;
+    padding: 4% 3%;
+    width: auto;
+    height: auto;
+    background: #2a2a2a;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 18px;
+    opacity: 0.8;
+    cursor: pointer;
 }
 
-a.control_prev:hover, a.control_next:hover {
-  opacity: 1;
-  -webkit-transition: all 0.2s ease;
+a.controlPrev:hover, a.controlNext:hover {
+    opacity: 1;
+    -webkit-transition: all 0.2s ease;
 }
 
-a.control_prev {
-  border-radius: 0 2px 2px 0;
+a.controlPrev {
+    border-radius: 0 2px 2px 0;
 }
 
-a.control_next {
-  right: 0;
-  border-radius: 2px 0 0 2px;
+a.controlNext {
+    right: 0;
+    border-radius: 2px 0 0 2px;
 }
 
 .slider_option {
-  position: relative;
-  margin: 10px auto;
-  width: 160px;
-  font-size: 18px;
+    position: relative;
+    margin: 10px auto;
+    width: 160px;
+    font-size: 18px;
 }
 
 .slider-container {
@@ -76,7 +74,7 @@ a.control_next {
     height: 100%;
 }
 
-#element-slider {
+.element-slider {
     display: inline-block;
     vertical-align: middle;  
     font: 16px/1 Arial sans-serif;

@@ -17,6 +17,7 @@ public class ProductLogic implements IProductLogic {
 
     @Inject private ProductPersistence persistence;
 
+    private static final String PARAM1="Not supported yet.";
     /**
      * @generated
      */
@@ -107,6 +108,7 @@ public class ProductLogic implements IProductLogic {
         return ProductConverter.listEntity2DTO(persistence.getByProviderName(name));
     }
     //Para Obtener la lista de un modelo especifico filtrado por ciudad, Desarrollado por Miguel Olivares
+    @Override
     public List<ProductDTO> getByCity(String city) {
         return ProductConverter.listEntity2DTO(persistence.getByCity(city));
     }
@@ -139,27 +141,33 @@ public class ProductLogic implements IProductLogic {
      * @param idProvider
      * @return 
      */
+    @Override
     public List<ProductDTO> getProductsByProvider(Integer page, Integer maxRecords, Long idProvider) {
         return ProductConverter.listEntity2DTO(persistence.getProductsByProvider(page, maxRecords, idProvider));
     }
+    
     /**
      * 
      * @param idProvider
      * @return 
      */
+    @Override
     public int countProductsByProvider(Long idProvider) {
         return persistence.getCountProductsByProvider(idProvider);
     }
 
+    @Override
     public ProductDTO getProductByProvider(Long id, Long idProvider) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException(PARAM1); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
+    @Override
     public ProductDTO updateProductByProvider(ProductDTO dto, Long idProvider) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException(PARAM1); //To change body of generated methods, choose Tools | Templates.
     }
 
+    @Override
     public void deleteProductByProvider(Long id, Long idProvider) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException(PARAM1); //To change body of generated methods, choose Tools | Templates.
     }
 }

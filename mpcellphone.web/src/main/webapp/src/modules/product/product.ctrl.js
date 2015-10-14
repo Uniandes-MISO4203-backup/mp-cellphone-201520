@@ -160,7 +160,7 @@
                         if(record.photos.length > 0){
                             for (var i = 0; i < record.photos.length; i++){
                                 text += "<li><div class='slider-container'>"
-                                        +"<div id='element-slider'>"
+                                        +"<div id='element-slider' class='element-slider'>"
                                         +"<a href='"+record.photos[i].image+"' target='_blank' "
                                         +" >"
                                         +"<img src='"+record.photos[i].image
