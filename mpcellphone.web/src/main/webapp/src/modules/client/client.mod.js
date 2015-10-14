@@ -1,8 +1,6 @@
 (function (ng) {
     var mod = ng.module('clientModule', ['ngCrud']);
-
     mod.constant('clientContext', 'clients');
-
     mod.constant('clientModel', {
         fields: [{
                 name: 'name',
@@ -63,5 +61,5 @@
                 name: 'shoppingCart',
                 displayName: 'ShoppingCart',
                 //template: '', //override generic template
-                ctrl: 'shoppingCartCtrl'            }        ]});
+                ctrl: 'shoppingCartCtrl' }   ]});
 })(window.angular);

@@ -3,36 +3,28 @@
 (function (ng) {
     var mod = ng.module('providerModule');
 
-    mod.controller('providerCtrl', ['CrudCreator', '$scope', 'providerService', 'providerModel', '$location', 'authService', function (CrudCreator, $scope, svc, model, $location, authSvc) {
+    mod.controller('providerCtrl', ['CrudCreator', '$scope', 'providerService', 'providerModel', '$location', 'authService', '$log', function (CrudCreator, $scope, svc, model, $location, authSvc, $log) {
             CrudCreator.extendController(this, svc, $scope, model, 'provider', 'Provider');
-            //this.fetchRecords();
-            if (authSvc.getCurrentUser())
-            {
+            if (authSvc.getCurrentUser()){
                 var self = this;
-                console.log('Ingresó rol');
-                svc.getRolePr().then(function(data)
-                {
-                    console.log(data.role);
-                    switch (data.role) 
-                    {
+                $log.log('Ingrese rol');
+                svc.getRolePr().then(function(data){
+                    $log.log(data.role);
+                    switch (data.role){
                         case "admin":
                             ocultaCampos("th");
                             self.fetchRecords().then(function(){
                                 $scope.$watch(function(){
                                     ocultaCampos("td");
-                                    //console.log("Ingresa");
                                 });
                             });
                             break;
                         case "provider":
                             self.itemsPerPage = 100;
-                            self.fetchRecords().then(function(data)
-                            {
+                            self.fetchRecords().then(function(data){
                                var idActual = authSvc.getCurrentUser().id;
-                               for(var i = 0; i < data.length; i++)
-                               {
-                                   if(Number(data[i].id) === Number(idActual))
-                                   {
+                               for(var i = 0; i < data.length; i++){
+                                   if(Number(data[i].id) === Number(idActual)){
                                        self.editRecord(data[i]);
                                        break;
                                    }
@@ -46,7 +38,6 @@
                             $("#cancel-provider").click(function(){
                                 $location.path('/#/catalog');
                             });
-                            //$location.path('/#/catalog');
                             break;
                         default:
                             $location.path('/#/catalog');
@@ -54,16 +45,12 @@
                     } 
                 });
             }
-            else
-            {
+            else{
                 $location.path('/#/catalog');
             }
-        var ocultaCampos = function(tipo)
-        {
-            for(var i = 1; i <= model.fields.length; i++)
-            {
-                if(!model.fields[i - 1].visible)
-                {
+        var ocultaCampos = function(tipo){
+            for(var i = 1; i <= model.fields.length; i++){
+                if(!model.fields[i - 1].visible){
                     $(tipo + ":nth-child("+i+")").css({"display" : "none"});
                 }
             }
