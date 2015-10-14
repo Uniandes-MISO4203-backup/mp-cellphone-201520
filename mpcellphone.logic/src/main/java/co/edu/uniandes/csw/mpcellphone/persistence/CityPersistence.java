@@ -5,8 +5,12 @@
  */
 package co.edu.uniandes.csw.mpcellphone.persistence;
 
+import co.edu.uniandes.csw.mpcellphone.ejbs.CityLogic;
 import co.edu.uniandes.csw.mpcellphone.entities.CityEntity;
+import java.util.Collections;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.NoResultException;
 
 /**
@@ -21,8 +25,9 @@ public class CityPersistence extends CrudPersistence<CityEntity>{
     public List<CityEntity> findAll(){
         try{
             return  executeListNamedQuery("City.getAll");
-        } catch(NoResultException e){
-            return null;
+        } catch (NoResultException ex) {
+            Logger.getLogger(CityLogic.class.getName()).log(Level.SEVERE, null, ex);
+            return Collections.emptyList();
         }
     }
 }
