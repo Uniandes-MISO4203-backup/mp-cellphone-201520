@@ -42,17 +42,13 @@ public class ProductService {
     @Inject private IProviderLogic providerLogic;
     @Inject private IQuestionLogic questionLogic;
     @Inject private ICommentLogic commentLogic;
-    @Inject private IClientLogic clientLogic;
     @Inject private ICellPhoneLogic cellPhoneLogic;
-    @Inject private CellPhonePersistence cellPhonePersistence;
     @Context private HttpServletResponse response;
     @QueryParam("page") private Integer page;
     @QueryParam("maxRecords") private Integer maxRecords;
     @QueryParam("q")
     private String cellPhoneName;
-    private String cellPhoneModel;
     private ProviderDTO provider = (ProviderDTO) SecurityUtils.getSubject().getSession().getAttribute("Provider");
-    private final ClientDTO client = (ClientDTO)SecurityUtils.getSubject().getSession().getAttribute("Client");
     
     /**
      * @generated
