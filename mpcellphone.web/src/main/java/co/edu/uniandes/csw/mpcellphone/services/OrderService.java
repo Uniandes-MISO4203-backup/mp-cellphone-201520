@@ -7,7 +7,6 @@ import co.edu.uniandes.csw.mpcellphone.providers.StatusCreated;
 import java.util.Date;
 import java.util.List;
 import javax.inject.Inject;
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;

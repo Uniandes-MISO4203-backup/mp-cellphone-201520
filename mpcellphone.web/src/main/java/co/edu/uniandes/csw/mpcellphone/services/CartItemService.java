@@ -30,9 +30,6 @@ import org.apache.shiro.SecurityUtils;
 public class CartItemService {
 
     @Inject private ICartItemLogic cartItemLogic;
-    @Context private HttpServletResponse response;
-    @QueryParam("page") private Integer page;
-    @QueryParam("maxRecords") private Integer maxRecords;
     @Inject  private IClientLogic clientLogic;
     private final ClientDTO client = (ClientDTO)SecurityUtils.getSubject().getSession().getAttribute("Client");
 

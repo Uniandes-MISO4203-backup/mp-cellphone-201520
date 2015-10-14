@@ -93,8 +93,7 @@ public abstract class CommentConverter {
      */
     public static CommentDTO fullEntity2DTO(CommentEntity entity) {
         if (entity != null) {
-            CommentDTO dto = basicEntity2DTO(entity);
-            return dto;
+            return basicEntity2DTO(entity);
         } else {
             return null;
         }
@@ -107,8 +106,7 @@ public abstract class CommentConverter {
      */
     public static CommentEntity fullDTO2Entity(CommentDTO dto) {
         if (dto != null) {
-            CommentEntity entity = basicDTO2Entity(dto);
-            return entity;
+            return basicDTO2Entity(dto);
         } else {
             return null;
         }

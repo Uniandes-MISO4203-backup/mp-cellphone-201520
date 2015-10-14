@@ -28,13 +28,13 @@
                 type: 'String',
                 required: true,
                 visible: true
-            }, {    
+            }, {
                 name: 'cellPhone',
                 displayName: 'CellPhone',
                 type: 'Reference',
                 service: 'cellPhoneService',
                 options: [],
                 required: true,
-                visible: true   
+                visible: true
             }]});
 })(window.angular);

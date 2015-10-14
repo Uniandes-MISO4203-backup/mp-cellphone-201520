@@ -7,8 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -35,7 +33,7 @@ public class AdminEntity implements Serializable {
 
     private String name;
     
-    //Se crea la relación Uno a Uno con el usuario, 
+    //Se crea la relaciï¿½n Uno a Uno con el usuario, 
     //se recomienda hacer lo mismo para el resto de perfiles. 
     @OneToOne(cascade={CascadeType.REMOVE})                                   
     private UserEntity user;

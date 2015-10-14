@@ -42,7 +42,7 @@
                         default:
                             $location.path('/#/catalog');
                             break;
-                    } 
+                    }
                 });
             }
             else{

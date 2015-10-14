@@ -69,6 +69,6 @@
 
     mainApp.run(function (editableOptions) {
         // bootstrap3 theme. For Xeditable plugin Angular
-        editableOptions.theme = 'bs3'; 
+        editableOptions.theme = 'bs3';
     });
 })(window.angular);

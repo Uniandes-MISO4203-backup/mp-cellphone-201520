@@ -85,7 +85,6 @@ public class ProviderService {
     @PUT
     @Path("{id: \\d+}")
     public ProviderDTO updateProvider(@PathParam("id") Long id, ProviderDTO dto) {
-        //this.updateUser(dto);
         dto.setId(id);
         return providerLogic.updateProvider(dto);
     }

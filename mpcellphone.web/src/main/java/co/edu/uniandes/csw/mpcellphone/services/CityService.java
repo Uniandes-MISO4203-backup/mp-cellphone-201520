@@ -27,10 +27,10 @@ import javax.ws.rs.core.MediaType;
 public class CityService {
     
     @Inject private ICityLogic cityLogic;     
-    @Context private HttpServletResponse response;
      
     
       /**
+     * @return 
      * @generated
      */
     @GET

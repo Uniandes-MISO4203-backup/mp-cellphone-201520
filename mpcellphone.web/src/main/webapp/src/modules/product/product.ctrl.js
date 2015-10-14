@@ -44,7 +44,7 @@
                 var nomServicio = "";
                 var criterio = "";
                 if (($("#price1").val().length !== 0) || ($("#price2").val().length !== 0)){ //jb.del10
-                    nomServicio = "getByPriceRange"; 
+                    nomServicio = "getByPriceRange";
                     criterio = [$("#price1").val(),$("#price2").val()];
                     ingresa = true;
                 }else{

@@ -7,7 +7,7 @@
                 svc.getRoleCl().then(function (data){
                     switch (data.role){
                         //Para mostrar la vista de administrador...
-                        case "admin":  
+                        case "admin":
                             ocultaCampos("th");
                             self.fetchRecords().then(function () {
                                 $scope.$watch(function () {
