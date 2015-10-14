@@ -20,7 +20,7 @@
             this.findItemProv = function(idcellPhone){
                 return this.api.one('cheapestProv', idcellPhone).get();
             };            
-            this.comments = function(idcellPhone){
+            this.comments = function(){
                 return this.api.one('allcomments').get();
             };            
             this.cargaCombos = function(service)

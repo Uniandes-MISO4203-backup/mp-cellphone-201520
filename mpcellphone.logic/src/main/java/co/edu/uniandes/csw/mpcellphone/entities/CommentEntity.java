@@ -28,9 +28,9 @@ public class CommentEntity implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date date;
 
-    private Long client_id;
+    private Long clientId;
     
-    private Long product_id;
+    private Long productId;
 
     public Long getId() {
         return id;
@@ -56,20 +56,20 @@ public class CommentEntity implements Serializable {
         this.date = date;
     }
 
-    public Long getClient_id() {
-        return client_id;
+    public Long getClientId() {
+        return clientId;
     }
 
-    public void setClient_id(Long client_id) {
-        this.client_id = client_id;
+    public void setClientId(Long clientId) {
+        this.clientId = clientId;
     }
 
-    public Long getProduct_id() {
-        return product_id;
+    public Long getProductId() {
+        return productId;
     }
 
-    public void setProduct_id(Long product_id) {
-        this.product_id = product_id;
+    public void setProductId(Long productId) {
+        this.productId = productId;
     }
     
     
