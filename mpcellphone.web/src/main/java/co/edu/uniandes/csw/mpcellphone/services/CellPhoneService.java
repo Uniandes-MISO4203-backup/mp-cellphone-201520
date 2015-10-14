@@ -3,7 +3,6 @@ package co.edu.uniandes.csw.mpcellphone.services;
 import co.edu.uniandes.csw.mpcellphone.api.ICellPhoneLogic;
 import co.edu.uniandes.csw.mpcellphone.api.IProductLogic;
 import co.edu.uniandes.csw.mpcellphone.dtos.CellPhoneDTO;
-import co.edu.uniandes.csw.mpcellphone.dtos.ProductDTO;
 import co.edu.uniandes.csw.mpcellphone.dtos.ProviderDTO;
 import co.edu.uniandes.csw.mpcellphone.providers.StatusCreated;
 import java.util.List;
@@ -31,14 +30,10 @@ import org.apache.shiro.SecurityUtils;
 public class CellPhoneService {
 
     @Inject private ICellPhoneLogic cellPhoneLogic;
-    @Inject private IProductLogic productLogic;
     @Context private HttpServletResponse response;
     @QueryParam("page") private Integer page;
     @QueryParam("maxRecords") private Integer maxRecords;
-    
-    private ProviderDTO provider = (ProviderDTO) SecurityUtils.getSubject().getSession().getAttribute("Provider");
-    //private String cellPhoneModel;
-
+   
     /**
      * @generated
      */
@@ -74,7 +69,8 @@ public class CellPhoneService {
     @PUT
     @Path("{id: \\d+}")
     public CellPhoneDTO updateCellPhone(@PathParam("id") Long id, CellPhoneDTO dto) {
-        return cellPhoneLogic.createCellPhone(dto);
+        dto.setId(id);
+        return cellPhoneLogic.updateCellPhone(dto);
     }
 
     /**
