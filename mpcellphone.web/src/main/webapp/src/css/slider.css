@@ -38,7 +38,6 @@ a.controlprev, a.controlnext {
 }
 a.controlprev:hover, a.controlnext:hover {
     opacity: 1;
-    -webkit-transition: all 0.2s ease;
 }
 a.controlprev {
     border-radius: 0 2px 2px 0;
@@ -47,12 +46,12 @@ a.controlnext {
     right: 0;
     border-radius: 2px 0 0 2px;
 }
-.slider-container {
+.slidercontainer {
     height: 400px;
     text-align: center;  
     font: 0/0 a;         
 }
-.slider-container:before {    
+.slidercontainer:before {    
     content: ' ';
     display: inline-block;
     vertical-align: middle;  

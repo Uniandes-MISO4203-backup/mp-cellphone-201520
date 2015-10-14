@@ -159,7 +159,7 @@
                         var text = "";
                         if(record.photos.length > 0){
                             for (var i = 0; i < record.photos.length; i++){
-                                text += "<li><div class='slider-container'>"
+                                text += "<li><div class='slidercontainer'>"
                                         +"<div id='element-slider' class='element-slider'>"
                                         +"<a href='"+record.photos[i].image+"' target='_blank' "
                                         +" >"
@@ -169,7 +169,7 @@
                                         +"</a></div></div></li>";
                             }
                         }else{
-                            text += "<li style='width: 100%;'><div class='slider-container' style='width: 100%;'>"
+                            text += "<li style='width: 100%;'><div class='slidercontainer' style='width: 100%;'>"
                                         +"<div id='element-slider' style='width: 100%;' class='element-slider'>"
                                         +"No pictures</div></div></li>";
                         }
