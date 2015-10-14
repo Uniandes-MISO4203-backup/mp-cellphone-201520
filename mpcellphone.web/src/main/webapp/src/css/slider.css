@@ -7,7 +7,7 @@
 .slider ul {
     position: relative;
     margin: 0;
-    padding: 0px;
+    padding: 0;
     box-sizing: border-box;    
     height: 400px;
     list-style: none;
@@ -17,7 +17,7 @@
     display: block;
     float: left;
     margin: 0;
-    padding: 0px;
+    padding: 0;
     box-sizing: border-box;
     height: 100%;
     background: #ccc;
