@@ -12,12 +12,11 @@
                 displayName: 'UserID',
                 type: 'String',
                 required: true
-            }, 
-             {
+            },  {
                 name: 'role',
                 displayName: 'Role',
                 type: 'String',
                 required: true
             }]
-        })
+        });
 })(window.angular);

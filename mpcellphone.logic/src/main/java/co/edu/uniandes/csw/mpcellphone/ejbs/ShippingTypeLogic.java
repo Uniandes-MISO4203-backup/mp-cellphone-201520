@@ -6,11 +6,8 @@
 package co.edu.uniandes.csw.mpcellphone.ejbs;
 
 import co.edu.uniandes.csw.mpcellphone.api.IShippingTypeLogic;
-import co.edu.uniandes.csw.mpcellphone.converters.ShipConverter;
 import co.edu.uniandes.csw.mpcellphone.converters.ShippingTypeConverter;
-import co.edu.uniandes.csw.mpcellphone.dtos.ShipDTO;
 import co.edu.uniandes.csw.mpcellphone.dtos.ShippingTypeDTO;
-import co.edu.uniandes.csw.mpcellphone.entities.ShipEntity;
 import co.edu.uniandes.csw.mpcellphone.entities.ShippingTypeEntity;
 import co.edu.uniandes.csw.mpcellphone.persistence.ShippingTypePersistence;
 import java.util.List;
