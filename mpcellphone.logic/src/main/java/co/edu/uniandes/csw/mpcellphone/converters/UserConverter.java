@@ -23,18 +23,15 @@ public abstract class UserConverter {
      */
     public static UserDTO refEntity2DTO(UserEntity entity) {
         if (entity != null) {
-            
             UserDTO dto = new UserDTO();
             dto.setId(entity.getId());
             dto.setName(entity.getName());
-            //dto.setUserId(entity.getUserId());
             dto.setRole(entity.getRole()); 
             dto.setEmail(entity.getEmail());
             dto.setStormpath(entity.getStormpath());
             dto.setPassword(entity.getPassword());
             dto.setUserName(entity.getUserName());
-            dto.setRememberMe(entity.isRememberMe());
-   
+            dto.setRememberMe(entity.isRememberMe());   
             return dto;
         } else {
             return null;
@@ -50,7 +47,6 @@ public abstract class UserConverter {
         if (dto != null) {
             UserEntity entity = new UserEntity();
             entity.setId(dto.getId());
-
             return entity;
         } else {
             return null;
@@ -65,7 +61,6 @@ public abstract class UserConverter {
             UserDTO dto = new UserDTO();
             dto.setId(entity.getId());
             dto.setName(entity.getName());
-            //dto.setUserId(entity.getUserId());
             dto.setEmail(entity.getEmail());
             dto.setRole(entity.getRole()); 
             dto.setStormpath(entity.getStormpath());
@@ -86,7 +81,6 @@ public abstract class UserConverter {
             UserEntity entity = new UserEntity();
             entity.setId(dto.getId());
             entity.setName(dto.getName());
-            //entity.setUserId(dto.getUserId());
             entity.setEmail(dto.getEmail());
             entity.setRole(dto.getRole());
             entity.setStormpath(dto.getStormpath());
@@ -103,7 +97,6 @@ public abstract class UserConverter {
     /**
      * @generated
      */
-
     public static List<UserDTO> listEntity2DTO(List<UserEntity> entities) {
         List<UserDTO> dtos = new ArrayList<UserDTO>();
         if (entities != null) {
@@ -129,8 +122,7 @@ public abstract class UserConverter {
 
     public static UserDTO fullEntity2DTO(UserEntity entity) {
         if (entity != null) {
-            UserDTO dto = basicEntity2DTO(entity);
-            return dto;
+            return basicEntity2DTO(entity);
         } else {
             return null;
         }
@@ -143,8 +135,7 @@ public abstract class UserConverter {
      */
     public static UserEntity fullDTO2Entity(UserDTO dto) {
         if (dto != null) {
-            UserEntity entity = basicDTO2Entity(dto);
-            return entity;
+            return basicDTO2Entity(dto);
         } else {
             return null;
         }

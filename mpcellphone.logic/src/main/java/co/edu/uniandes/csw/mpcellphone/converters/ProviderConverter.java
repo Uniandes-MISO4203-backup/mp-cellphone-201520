@@ -35,7 +35,6 @@ public abstract class ProviderConverter {
             dto.setCity(entity.getCity());
             dto.setCountry(entity.getCountry());
             dto.setCalification(entity.getCalification());
-
             return dto;
         } else {
             return null;
@@ -51,7 +50,6 @@ public abstract class ProviderConverter {
         if (dto != null) {
             ProviderEntity entity = new ProviderEntity();
             entity.setId(dto.getId());
-
             return entity;
         } else {
             return null;
@@ -75,7 +73,6 @@ public abstract class ProviderConverter {
             dto.setCity(entity.getCity());
             dto.setCountry(entity.getCountry());
             dto.setCalification(entity.getCalification());
-
             return dto;
         } else {
             return null;
@@ -99,7 +96,6 @@ public abstract class ProviderConverter {
             entity.setCity(dto.getCity());
             entity.setCountry(dto.getCountry());
             entity.setCalification(dto.getCalification());
-
             return entity;
         } else {
             return null;
@@ -172,7 +168,6 @@ public abstract class ProviderConverter {
         if (Models != null) {
             for (String name : Models) {
                 ProviderDTO dto = new ProviderDTO();
-                
                 dto.setName(name);
                 dtos.add(dto);
             }

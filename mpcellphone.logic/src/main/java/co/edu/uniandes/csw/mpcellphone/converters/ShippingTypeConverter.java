@@ -95,8 +95,7 @@ public class ShippingTypeConverter {
      */
     public static ShippingTypeDTO fullEntity2DTO(ShippingTypeEntity entity) {
         if (entity != null) {
-            ShippingTypeDTO dto = basicEntity2DTO(entity);
-            return dto;
+            return basicEntity2DTO(entity);
         } else {
             return null;
         }
@@ -108,8 +107,7 @@ public class ShippingTypeConverter {
      */
     public static ShippingTypeEntity fullDTO2Entity(ShippingTypeDTO dto) {
         if (dto != null) {
-            ShippingTypeEntity entity = basicDTO2Entity(dto);
-            return entity;
+            return basicDTO2Entity(dto);
         } else {
             return null;
         }

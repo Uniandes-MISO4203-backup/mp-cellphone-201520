@@ -34,7 +34,6 @@ public abstract class ClientConverter {
             dto.setAddress(entity.getAddress());
             dto.setCity(entity.getCity());
             dto.setCountry(entity.getCountry());
-
             return dto;
         } else {
             return null;
@@ -50,7 +49,6 @@ public abstract class ClientConverter {
         if (dto != null) {
             ClientEntity entity = new ClientEntity();
             entity.setId(dto.getId());
-
             return entity;
         } else {
             return null;
@@ -73,7 +71,6 @@ public abstract class ClientConverter {
             dto.setAddress(entity.getAddress());
             dto.setCity(entity.getCity());
             dto.setCountry(entity.getCountry());
-
             return dto;
         } else {
             return null;
@@ -96,7 +93,6 @@ public abstract class ClientConverter {
             entity.setAddress(dto.getAddress());
             entity.setCity(dto.getCity());
             entity.setCountry(dto.getCountry());
-
             return entity;
         } else {
             return null;

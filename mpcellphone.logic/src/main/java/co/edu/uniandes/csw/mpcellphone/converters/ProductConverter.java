@@ -38,7 +38,6 @@ public abstract class ProductConverter {
             dto.setPhotos(PhotoConverter.listEntity2DTO(entity.getPhotos()));
             dto.setProductState(entity.getProductState());
             dto.setCity(CityConverter.refEntity2DTO(entity.getCity()));
-            
             return dto;
         } else {
             return null;
@@ -54,7 +53,6 @@ public abstract class ProductConverter {
         if (dto != null) {
             ProductEntity entity = new ProductEntity();
             entity.setId(dto.getId());
-
             return entity;
         } else {
             return null;
@@ -82,7 +80,6 @@ public abstract class ProductConverter {
             dto.setImei(entity.getImei());
             dto.setProductState(entity.getProductState());
             dto.setCity(CityConverter.refEntity2DTO(entity.getCity()));
-
             return dto;
         } else {
             return null;
@@ -110,7 +107,6 @@ public abstract class ProductConverter {
             entity.setImei(dto.getImei());
             entity.setProductState(dto.getProductState());
             entity.setCity(CityConverter.refDTO2Entity(dto.getCity()));
-
             return entity;
         } else {
             return null;
@@ -124,8 +120,7 @@ public abstract class ProductConverter {
      */
     public static ProductDTO fullEntity2DTO(ProductEntity entity) {
         if (entity != null) {
-            ProductDTO dto = basicEntity2DTO(entity);
-            return dto;
+            return basicEntity2DTO(entity);
         } else {
             return null;
         }
@@ -138,8 +133,7 @@ public abstract class ProductConverter {
      */
     public static ProductEntity fullDTO2Entity(ProductDTO dto) {
         if (dto != null) {
-            ProductEntity entity = basicDTO2Entity(dto);
-            return entity;
+            return basicDTO2Entity(dto);
         } else {
             return null;
         }

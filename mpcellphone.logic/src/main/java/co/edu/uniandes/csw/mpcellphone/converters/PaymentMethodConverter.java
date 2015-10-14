@@ -7,7 +7,7 @@ import co.edu.uniandes.csw.mpcellphone.entities.PaymentMethodEntity;
 
 /**
  * Converter para la entidad PaymentMethod
- * @author Cindy Hernández - cv.hernandez10
+ * @author Cindy Hernandez - cv.hernandez10
  */
 public abstract class PaymentMethodConverter {
 
@@ -26,7 +26,6 @@ public abstract class PaymentMethodConverter {
             PaymentMethodDTO dto = new PaymentMethodDTO();
             dto.setId(entity.getId());
             dto.setMethodName(entity.getMethodName());
-
             return dto;
         } else {
             return null;
@@ -41,7 +40,6 @@ public abstract class PaymentMethodConverter {
         if (dto != null) {
             PaymentMethodEntity entity = new PaymentMethodEntity();
             entity.setId(dto.getId());
-
             return entity;
         } else {
             return null;
@@ -57,7 +55,6 @@ public abstract class PaymentMethodConverter {
             PaymentMethodDTO dto = new PaymentMethodDTO();
             dto.setId(entity.getId());
             dto.setMethodName(entity.getMethodName());
-
             return dto;
         } else {
             return null;
@@ -73,7 +70,6 @@ public abstract class PaymentMethodConverter {
             PaymentMethodEntity entity = new PaymentMethodEntity();
             entity.setId(dto.getId());
             entity.setMethodName(dto.getMethodName());
-
             return entity;
         } else {
             return null;
@@ -86,8 +82,7 @@ public abstract class PaymentMethodConverter {
      */
     public static PaymentMethodDTO fullEntity2DTO(PaymentMethodEntity entity) {
         if (entity != null) {
-            PaymentMethodDTO dto = basicEntity2DTO(entity);
-            return dto;
+            return basicEntity2DTO(entity);
         } else {
             return null;
         }
@@ -98,9 +93,8 @@ public abstract class PaymentMethodConverter {
      * @return 
      */
     public static PaymentMethodEntity fullDTO2Entity(PaymentMethodDTO dto) {
-        if (dto != null) {
-            PaymentMethodEntity entity = basicDTO2Entity(dto);
-            return entity;
+        if (dto != null) { 
+            return basicDTO2Entity(dto);
         } else {
             return null;
         }

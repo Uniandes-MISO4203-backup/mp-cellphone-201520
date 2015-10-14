@@ -25,14 +25,12 @@ public abstract class AdminConverter {
      */
     public static AdminDTO refEntity2DTO(AdminEntity entity) {
         if (entity != null) {
-            AdminDTO dto = new AdminDTO();
-            
+            AdminDTO dto = new AdminDTO();            
             dto.setId(entity.getId());
             dto.setName(entity.getName());
             dto.setEmail(entity.getEmail());
             //Converter para el usuario
-            dto.setUser(UserConverter.refEntity2DTO(entity.getUser()));
-                    
+            dto.setUser(UserConverter.refEntity2DTO(entity.getUser()));                    
             return dto;
         } else {
             return null;
@@ -48,7 +46,6 @@ public abstract class AdminConverter {
         if (dto != null) {
             AdminEntity entity = new AdminEntity();
             entity.setId(dto.getId());
-
             return entity;
         } else {
             return null;
@@ -62,7 +59,6 @@ public abstract class AdminConverter {
             dto.setName(entity.getName());
             dto.setUser(UserConverter.refEntity2DTO(entity.getUser()));          
             dto.setEmail(entity.getEmail());
-
             return dto;
         } else {
             return null;
@@ -78,8 +74,7 @@ public abstract class AdminConverter {
             entity.setId(dto.getId());
             entity.setName(dto.getName());
             entity.setUser(UserConverter.refDTO2Entity(dto.getUser()));
-            entity.setEmail(dto.getEmail());
-          
+            entity.setEmail(dto.getEmail());          
             return entity;
         } else {
             return null;
@@ -109,5 +104,4 @@ public abstract class AdminConverter {
         }
         return entities;
     }
-
 }

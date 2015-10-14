@@ -27,7 +27,6 @@ public abstract class CellPhoneConverter {
             dto.setId(entity.getId());
             dto.setName(entity.getName());
             dto.setBrand(entity.getBrand());
-
             return dto;
         } else {
             return null;
@@ -43,7 +42,6 @@ public abstract class CellPhoneConverter {
         if (dto != null) {
             CellPhoneEntity entity = new CellPhoneEntity();
             entity.setId(dto.getId());
-
             return entity;
         } else {
             return null;
@@ -90,9 +88,8 @@ public abstract class CellPhoneConverter {
      * @generated
      */
     public static CellPhoneDTO fullEntity2DTO(CellPhoneEntity entity) {
-        if (entity != null) {
-            CellPhoneDTO dto = basicEntity2DTO(entity);
-            return dto;
+        if (entity != null) { 
+            return basicEntity2DTO(entity);
         } else {
             return null;
         }
@@ -105,8 +102,7 @@ public abstract class CellPhoneConverter {
      */
     public static CellPhoneEntity fullDTO2Entity(CellPhoneDTO dto) {
         if (dto != null) {
-            CellPhoneEntity entity = basicDTO2Entity(dto);
-            return entity;
+            return basicDTO2Entity(dto);
         } else {
             return null;
         }

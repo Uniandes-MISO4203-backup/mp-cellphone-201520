@@ -90,8 +90,7 @@ public abstract class StateConverter {
      */
     public static StateDTO fullEntity2DTO(StateEntity entity) {
         if (entity != null) {
-            StateDTO dto = basicEntity2DTO(entity);
-            return dto;
+            return basicEntity2DTO(entity);
         } else {
             return null;
         }
@@ -104,8 +103,7 @@ public abstract class StateConverter {
      */
     public static StateEntity fullDTO2Entity(StateDTO dto) {
         if (dto != null) {
-            StateEntity entity = basicDTO2Entity(dto);
-            return entity;
+            return basicDTO2Entity(dto);
         } else {
             return null;
         }

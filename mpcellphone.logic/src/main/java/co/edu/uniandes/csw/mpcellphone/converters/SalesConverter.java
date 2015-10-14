@@ -28,8 +28,7 @@ public abstract class SalesConverter {
             dto.setId(entity.getId());
             dto.setProductId(ProductConverter.refEntity2DTO(entity.getProductId()));
             dto.setOrderId(OrderConverter.refEntity2DTO(entity.getOrderId()));
-            dto.setProviderId(ProviderConverter.refEntity2DTO(entity.getProviderId()));
-            
+            dto.setProviderId(ProviderConverter.refEntity2DTO(entity.getProviderId()));            
             return dto;
         } else {
             return null;
@@ -45,7 +44,6 @@ public abstract class SalesConverter {
         if (dto != null) {
             SalesEntity entity = new SalesEntity();
             entity.setId(dto.getId());
-
             return entity;
         } else {
             return null;
@@ -63,7 +61,6 @@ public abstract class SalesConverter {
             dto.setProductId(ProductConverter.refEntity2DTO(entity.getProductId()));
             dto.setOrderId(OrderConverter.refEntity2DTO(entity.getOrderId()));
             dto.setProviderId(ProviderConverter.refEntity2DTO(entity.getProviderId()));
-
             return dto;
         } else {
             return null;
@@ -81,7 +78,6 @@ public abstract class SalesConverter {
             entity.setProductId(ProductConverter.refDTO2Entity(dto.getProductId()));
             entity.setOrderId(OrderConverter.refDTO2Entity(dto.getOrderId()));
             entity.setProviderId(ProviderConverter.refDTO2Entity(dto.getProviderId()));
-
             return entity;
         } else {
             return null;
@@ -94,8 +90,7 @@ public abstract class SalesConverter {
      */
     public static SaleDTO fullEntity2DTO(SalesEntity entity) {
         if (entity != null) {
-            SaleDTO dto = basicEntity2DTO(entity);
-            return dto;
+            return basicEntity2DTO(entity);
         } else {
             return null;
         }
@@ -107,8 +102,7 @@ public abstract class SalesConverter {
      */
     public static SalesEntity fullDTO2Entity(SaleDTO dto) {
         if (dto != null) {
-            SalesEntity entity = basicDTO2Entity(dto);
-            return entity;
+            return basicDTO2Entity(dto);
         } else {
             return null;
         }

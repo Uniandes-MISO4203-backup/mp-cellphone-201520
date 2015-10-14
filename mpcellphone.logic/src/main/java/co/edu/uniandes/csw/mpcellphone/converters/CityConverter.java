@@ -19,7 +19,7 @@ public abstract class CityConverter {
     private CityConverter(){
     }
 
-        /**
+    /**
      * @param entity
      * @return
      * @generated
@@ -32,7 +32,6 @@ public abstract class CityConverter {
             dto.setLatitude(entity.getLatitude());
             dto.setLongitude(entity.getLongitude());
             dto.setState(StateConverter.refEntity2DTO(entity.getState()));
-
             return dto;
         } else {
             return null;
@@ -48,7 +47,6 @@ public abstract class CityConverter {
         if (dto != null) {
             CityEntity entity = new CityEntity();
             entity.setId(dto.getId());
-
             return entity;
         } else {
             return null;
@@ -68,7 +66,6 @@ public abstract class CityConverter {
             dto.setLatitude(entity.getLatitude());
             dto.setLongitude(entity.getLongitude());
             dto.setState(StateConverter.refEntity2DTO(entity.getState()));
-
             return dto;
         } else {
             return null;
@@ -88,7 +85,6 @@ public abstract class CityConverter {
             entity.setLatitude(dto.getLatitude());
             entity.setLongitude(dto.getLongitude());
             entity.setState(StateConverter.refDTO2Entity(dto.getState()));
-
             return entity;
         } else {
             return null;
@@ -102,8 +98,7 @@ public abstract class CityConverter {
      */
     public static CityDTO fullEntity2DTO(CityEntity entity) {
         if (entity != null) {
-            CityDTO dto = basicEntity2DTO(entity);
-            return dto;
+            return basicEntity2DTO(entity);
         } else {
             return null;
         }
@@ -116,8 +111,7 @@ public abstract class CityConverter {
      */
     public static CityEntity fullDTO2Entity(CityDTO dto) {
         if (dto != null) {
-            CityEntity entity = basicDTO2Entity(dto);
-            return entity;
+            return basicDTO2Entity(dto);
         } else {
             return null;
         }
@@ -151,6 +145,5 @@ public abstract class CityConverter {
             }
         }
         return entities;
-    }
-    
+    }    
 }
