@@ -74,7 +74,7 @@ a.controlNext {
     height: 100%;
 }
 
-#element-slider {
+.element-slider {
     display: inline-block;
     vertical-align: middle;  
     font: 16px/1 Arial sans-serif;
