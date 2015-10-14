@@ -27,7 +27,7 @@
                         controller: 'clientCtrl',
                         controllerAs: alias
                     }).when('/products', {
-                templateUrl: tplUrl, //
+                templateUrl: tplUrl,
                 controller: 'productsCtrl',
                 controllerAs: alias
             }).when('/provider', {
@@ -68,6 +68,7 @@
         }]);
 
     mainApp.run(function (editableOptions) {
-        editableOptions.theme = 'bs3'; // bootstrap3 theme. For Xeditable plugin Angular
+        // bootstrap3 theme. For Xeditable plugin Angular
+        editableOptions.theme = 'bs3'; 
     });
 })(window.angular);
