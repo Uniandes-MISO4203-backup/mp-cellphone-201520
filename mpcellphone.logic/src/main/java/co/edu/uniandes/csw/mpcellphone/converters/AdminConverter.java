@@ -1,7 +1,6 @@
 package co.edu.uniandes.csw.mpcellphone.converters;
 
 import co.edu.uniandes.csw.mpcellphone.dtos.AdminDTO;
-import co.edu.uniandes.csw.mpcellphone.dtos.UserDTO;
 import co.edu.uniandes.csw.mpcellphone.entities.AdminEntity;
 import java.util.ArrayList;
 import java.util.List;
@@ -84,7 +83,6 @@ public abstract class AdminConverter {
     /**
      * @generated
      */
-
     public static List<AdminDTO> listEntity2DTO(List<AdminEntity> entities) {
         List<AdminDTO> dtos = new ArrayList<AdminDTO>();
         if (entities != null) {

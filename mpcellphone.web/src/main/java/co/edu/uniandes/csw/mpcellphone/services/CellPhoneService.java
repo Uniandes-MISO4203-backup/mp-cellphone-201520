@@ -1,9 +1,7 @@
 package co.edu.uniandes.csw.mpcellphone.services;
 
 import co.edu.uniandes.csw.mpcellphone.api.ICellPhoneLogic;
-import co.edu.uniandes.csw.mpcellphone.api.IProductLogic;
 import co.edu.uniandes.csw.mpcellphone.dtos.CellPhoneDTO;
-import co.edu.uniandes.csw.mpcellphone.dtos.ProviderDTO;
 import co.edu.uniandes.csw.mpcellphone.providers.StatusCreated;
 import java.util.List;
 import javax.inject.Inject;
@@ -19,7 +17,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
-import org.apache.shiro.SecurityUtils;
 
 /**
  * @generated

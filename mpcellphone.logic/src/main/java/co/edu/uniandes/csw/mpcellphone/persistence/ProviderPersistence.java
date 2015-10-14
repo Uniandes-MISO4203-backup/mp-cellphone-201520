@@ -48,22 +48,20 @@ public class ProviderPersistence extends CrudPersistence<ProviderEntity> {
     //Para Obtener la lista de Proveedores desarrollado por Miguel Olivares
     public List<String> getProviders() {
         try{            
-            List<String> list = executeListNamedQuery("Provider.getProviders");            
-            return list;
+            return executeListNamedQuery("Provider.getProviders");
         } catch(NoResultException e){
             Logger.getLogger(ProviderPersistence.class.getName()).log(Level.SEVERE, null, e);
-            return Collections.EMPTY_LIST;
+            return Collections.emptyList();
         }
     }
     
     //Para Obtener la lista de Ciudades desarrollado por Miguel Olivares
     public List<String> getCities() {
         try{            
-            List<String> list = executeListNamedQuery("Provider.getCities");            
-            return list;
+            return executeListNamedQuery("Provider.getCities");            
         } catch(NoResultException e){
             Logger.getLogger(ProviderPersistence.class.getName()).log(Level.SEVERE, null, e);
-            return Collections.EMPTY_LIST;
+            return Collections.emptyList();
         }
     }
 

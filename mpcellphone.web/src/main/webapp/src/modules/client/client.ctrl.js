@@ -1,11 +1,8 @@
-(function (ng)
-{
+(function (ng){
     var mod = ng.module('clientModule');
-    mod.controller('clientCtrl', ['CrudCreator', '$scope', 'clientService', 'clientModel', '$location', 'authService', function (CrudCreator, $scope, svc, model, $location, authSvc)
-        {
+    mod.controller('clientCtrl', ['CrudCreator', '$scope', 'clientService', 'clientModel', '$location', 'authService', function (CrudCreator, $scope, svc, model, $location, authSvc){
             CrudCreator.extendController(this, svc, $scope, model, 'client', 'Client');
-            if (authSvc.getCurrentUser())
-            {
+            if (authSvc.getCurrentUser()){
                 var self = this;
                 svc.getRoleCl().then(function (data){
                     switch (data.role){

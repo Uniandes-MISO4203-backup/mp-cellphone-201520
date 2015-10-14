@@ -14,8 +14,4 @@ public interface IUserLogic {
     public UserDTO createUser(UserDTO dto);
     public UserDTO updateUser(UserDTO dto);
     public void deleteUser(Long id);
-    /*
-    public UserDTO getUser(Long id);
-    public List<UserDTO> findByName(String name);
-    */
 }
