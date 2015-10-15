@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.mpcellphone.ejbs;
 
+import co.edu.uniandes.csw.mpcellphone.utils.MailUtilsMP;
 import co.edu.uniandes.csw.mpcellphone.api.IOrderLogic;
 import co.edu.uniandes.csw.mpcellphone.converters.OrderConverter;
 import co.edu.uniandes.csw.mpcellphone.dtos.OrderDTO;

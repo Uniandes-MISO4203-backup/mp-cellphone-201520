@@ -1,9 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package co.edu.uniandes.csw.mpcellphone.ejbs;
+package co.edu.uniandes.csw.mpcellphone.utils;
 
 import java.util.Properties;
 import java.util.logging.Level;
@@ -25,7 +20,7 @@ import javax.mail.internet.MimeMultipart;
  * @author g.gonzalez10
  */
 @Stateless
-public class mailUtilsMP{
+public class MailUtilsMP{
 
     // L�gica para generar el email
     static Properties mailServerProperties;
