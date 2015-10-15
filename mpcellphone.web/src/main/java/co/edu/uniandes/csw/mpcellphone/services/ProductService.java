@@ -46,6 +46,8 @@ public class ProductService {
     @QueryParam("q")
     private String cellPhoneName;
     private ProviderDTO provider = (ProviderDTO) SecurityUtils.getSubject().getSession().getAttribute("Provider");
+    private final String xTotalCount = "X-Total-Count";
+    
     
     /**
      * @generated
@@ -90,7 +92,7 @@ public class ProductService {
     public List<ProductDTO> getProducts() {
         if (provider != null) {
             if (page != null && maxRecords != null) {
-                this.response.setIntHeader("X-Total-Count", productLogic.countProductsByProvider(provider.getId()));
+                this.response.setIntHeader(xTotalCount, productLogic.countProductsByProvider(provider.getId()));
             }
             return productLogic.getProductsByProvider(page, maxRecords,provider.getId());
         } else {
@@ -98,7 +100,7 @@ public class ProductService {
                 return productLogic.getByCellPhoneName(cellPhoneName);
             } else {
                 if (page != null && maxRecords != null) {
-                    this.response.setIntHeader("X-Total-Count", productLogic.countProducts());
+                    this.response.setIntHeader(xTotalCount, productLogic.countProducts());
                 }
                 return productLogic.getProducts(page, maxRecords);
             }
@@ -162,7 +164,7 @@ public class ProductService {
         List<CommentDTO> listComments;
         if (page != null && maxRecords != null)
         {
-            this.response.setIntHeader("X-Total-Count", commentLogic.countComment());
+            this.response.setIntHeader(xTotalCount, commentLogic.countComment());
         }
         listComments = commentLogic.getComments(page, maxRecords);
         

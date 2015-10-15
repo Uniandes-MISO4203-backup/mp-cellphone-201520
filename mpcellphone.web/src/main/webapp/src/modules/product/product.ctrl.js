@@ -52,7 +52,8 @@
                         if($("#" + serviceSearch[i].select).val() !== "0"){
                             criterio = ($("#" + serviceSearch[i].select).val());
                             nomServicio = serviceSearch[i].service + "/";
-                            ingresa = true; break;
+                            ingresa = true; 
+                            break;
                         }
                     }
                 }
@@ -326,7 +327,7 @@
                 });
             };
             //Para encontrar el menor precio de un Proveedor
-            this.cheapestProvActions = [{ 
+            this.cheapestProvActions = [{
                     name: 'BestPrice',
                     displayName: 'Best Price',
                     icon: 'usd',
