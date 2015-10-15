@@ -46,51 +46,86 @@ import org.apache.shiro.subject.Subject;
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class UserService {
-    @Inject
-    private IClientLogic clientLogic;
-    @Inject
-    private IProviderLogic providerLogic;
-    @Inject
-    private IAdminLogic adminLogic;
+    @Inject private IClientLogic clientLogic;
+    @Inject private IProviderLogic providerLogic;
+    @Inject private IAdminLogic adminLogic;
     @Inject private IUserLogic userLogic;
+    
+    private Response loginClient (Subject currentUser) {
+        ClientDTO client = clientLogic.getClientByUserId(currentUser.getPrincipal().toString());
+        if (client != null) {
+            currentUser.getSession().setAttribute("Client", client);
+            return Response.ok(client).build();
+        } else {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity(" User is not registered")
+                    .type(MediaType.TEXT_PLAIN)
+                    .build();
+        }
+                    
+    }
+    
+    private Response loginProvider (Subject currentUser) {
+        ProviderDTO provider = providerLogic.getProviderByUserId(currentUser.getPrincipal().toString());
+        if (provider != null) {
+            currentUser.getSession().setAttribute("Provider", provider);
+            return Response.ok(provider).build();
+        } else { 
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity(" User is not registered")
+                    .type(MediaType.TEXT_PLAIN)
+                    .build();
+        }
+    }
+    
+    private Response loginAdmin (Subject currentUser) {
+        AdminDTO admin = adminLogic.getAdminByUserId(currentUser.getPrincipal().toString());
+        if (admin != null) {
+            currentUser.getSession().setAttribute("Admin", admin);
+            return Response.ok(admin).build();
+        } else {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity(" User is not registered")
+                    .type(MediaType.TEXT_PLAIN)
+                    .build();
+        }                
+    }
+    
     @Context private HttpServletResponse respon;
     @QueryParam("page") private Integer page;
     @QueryParam("maxRecords") private Integer maxRecords;
     @Path("/login")
     @POST
     public Response login(UserDTO user) {
+        Response rta;
         try {
             UsernamePasswordToken token = new UsernamePasswordToken(user.getUserName(), user.getPassword(), user.isRememberMe());
             Subject currentUser = SecurityUtils.getSubject();
             currentUser.login(token);
-            ClientDTO client = clientLogic.getClientByUserId(currentUser.getPrincipal().toString());
-            if (client != null && client.getId() !=null) {
-                currentUser.getSession().setAttribute("Client", client);
-                return Response.ok(client).build();
-            } else {
-                ProviderDTO provider = providerLogic.getProviderByUserId(currentUser.getPrincipal().toString());
-                if (provider != null && provider.getId() != null) {
-                    currentUser.getSession().setAttribute("Provider", provider);
-                    return Response.ok(provider).build();
-                } else { //jbdel10
-                    AdminDTO admin = adminLogic.getAdminByUserId(currentUser.getPrincipal().toString());
-                    if (admin != null && admin.getId() != null) {
-                        currentUser.getSession().setAttribute("Admin", admin);
-                        return Response.ok(admin).build();
-                    } else {
-                        return Response.status(Response.Status.BAD_REQUEST)
-                                .entity(" User is not registered")
-                                .type(MediaType.TEXT_PLAIN)
-                                .build();
-                    }                
-                }
-            }   
+            UserDTO userLogin = userLogic.getUserByUserId(currentUser.getPrincipal().toString());
+            switch (userLogin.getRole()) {
+                case "client":
+                    rta =  loginClient(currentUser);
+                    break;
+                case "provider":
+                    rta =  loginProvider(currentUser);
+                    break;
+                case "admin":
+                    rta = loginAdmin(currentUser);
+                    break;
+                default:
+                    rta = Response.status(Response.Status.BAD_REQUEST)
+                        .entity(" User is not registered")
+                        .type(MediaType.TEXT_PLAIN)
+                        .build();
+            }                
         } catch (AuthenticationException e){
-            return Response.status(Response.Status.BAD_REQUEST)
+            rta = Response.status(Response.Status.BAD_REQUEST)
                     .entity(e.getMessage())
                     .type(MediaType.TEXT_PLAIN)
                     .build();
         }    
+        return rta;
     }
     @Path("/logout")
     @GET
@@ -113,13 +148,8 @@ public class UserService {
             user.setName(userAttributes.get("givenName") + " " + userAttributes.get("surname"));
             user.setEmail(userAttributes.get("email"));
             user.setUserName(userAttributes.get("username"));
-            if(currentUser.getSession().getAttribute("Client")!=null){
-                user.setRole("client");
-            }else if(currentUser.getSession().getAttribute("Provider")!=null){
-                user.setRole("provider");
-            }else if(currentUser.getSession().getAttribute("Admin")!=null){
-                user.setRole("admin");
-            }
+            UserDTO userLogin = userLogic.getUserByUserId(currentUser.getPrincipal().toString());
+            user.setRole(userLogin.getRole());
             return Response.ok(user).build();
         } catch (AuthenticationException e) {
             return Response.status(Response.Status.BAD_REQUEST)
@@ -149,10 +179,22 @@ public class UserService {
         }
         return acct;
     } 
+    
+    private void CreateU (String role, Account acctClient, UserDTO user) {
+        UserDTO userC = new UserDTO();
+        userC.setName(user.getUserName());
+        userC.setRole(role);
+        userC.setStormpath(acctClient.getHref());
+        userC.setPassword(user.getPassword());
+        userC.setUserName(acctClient.getFullName());
+        userC.setEmail(user.getEmail());
+        userC.setRememberMe(user.isRememberMe());
+        userLogic.createUser(userC);
+    }
+
     @Path("/register")
     @POST
     public Response setUser(UserDTO user) {
-        String rolC;
         try {
             switch (user.getRole()) {
                 case "user":
@@ -162,16 +204,7 @@ public class UserService {
                     newClient.setUserId(acctClient.getHref());
                     newClient.setEmail(acctClient.getEmail());
                     clientLogic.createClient(newClient);
-                    rolC="client";
-                    UserDTO userC = new UserDTO();
-                    userC.setName(user.getName());
-                    userC.setRole(rolC);
-                    userC.setStormpath(acctClient.getHref());
-                    userC.setPassword(user.getPassword());
-                    userC.setUserName(acctClient.getFullName());
-                    userC.setEmail(user.getEmail());
-                    userC.setRememberMe(user.isRememberMe());
-                    userLogic.createUser(userC);
+                    CreateU("client",acctClient,user);
                     break;
                 case "provider":
                     Account acctProvider = this.createUser(user);
@@ -180,16 +213,7 @@ public class UserService {
                     newProvider.setUserId(acctProvider.getHref());
                     newProvider.setEmail(acctProvider.getEmail());
                     providerLogic.createProvider(newProvider);
-                    rolC="provider";
-                    UserDTO userP = new UserDTO();
-                    userP.setName(user.getName());
-                    userP.setRole(rolC);
-                    userP.setStormpath(acctProvider.getHref());
-                    userP.setPassword(user.getPassword());
-                    userP.setUserName(acctProvider.getFullName());
-                    userP.setEmail(user.getEmail());
-                    userP.setRememberMe(user.isRememberMe());
-                    userLogic.createUser(userP);
+                    CreateU("provider",acctProvider,user);
                     break;  
                 case "admin": //jdelchiaro -- 09/09/2015
                     Account acctAdmin = this.createUser(user);
@@ -197,16 +221,7 @@ public class UserService {
                     newAdmin.setName(user.getUserName());
                     newAdmin.setEmail(acctAdmin.getEmail());
                     adminLogic.createAdmin(newAdmin);                    
-                    rolC="admin";
-                    UserDTO userA = new UserDTO();
-                    userA.setName(user.getName());
-                    userA.setRole(rolC);
-                    userA.setStormpath(acctAdmin.getHref());
-                    userA.setPassword(user.getPassword());
-                    userA.setUserName(acctAdmin.getFullName());
-                    userA.setEmail(user.getEmail());
-                    userA.setRememberMe(user.isRememberMe());
-                    userLogic.createUser(userA);
+                    CreateU("admin",acctAdmin,user);
                     break;
             }
             return Response.ok().build();
