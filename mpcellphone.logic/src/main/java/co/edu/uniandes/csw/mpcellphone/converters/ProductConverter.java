@@ -198,14 +198,14 @@ public abstract class ProductConverter {
     }
     
     /**
-     * @param  Models 
+     * @param  models 
      * @return 
      * @generated
      */
-    public static List<ProductDTO> listString2DTO(List<String> Models) {
+    public static List<ProductDTO> listString2DTO(List<String> models) {
         List<ProductDTO> dtos = new ArrayList<ProductDTO>();
-        if (Models != null) {
-            for (String name : Models) {
+        if (models != null) {
+            for (String name : models) {
                 ProductDTO dto = new ProductDTO();
                 dto.setCategory(name);
                 dtos.add(dto);
