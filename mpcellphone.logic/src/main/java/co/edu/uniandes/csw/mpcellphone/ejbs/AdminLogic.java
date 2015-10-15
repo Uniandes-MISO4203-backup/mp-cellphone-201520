@@ -48,6 +48,7 @@ public class AdminLogic implements IAdminLogic {
     /**
      * @generated
      */
+    @Override
     public AdminDTO createAdmin(AdminDTO dto) {
         AdminEntity entity = AdminConverter.refDTO2Entity(dto);
         persistence.create(entity);

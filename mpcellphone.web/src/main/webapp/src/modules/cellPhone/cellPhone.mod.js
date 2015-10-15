@@ -4,7 +4,6 @@
     mod.constant('cellPhoneContext', 'products');
     mod.constant('cellPhoneModelContext', 'cellPhones');
     mod.constant('cellPhoneCityContext', 'cities');
-    
     mod.constant('cellPhoneModel', {
         fields: [{
                 name: 'name',

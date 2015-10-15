@@ -67,7 +67,7 @@ public class ProviderService {
     }
 
     private Account updateUser(ProviderDTO user) {
-        ApplicationRealm realm = ((ApplicationRealm) ((RealmSecurityManager) SecurityUtils.getSecurityManager()).getRealms());
+        ApplicationRealm realm = (ApplicationRealm) ((RealmSecurityManager) SecurityUtils.getSecurityManager()).getRealms();
         Client clientPr = realm.getClient();
         Account acct = clientPr.instantiate(Account.class);
         acct.setEmail(user.getEmail());
@@ -85,7 +85,6 @@ public class ProviderService {
     @PUT
     @Path("{id: \\d+}")
     public ProviderDTO updateProvider(@PathParam("id") Long id, ProviderDTO dto) {
-        //this.updateUser(dto);
         dto.setId(id);
         return providerLogic.updateProvider(dto);
     }

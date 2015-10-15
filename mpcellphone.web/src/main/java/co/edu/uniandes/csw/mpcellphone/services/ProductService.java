@@ -1,18 +1,15 @@
 package co.edu.uniandes.csw.mpcellphone.services;
 
-import co.edu.uniandes.csw.mpcellphone.api.IClientLogic;
 import co.edu.uniandes.csw.mpcellphone.api.ICommentLogic;
 import co.edu.uniandes.csw.mpcellphone.api.IProductLogic;
 import co.edu.uniandes.csw.mpcellphone.api.IProviderLogic;
 import co.edu.uniandes.csw.mpcellphone.api.IQuestionLogic;
 import co.edu.uniandes.csw.mpcellphone.api.ICellPhoneLogic;
 import co.edu.uniandes.csw.mpcellphone.dtos.CellPhoneDTO;
-import co.edu.uniandes.csw.mpcellphone.dtos.ClientDTO;
 import co.edu.uniandes.csw.mpcellphone.dtos.CommentDTO;
 import co.edu.uniandes.csw.mpcellphone.dtos.ProductDTO;
 import co.edu.uniandes.csw.mpcellphone.dtos.ProviderDTO;
 import co.edu.uniandes.csw.mpcellphone.dtos.QuestionDTO;
-import co.edu.uniandes.csw.mpcellphone.persistence.CellPhonePersistence;
 import co.edu.uniandes.csw.mpcellphone.providers.StatusCreated;
 import java.util.List;
 import javax.inject.Inject;
@@ -42,17 +39,15 @@ public class ProductService {
     @Inject private IProviderLogic providerLogic;
     @Inject private IQuestionLogic questionLogic;
     @Inject private ICommentLogic commentLogic;
-    @Inject private IClientLogic clientLogic;
     @Inject private ICellPhoneLogic cellPhoneLogic;
-    @Inject private CellPhonePersistence cellPhonePersistence;
     @Context private HttpServletResponse response;
     @QueryParam("page") private Integer page;
     @QueryParam("maxRecords") private Integer maxRecords;
     @QueryParam("q")
     private String cellPhoneName;
-    private String cellPhoneModel;
     private ProviderDTO provider = (ProviderDTO) SecurityUtils.getSubject().getSession().getAttribute("Provider");
-    private final ClientDTO client = (ClientDTO)SecurityUtils.getSubject().getSession().getAttribute("Client");
+    private final String xTotalCount = "X-Total-Count";
+    
     
     /**
      * @generated
@@ -97,7 +92,7 @@ public class ProductService {
     public List<ProductDTO> getProducts() {
         if (provider != null) {
             if (page != null && maxRecords != null) {
-                this.response.setIntHeader("X-Total-Count", productLogic.countProductsByProvider(provider.getId()));
+                this.response.setIntHeader(xTotalCount, productLogic.countProductsByProvider(provider.getId()));
             }
             return productLogic.getProductsByProvider(page, maxRecords,provider.getId());
         } else {
@@ -105,7 +100,7 @@ public class ProductService {
                 return productLogic.getByCellPhoneName(cellPhoneName);
             } else {
                 if (page != null && maxRecords != null) {
-                    this.response.setIntHeader("X-Total-Count", productLogic.countProducts());
+                    this.response.setIntHeader(xTotalCount, productLogic.countProducts());
                 }
                 return productLogic.getProducts(page, maxRecords);
             }
@@ -169,7 +164,7 @@ public class ProductService {
         List<CommentDTO> listComments;
         if (page != null && maxRecords != null)
         {
-            this.response.setIntHeader("X-Total-Count", commentLogic.countComment());
+            this.response.setIntHeader(xTotalCount, commentLogic.countComment());
         }
         listComments = commentLogic.getComments(page, maxRecords);
         

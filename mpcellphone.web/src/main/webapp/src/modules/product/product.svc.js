@@ -16,21 +16,21 @@
             //Para listar el proveedor con el producto mas economico...
             this.findItemProv = function(idcellPhone){
                 return this.api.one('cheapestProv', idcellPhone).get();
-            };          
+            };
             this.comments = function(){
                 return this.api.one('allcomments').get();
-            };  
+            };
             this.cargaCombos = function(service){
                 return this.api.one(service).get();
-            };         
+            };
             this.getBy = function(service, name){
                 //Se edita la función getBy, porque es una busqueda alterna
                 if (service !== "getByPriceRange"){
                     return this.api.one(service, name).get();
                 }else{
                     return this.api.one(service+"/"+name[0]+"/"+name[1]).get();
-                }            
-            };     
+                }
+            };
             this.getByDiscount = function(){
                 return this.api.one("getDiscount").get();
             };

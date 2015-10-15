@@ -25,7 +25,7 @@ import javax.mail.internet.MimeMultipart;
  * @author g.gonzalez10
  */
 @Stateless
-public class mailUtilsMP{
+public class MailUtilsMP{
 
     // L�gica para generar el email
     static Properties mailServerProperties;

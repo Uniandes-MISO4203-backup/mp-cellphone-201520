@@ -67,6 +67,7 @@ public class CityLogic implements ICityLogic {
      * Metodo encargado de retornar todas las ciudades
      * @return 
      */
+    @Override
     public List<CityDTO> getAllCities() {
         return CityConverter.listEntity2DTO(persistence.findAll());
     }

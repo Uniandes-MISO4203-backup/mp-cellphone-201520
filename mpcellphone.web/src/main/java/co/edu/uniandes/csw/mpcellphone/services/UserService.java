@@ -120,16 +120,6 @@ public class UserService {
             }else if(currentUser.getSession().getAttribute("Admin")!=null){
                 user.setRole("admin");
             }
-            //user.setRole(userLogic.getUserByUserName(user.getUserName()).getRole());
-            /*
-            switch (user.getRole()) {
-                case "client":
-                    user.setId(clientLogic.getClientByEmail(user.getEmail()).getId());
-                    break;
-                case "provider":
-                    //user.setId(providerLogic.getProviderByEmail(user.getEmail()).getId());
-                    break;
-            }*/
             return Response.ok(user).build();
         } catch (AuthenticationException e) {
             return Response.status(Response.Status.BAD_REQUEST)
@@ -139,7 +129,7 @@ public class UserService {
         }
     }
     private Account createUser(UserDTO user) { 
-        ApplicationRealm realm = ((ApplicationRealm) ((RealmSecurityManager) SecurityUtils.getSecurityManager()).getRealms().iterator().next());
+        ApplicationRealm realm = (ApplicationRealm) ((RealmSecurityManager) SecurityUtils.getSecurityManager()).getRealms().iterator().next();
         Client client = realm.getClient();
         Application application = client.getResource(realm.getApplicationRestUrl(), Application.class);
         Account acct = client.instantiate(Account.class);
@@ -205,7 +195,6 @@ public class UserService {
                     Account acctAdmin = this.createUser(user);
                     AdminDTO newAdmin = new AdminDTO();
                     newAdmin.setName(user.getUserName());
-                    //newAdmin.setUserId(acctAdmin.getHref());
                     newAdmin.setEmail(acctAdmin.getEmail());
                     adminLogic.createAdmin(newAdmin);                    
                     rolC="admin";

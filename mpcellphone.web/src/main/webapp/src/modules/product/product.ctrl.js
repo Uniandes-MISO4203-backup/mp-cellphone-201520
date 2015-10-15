@@ -44,7 +44,7 @@
                 var nomServicio = "";
                 var criterio = "";
                 if (($("#price1").val().length !== 0) || ($("#price2").val().length !== 0)){ //jb.del10
-                    nomServicio = "getByPriceRange"; 
+                    nomServicio = "getByPriceRange";
                     criterio = [$("#price1").val(),$("#price2").val()];
                     ingresa = true;
                 }else{
@@ -52,7 +52,8 @@
                         if($("#" + serviceSearch[i].select).val() !== "0"){
                             criterio = ($("#" + serviceSearch[i].select).val());
                             nomServicio = serviceSearch[i].service + "/";
-                            ingresa = true; break;
+                            ingresa = true; 
+                            break;
                         }
                     }
                 }
@@ -325,7 +326,8 @@
                     $scope.records.push(provider);
                 });
             };
-            this.cheapestProvActions = [{ //Para encontrar el menor precio de un Proveedor
+            //Para encontrar el menor precio de un Proveedor
+            this.cheapestProvActions = [{
                     name: 'BestPrice',
                     displayName: 'Best Price',
                     icon: 'usd',

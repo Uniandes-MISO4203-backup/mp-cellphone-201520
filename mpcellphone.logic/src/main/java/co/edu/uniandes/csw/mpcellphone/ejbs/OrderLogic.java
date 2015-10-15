@@ -81,7 +81,7 @@ public class OrderLogic implements IOrderLogic {
                 + "<br /><br />Atentamente,"
                 + "<br /><br /><br />MarketPhone";
         String subject = "Factura de su Compra en MarketPhone";
-        mailUtilsMP.sendEmailMPAttach(emailMsg, dto.getClient().getEmail(), subject, factura);
+        MailUtilsMP.sendEmailMPAttach(emailMsg, dto.getClient().getEmail(), subject, factura);
 
         return OrderConverter.fullEntity2DTO(entity);
     }
