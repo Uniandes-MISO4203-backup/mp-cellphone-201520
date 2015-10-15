@@ -1,18 +1,15 @@
 package co.edu.uniandes.csw.mpcellphone.services;
 
-import co.edu.uniandes.csw.mpcellphone.api.IClientLogic;
 import co.edu.uniandes.csw.mpcellphone.api.ICommentLogic;
 import co.edu.uniandes.csw.mpcellphone.api.IProductLogic;
 import co.edu.uniandes.csw.mpcellphone.api.IProviderLogic;
 import co.edu.uniandes.csw.mpcellphone.api.IQuestionLogic;
 import co.edu.uniandes.csw.mpcellphone.api.ICellPhoneLogic;
 import co.edu.uniandes.csw.mpcellphone.dtos.CellPhoneDTO;
-import co.edu.uniandes.csw.mpcellphone.dtos.ClientDTO;
 import co.edu.uniandes.csw.mpcellphone.dtos.CommentDTO;
 import co.edu.uniandes.csw.mpcellphone.dtos.ProductDTO;
 import co.edu.uniandes.csw.mpcellphone.dtos.ProviderDTO;
 import co.edu.uniandes.csw.mpcellphone.dtos.QuestionDTO;
-import co.edu.uniandes.csw.mpcellphone.persistence.CellPhonePersistence;
 import co.edu.uniandes.csw.mpcellphone.providers.StatusCreated;
 import java.util.List;
 import javax.inject.Inject;

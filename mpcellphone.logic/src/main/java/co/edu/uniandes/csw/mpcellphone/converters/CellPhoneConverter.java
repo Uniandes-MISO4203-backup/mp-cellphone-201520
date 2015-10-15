@@ -145,10 +145,10 @@ public abstract class CellPhoneConverter {
      * Para convertir de lista de String a Lista DTO
      * 
      */
-    public static List<CellPhoneDTO> listString2DTO(List<String> Models) {
+    public static List<CellPhoneDTO> listString2DTO(List<String> models) {
         List<CellPhoneDTO> dtos = new ArrayList<CellPhoneDTO>();
-        if (Models != null) {
-            for (String name : Models) {
+        if (models != null) {
+            for (String name : models) {
                 CellPhoneDTO dto = new CellPhoneDTO();
                 //dtos.add(basicEntity2DTO(Models));
                 dto.setName(name);
