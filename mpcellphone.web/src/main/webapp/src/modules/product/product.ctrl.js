@@ -325,7 +325,8 @@
                     $scope.records.push(provider);
                 });
             };
-            this.cheapestProvActions = [{ //Para encontrar el menor precio de un Proveedor
+            //Para encontrar el menor precio de un Proveedor
+            this.cheapestProvActions = [{ 
                     name: 'BestPrice',
                     displayName: 'Best Price',
                     icon: 'usd',
