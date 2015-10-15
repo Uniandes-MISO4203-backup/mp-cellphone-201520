@@ -48,7 +48,7 @@ public class ProductService {
     @QueryParam("q")
     private String cellPhoneName;
     private ProviderDTO provider = (ProviderDTO) SecurityUtils.getSubject().getSession().getAttribute("Provider");
-    private final String xTotalCount = "X-Total-Count";
+    private static final String xTotalCount = "X-Total-Count";
     
     
     /**

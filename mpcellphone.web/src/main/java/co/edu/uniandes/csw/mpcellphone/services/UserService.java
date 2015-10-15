@@ -51,6 +51,11 @@ public class UserService {
     @Inject private IAdminLogic adminLogic;
     @Inject private IUserLogic userLogic;
     
+    private static final String NOT_REGISTERED="User is not registered";
+    private static final String PROVIDER="provider";
+    private static final String ADMIN="admin";
+    private static final String CLIENT="client";
+    
     private Response loginClient (Subject currentUser) {
         ClientDTO client = clientLogic.getClientByUserId(currentUser.getPrincipal().toString());
         if (client != null) {
@@ -58,7 +63,7 @@ public class UserService {
             return Response.ok(client).build();
         } else {
             return Response.status(Response.Status.BAD_REQUEST)
-                    .entity(" User is not registered")
+                    .entity(NOT_REGISTERED)
                     .type(MediaType.TEXT_PLAIN)
                     .build();
         }
@@ -72,7 +77,7 @@ public class UserService {
             return Response.ok(provider).build();
         } else { 
             return Response.status(Response.Status.BAD_REQUEST)
-                    .entity(" User is not registered")
+                    .entity(NOT_REGISTERED)
                     .type(MediaType.TEXT_PLAIN)
                     .build();
         }
@@ -85,7 +90,7 @@ public class UserService {
             return Response.ok(admin).build();
         } else {
             return Response.status(Response.Status.BAD_REQUEST)
-                    .entity(" User is not registered")
+                    .entity(NOT_REGISTERED)
                     .type(MediaType.TEXT_PLAIN)
                     .build();
         }                
@@ -104,18 +109,18 @@ public class UserService {
             currentUser.login(token);
             UserDTO userLogin = userLogic.getUserByUserId(currentUser.getPrincipal().toString());
             switch (userLogin.getRole()) {
-                case "client":
+                case CLIENT:
                     rta =  loginClient(currentUser);
                     break;
-                case "provider":
+                case PROVIDER:
                     rta =  loginProvider(currentUser);
                     break;
-                case "admin":
+                case ADMIN:
                     rta = loginAdmin(currentUser);
                     break;
                 default:
                     rta = Response.status(Response.Status.BAD_REQUEST)
-                        .entity(" User is not registered")
+                        .entity(NOT_REGISTERED)
                         .type(MediaType.TEXT_PLAIN)
                         .build();
             }                
@@ -204,24 +209,24 @@ public class UserService {
                     newClient.setUserId(acctClient.getHref());
                     newClient.setEmail(acctClient.getEmail());
                     clientLogic.createClient(newClient);
-                    CreateU("client",acctClient,user);
+                    CreateU(CLIENT,acctClient,user);
                     break;
-                case "provider":
+                case PROVIDER:
                     Account acctProvider = this.createUser(user);
                     ProviderDTO newProvider = new ProviderDTO();
                     newProvider.setName(user.getUserName());
                     newProvider.setUserId(acctProvider.getHref());
                     newProvider.setEmail(acctProvider.getEmail());
                     providerLogic.createProvider(newProvider);
-                    CreateU("provider",acctProvider,user);
+                    CreateU(PROVIDER,acctProvider,user);
                     break;  
-                case "admin": //jdelchiaro -- 09/09/2015
+                case ADMIN: //jdelchiaro -- 09/09/2015
                     Account acctAdmin = this.createUser(user);
                     AdminDTO newAdmin = new AdminDTO();
                     newAdmin.setName(user.getUserName());
                     newAdmin.setEmail(acctAdmin.getEmail());
                     adminLogic.createAdmin(newAdmin);                    
-                    CreateU("admin",acctAdmin,user);
+                    CreateU(ADMIN,acctAdmin,user);
                     break;
             }
             return Response.ok().build();

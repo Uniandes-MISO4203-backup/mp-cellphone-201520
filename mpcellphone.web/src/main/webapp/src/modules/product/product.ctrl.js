@@ -52,7 +52,7 @@
                         if($("#" + serviceSearch[i].select).val() !== "0"){
                             criterio = ($("#" + serviceSearch[i].select).val());
                             nomServicio = serviceSearch[i].service + "/";
-                            ingresa = true; 
+                            ingresa = true;
                             break;
                         }
                     }

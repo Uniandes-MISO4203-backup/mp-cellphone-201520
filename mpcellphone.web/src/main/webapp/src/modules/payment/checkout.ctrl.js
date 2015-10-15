@@ -4,7 +4,6 @@
                 , 'checkoutService', 'shippingService', 'creditCardService', 'shippingTypeService', '$log',
         'saleService','productService',
         function (CrudCreator, $scope, authSvc, ciSvc, $location, chSvc, shpSvc, ccSvc, stSvc, $log, saleSvc, proSvc) {
-            var that = this;
             $scope.cartItems = [];
             $scope.payment = {};
             $scope.totalCompra = 0;
@@ -29,7 +28,7 @@
                 }
                 setTimeout(function(){
                     var types = $('#shippingType').children();
-                    while($(types[0]).text().indexOf('Select a Shipping Type') == -1){
+                    while($(types[0]).text().indexOf('Select a Shipping Type') === -1){
                         $(types[0]).remove();
                         types = $('#shippingType').children();
                     }
@@ -55,7 +54,7 @@
                 var data = $scope.shipping.shippingTypeHolders;
                 for (var i = 0; i < $scope.shippingTypeHolders.length; i++) {
                     shippingType = $scope.shippingTypeHolders[i];
-                    if ($scope.shippingTypeHolders[i].id == data) {
+                    if ($scope.shippingTypeHolders[i].id === data) {
                         break;
                     }
                 }
@@ -72,7 +71,7 @@
                     });
                 }
                 $scope.totalC = parseInt($scope.totalCompra) + parseInt($scope.shippingTypeValue);
-            }
+            };
             /*------------ Credit card ----------*/
             $scope.creditCardHolders = [];
             ccSvc.fetchRecords().then(function (data) {
@@ -83,7 +82,7 @@
                 }
                 setTimeout(function(){
                     var types = $('#creditCardType').children();
-                    while($(types[0]).text().indexOf('Select a Card Provider') == -1){
+                    while($(types[0]).text().indexOf('Select a Card Provider') === -1){
                         $(types[0]).remove();
                         types = $('#creditCardType').children();
                     }
@@ -100,7 +99,7 @@
                         document.querySelector('#pseForm').style.display = "block";
                         break;
                 }
-            }
+            };
             /*------------ Order ----------*/
             $scope.submitPayment = function () {
                 var order = {};
@@ -113,7 +112,7 @@
                 var data = $scope.payment.creditCardHolder;
                 for (var i = 0; i < $scope.creditCardHolders.length; i++) {
                     creditCard = $scope.creditCardHolders[i];
-                    if ($scope.creditCardHolders[i].id == data) {
+                    if ($scope.creditCardHolders[i].id === data) {
                         break;
                     }
                 }
@@ -127,14 +126,14 @@
                     $scope.order = data;
                     $scope.submitOrderData();
                 });
-            }
+            };
             $scope.changeView = function () {
                 var pestana = $('li.active');
                 document.querySelector('#paymentData').style.display = "none";
                 document.querySelector('#confirmationTmpl').style.display = "block";
                 pestana.next('li').addClass('active').show();
                 pestana.removeClass('active');
-            }
+            };
             $scope.saleService = function (i) {
                 $log.log($scope.cartItems[i]);
                 $log.log($scope.cartItems[i].product.id);
@@ -152,20 +151,20 @@
                     $log.log("Request success");
                     proSvc.updateProduct($scope.cartItems[i]);
                     ciSvc.deleteRecord($scope.cartItems[i]);
-                    if (i == ($scope.cartItems.length - 1)) {
+                    if (i === ($scope.cartItems.length - 1)) {
                         $('.mask').remove();
                         $('#modalPay').modal('show');
                     }
                 }).fail(function (jqXHR, textStatus) {
                     $log.log("Request failed: " + textStatus);
-                })
-            }
+                });
+            };
             /** Compendio de orden **/
             $scope.submitOrderData = function () {
                 for (var i = 0, l = $scope.cartItems.length; i < l; i++) {
                     $scope.saleService(i);
                 }
-            }
+            };
             $scope.pay = function () {
                 $('body').append('<div class="mask">');
                 $scope.submitPayment();
