@@ -6,11 +6,12 @@
 package co.edu.uniandes.csw.mpcellphone.entities;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 
 /**
  * Clase donde se almacenan las ventas hechas 
@@ -23,14 +24,17 @@ public class SalesEntity implements Serializable{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
-    @OneToOne
+    @ManyToOne
     private ProductEntity productId;
     
-    @OneToOne
+    @ManyToOne
     private OrderEntity orderId;
     
-    @OneToOne
+    @ManyToOne
     private ProviderEntity providerId;
+    
+    @ManyToOne
+    private ClientEntity clientId;
 
     public Long getId() {
         return id;
@@ -63,5 +67,12 @@ public class SalesEntity implements Serializable{
     public void setProviderId(ProviderEntity providerId) {
         this.providerId = providerId;
     }
-    
+
+    public ClientEntity getClientId() {
+        return clientId;
+    }
+
+    public void setClientId(ClientEntity clientId) {
+        this.clientId = clientId;
+    }
 }

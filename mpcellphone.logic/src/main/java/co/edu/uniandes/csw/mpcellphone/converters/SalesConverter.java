@@ -28,7 +28,8 @@ public abstract class SalesConverter {
             dto.setId(entity.getId());
             dto.setProductId(ProductConverter.refEntity2DTO(entity.getProductId()));
             dto.setOrderId(OrderConverter.refEntity2DTO(entity.getOrderId()));
-            dto.setProviderId(ProviderConverter.refEntity2DTO(entity.getProviderId()));            
+            dto.setProviderId(ProviderConverter.refEntity2DTO(entity.getProviderId())); 
+            dto.setClientId(ClientConverter.refEntity2DTO(entity.getClientId()));
             return dto;
         } else {
             return null;
@@ -61,6 +62,7 @@ public abstract class SalesConverter {
             dto.setProductId(ProductConverter.refEntity2DTO(entity.getProductId()));
             dto.setOrderId(OrderConverter.refEntity2DTO(entity.getOrderId()));
             dto.setProviderId(ProviderConverter.refEntity2DTO(entity.getProviderId()));
+            dto.setClientId(ClientConverter.refEntity2DTO(entity.getClientId()));
             return dto;
         } else {
             return null;
@@ -78,6 +80,7 @@ public abstract class SalesConverter {
             entity.setProductId(ProductConverter.refDTO2Entity(dto.getProductId()));
             entity.setOrderId(OrderConverter.refDTO2Entity(dto.getOrderId()));
             entity.setProviderId(ProviderConverter.refDTO2Entity(dto.getProviderId()));
+            entity.setClientId(ClientConverter.refDTO2Entity(dto.getClientId()));
             return entity;
         } else {
             return null;

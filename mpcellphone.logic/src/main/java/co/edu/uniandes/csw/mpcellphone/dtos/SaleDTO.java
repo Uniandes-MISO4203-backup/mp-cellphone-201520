@@ -18,6 +18,7 @@ public class SaleDTO {
     private ProductDTO productId;
     private OrderDTO orderId;
     private ProviderDTO providerId;
+    private ClientDTO clientId;
     
 
     public Long getId() {
@@ -51,5 +52,12 @@ public class SaleDTO {
     public void setProviderId(ProviderDTO providerId) {
         this.providerId = providerId;
     }
-    
+
+    public ClientDTO getClientId() {
+        return clientId;
+    }
+
+    public void setClientId(ClientDTO clientId) {
+        this.clientId = clientId;
+    }
 }

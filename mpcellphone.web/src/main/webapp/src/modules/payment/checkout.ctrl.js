@@ -1,10 +1,9 @@
 (function (ng) {
     var mod = ng.module('paymentModule');
-
     mod.controller('checkoutCtrl', ['CrudCreator', '$scope', 'authService', 'cartItemService', '$location'
                 , 'checkoutService', 'shippingService', 'creditCardService', 'shippingTypeService', '$log',
-        'saleService',
-        function (CrudCreator, $scope, authSvc, ciSvc, $location, chSvc, shpSvc, ccSvc, stSvc, $log, saleSvc) {
+        'saleService','productService',
+        function (CrudCreator, $scope, authSvc, ciSvc, $location, chSvc, shpSvc, ccSvc, stSvc, $log, saleSvc, proSvc) {
             var that = this;
             $scope.cartItems = [];
             $scope.payment = {};
@@ -141,56 +140,35 @@
                 pestana.next('li').addClass('active').show();
                 pestana.removeClass('active');
             }
-
-            /** Productos **/
-            $scope.productSale = function (cartI) {
-                $scope.cartItems[i].product.productState = 'Vendido';
+            $scope.saleService = function (i) {
+                $log.log($scope.cartItems[i]);
+                $log.log($scope.cartItems[i].product.id);
                 $.ajax({
-                    url: '/mpcellphone.web/webresources/product',
-                    method: 'PUT',
-                    data: {id: cartI.product.id,
-                        product: cartI.product},
+                    url: '/mpcellphone.web/webresources/sale',
+                    method: 'POST',
+                    data: JSON.stringify({
+                        productId: $scope.cartItems[i].product,
+                        orderId: $scope.order,
+                        providerId: $scope.cartItems[i].product.provider,
+                        clientId: authSvc.getCurrentUser()}),
                     dataType: 'json',
                     contentType: "application/json"
                 }).success(function (data) {
                     $log.log("Request success");
-                    $.ajax({
-                        url: '/mpcellphone.web/webresources/cartItems',
-                        method: 'DELETE',
-                        data: {id: cartI.id},
-                        dataType: 'json',
-                        contentType: "application/json"
-                    }).success(function (data) {
-                        $log.log("Request success");
-                    }).fail(function (jqXHR, textStatus) {
-                        $log.log("Request failed: " + textStatus);
-                    })
+                    proSvc.updateProduct($scope.cartItems[i]);
+                    ciSvc.deleteRecord($scope.cartItems[i]);
+                    if (i == ($scope.cartItems.length - 1)) {
+                        $('.mask').remove();
+                        $('#modalPay').modal('show');
+                    }
                 }).fail(function (jqXHR, textStatus) {
                     $log.log("Request failed: " + textStatus);
                 })
             }
-
             /** Compendio de orden **/
             $scope.submitOrderData = function () {
                 for (var i = 0, l = $scope.cartItems.length; i < l; i++) {
-                    $.ajax({
-                        url: '/mpcellphone.web/webresources/sale',
-                        method: 'POST',
-                        data: JSON.stringify({productId: $scope.cartItems[i].id,
-                            orderId: $scope.order.id,
-                            providerId: $scope.cartItems[i].product.provider.id}),
-                        dataType: 'json',
-                        contentType: "application/json"
-                    }).success(function (data) {
-                        $log.log("Request success");
-                        $scope.productSale($scope.cartItems[i]);
-                        if(i==(l-1)){
-                            $('.mask').remove();
-                            $('#modalPay').modal('show');
-                        }
-                    }).fail(function (jqXHR, textStatus) {
-                        $log.log("Request failed: " + textStatus);
-                    })
+                    $scope.saleService(i);
                 }
             }
 
