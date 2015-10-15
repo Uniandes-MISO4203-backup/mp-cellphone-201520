@@ -122,7 +122,7 @@ public class ProductService {
     @PUT
     @Path("{id: \\d+}")
     public ProductDTO updateProduct(@PathParam("id") Long id, ProductDTO dto) {
-        if(provider!=null){            
+        if(dto.getProvider()!=null){            
             dto.setId(id);
             return productLogic.updateProduct(dto);
         }else{
