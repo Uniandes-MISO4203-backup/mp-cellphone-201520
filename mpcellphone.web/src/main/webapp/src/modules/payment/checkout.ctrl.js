@@ -27,6 +27,13 @@
                         $scope.shippingTypeHolders.push(data[i]);
                     }
                 }
+                setTimeout(function(){
+                    var types = $('#shippingType').children();
+                    while($(types[0]).text().indexOf('Select a Shipping Type') == -1){
+                        $(types[0]).remove();
+                        types = $('#shippingType').children();
+                    }
+                }, 200);
             });
             $scope.onShippingChange = function () {
                 $scope.shippingType = $('#shippingType').val();
@@ -74,6 +81,13 @@
                         $scope.creditCardHolders.push(data[i]);
                     }
                 }
+                setTimeout(function(){
+                    var types = $('#creditCardType').children();
+                    while($(types[0]).text().indexOf('Select a Card Provider') == -1){
+                        $(types[0]).remove();
+                        types = $('#creditCardType').children();
+                    }
+                }, 200);
             });
             $scope.changePayment = function (evt) {
                 switch (evt.currentTarget.id) {

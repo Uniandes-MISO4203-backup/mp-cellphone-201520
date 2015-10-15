@@ -94,7 +94,7 @@
                         <div class="form-group">
                             <label class="col-lg-2 control-label" for="creditCard">Credit Card</label>
                             <div class="col-lg-10">
-                                <select class="form-control" ng-model="payment.creditCardHolder">
+                                <select id="creditCardType" class="form-control" ng-model="payment.creditCardHolder">
                                     <option>Select a Card Provider</option>
                                     <option ng-repeat="card in creditCardHolders" value="{{card.id}}">{{card.methodName}}</option>
                                 </select>
