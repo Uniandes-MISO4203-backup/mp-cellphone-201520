@@ -155,6 +155,10 @@ public class ProductLogic implements IProductLogic {
     public int countProductsByProvider(Long idProvider) {
         return persistence.getCountProductsByProvider(idProvider);
     }
+    @Override
+    public ProductDTO getProductByImei(String imei){
+        return ProductConverter.simpleEntity2DTO(persistence.getProductByImei(imei));
+    }    
 
     @Override
     public ProductDTO getProductByProvider(Long id, Long idProvider) {

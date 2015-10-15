@@ -64,17 +64,17 @@ public class UserService {
             Subject currentUser = SecurityUtils.getSubject();
             currentUser.login(token);
             ClientDTO client = clientLogic.getClientByUserId(currentUser.getPrincipal().toString());
-            if (client != null) {
+            if (client != null && client.getId() !=null) {
                 currentUser.getSession().setAttribute("Client", client);
                 return Response.ok(client).build();
             } else {
                 ProviderDTO provider = providerLogic.getProviderByUserId(currentUser.getPrincipal().toString());
-                if (provider != null) {
+                if (provider != null && provider.getId() != null) {
                     currentUser.getSession().setAttribute("Provider", provider);
                     return Response.ok(provider).build();
                 } else { //jbdel10
                     AdminDTO admin = adminLogic.getAdminByUserId(currentUser.getPrincipal().toString());
-                    if (admin != null) {
+                    if (admin != null && admin.getId() != null) {
                         currentUser.getSession().setAttribute("Admin", admin);
                         return Response.ok(admin).build();
                     } else {

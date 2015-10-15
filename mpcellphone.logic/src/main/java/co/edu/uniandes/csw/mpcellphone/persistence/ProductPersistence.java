@@ -172,4 +172,14 @@ public class ProductPersistence extends CrudPersistence<ProductEntity> {
         params.put(PARAM_1, idProvider);
         return ((Long) executeSingleNamedQuery("Product.getCountProductsByProvider", params)).intValue();
     }
+    /**
+     * Ejecuta consulta para obtener producto basado en un imei
+     * @param imei
+     * @return 
+     */
+    public ProductEntity getProductByImei(String imei){
+        Map<String, Object> params = new HashMap<String, Object>();
+        params.put("imei", imei);
+        return executeSingleNamedQuery("Product.getByImei", params);
+    }
 }

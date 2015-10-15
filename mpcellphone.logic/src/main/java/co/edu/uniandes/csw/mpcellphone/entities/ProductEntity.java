@@ -38,8 +38,9 @@ import javax.persistence.OneToMany;
     //Query para obtener la lista de productos de un Proveedor   
     @NamedQuery(name = "Product.getProductsByProvider", query = "select u from ProductEntity u where u.provider.id =:idProvider"),
     //Query para obtener el conteo de productos de un proveedor
-    @NamedQuery(name = "Product.getCountProductsByProvider", query = "select count(u) from ProductEntity u where u.provider.id =:idProvider ")    
-   
+    @NamedQuery(name = "Product.getCountProductsByProvider", query = "select count(u) from ProductEntity u where u.provider.id =:idProvider "),   
+    //Query para obtener u producto en base a un imei 
+    @NamedQuery(name = "Product.getByImei", query = "select p from ProductEntity p where p.imei =:imei")   
         
 })
 public class ProductEntity implements Serializable {

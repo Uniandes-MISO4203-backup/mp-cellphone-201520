@@ -28,4 +28,5 @@ public interface IProductLogic {
     public ProductDTO getProductByProvider(Long id, Long idProvider);
     public ProductDTO updateProductByProvider(ProductDTO dto, Long idProvider);
     public void deleteProductByProvider(Long id, Long idProvider);
+    public ProductDTO getProductByImei(String imei);
 }

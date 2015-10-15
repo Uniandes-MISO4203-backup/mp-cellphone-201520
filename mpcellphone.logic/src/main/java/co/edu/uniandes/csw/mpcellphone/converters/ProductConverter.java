@@ -213,6 +213,19 @@ public abstract class ProductConverter {
         }
         return dtos;
     }
-    
-    
+    /**
+     * 
+     * @param entity
+     * @return 
+     */
+    public static ProductDTO simpleEntity2DTO(ProductEntity entity){
+        if(entity!=null){
+            ProductDTO dto = new ProductDTO();
+            dto.setId(entity.getId());
+            dto.setImei(entity.getImei());
+            return dto;
+        }else{
+            return null;
+        }
+    }
 }
