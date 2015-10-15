@@ -161,4 +161,4 @@
                 $location.path('/catalog');
             };
         }]);
-})(window.angular);s
+})(window.angular);
