@@ -129,7 +129,7 @@ public class UserService {
         }
     }
     private Account createUser(UserDTO user) { 
-        ApplicationRealm realm = ((ApplicationRealm) ((RealmSecurityManager) SecurityUtils.getSecurityManager()).getRealms().iterator().next());
+        ApplicationRealm realm = (ApplicationRealm) ((RealmSecurityManager) SecurityUtils.getSecurityManager()).getRealms().iterator().next();
         Client client = realm.getClient();
         Application application = client.getResource(realm.getApplicationRestUrl(), Application.class);
         Account acct = client.instantiate(Account.class);

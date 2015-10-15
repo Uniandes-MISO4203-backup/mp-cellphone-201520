@@ -72,7 +72,7 @@ public class ClientService {
     }
 
     private Account updateUser(ClientDTO user) {
-        ApplicationRealm realm = ((ApplicationRealm) ((RealmSecurityManager) SecurityUtils.getSecurityManager()).getRealms());
+        ApplicationRealm realm = (ApplicationRealm) ((RealmSecurityManager) SecurityUtils.getSecurityManager()).getRealms();
         Client clientR = realm.getClient();
         Account acct;
         acct = clientR.instantiate(Account.class);
