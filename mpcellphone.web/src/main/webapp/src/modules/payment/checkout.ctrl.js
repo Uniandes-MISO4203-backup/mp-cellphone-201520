@@ -9,7 +9,6 @@
             $scope.payment = {};
             $scope.totalCompra = 0;
             $scope.totalC = 0;
-
             ciSvc.fetchRecords().then(function (data) {
                 for (var i = 0, l = data.length; i < l; i++) {
                     if (data[i].name) {
@@ -20,10 +19,8 @@
                     }
                 }
             });
-
             /*------------ Shipping Type ----------*/
             $scope.shippingTypeHolders = [];
-
             stSvc.fetchRecords().then(function (data) {
                 for (var i = 0, l = data.length; i < l; i++) {
                     if (data[i].name) {
@@ -31,18 +28,15 @@
                     }
                 }
             });
-
             $scope.onShippingChange = function () {
                 $scope.shippingType = $('#shippingType').val();
                 var e = document.getElementById("shippingType");
                 $scope.shippingTypeValue = $(e.options[e.selectedIndex]).attr('data-price');
                 $('.alert.alert-dismissible.alert-success.hidden').removeClass('hidden');
             };
-
             /*-------------- Shipping ------------*/
             $scope.shipping = {};
             $scope.shipping.time = Math.ceil(Math.random() * 5);
-
             $scope.submitShippingData = function () {
                 var shippingData = {};
                 shippingData.state = $scope.shipping.state;
@@ -50,7 +44,6 @@
                 shippingData.city = $scope.shipping.city;
                 shippingData.address = $scope.shipping.address;
                 shippingData.stimatedTime = $scope.shipping.time;
-
                 var shippingType = {};
                 var data = $scope.shipping.shippingTypeHolders;
                 for (var i = 0; i < $scope.shippingTypeHolders.length; i++) {
@@ -59,9 +52,7 @@
                         break;
                     }
                 }
-
                 shippingData.shipType = shippingType;
-
                 if (shippingData.state && shippingData.country && shippingData.city
                         && shippingData.address) {
                     shpSvc.saveRecord(shippingData).then(function (data) {
@@ -73,15 +64,10 @@
                         pestana.removeClass('active');
                     });
                 }
-
                 $scope.totalC = parseInt($scope.totalCompra) + parseInt($scope.shippingTypeValue);
             }
-
-
             /*------------ Credit card ----------*/
-
             $scope.creditCardHolders = [];
-
             ccSvc.fetchRecords().then(function (data) {
                 for (var i = 0, l = data.length; i < l; i++) {
                     if (data[i].methodName) {
@@ -89,7 +75,6 @@
                     }
                 }
             });
-
             $scope.changePayment = function (evt) {
                 switch (evt.currentTarget.id) {
                     case 'creditCard':
@@ -102,7 +87,6 @@
                         break;
                 }
             }
-
             /*------------ Order ----------*/
             $scope.submitPayment = function () {
                 var order = {};
@@ -111,7 +95,6 @@
                 order.client = authSvc.getCurrentUser();
                 order.totalDiscount = 0;
                 order.totalSale = $scope.totalC;
-
                 var creditCard = {};
                 var data = $scope.payment.creditCardHolder;
                 for (var i = 0; i < $scope.creditCardHolders.length; i++) {
@@ -126,13 +109,11 @@
                 order.bank = $scope.payment.clientBankName;
                 order.expirationDate = $scope.payment.cardExpiration;
                 order.svc = $scope.payment.cardCode;
-
                 chSvc.saveRecord(order).then(function (data) {
                     $scope.order = data;
                     $scope.submitOrderData();
                 });
             }
-
             $scope.changeView = function () {
                 var pestana = $('li.active');
                 document.querySelector('#paymentData').style.display = "none";
@@ -171,16 +152,13 @@
                     $scope.saleService(i);
                 }
             }
-
             $scope.pay = function () {
                 $('body').append('<div class="mask">');
                 $scope.submitPayment();
             };
-
             $scope.finish = function () {
                 $('#modalPay').modal('hide');
                 $location.path('/catalog');
             };
         }]);
-
-})(window.angular);
+})(window.angular);s
