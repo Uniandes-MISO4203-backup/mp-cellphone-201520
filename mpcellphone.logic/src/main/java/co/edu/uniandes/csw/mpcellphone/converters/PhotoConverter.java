@@ -63,6 +63,7 @@ public abstract class PhotoConverter {
             dto.setId(entity.getId());
             dto.setName(entity.getName());
             dto.setImage(entity.getImage());
+            dto.setProduct(ProductConverter.simpleEntity2DTO(entity.getProduct()));
             return dto;
         } else {
             return null;

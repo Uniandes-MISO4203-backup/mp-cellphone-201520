@@ -17,5 +17,8 @@ public interface IPhotoLogic {
     public List<PhotoDTO> getPhotos(Integer page, Integer maxRecords);
     public PhotoDTO getPhoto(Long id);
     public PhotoDTO createPhoto(PhotoDTO dto);
+    public PhotoDTO updatePhoto(PhotoDTO dto);
+    public void deletePhoto(Long id);
+    public List<PhotoDTO> getByProductId(Long id);
     
 }

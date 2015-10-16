@@ -129,6 +129,7 @@ public class ProductPersistence extends CrudPersistence<ProductEntity> {
             return Collections.emptyList();
         }
     }
+    
     //Para Obtener la lista de un producto filtrado por Categoria  desarrollado por Miguel Olivares
     public List<ProductEntity> getByCategory(String category) {
         try{
@@ -178,8 +179,13 @@ public class ProductPersistence extends CrudPersistence<ProductEntity> {
      * @return 
      */
     public ProductEntity getProductByImei(String imei){
-        Map<String, Object> params = new HashMap<String, Object>();
-        params.put("imei", imei);
-        return executeSingleNamedQuery("Product.getByImei", params);
+        try {
+            Map<String, Object> params = new HashMap<String, Object>();
+            params.put("imei", imei);
+            return executeSingleNamedQuery("Product.getByImei", params);
+        } catch (Exception e) {            
+            Logger.getLogger(ProductPersistence.class.getName()).log(Level.SEVERE, null, e);
+            return new ProductEntity();
+        }       
     }
 }
