@@ -59,5 +59,12 @@
                 type: 'String',
                 required: true,
                 visible: false
-            }]});
+            }]
+            ,
+            childs: [{
+                name: 'photos',
+                displayName: 'Photos',
+                ctrl: 'photoCtrl'
+            }]
+    });
 })(window.angular);

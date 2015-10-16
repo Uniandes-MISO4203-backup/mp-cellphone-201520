@@ -7,6 +7,7 @@
         'clientModule',
         'productModule',
         'providerModule',
+        'photoModule',
         'ngRoute',
         'ngCrud',
         'xeditable',
@@ -29,6 +30,10 @@
                     }).when('/products', {
                 templateUrl: tplUrl,
                 controller: 'productsCtrl',
+                controllerAs: alias
+            }).when('/photo', {
+                templateUrl: tplUrl,
+                controller: 'photoCtrl',
                 controllerAs: alias
             }).when('/provider', {
                 templateUrl: tplUrl,

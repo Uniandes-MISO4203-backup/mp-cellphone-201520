@@ -129,6 +129,7 @@ public class ProductPersistence extends CrudPersistence<ProductEntity> {
             return Collections.emptyList();
         }
     }
+    
     //Para Obtener la lista de un producto filtrado por Categoria  desarrollado por Miguel Olivares
     public List<ProductEntity> getByCategory(String category) {
         try{

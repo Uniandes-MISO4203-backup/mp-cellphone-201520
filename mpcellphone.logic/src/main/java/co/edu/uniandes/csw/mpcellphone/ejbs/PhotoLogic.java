@@ -7,7 +7,9 @@ package co.edu.uniandes.csw.mpcellphone.ejbs;
 
 import co.edu.uniandes.csw.mpcellphone.api.IPhotoLogic;
 import co.edu.uniandes.csw.mpcellphone.converters.PhotoConverter;
+import co.edu.uniandes.csw.mpcellphone.converters.ProductConverter;
 import co.edu.uniandes.csw.mpcellphone.dtos.PhotoDTO;
+import co.edu.uniandes.csw.mpcellphone.dtos.ProductDTO;
 import co.edu.uniandes.csw.mpcellphone.entities.PhotoEntity;
 import co.edu.uniandes.csw.mpcellphone.persistence.PhotoPersistence;
 import java.util.List;
@@ -66,4 +68,34 @@ public class PhotoLogic implements IPhotoLogic {
         persistence.create(entity);
         return PhotoConverter.fullEntity2DTO(entity);
     }
+    
+
+    /**
+     * Metodo que permite actualizar la informaci�n de una orden
+     *
+     * @param dto
+     * @return
+     */
+    @Override
+    public PhotoDTO updatePhoto(PhotoDTO dto) {
+        PhotoEntity entity = persistence.update(PhotoConverter.fullDTO2Entity(dto));
+        return PhotoConverter.fullEntity2DTO(entity);
+    }
+
+    /**
+     * Metodo que permite eliminar una orden
+     *
+     * @param id
+     */
+    @Override
+    public void deletePhoto(Long id) {
+        persistence.delete(id);
+    }
+    
+    @Override
+    public List<PhotoDTO> getByProductId(Long id){
+        return PhotoConverter.listEntity2DTO(persistence.getByProductId(id));
+    }
+    
+    
 }
