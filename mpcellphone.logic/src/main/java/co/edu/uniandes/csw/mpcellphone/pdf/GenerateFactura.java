@@ -17,7 +17,7 @@ import java.io.FileOutputStream;
 
 public class GenerateFactura {
     
-    private final String FUENTE = "Comic Sans MS";
+    private static final String FUENTE = "Comic Sans MS";
 
     public String generate(OrderDTO order) throws Exception {
         Document document = new Document();
