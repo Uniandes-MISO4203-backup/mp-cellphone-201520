@@ -11,12 +11,30 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 /**
  * Clase donde se almacenan las ventas hechas 
  * @author Cindy
  */
 @Entity
+@NamedQueries({
+    @NamedQuery(name = "Sales.getSaleByClient", query = "SELECT DISTINCT c.id as clientId, d.id as ProviderId, " +
+            "c.name as clientName, d.name as providerName, " +
+            "a.orderId, b.dateOrder, b.totalSale, b.state, b.numberCard, b.bank " +
+            "FROM SalesEntity a, OrderEntity b, ClientEntity c, ProviderEntity d " +
+            "JOIN a.clientId e JOIN b.client f JOIN a.providerId g " +
+            "WHERE a.orderId.id=b.id AND e.id=c.id AND f.id=c.id AND g.id=d.id " +
+            "AND c.id = :client_id"),
+    @NamedQuery(name = "Sales.getSaleByProvider", query = "SELECT DISTINCT c.id as clientId, d.id as ProviderId, " +
+            "c.name as clientName, d.name as providerName, " +
+            "a.orderId, b.dateOrder, b.totalSale, b.state, b.numberCard, b.bank " +
+            "FROM SalesEntity a, OrderEntity b, ClientEntity c, ProviderEntity d " +
+            "JOIN a.clientId e JOIN b.client f JOIN a.providerId g " +
+            "WHERE a.orderId.id=b.id AND e.id=c.id AND f.id=c.id AND g.id=d.id " +
+            "AND d.id = :provider_id")
+})
 public class SalesEntity implements Serializable{
     
     @Id

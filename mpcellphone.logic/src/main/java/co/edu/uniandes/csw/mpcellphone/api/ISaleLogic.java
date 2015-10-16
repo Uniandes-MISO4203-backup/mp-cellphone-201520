@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.mpcellphone.api;
 
+import co.edu.uniandes.csw.mpcellphone.dtos.OrderQueryDTO;
 import co.edu.uniandes.csw.mpcellphone.dtos.SaleDTO;
 import java.util.List;
 
@@ -15,6 +16,8 @@ import java.util.List;
 public interface ISaleLogic {
     public int countSale();
     public List<SaleDTO> getSales(Integer page, Integer maxRecords);
+    public List<OrderQueryDTO> getSaleByClient(Long userId);
+    public List<OrderQueryDTO> getSaleByProvider(Long userId);
     public SaleDTO getSale(Long id);
     public SaleDTO createSale(SaleDTO dto);
     public SaleDTO updateSale(SaleDTO dto);

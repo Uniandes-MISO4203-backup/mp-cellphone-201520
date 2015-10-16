@@ -1,6 +1,7 @@
 package co.edu.uniandes.csw.mpcellphone.services;
 
 import co.edu.uniandes.csw.mpcellphone.api.ISaleLogic;
+import co.edu.uniandes.csw.mpcellphone.dtos.OrderQueryDTO;
 import co.edu.uniandes.csw.mpcellphone.dtos.SaleDTO;
 import co.edu.uniandes.csw.mpcellphone.providers.StatusCreated;
 import java.util.List;
@@ -69,6 +70,28 @@ public class SaleService {
         return saleLogic.getSale(id);
     }
 
+    /**
+     * Metodo GET, para obtener la lista de ordenes por cliente
+     * @param id
+     * @return 
+     */
+    @GET
+    @Path("/client/{id: \\d+}")
+    public List<OrderQueryDTO> getSalebyClient(@PathParam("id") Long id) {
+        return saleLogic.getSaleByClient(id);
+    }
+
+    /**
+     * Metodo GET, para obtener la lista de ordenes por cliente
+     * @param id
+     * @return 
+     */
+    @GET
+    @Path("/provider/{id: \\d+}")
+    public List<OrderQueryDTO> getSalebyProvider(@PathParam("id") Long id) {
+        return saleLogic.getSaleByProvider(id);
+    }    
+    
     /**
      * Metodo PUT, encargado de actualizar informacion de la orden
      * @param id
