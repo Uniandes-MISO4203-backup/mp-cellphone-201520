@@ -155,21 +155,43 @@ public class ProductLogic implements IProductLogic {
     public int countProductsByProvider(Long idProvider) {
         return persistence.getCountProductsByProvider(idProvider);
     }
+    /**
+     * 
+     * @param imei
+     * @return 
+     */
     @Override
     public ProductDTO getProductByImei(String imei){
         return ProductConverter.simpleEntity2DTO(persistence.getProductByImei(imei));
     }    
-
+    
+    /**
+     * 
+     * @param id
+     * @param idProvider
+     * @return 
+     */
     @Override
     public ProductDTO getProductByProvider(Long id, Long idProvider) {
         throw new UnsupportedOperationException(PARAM1); //To change body of generated methods, choose Tools | Templates.
     }
     
+    /**
+     * 
+     * @param dto
+     * @param idProvider
+     * @return 
+     */
     @Override
     public ProductDTO updateProductByProvider(ProductDTO dto, Long idProvider) {
         throw new UnsupportedOperationException(PARAM1); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
+    /**
+     * 
+     * @param id
+     * @param idProvider 
+     */
     @Override
     public void deleteProductByProvider(Long id, Long idProvider) {
         throw new UnsupportedOperationException(PARAM1); //To change body of generated methods, choose Tools | Templates.

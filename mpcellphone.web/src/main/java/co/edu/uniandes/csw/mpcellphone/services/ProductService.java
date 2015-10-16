@@ -5,13 +5,14 @@ import co.edu.uniandes.csw.mpcellphone.api.IProductLogic;
 import co.edu.uniandes.csw.mpcellphone.api.IProviderLogic;
 import co.edu.uniandes.csw.mpcellphone.api.IQuestionLogic;
 import co.edu.uniandes.csw.mpcellphone.api.ICellPhoneLogic;
-import co.edu.uniandes.csw.mpcellphone.api.IStolenImeiLogic;
 import co.edu.uniandes.csw.mpcellphone.dtos.CellPhoneDTO;
 import co.edu.uniandes.csw.mpcellphone.dtos.CommentDTO;
 import co.edu.uniandes.csw.mpcellphone.dtos.ProductDTO;
 import co.edu.uniandes.csw.mpcellphone.dtos.ProviderDTO;
 import co.edu.uniandes.csw.mpcellphone.dtos.QuestionDTO;
 import co.edu.uniandes.csw.mpcellphone.providers.StatusCreated;
+import co.edu.uniandes.csw.mpcellphone.utils.RequestUtilsMP;
+import com.sun.jersey.api.Responses;
 import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
@@ -24,8 +25,10 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import org.apache.shiro.SecurityUtils;
 
 /**
@@ -37,7 +40,6 @@ import org.apache.shiro.SecurityUtils;
 public class ProductService {
 
     @Inject private IProductLogic productLogic;
-    @Inject private IStolenImeiLogic stoleLogic;
     @Inject private IProviderLogic providerLogic;
     @Inject private IQuestionLogic questionLogic;
     @Inject private ICommentLogic commentLogic;
@@ -56,12 +58,19 @@ public class ProductService {
      */
     @POST
     @StatusCreated
-    public ProductDTO createProduct(ProductDTO dto) throws Exception{
+    public ProductDTO createProduct(ProductDTO dto){
         dto.setProvider(provider);
-        if(productLogic.getProductByImei(dto.getImei())!=null)
-            throw new Exception("Ya existe un celular registrado con ese mismo código Imei.");
-        if(stoleLogic.getByImei(dto.getImei())!=null)
-            throw new Exception("El Imei digitado se encuentra en la base de datos de celulares reportados. Favor comuniquese con la policia.");
+        ProductDTO dtoSearch= productLogic.getProductByImei(dto.getImei());
+        if(dtoSearch!=null&&dtoSearch.getId()!=null)
+            throw new WebApplicationException(Response.status(Responses.NOT_FOUND)
+                    .entity("There is already a cellphone registered with the same Imei Id.")
+                    .type("text/plain").build());
+        if(RequestUtilsMP.isStolenImei(dto.getImei()))
+            throw new WebApplicationException(Response.status(Responses.NOT_FOUND)
+                    .entity("The Imei id appears in the police database for stolen cellphones. "
+                            + "Please contact with a police office nearly to your home")
+                    .type("text/plain").build());
+            
         return productLogic.createProduct(dto);
     }
 
