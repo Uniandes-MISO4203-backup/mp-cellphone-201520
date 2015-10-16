@@ -8,18 +8,24 @@ package co.edu.uniandes.csw.mpcellphone.entities;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.NamedQueries;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 
 /**
  * Entidad relacionada con la tabla que almacena la información de las ciudades.
  * @author Mauricio Amaya m.amaya@unal.edu.co
  */
 @Entity
+@NamedQueries({
+    @NamedQuery(name = "Photo.getByProductId", query = "select p from PhotoEntity p WHERE p.id =:id")
+})
 public class PhotoEntity  implements Serializable {
     
     @Id
-    @GeneratedValue(generator = "Photo")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
     private String image;
