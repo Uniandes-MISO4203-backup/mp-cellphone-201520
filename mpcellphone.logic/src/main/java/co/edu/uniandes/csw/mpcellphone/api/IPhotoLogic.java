@@ -19,6 +19,5 @@ public interface IPhotoLogic {
     public PhotoDTO createPhoto(PhotoDTO dto);
     public PhotoDTO updatePhoto(PhotoDTO dto);
     public void deletePhoto(Long id);
-    public List<PhotoDTO> getByProductId(Long id);
     
 }

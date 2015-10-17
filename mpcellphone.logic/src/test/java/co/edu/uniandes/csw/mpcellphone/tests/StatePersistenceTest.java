@@ -167,5 +167,23 @@ public class StatePersistenceTest {
         Assert.assertEquals(newEntity.getName(), resp.getName());
     }
     
+        /**
+     * @generated
+     */
+    @Test
+    public void getStatesTest() {
+        List<StateEntity> list = statePersistence.findAll(null, null);
+        Assert.assertEquals(data.size(), list.size());
+        for (StateEntity ent : list) {
+            boolean found = false;
+            for (StateEntity entity : data) {
+                if (ent.getId().equals(entity.getId())) {
+                    found = true;
+                }
+            }
+            Assert.assertTrue(found);
+        }
+    }
+    
     
 }

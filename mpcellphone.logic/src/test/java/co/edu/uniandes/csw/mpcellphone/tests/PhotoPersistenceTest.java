@@ -5,10 +5,10 @@
  */
 package co.edu.uniandes.csw.mpcellphone.tests;
 
-import co.edu.uniandes.csw.mpcellphone.converters.CityConverter;
-import co.edu.uniandes.csw.mpcellphone.dtos.CityDTO;
-import co.edu.uniandes.csw.mpcellphone.entities.CityEntity;
-import co.edu.uniandes.csw.mpcellphone.persistence.CityPersistence;
+import co.edu.uniandes.csw.mpcellphone.converters.PhotoConverter;
+import co.edu.uniandes.csw.mpcellphone.dtos.PhotoDTO;
+import co.edu.uniandes.csw.mpcellphone.entities.PhotoEntity;
+import co.edu.uniandes.csw.mpcellphone.persistence.PhotoPersistence;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject; 
@@ -31,7 +31,7 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  * @author Mauro
  */
 @RunWith(Arquillian.class) 
-public class CityPersistenceTest {
+public class PhotoPersistenceTest {
     /**
      * @generated
      */
@@ -54,9 +54,9 @@ public class CityPersistenceTest {
      * @generated
      */
     @Inject
-    private CityPersistence cityPersistence;
+    private PhotoPersistence photoPersistence;
     
-    private List<CityEntity> data = new ArrayList(); 
+    private List<PhotoEntity> data = new ArrayList(); 
     
     /**
      * @return 
@@ -65,8 +65,8 @@ public class CityPersistenceTest {
     @Deployment
     public static WebArchive createDeployment() {
         return ShrinkWrap.create(WebArchive.class, DEPLOY + ".war")
-                .addPackage(CityEntity.class.getPackage())
-                .addPackage(CityPersistence.class.getPackage())
+                .addPackage(PhotoEntity.class.getPackage())
+                .addPackage(PhotoPersistence.class.getPackage())
                 .addAsResource("META-INF/persistence.xml", "META-INF/persistence.xml")
                 .addAsWebInfResource("META-INF/beans.xml", "beans.xml");
     }
@@ -95,7 +95,7 @@ public class CityPersistenceTest {
      * @generated
      */
     private void clearData() { 
-        em.createQuery("delete from CityEntity").executeUpdate(); 
+        em.createQuery("delete from PhotoEntity").executeUpdate(); 
     } 
     
      /**
@@ -104,7 +104,7 @@ public class CityPersistenceTest {
     private void insertData() { 
         for (int i = 0; i < 3; i++) { 
             PodamFactory factory = new PodamFactoryImpl(); 
-            CityEntity entity = CityConverter.basicDTO2Entity(factory.manufacturePojo(CityDTO.class)); 
+            PhotoEntity entity = PhotoConverter.basicDTO2Entity(factory.manufacturePojo(PhotoDTO.class)); 
             em.persist(entity); 
             data.add(entity); 
         } 
@@ -114,42 +114,38 @@ public class CityPersistenceTest {
      * @generated
      */
     @Test
-    public void createCityTest() {
+    public void createPhotoTest() {
         PodamFactory factory = new PodamFactoryImpl();
-        CityEntity newEntity = CityConverter.basicDTO2Entity(factory.manufacturePojo(CityDTO.class));
+        PhotoEntity newEntity = PhotoConverter.basicDTO2Entity(factory.manufacturePojo(PhotoDTO.class));
 
-        CityEntity result = cityPersistence.create(newEntity);
+        PhotoEntity result = photoPersistence.create(newEntity);
 
         Assert.assertNotNull(result);
 
-        CityEntity entity = em.find(CityEntity.class, result.getId());
+        PhotoEntity entity = em.find(PhotoEntity.class, result.getId());
 
         Assert.assertEquals(newEntity.getName(), entity.getName());
-        Assert.assertEquals(newEntity.getLatitude(), entity.getLatitude());
-        Assert.assertEquals(newEntity.getLongitude(), entity.getLongitude());
-    }
-    
-      /**
-     * @generated
-     */
-    @Test
-    public void getCityTest() {
-        CityEntity entity = data.get(0);
-        CityEntity newEntity = cityPersistence.find(entity.getId());
-        Assert.assertNotNull(newEntity);
-        Assert.assertEquals(entity.getName(), newEntity.getName());
-        Assert.assertEquals(entity.getLatitude(), newEntity.getLatitude());
-        Assert.assertEquals(entity.getLongitude(), newEntity.getLongitude());
     }
     
     /**
      * @generated
      */
     @Test
-    public void deleteCityTest() {
-        CityEntity entity = data.get(0);
-        cityPersistence.delete(entity.getId());
-        CityEntity deleted = em.find(CityEntity.class, entity.getId());
+    public void getPhotoTest() {
+        PhotoEntity entity = data.get(0);
+        PhotoEntity newEntity = photoPersistence.find(entity.getId());
+        Assert.assertNotNull(newEntity);
+        Assert.assertEquals(entity.getName(), newEntity.getName());
+    }
+    
+    /**
+     * @generated
+     */
+    @Test
+    public void deletePhotoTest() {
+        PhotoEntity entity = data.get(0);
+        photoPersistence.delete(entity.getId());
+        PhotoEntity deleted = em.find(PhotoEntity.class, entity.getId());
         Assert.assertNull(deleted);
     }
 
@@ -157,16 +153,16 @@ public class CityPersistenceTest {
      * @generated
      */
     @Test
-    public void updateCityTest() {
-        CityEntity entity = data.get(0);
+    public void updatePhotoTest() {
+        PhotoEntity entity = data.get(0);
 
         PodamFactory factory = new PodamFactoryImpl();
-        CityEntity newEntity = CityConverter.basicDTO2Entity(factory.manufacturePojo(CityDTO.class));
+        PhotoEntity newEntity = PhotoConverter.basicDTO2Entity(factory.manufacturePojo(PhotoDTO.class));
         newEntity.setId(entity.getId());
 
-        cityPersistence.update(newEntity);
+        photoPersistence.update(newEntity);
 
-        CityEntity resp = em.find(CityEntity.class, entity.getId());
+        PhotoEntity resp = em.find(PhotoEntity.class, entity.getId());
 
         Assert.assertEquals(newEntity.getName(), resp.getName());
     }
@@ -175,12 +171,12 @@ public class CityPersistenceTest {
      * @generated
      */
     @Test
-    public void getCitiesTest() {
-        List<CityEntity> list = cityPersistence.findAll(null, null);
+    public void getPhotosTest() {
+        List<PhotoEntity> list = photoPersistence.findAll(null, null);
         Assert.assertEquals(data.size(), list.size());
-        for (CityEntity ent : list) {
+        for (PhotoEntity ent : list) {
             boolean found = false;
-            for (CityEntity entity : data) {
+            for (PhotoEntity entity : data) {
                 if (ent.getId().equals(entity.getId())) {
                     found = true;
                 }
@@ -188,5 +184,6 @@ public class CityPersistenceTest {
             Assert.assertTrue(found);
         }
     }
+    
     
 }

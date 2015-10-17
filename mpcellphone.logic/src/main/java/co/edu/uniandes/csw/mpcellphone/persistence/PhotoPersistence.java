@@ -9,24 +9,15 @@ import co.edu.uniandes.csw.mpcellphone.entities.PhotoEntity;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.ejb.Stateless;
 
 /**
  *
  * @author m.amaya11
  */
+@Stateless
 public class PhotoPersistence extends CrudPersistence<PhotoEntity>{
     public PhotoPersistence(){
         this.entityClass = PhotoEntity.class;
-    }
-    
-    /**
-     * Ejecuta consulta para obtener photos
-     * @param id
-     * @return 
-     */
-    public List<PhotoEntity> getByProductId(Long id){
-        Map<String, Object> params = new HashMap<String, Object>();
-        params.put("id", id);
-        return executeListNamedQuery("Photo.getByProductId", params);
     }
 }
