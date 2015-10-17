@@ -91,12 +91,6 @@ public class PhotoService {
     public PhotoDTO getPhoto(@PathParam("id") Long id) {
         return photoLogic.getPhoto(id);
     }
-    
-    @GET
-    @Path("/getByProductId/{id: \\d+}")
-    public List<PhotoDTO> getByProductId(@PathParam("id") Long id) {
-        return photoLogic.getByProductId(id);
-    }
 
     
 }
