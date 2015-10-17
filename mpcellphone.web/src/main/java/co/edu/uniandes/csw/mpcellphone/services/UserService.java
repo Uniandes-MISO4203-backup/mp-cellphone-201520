@@ -20,6 +20,7 @@ import com.stormpath.sdk.group.Group;
 import com.stormpath.sdk.group.GroupList;
 import com.stormpath.sdk.resource.ResourceException;
 import com.stormpath.shiro.realm.ApplicationRealm;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import javax.inject.Inject;
@@ -56,6 +57,10 @@ public class UserService {
     private static final String ADMIN="admin";
     private static final String CLIENT="client";
     
+    @Context private HttpServletResponse respon;
+    @QueryParam("page") private Integer page;
+    @QueryParam("maxRecords") private Integer maxRecords;
+
     private Response loginClient (Subject currentUser) {
         ClientDTO client = clientLogic.getClientByUserId(currentUser.getPrincipal().toString());
         if (client != null) {
@@ -96,9 +101,6 @@ public class UserService {
         }                
     }
     
-    @Context private HttpServletResponse respon;
-    @QueryParam("page") private Integer page;
-    @QueryParam("maxRecords") private Integer maxRecords;
     @Path("/login")
     @POST
     public Response login(UserDTO user) {
@@ -132,6 +134,7 @@ public class UserService {
         }    
         return rta;
     }
+    
     @Path("/logout")
     @GET
     public Response logout() {
@@ -140,9 +143,13 @@ public class UserService {
             currentUser.logout();
             return Response.ok().build();
         } catch (Exception e) {
-            return Response.status(Response.Status.BAD_REQUEST).build();
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity(e.getMessage())
+                    .type(MediaType.TEXT_PLAIN)
+                    .build();
         }
     }
+    
     @Path("/currentUser")
     @GET
     public Response getCurrentUser() {
@@ -163,6 +170,7 @@ public class UserService {
                     .build();
         }
     }
+    
     private Account createUser(UserDTO user) { 
         ApplicationRealm realm = (ApplicationRealm) ((RealmSecurityManager) SecurityUtils.getSecurityManager()).getRealms().iterator().next();
         Client client = realm.getClient();
@@ -185,7 +193,7 @@ public class UserService {
         return acct;
     } 
     
-    private void CreateU (String role, Account acctClient, UserDTO user) {
+    private void createU (String role, Account acctClient, UserDTO user) {
         UserDTO userC = new UserDTO();
         userC.setName(user.getUserName());
         userC.setRole(role);
@@ -197,39 +205,90 @@ public class UserService {
         userLogic.createUser(userC);
     }
 
+    private Response registerClient(UserDTO user) {
+        Response rta;
+        try {
+            Account acctClient = this.createUser(user);
+            ClientDTO newClient = new ClientDTO();
+            newClient.setName(user.getUserName());
+            newClient.setUserId(acctClient.getHref());
+            newClient.setEmail(acctClient.getEmail());
+            clientLogic.createClient(newClient);
+            createU(CLIENT,acctClient,user);
+            rta = Response.ok().build();
+        } catch (ResourceException e) {
+            rta = Response.status(e.getStatus())
+                    .entity(e.getMessage())
+                    .type(MediaType.TEXT_PLAIN)
+                    .build();
+        }
+        return rta;
+    }
+
+
+    private Response registerProvider(UserDTO user) {
+        Response rta;
+        try {
+            Account acctProvider = this.createUser(user);
+            ProviderDTO newProvider = new ProviderDTO();
+            newProvider.setName(user.getUserName());
+            newProvider.setUserId(acctProvider.getHref());
+            newProvider.setEmail(acctProvider.getEmail());
+            providerLogic.createProvider(newProvider);
+            createU(PROVIDER,acctProvider,user);
+            rta = Response.ok().build();
+        } catch (ResourceException e) {
+            rta = Response.status(e.getStatus())
+                    .entity(e.getMessage())
+                    .type(MediaType.TEXT_PLAIN)
+                    .build();
+        }
+        return rta;
+    }    
+
+    private Response registerAdmin(UserDTO user) {
+        Response rta;
+        try {
+            Account acctAdmin = this.createUser(user);
+            AdminDTO newAdmin = new AdminDTO();
+            newAdmin.setName(user.getUserName());
+            newAdmin.setEmail(acctAdmin.getEmail());
+            adminLogic.createAdmin(newAdmin);                    
+            createU(ADMIN,acctAdmin,user);
+            rta = Response.ok().build();
+        } catch (ResourceException e) {
+            rta = Response.status(e.getStatus())
+                    .entity(e.getMessage())
+                    .type(MediaType.TEXT_PLAIN)
+                    .build();
+        }
+        return rta;
+    }    
+    
+    
     @Path("/register")
     @POST
     public Response setUser(UserDTO user) {
+        Response rta;
         try {
             switch (user.getRole()) {
                 case "user":
-                    Account acctClient = this.createUser(user);
-                    ClientDTO newClient = new ClientDTO();
-                    newClient.setName(user.getUserName());
-                    newClient.setUserId(acctClient.getHref());
-                    newClient.setEmail(acctClient.getEmail());
-                    clientLogic.createClient(newClient);
-                    CreateU(CLIENT,acctClient,user);
+                    rta = registerClient(user);
                     break;
                 case PROVIDER:
-                    Account acctProvider = this.createUser(user);
-                    ProviderDTO newProvider = new ProviderDTO();
-                    newProvider.setName(user.getUserName());
-                    newProvider.setUserId(acctProvider.getHref());
-                    newProvider.setEmail(acctProvider.getEmail());
-                    providerLogic.createProvider(newProvider);
-                    CreateU(PROVIDER,acctProvider,user);
+                    rta = registerProvider(user);
                     break;  
                 case ADMIN: //jdelchiaro -- 09/09/2015
-                    Account acctAdmin = this.createUser(user);
-                    AdminDTO newAdmin = new AdminDTO();
-                    newAdmin.setName(user.getUserName());
-                    newAdmin.setEmail(acctAdmin.getEmail());
-                    adminLogic.createAdmin(newAdmin);                    
-                    CreateU(ADMIN,acctAdmin,user);
+                    rta = registerAdmin(user);
+                    break;
+                default:
+                    rta = Response.status(Response.Status.BAD_REQUEST)
+                        .entity(NOT_REGISTERED)
+                        .type(MediaType.TEXT_PLAIN)
+                        .build();
                     break;
             }
-            return Response.ok().build();
+            return rta;
         } catch (ResourceException e) {
             return Response.status(e.getStatus())
                     .entity(e.getMessage())
@@ -237,14 +296,19 @@ public class UserService {
                     .build();
         }
     }
+    
     @Path("/AllUsers")    
     @GET
     public List<UserDTO> getUsers(UserDTO user) {
-        List<UserDTO> listUsers;                                
+        if (user != null) {
+            List<UserDTO> listUsers;                                
             if (page != null && maxRecords != null) {
                 this.respon.setIntHeader("X-Total-Count", userLogic.countUsers());
             }
             listUsers = userLogic.getUsers(page, maxRecords);
             return listUsers;    
+        } else {
+            return Collections.emptyList();
+        }
     }       
 }
