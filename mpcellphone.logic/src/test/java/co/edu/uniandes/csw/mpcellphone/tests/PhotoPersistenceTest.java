@@ -104,7 +104,7 @@ public class PhotoPersistenceTest {
     private void insertData() { 
         for (int i = 0; i < 3; i++) { 
             PodamFactory factory = new PodamFactoryImpl(); 
-            PhotoEntity entity = PhotoConverter.basicDTO2Entity(factory.manufacturePojo(PhotoDTO.class)); 
+            PhotoEntity entity = PhotoConverter.refDTO2Entity(factory.manufacturePojo(PhotoDTO.class)); 
             em.persist(entity); 
             data.add(entity); 
         } 
@@ -116,7 +116,7 @@ public class PhotoPersistenceTest {
     @Test
     public void createPhotoTest() {
         PodamFactory factory = new PodamFactoryImpl();
-        PhotoEntity newEntity = PhotoConverter.basicDTO2Entity(factory.manufacturePojo(PhotoDTO.class));
+        PhotoEntity newEntity = PhotoConverter.refDTO2Entity(factory.manufacturePojo(PhotoDTO.class));
 
         PhotoEntity result = photoPersistence.create(newEntity);
 
@@ -157,7 +157,7 @@ public class PhotoPersistenceTest {
         PhotoEntity entity = data.get(0);
 
         PodamFactory factory = new PodamFactoryImpl();
-        PhotoEntity newEntity = PhotoConverter.basicDTO2Entity(factory.manufacturePojo(PhotoDTO.class));
+        PhotoEntity newEntity = PhotoConverter.refDTO2Entity(factory.manufacturePojo(PhotoDTO.class));
         newEntity.setId(entity.getId());
 
         photoPersistence.update(newEntity);

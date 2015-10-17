@@ -42,9 +42,9 @@ public abstract class PhotoConverter {
      * @return
      * @generated
      */
-    public static PhotoDTO refDTO2Entity(PhotoDTO dto) {
+    public static PhotoEntity refDTO2Entity(PhotoDTO dto) {
         if (dto != null) {
-            PhotoDTO entity = new PhotoDTO();
+            PhotoEntity entity = new PhotoEntity();
             entity.setId(dto.getId());
             return entity;
         } else {
@@ -75,12 +75,13 @@ public abstract class PhotoConverter {
      * @generated
      * @return
      */
-    public static PhotoEntity basicDTO2Entity(PhotoDTO dto) {
+    private static PhotoEntity basicDTO2Entity(PhotoDTO dto) {
         if (dto != null) {
             PhotoEntity entity = new PhotoEntity();
             entity.setId(dto.getId());
             entity.setName(dto.getName());
             entity.setImage(dto.getImage());
+            entity.setProduct(ProductConverter.refDTO2Entity(dto.getProduct()));
             return entity;
         } else {
             return null;

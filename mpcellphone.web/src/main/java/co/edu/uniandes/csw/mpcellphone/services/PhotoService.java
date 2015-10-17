@@ -40,6 +40,7 @@ public class PhotoService {
     
     /**
      * @param dto
+     * @return 
      * @generated
      */
     @POST
