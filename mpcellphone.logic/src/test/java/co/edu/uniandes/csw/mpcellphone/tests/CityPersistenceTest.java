@@ -31,7 +31,7 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  * @author Mauro
  */
 @RunWith(Arquillian.class) 
-public class CityPersistanceTest {
+public class CityPersistenceTest {
     /**
      * @generated
      */
