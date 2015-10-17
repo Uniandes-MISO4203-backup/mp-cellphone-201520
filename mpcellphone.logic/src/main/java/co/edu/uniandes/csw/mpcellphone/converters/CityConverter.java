@@ -61,14 +61,13 @@ public abstract class CityConverter {
      * @generated
      * @return
      */
-    private static CityEntity basicDTO2Entity(CityDTO dto) {
+    public static CityEntity basicDTO2Entity(CityDTO dto) {
         if (dto != null) {
             CityEntity entity = new CityEntity();
             entity.setId(dto.getId());
             entity.setName(dto.getName());
             entity.setLatitude(dto.getLatitude());
             entity.setLongitude(dto.getLongitude());
-            entity.setState(StateConverter.refDTO2Entity(dto.getState()));
             return entity;
         } else {
             return null;

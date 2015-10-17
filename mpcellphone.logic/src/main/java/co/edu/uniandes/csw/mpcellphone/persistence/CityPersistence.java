@@ -11,12 +11,14 @@ import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.ejb.Stateless;
 import javax.persistence.NoResultException;
 
 /**
  *
  * @author m.amaya11
  */
+@Stateless
 public class CityPersistence extends CrudPersistence<CityEntity>{
     public CityPersistence(){
         this.entityClass = CityEntity.class;
