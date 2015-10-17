@@ -89,6 +89,14 @@
             $("#carrito").hide();
             $("#products").hide();
             if (!$('#profile').length){
+                var orderListItem = $('<li>');
+                var orderListLink = $('<a href="#/orderLists">');
+                //To-Do verificar el icono
+                var orderListIcon = $('<span>').addClass('glyphicon glyphicon-user');
+                orderListItem.append(orderListLink);
+                orderListLink.text(' Order List');
+                orderListLink.prepend(orderListIcon);
+                $(".dropdown-menu").prepend(orderListItem);
                 $(".dropdown-menu").prepend("<li><a href = '#' id = 'profile'><span class = 'glyphicon glyphicon-user'></span> My Profile</a></li>");
             }
             var currentUser = authSvc.getCurrentUser();

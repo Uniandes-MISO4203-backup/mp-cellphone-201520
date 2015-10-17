@@ -1,0 +1,53 @@
+<div ng-controller="orderQueryCtrl">
+    <toolbar name="name" display-name="displayName"></toolbar>
+    <div>
+        <table class="table table-striped table-bordered" ng-if="userRole=='client'">
+            <thead>
+                <tr>                   
+                    <th>N° Order</th>
+                    <th>Date</th>
+                    <th>Provider</th>
+                    <th>Shipping Address</th>
+                    <th>Total Sale</th>
+                    <th ng-if="recordActions">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="order in orderList">
+                    <td><div>{{}}</div></td> 
+                    <td><div> </div></td>        
+                    <td><div>{{ | currency}}</div></td>
+                    <td><div>{{}}</div></td>
+                    <td><button ng-repeat="(key, action) in ctrl.recordActions" id="{{$parent.$index}}-{{key}}-btn" class="btn btn-default btn-sm" ng-show="action.show()" ng-click="action.fn(record)"><span class="glyphicon glyphicon-{{action.icon}}"></span> {{action.displayName}}</button></td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <table class="table table-striped table-bordered" ng-if="userRole=='provider'">
+            <thead>
+                <tr>                   
+                    <th>N° Order</th>
+                    <th>Date</th>
+                    <th>Provider</th>
+                    <th>Shipping Address</th>
+                    <th>Total Sale</th>
+                    <th ng-if="ctrl.recordActions">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="record in records">
+                    <td><div>{{record.product.name}}</div></td> 
+                    <td><div> <a text="record.quantity" onbeforesave="verify(record.quantity)" onaftersave="postVerify(record)">{{ record.quantity }}</a></div></td>        
+                    <td><div>{{record.product.price | currency}}</div></td>
+                    <td><div>{{subtotal(record)| currency}}</div></td>
+                    <td><button ng-repeat="(key, action) in ctrl.recordActions" id="{{$parent.$index}}-{{key}}-btn" class="btn btn-default btn-sm" ng-show="action.show()" ng-click="action.fn(record)"><span class="glyphicon glyphicon-{{action.icon}}"></span> {{action.displayName}}</button></td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- <div class="text-center">
+            <pagination ng-show="ctrl.numPages > 1" num-pages="ctrl.numPages" total-items="ctrl.totalItems"
+                        ng-model="ctrl.currentPage" ng-change="ctrl.pageChanged()" items-per-page="ctrl.itemsPerPage"
+                        max-size="ctrl.maxSize" class="pagination-md" boundary-links="true" rotate="false"></pagination>
+        </div> -->
+    </div>
+</div>

@@ -12,7 +12,8 @@
         'ngCrud',
         'xeditable',
         'paymentModule',
-        'adminModule'
+        'adminModule',
+        'orderQueryModule'
     ]);
 
     mainApp.config(['$routeProvider', 'CrudTemplateURL', 'CrudCtrlAlias', function ($routeProvider, tplUrl, alias) {
@@ -55,6 +56,9 @@
                 templateUrl: tplUrl,
                 controller: 'adminCtrl',
                 controllerAs: alias
+            }).when('/orderLists', {
+                templateUrl: 'src/modules/orderQuery/templates/orderByRoleTmpl.html',
+                controller: 'orderQueryCtrl'
             }).otherwise('/catalog');
         }]);
 

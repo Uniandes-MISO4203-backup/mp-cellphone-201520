@@ -1,6 +1,6 @@
 (function(ng){
     var mod = ng.module('orderQueryModule');
-    mod.service('saleService', ['CrudCreator','clientContext', function(CrudCreator, context){
+    mod.service('saleService', ['CrudCreator','saleContext', function(CrudCreator, context){
             CrudCreator.extendService(this, context);
             this.getRoleOQ = function() {
                 return this.api.one('../users/currentUser').get();

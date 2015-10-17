@@ -1,5 +1,6 @@
 (function (ng) {
     var mod = ng.module('orderQueryModule', ['ngCrud']);
+    mod.constant('saleContext', 'sale');
     mod.constant('orderQueryContext', 'clients');
     mod.constant('orderQueryModel', {
         fields: [{

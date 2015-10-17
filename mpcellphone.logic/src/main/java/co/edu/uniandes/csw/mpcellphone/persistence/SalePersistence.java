@@ -30,7 +30,7 @@ public class SalePersistence extends CrudPersistence<SalesEntity> {
         try {
             Map<String, Object> params = new HashMap<String, Object>();
             params.put("client_id", userId);
-            return this.executeSingleNamedQuery("Sales.getSaleByClient", params);
+            return this.executeListNamedQuery("Sales.getSaleByClient", params);
         } catch (NoResultException ex) {
             Logger.getLogger(SaleLogic.class.getName()).log(Level.SEVERE, null, ex);
             return Collections.emptyList();
@@ -41,7 +41,7 @@ public class SalePersistence extends CrudPersistence<SalesEntity> {
         try {
             Map<String, Object> params = new HashMap<String, Object>();
             params.put("provider_id", userId);
-            return this.executeSingleNamedQuery("Sales.getSaleByProvider", params);
+            return this.executeListNamedQuery("Sales.getSaleByProvider", params);
         } catch (NoResultException ex) {
             Logger.getLogger(SaleLogic.class.getName()).log(Level.SEVERE, null, ex);
             return Collections.emptyList();
