@@ -11,7 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ * Converter para la Clase usada para asociar los departametnos 
+ * de las ciudades
+ * y poder trabajar en la vista filtrando sencillamente.
  * @author m.amaya11
  */
 public abstract class StateConverter {
@@ -19,7 +21,7 @@ public abstract class StateConverter {
     private StateConverter(){
     }
 
-        /**
+    /**
      * @param entity
      * @return
      * @generated
@@ -51,11 +53,11 @@ public abstract class StateConverter {
     }
 
     /**
-     * @param 
+     * @param entity
      * @return
      * @generated
      */
-    private static StateDTO basicEntity2DTO(StateEntity entity) {
+    public static StateDTO basicEntity2DTO(StateEntity entity) {
         if (entity != null) {
             StateDTO dto = new StateDTO();
             dto.setId(entity.getId());
@@ -71,7 +73,7 @@ public abstract class StateConverter {
      * @return 
      * @generated
      */
-    private static StateEntity basicDTO2Entity(StateDTO dto) {
+    public static StateEntity basicDTO2Entity(StateDTO dto) {
         if (dto != null) {
             StateEntity entity = new StateEntity();
             entity.setId(dto.getId());

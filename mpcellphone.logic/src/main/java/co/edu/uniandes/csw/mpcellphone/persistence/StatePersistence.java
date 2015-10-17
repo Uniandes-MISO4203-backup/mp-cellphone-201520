@@ -6,11 +6,13 @@
 package co.edu.uniandes.csw.mpcellphone.persistence;
 
 import co.edu.uniandes.csw.mpcellphone.entities.StateEntity;
+import javax.ejb.Stateless;
 
 /**
  *
  * @author m.amaya11
  */
+@Stateless
 public class StatePersistence extends CrudPersistence<StateEntity>{
     public StatePersistence(){
         this.entityClass = StateEntity.class;
