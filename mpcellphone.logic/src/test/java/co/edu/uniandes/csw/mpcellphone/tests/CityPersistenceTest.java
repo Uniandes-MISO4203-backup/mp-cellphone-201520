@@ -176,7 +176,7 @@ public class CityPersistenceTest {
      */
     @Test
     public void getCitiesTest() {
-        List<CityEntity> list = cityPersistence.findAll(null, null);
+        List<CityEntity> list = cityPersistence.findAll();
         Assert.assertEquals(data.size(), list.size());
         for (CityEntity ent : list) {
             boolean found = false;
