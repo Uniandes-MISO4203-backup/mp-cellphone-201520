@@ -20,20 +20,8 @@ import javax.persistence.NamedQuery;
  */
 @Entity
 @NamedQueries({
-    @NamedQuery(name = "Sales.getSaleByClient", query = "SELECT DISTINCT c.id as clientId, d.id as ProviderId, " +
-            "c.name as clientName, d.name as providerName, " +
-            "a.orderId, b.dateOrder, b.totalSale, b.state, b.numberCard, b.bank " +
-            "FROM SalesEntity a, OrderEntity b, ClientEntity c, ProviderEntity d " +
-            "JOIN a.clientId e JOIN b.client f JOIN a.providerId g " +
-            "WHERE a.orderId.id=b.id AND e.id=c.id AND f.id=c.id AND g.id=d.id " +
-            "AND c.id = :client_id"),
-    @NamedQuery(name = "Sales.getSaleByProvider", query = "SELECT DISTINCT c.id as clientId, d.id as ProviderId, " +
-            "c.name as clientName, d.name as providerName, " +
-            "a.orderId, b.dateOrder, b.totalSale, b.state, b.numberCard, b.bank " +
-            "FROM SalesEntity a, OrderEntity b, ClientEntity c, ProviderEntity d " +
-            "JOIN a.clientId e JOIN b.client f JOIN a.providerId g " +
-            "WHERE a.orderId.id=b.id AND e.id=c.id AND f.id=c.id AND g.id=d.id " +
-            "AND d.id = :provider_id")
+    @NamedQuery(name = "Sales.getSaleByClient", query = "SELECT u FROM SalesEntity u where u.orderId.client.id = :clientId"),
+    @NamedQuery(name = "Sales.getSaleByProvider", query = "SELECT u FROM SalesEntity u where u.productId.provider.id = :providerId"),
 })
 public class SalesEntity implements Serializable{
     

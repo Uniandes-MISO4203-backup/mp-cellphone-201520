@@ -7,7 +7,6 @@ package co.edu.uniandes.csw.mpcellphone.ejbs;
 
 import co.edu.uniandes.csw.mpcellphone.api.ISaleLogic;
 import co.edu.uniandes.csw.mpcellphone.converters.SalesConverter;
-import co.edu.uniandes.csw.mpcellphone.dtos.OrderQueryDTO;
 import co.edu.uniandes.csw.mpcellphone.dtos.SaleDTO;
 import co.edu.uniandes.csw.mpcellphone.entities.SalesEntity;
 import co.edu.uniandes.csw.mpcellphone.persistence.SalePersistence;
@@ -64,13 +63,13 @@ public class SaleLogic implements ISaleLogic {
     }
 
     @Override
-    public List<OrderQueryDTO> getSaleByClient(Long userId){
-        return persistence.getSaleByClient(userId);
+    public List<SaleDTO> getSaleByClient(Integer page, Integer maxRecords, Long userId){
+        return persistence.getSaleByClient(page, maxRecords, userId);
     }
     
     @Override
-    public List<OrderQueryDTO> getSaleByProvider(Long userId){
-        return persistence.getSaleByProvider(userId);
+    public List<SaleDTO> getSaleByProvider(Integer page, Integer maxRecords, Long userId){
+        return persistence.getSaleByProvider(page, maxRecords, userId);
     }
     
     /**

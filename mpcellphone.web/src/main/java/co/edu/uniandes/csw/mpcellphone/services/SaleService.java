@@ -1,8 +1,8 @@
 package co.edu.uniandes.csw.mpcellphone.services;
 
 import co.edu.uniandes.csw.mpcellphone.api.ISaleLogic;
-import co.edu.uniandes.csw.mpcellphone.dtos.OrderQueryDTO;
 import co.edu.uniandes.csw.mpcellphone.dtos.SaleDTO;
+import co.edu.uniandes.csw.mpcellphone.entities.SalesEntity;
 import co.edu.uniandes.csw.mpcellphone.providers.StatusCreated;
 import java.util.List;
 import javax.inject.Inject;
@@ -77,8 +77,11 @@ public class SaleService {
      */
     @GET
     @Path("/client/{id: \\d+}")
-    public List<OrderQueryDTO> getSalebyClient(@PathParam("id") Long id) {
-        return saleLogic.getSaleByClient(id);
+    public List<SaleDTO> getSaleByClient(@PathParam("id") Long id) {
+        if (page != null && maxRecords != null) {
+            this.response.setIntHeader("X-Total-Count", saleLogic.countSale());
+        }
+        return saleLogic.getSaleByClient(page, maxRecords, id);
     }
 
     /**
@@ -88,8 +91,11 @@ public class SaleService {
      */
     @GET
     @Path("/provider/{id: \\d+}")
-    public List<OrderQueryDTO> getSalebyProvider(@PathParam("id") Long id) {
-        return saleLogic.getSaleByProvider(id);
+    public List<SaleDTO> getSaleByProvider(@PathParam("id") Long id) {
+        if (page != null && maxRecords != null) {
+            this.response.setIntHeader("X-Total-Count", saleLogic.countSale());
+        }
+        return saleLogic.getSaleByProvider(page, maxRecords, id);
     }    
     
     /**
