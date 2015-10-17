@@ -11,10 +11,10 @@
                 $log.log(user.id);
                 svc.getSaleByClient(user.id).then(function(data){
                     $scope.orderList = data;
+                    $log.log(data);
                     $log.log($scope.orderList);
                 });
-               
-                
+                               
                 $scope.recordActions = {
                     viewDetail: {
                         displayName: 'View Detail',

@@ -16,7 +16,7 @@
                 <tr ng-repeat="order in orderList">
                     <td><div>{{}}</div></td> 
                     <td><div> </div></td>        
-                    <td><div>{{ | currency}}</div></td>
+                    <td><div>{{}}</div></td>
                     <td><div>{{}}</div></td>
                     <td><button ng-repeat="(key, action) in ctrl.recordActions" id="{{$parent.$index}}-{{key}}-btn" class="btn btn-default btn-sm" ng-show="action.show()" ng-click="action.fn(record)"><span class="glyphicon glyphicon-{{action.icon}}"></span> {{action.displayName}}</button></td>
                 </tr>
