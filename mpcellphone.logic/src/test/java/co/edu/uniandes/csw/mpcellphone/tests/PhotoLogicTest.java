@@ -1,16 +1,11 @@
 package co.edu.uniandes.csw.mpcellphone.tests;
 
-import co.edu.uniandes.csw.mpcellphone.api.ICityLogic;
-import co.edu.uniandes.csw.mpcellphone.api.IStateLogic;
-import co.edu.uniandes.csw.mpcellphone.converters.CityConverter;
-import co.edu.uniandes.csw.mpcellphone.converters.StateConverter;
-import co.edu.uniandes.csw.mpcellphone.dtos.CityDTO;
-import co.edu.uniandes.csw.mpcellphone.dtos.StateDTO;
-import co.edu.uniandes.csw.mpcellphone.ejbs.CityLogic;
-import co.edu.uniandes.csw.mpcellphone.ejbs.StateLogic;
-import co.edu.uniandes.csw.mpcellphone.entities.CityEntity;
-import co.edu.uniandes.csw.mpcellphone.entities.StateEntity;
-import co.edu.uniandes.csw.mpcellphone.persistence.CityPersistence;
+import co.edu.uniandes.csw.mpcellphone.api.IPhotoLogic;
+import co.edu.uniandes.csw.mpcellphone.converters.PhotoConverter;
+import co.edu.uniandes.csw.mpcellphone.dtos.PhotoDTO;
+import co.edu.uniandes.csw.mpcellphone.ejbs.PhotoLogic;
+import co.edu.uniandes.csw.mpcellphone.entities.PhotoEntity;
+import co.edu.uniandes.csw.mpcellphone.persistence.PhotoPersistence;
 import static co.edu.uniandes.csw.mpcellphone.tests._TestUtil.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +29,7 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  * @generated
  */
 @RunWith(Arquillian.class)
-public class CityLogicTest {
+public class PhotoLogicTest {
     public static final String DEPLOY = "Prueba";
 
     /**
@@ -43,14 +38,12 @@ public class CityLogicTest {
     @Deployment
     public static WebArchive createDeployment() {
         return ShrinkWrap.create(WebArchive.class, DEPLOY + ".war")
-                .addPackage(CityEntity.class.getPackage())
-                .addPackage(CityDTO.class.getPackage())
-                .addPackage(CityConverter.class.getPackage())
-                .addPackage(CityLogic.class.getPackage())
-                .addPackage(ICityLogic.class.getPackage())
-                .addPackage(StateLogic.class.getPackage())
-                .addPackage(IStateLogic.class.getPackage())
-                .addPackage(CityPersistence.class.getPackage())
+                .addPackage(PhotoEntity.class.getPackage())
+                .addPackage(PhotoDTO.class.getPackage())
+                .addPackage(PhotoConverter.class.getPackage())
+                .addPackage(PhotoLogic.class.getPackage())
+                .addPackage(IPhotoLogic.class.getPackage())
+                .addPackage(PhotoPersistence.class.getPackage())
                 .addAsResource("META-INF/persistence.xml", "META-INF/persistence.xml")
                 .addAsWebInfResource("META-INF/beans.xml", "beans.xml");
     }
@@ -59,13 +52,7 @@ public class CityLogicTest {
      * @generated
      */
     @Inject
-    private ICityLogic cityLogic;
-
-    /**
-     * @generated
-     */
-    @Inject
-    private IStateLogic stateLogic;
+    private IPhotoLogic photoLogic;
 
     /**
      * @generated
@@ -103,22 +90,22 @@ public class CityLogicTest {
      * @generated
      */
     private void clearData() {
-        em.createQuery("delete from CityEntity").executeUpdate();
+        em.createQuery("delete from PhotoEntity").executeUpdate();
     }
 
     /**
      * @generated
      */
-    private List<CityEntity> data = new ArrayList<CityEntity>();
+    private List<PhotoEntity> data = new ArrayList<PhotoEntity>();
 
     /**
      * @generated
      */
     private void insertData() {
         for (int i = 0; i < 3; i++) {
-            PodamFactory factory = new PodamFactoryImpl();                 
-            CityEntity entity = CityConverter.basicDTO2Entity(
-                    factory.manufacturePojo(CityDTO.class)); 
+            PhotoEntity entity = new PhotoEntity();
+            entity.setName(generateRandom(String.class));
+            entity.setImage(generateRandom(String.class));
             em.persist(entity);
             data.add(entity);
         }
@@ -128,38 +115,30 @@ public class CityLogicTest {
      * @generated
      */
     @Test
-    public void createCityTest() {
-        CityDTO dto = new CityDTO();
+    public void createPhotoTest() {
+        PhotoDTO dto = new PhotoDTO();
         dto.setName(generateRandom(String.class));
-        
-        PodamFactory factory = new PodamFactoryImpl();
-        
-        StateDTO newStateEntity = factory.manufacturePojo(StateDTO.class);
+        dto.setImage(generateRandom(String.class));
 
-        StateDTO resultState = stateLogic.createState(newStateEntity);
-        
-        dto.setState(resultState);
-        
-        CityDTO result = cityLogic.createCity(dto);
+        PhotoDTO result = photoLogic.createPhoto(dto);
 
         Assert.assertNotNull(result);
 
-        CityEntity entity = em.find(CityEntity.class, result.getId());
+        PhotoEntity entity = em.find(PhotoEntity.class, result.getId());
 
         Assert.assertEquals(dto.getName(), entity.getName());
-        Assert.assertEquals(dto.getState().getName(), entity.getState().getName());
     }
 
     /**
      * @generated
      */
     @Test
-    public void getCitiesTest() {
-        List<CityDTO> list = cityLogic.getCities(null, null);
+    public void getPhotosTest() {
+        List<PhotoDTO> list = photoLogic.getPhotos(null, null);
         Assert.assertEquals(data.size(), list.size());
-        for (CityDTO dto : list) {
+        for (PhotoDTO dto : list) {
             boolean found = false;
-            for (CityEntity entity : data) {
+            for (PhotoEntity entity : data) {
                 if (dto.getId().equals(entity.getId())) {
                     found = true;
                 }
@@ -172,48 +151,30 @@ public class CityLogicTest {
      * @generated
      */
     @Test
-    public void getAllCitiesTest() {
-        List<CityDTO> list = cityLogic.getAllCities();
-        Assert.assertEquals(data.size(), list.size());
-        for (CityDTO dto : list) {
-            boolean found = false;
-            for (CityEntity entity : data) {
-                if (dto.getId().equals(entity.getId())) {
-                    found = true;
-                }
-            }
-            Assert.assertTrue(found);
-        }
-    }
-
-    /**
-     * @generated
-     */
-    @Test
-    public void getCityTest() {
-        CityEntity entity = data.get(0);
-        CityDTO dto = cityLogic.getCity(entity.getId());
+    public void getPhotoTest() {
+        PhotoEntity entity = data.get(0);
+        PhotoDTO dto = photoLogic.getPhoto(entity.getId());
         Assert.assertNotNull(dto);
         Assert.assertEquals(entity.getName(), dto.getName());
     }
-
+    
     /**
      * @generated
      */
     @Test
-    public void getCityPaginationTest() {
+    public void getPhotosPaginationTest() {
         //Page 1
-        List<CityDTO> dto1 = cityLogic.getCities(1, 2);
+        List<PhotoDTO> dto1 = photoLogic.getPhotos(1, 2);
         Assert.assertNotNull(dto1);
         Assert.assertEquals(2, dto1.size());
         //Page 2
-        List<CityDTO> dto2 = cityLogic.getCities(2, 2);
+        List<PhotoDTO> dto2 = photoLogic.getPhotos(2, 2);
         Assert.assertNotNull(dto2);
         Assert.assertEquals(1, dto2.size());
 
-        for (CityDTO dto : dto1) {
+        for (PhotoDTO dto : dto1) {
             boolean found = false;
-            for (CityEntity entity : data) {
+            for (PhotoEntity entity : data) {
                 if (dto.getId().equals(entity.getId())) {
                     found = true;
                 }
@@ -221,9 +182,9 @@ public class CityLogicTest {
             Assert.assertTrue(found);
         }
 
-        for (CityDTO dto : dto2) {
+        for (PhotoDTO dto : dto2) {
             boolean found = false;
-            for (CityEntity entity : data) {
+            for (PhotoEntity entity : data) {
                 if (dto.getId().equals(entity.getId())) {
                     found = true;
                 }
@@ -233,11 +194,42 @@ public class CityLogicTest {
     }
     
     /**
-     * Test countCellphone method
+     * Test countPhotos method
      */ 
     @Test
     public void countCitiesTest(){
-        Assert.assertEquals(data.size(), cityLogic.countCities()); 
+        Assert.assertEquals(data.size(), photoLogic.countPhotos()); 
     }
     
+    /**
+     * @generated
+     */
+    @Test
+    public void updatePhotoTest() {
+        PhotoEntity entity = data.get(0);
+
+        PhotoDTO dto = new PhotoDTO();
+
+        dto.setId(entity.getId());
+        dto.setName(generateRandom(String.class));
+        dto.setImage(generateRandom(String.class));
+
+        photoLogic.updatePhoto(dto);
+
+        PhotoEntity resp = em.find(PhotoEntity.class, entity.getId());
+
+        Assert.assertEquals(dto.getName(), resp.getName());
+        Assert.assertEquals(dto.getImage(), resp.getImage());
+    }
+    
+    /**
+     * @generated
+     */
+    @Test
+    public void deleteCellPhoneTest() {
+        PhotoEntity entity = data.get(0);
+        photoLogic.deletePhoto(entity.getId());
+        PhotoEntity deleted = em.find(PhotoEntity.class, entity.getId());
+        Assert.assertNull(deleted);
+    }
 }
