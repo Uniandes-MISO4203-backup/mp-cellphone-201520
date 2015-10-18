@@ -147,7 +147,6 @@ public class CityLogicTest {
         CityEntity entity = em.find(CityEntity.class, result.getId());
 
         Assert.assertEquals(dto.getName(), entity.getName());
-        Assert.assertEquals(dto.getState().getName(), entity.getState().getName());
     }
 
     /**
