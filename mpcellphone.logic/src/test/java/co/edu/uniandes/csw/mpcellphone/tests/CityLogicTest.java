@@ -3,13 +3,11 @@ package co.edu.uniandes.csw.mpcellphone.tests;
 import co.edu.uniandes.csw.mpcellphone.api.ICityLogic;
 import co.edu.uniandes.csw.mpcellphone.api.IStateLogic;
 import co.edu.uniandes.csw.mpcellphone.converters.CityConverter;
-import co.edu.uniandes.csw.mpcellphone.converters.StateConverter;
 import co.edu.uniandes.csw.mpcellphone.dtos.CityDTO;
 import co.edu.uniandes.csw.mpcellphone.dtos.StateDTO;
 import co.edu.uniandes.csw.mpcellphone.ejbs.CityLogic;
 import co.edu.uniandes.csw.mpcellphone.ejbs.StateLogic;
 import co.edu.uniandes.csw.mpcellphone.entities.CityEntity;
-import co.edu.uniandes.csw.mpcellphone.entities.StateEntity;
 import co.edu.uniandes.csw.mpcellphone.persistence.CityPersistence;
 import static co.edu.uniandes.csw.mpcellphone.tests._TestUtil.*;
 import java.util.ArrayList;
@@ -147,6 +145,7 @@ public class CityLogicTest {
         CityEntity entity = em.find(CityEntity.class, result.getId());
 
         Assert.assertEquals(dto.getName(), entity.getName());
+        Assert.assertEquals(dto.getState().getName(), entity.getState().getName());
     }
 
     /**

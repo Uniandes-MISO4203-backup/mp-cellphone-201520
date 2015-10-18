@@ -94,7 +94,9 @@ public abstract class CityConverter {
      */
     public static CityEntity fullDTO2Entity(CityDTO dto) {
         if (dto != null) {
-            return basicDTO2Entity(dto);
+            CityEntity entity = basicDTO2Entity(dto);
+            entity.setState(StateConverter.refDTO2Entity(dto.getState()));
+            return entity;
         } else {
             return null;
         }
