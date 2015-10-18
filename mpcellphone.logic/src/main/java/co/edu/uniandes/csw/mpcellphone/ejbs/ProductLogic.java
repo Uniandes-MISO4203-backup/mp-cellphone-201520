@@ -88,7 +88,7 @@ public class ProductLogic implements IProductLogic {
     }
     
     /**
-     * Return the cheapest Product
+     * Return the cheapest Product from a provider
      * @param idProvider
      * @return 
      */
@@ -97,27 +97,48 @@ public class ProductLogic implements IProductLogic {
         return ProductConverter.fullEntity2DTO(persistence.getCheaperProduct(idProvider));
     }
     
+    /**
+     * Return the cheapest provider of a Cellphone model
+     * @param idCellPhone
+     * @return 
+     */
     @Override
     public ProductDTO getCheaperProvider(Long idCellPhone){       
         return ProductConverter.fullEntity2DTO(persistence.getCheaperProvider(idCellPhone));
     }
-    //Para Obtener la lista de un modelo especifico, Desarrollado por Miguel Olivares
+    /**
+     * Para Obtener la lista de un modelo especifico, Desarrollado por Miguel Olivares
+     * @param model
+     * @return 
+     */
     @Override
     public List<ProductDTO> getByModel(String model) {
         return ProductConverter.listEntity2DTO(persistence.getByModel(model));
     }
-    //Para Obtener la lista de un modelo especifico filtrado por marca, Desarrollado por Miguel Olivares
+    /**
+     * Para Obtener la lista de productos filtrado por marca, Desarrollado por Miguel Olivares
+     * @param brand
+     * @return 
+     */
     @Override
     public List<ProductDTO> getByBrand(String brand) {
         return ProductConverter.listEntity2DTO(persistence.getByBrand(brand));
     }
     
-    //Para Obtener la lista de un modelo especifico de un proveedor, Desarrollado por Miguel Olivares
+    /**
+     * Para Obtener la lista de productos basado en el nombre de un proveedor, Desarrollado por Miguel Olivares
+     * @param name
+     * @return 
+     */
     @Override
     public List<ProductDTO> getByProviderName(String name) {
         return ProductConverter.listEntity2DTO(persistence.getByProviderName(name));
     }
-    //Para Obtener la lista de un modelo especifico filtrado por ciudad, Desarrollado por Miguel Olivares
+    /**
+     * Para Obtener la lista de un modelo especifico filtrado por ciudad, Desarrollado por Miguel Olivares
+     * @param city
+     * @return 
+     */
     @Override
     public List<ProductDTO> getByCity(String city) {
         return ProductConverter.listEntity2DTO(persistence.getByCity(city));
@@ -173,37 +194,5 @@ public class ProductLogic implements IProductLogic {
     @Override
     public ProductDTO getProductByImei(String imei){
         return ProductConverter.simpleEntity2DTO(persistence.getProductByImei(imei));
-    }    
-    
-    /**
-     * 
-     * @param id
-     * @param idProvider
-     * @return 
-     */
-    @Override
-    public ProductDTO getProductByProvider(Long id, Long idProvider) {
-        throw new UnsupportedOperationException(PARAM1); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    /**
-     * 
-     * @param dto
-     * @param idProvider
-     * @return 
-     */
-    @Override
-    public ProductDTO updateProductByProvider(ProductDTO dto, Long idProvider) {
-        throw new UnsupportedOperationException(PARAM1); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    /**
-     * 
-     * @param id
-     * @param idProvider 
-     */
-    @Override
-    public void deleteProductByProvider(Long id, Long idProvider) {
-        throw new UnsupportedOperationException(PARAM1); //To change body of generated methods, choose Tools | Templates.
-    }
+    }     
 }

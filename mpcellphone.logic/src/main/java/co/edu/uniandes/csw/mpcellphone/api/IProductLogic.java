@@ -25,8 +25,5 @@ public interface IProductLogic {
     
     public List<ProductDTO> getProductsByProvider(Integer page, Integer maxRecords, Long idProvider);
     public int countProductsByProvider(Long idProvider);
-    public ProductDTO getProductByProvider(Long id, Long idProvider);
-    public ProductDTO updateProductByProvider(ProductDTO dto, Long idProvider);
-    public void deleteProductByProvider(Long id, Long idProvider);
     public ProductDTO getProductByImei(String imei);
 }

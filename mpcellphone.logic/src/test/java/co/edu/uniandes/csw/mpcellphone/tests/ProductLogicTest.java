@@ -30,8 +30,6 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import uk.co.jemos.podam.api.PodamFactory;
-import uk.co.jemos.podam.api.PodamFactoryImpl;
 
 /**
  * @generated
@@ -120,7 +118,9 @@ public class ProductLogicTest {
      */
     private void insertData() {
         for (int i = 0; i < 3; i++) {
-            ProviderEntity provider = new ProviderEntity();             
+            ProviderEntity provider = new ProviderEntity(); 
+            provider.setName(generateRandom(String.class));
+            provider.setCity(generateRandom(String.class));
             provider.setProducts(Collections.EMPTY_LIST);
             em.persist(provider);
             CellPhoneEntity cellPhone = new CellPhoneEntity();
@@ -387,5 +387,145 @@ public class ProductLogicTest {
         Assert.assertEquals(cheapest.getId(), dto.getId());
         Assert.assertEquals(cheapest.getPrice(), dto.getPrice());
         Assert.assertEquals(cheapest.getProvider().getId(), dto.getProvider().getId());
+    }
+    
+     /**
+     * Test getCheaperProvider method
+     */ 
+    @Test
+    public void getCheaperProviderTest(){
+        Long id = data.get(0).getCellPhone().getId();
+        ProductDTO dto = productLogic.getCheaperProvider(id);
+        Assert.assertNotNull(dto);
+        Long price = Long.MAX_VALUE;
+        ProductEntity cheapest = null;
+        for(ProductEntity entity: data){
+            if(entity.getCellPhone().getId().equals(id)&&entity.getPrice()<price){
+                price=entity.getPrice();
+                cheapest=entity;
+            }
+        }        
+        Assert.assertEquals(cheapest.getId(), dto.getId());
+        Assert.assertEquals(cheapest.getPrice(), dto.getPrice());
+        Assert.assertEquals(cheapest.getProvider().getId(), dto.getProvider().getId());
+    }
+    
+    /**
+     * Test getByModel method
+     */ 
+    @Test
+    public void getByModelTest(){
+        String name = data.get(0).getCellPhone().getName();
+        List<ProductEntity> cache = new ArrayList<ProductEntity>();
+        List<ProductDTO> list = productLogic.getByModel(name);
+
+        for (ProductEntity entity : data) {
+            if (entity.getCellPhone().getName().equals(name)) {
+                cache.add(entity);
+            }
+        }
+        Assert.assertEquals(cache.size(), list.size());
+        for (ProductDTO dto : list) {
+            Assert.assertNotNull(dto);
+            boolean found = false;
+            for (ProductEntity cacheEntity : cache) {
+                if (cacheEntity.getId().equals(dto.getId())) {
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                Assert.fail();
+            }
+        }
+    }
+    
+    /**
+     * Test getByBrand method
+     */ 
+    @Test
+    public void getByBrandTest(){
+        String name = data.get(0).getCellPhone().getBrand();
+        List<ProductEntity> cache = new ArrayList<ProductEntity>();
+        List<ProductDTO> list = productLogic.getByBrand(name);
+
+        for (ProductEntity entity : data) {
+            if (entity.getCellPhone().getBrand().equals(name)) {
+                cache.add(entity);
+            }
+        }
+        Assert.assertEquals(cache.size(), list.size());
+        for (ProductDTO dto : list) {
+            Assert.assertNotNull(dto);
+            boolean found = false;
+            for (ProductEntity cacheEntity : cache) {
+                if (cacheEntity.getId().equals(dto.getId())) {
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                Assert.fail();
+            }
+        }
+    }
+    /**
+     * Test getByProviderName method
+     */ 
+    @Test
+    public void getByProviderNameTest(){
+        String name = data.get(0).getProvider().getName();
+        List<ProductEntity> cache = new ArrayList<ProductEntity>();
+        List<ProductDTO> list = productLogic.getByProviderName(name);
+
+        for (ProductEntity entity : data) {
+            if (entity.getProvider().getName().equals(name)) {
+                cache.add(entity);
+            }
+        }
+        Assert.assertEquals(cache.size(), list.size());
+        for (ProductDTO dto : list) {
+            Assert.assertNotNull(dto);
+            boolean found = false;
+            for (ProductEntity cacheEntity : cache) {
+                if (cacheEntity.getId().equals(dto.getId())) {
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                Assert.fail();
+            }
+        }
+    }
+    
+    /**
+     * Test getByCity method
+     */ 
+    @Test
+    public void getByCityTest(){
+        String name = data.get(0).getProvider().getCity();
+        List<ProductEntity> cache = new ArrayList<ProductEntity>();
+        List<ProductDTO> list = productLogic.getByCity(name);
+
+        for (ProductEntity entity : data) {
+            if (entity.getProvider().getCity().equals(name)) {
+                cache.add(entity);
+            }
+        }
+        Assert.assertEquals(cache.size(), list.size());
+        for (ProductDTO dto : list) {
+            Assert.assertNotNull(dto);
+            boolean found = false;
+            for (ProductEntity cacheEntity : cache) {
+                if (cacheEntity.getId().equals(dto.getId())) {
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                Assert.fail();
+            }
+        }
     }
 }
