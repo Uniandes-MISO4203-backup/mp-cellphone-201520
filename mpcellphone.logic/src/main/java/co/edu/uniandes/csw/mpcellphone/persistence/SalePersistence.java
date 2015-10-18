@@ -31,7 +31,7 @@ public class SalePersistence extends CrudPersistence<SalesEntity> {
     }
 
      public List<SaleDTO> getSaleByProvider(Integer page, Integer maxRecords, Long idProvider) {
-        Query q = em.createQuery("select u from " + entityClass.getSimpleName() + " u where u.productId.provider.id = :idP");
+        Query q = em.createQuery("select u from " + entityClass.getSimpleName() + " u where u.providerId.id = :idP");
         if (page != null && maxRecords != null) {
             q.setFirstResult((page - 1) * maxRecords);
             q.setMaxResults(maxRecords);
