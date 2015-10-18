@@ -119,6 +119,13 @@ public class UserLogicTest {
     }
 
     @Test
+    public void countUsersTest(){
+        int size = userLogic.countUsers();
+        Assert.assertEquals(data.size(), size);
+    }
+    
+   
+    @Test
     public void getUsersTest() {
         List<UserDTO> list = userLogic.getUsers(null, null);
         Assert.assertEquals(data.size(), list.size());
@@ -134,7 +141,30 @@ public class UserLogicTest {
     }
     
     @Test
-    public void deleteClientTest() {
+    public void updateUserTest() {
+        String name = generateRandom(String.class);
+        String role = generateRandom(String.class);
+        String email = generateRandom(String.class);
+        
+        UserEntity entity = data.get(0);
+        
+        UserDTO dto = userLogic.getUserByUserId(entity.getStormpath());
+        dto.setName(name);
+        dto.setRole(role);
+        dto.setEmail(email);
+        
+        UserDTO updDto = userLogic.updateUser(dto);
+        
+        Assert.assertNotNull(updDto);
+
+        Assert.assertEquals(updDto.getName(), name);
+        Assert.assertEquals(updDto.getRole(), role);
+        Assert.assertEquals(updDto.getEmail(), email);
+        
+    }
+    
+    @Test
+    public void deleteUserTest() {
         UserEntity entity = data.get(0);
         userLogic.deleteUser(entity.getId());
         UserEntity deleted = em.find(UserEntity.class, entity.getId());
