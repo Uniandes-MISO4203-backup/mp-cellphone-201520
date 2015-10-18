@@ -192,4 +192,12 @@ public class StateLogicTest {
         }
     }
     
+    /**
+     * Test countCellphone method
+     */ 
+    @Test
+    public void countStateTest(){
+        Assert.assertEquals(data.size(), stateLogic.countStates()); 
+    }
+    
 }
