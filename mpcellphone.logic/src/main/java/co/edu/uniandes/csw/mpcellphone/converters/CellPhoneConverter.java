@@ -150,7 +150,6 @@ public abstract class CellPhoneConverter {
         if (models != null) {
             for (String name : models) {
                 CellPhoneDTO dto = new CellPhoneDTO();
-                //dtos.add(basicEntity2DTO(Models));
                 dto.setName(name);
                 dtos.add(dto);
             }

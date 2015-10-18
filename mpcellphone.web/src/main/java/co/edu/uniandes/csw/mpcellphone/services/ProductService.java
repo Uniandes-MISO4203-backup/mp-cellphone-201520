@@ -59,6 +59,9 @@ public class ProductService {
     @POST
     @StatusCreated
     public ProductDTO createProduct(ProductDTO dto){
+        if(provider==null)throw new WebApplicationException(Response.status(Responses.NOT_FOUND)
+                    .entity("Forbidden access.")
+                    .type("text/plain").build());
         dto.setProvider(provider);
         ProductDTO dtoSearch= productLogic.getProductByImei(dto.getImei());
         if(dtoSearch!=null&&dtoSearch.getId()!=null)
@@ -68,7 +71,7 @@ public class ProductService {
         if(RequestUtilsMP.isStolenImei(dto.getImei()))
             throw new WebApplicationException(Response.status(Responses.NOT_FOUND)
                     .entity("The Imei id appears in the police database for stolen cellphones. "
-                            + "Please contact with a police office nearly to your home")
+                            + "Please contact with a police office near to your home")
                     .type("text/plain").build());
             
         return productLogic.createProduct(dto);

@@ -108,6 +108,14 @@ public class CellPhoneLogicTest {
             data.add(entity);
         }
     }
+    
+    /**
+     * Test countCellphone method
+     */ 
+    @Test
+    public void countCellPhonesTest(){
+        Assert.assertEquals(data.size(), cellPhoneLogic.countCellPhones()); 
+    }
 
     /**
      * @generated
@@ -222,5 +230,66 @@ public class CellPhoneLogicTest {
             }
             Assert.assertTrue(found);
         }
-    }    
+    }  
+    /**
+     * Method to test findByName
+     */
+    @Test
+    public void findByNameTest(){
+        for(CellPhoneEntity entity: data){
+            int nameQuantity = 0;
+            for(CellPhoneEntity entityTest: data){
+                if(entityTest.getName().equals(entity.getName())){
+                    nameQuantity++;
+                }
+            }
+            List<CellPhoneDTO> cellPhones = cellPhoneLogic.findByName(entity.getName());
+            Assert.assertNotNull(cellPhones);
+            Assert.assertEquals(nameQuantity, cellPhones.size());
+            for(CellPhoneDTO dto: cellPhones){
+                Assert.assertNotNull(dto);
+                Assert.assertEquals(entity.getName(), dto.getName());
+            }
+        }
+    }
+    
+    /**
+     * Method to test cellPhoneModelTest
+     */
+    @Test
+    public void getCellPhoneModelTest(){        
+        List<CellPhoneDTO> cellPhones = cellPhoneLogic.getCellPhoneModel();
+        Assert.assertNotNull(cellPhones);
+        for(CellPhoneDTO dto: cellPhones){
+            Assert.assertNotNull(dto);
+            Assert.assertNotNull(dto.getName());
+        }
+        List<String> list = em.createNamedQuery("CellPhone.getCellPhoneModel").getResultList();
+        Assert.assertEquals(cellPhones.size(), list.size());
+        ArrayList<String> names = new ArrayList<String>();
+        for(CellPhoneDTO dto: cellPhones){
+            names.add(dto.getName());
+        }
+        Assert.assertArrayEquals(list.toArray(), names.toArray());
+    }
+    
+    /**
+     * Method to test cellPhoneBrandTest
+     */
+    @Test
+    public void getCellPhoneBrandTest(){        
+        List<CellPhoneDTO> cellPhones = cellPhoneLogic.getCellPhoneBrand();
+        Assert.assertNotNull(cellPhones);
+        for(CellPhoneDTO dto: cellPhones){
+            Assert.assertNotNull(dto);
+            Assert.assertNotNull(dto.getName());
+        }
+        List<String> list = em.createNamedQuery("CellPhone.getCellPhoneBrand").getResultList();
+        Assert.assertEquals(cellPhones.size(), list.size());
+        ArrayList<String> names = new ArrayList<String>();
+        for(CellPhoneDTO dto: cellPhones){
+            names.add(dto.getName());
+        }
+        Assert.assertArrayEquals(list.toArray(), names.toArray());
+    }
 }
