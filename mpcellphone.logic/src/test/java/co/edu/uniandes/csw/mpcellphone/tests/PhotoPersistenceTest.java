@@ -9,58 +9,59 @@ import co.edu.uniandes.csw.mpcellphone.converters.PhotoConverter;
 import co.edu.uniandes.csw.mpcellphone.dtos.PhotoDTO;
 import co.edu.uniandes.csw.mpcellphone.entities.PhotoEntity;
 import co.edu.uniandes.csw.mpcellphone.persistence.PhotoPersistence;
+import uk.co.jemos.podam.api.PodamFactory;
+import uk.co.jemos.podam.api.PodamFactoryImpl;
+import static co.edu.uniandes.csw.mpcellphone.tests._TestUtil.*;
 import java.util.ArrayList;
 import java.util.List;
-import javax.inject.Inject; 
-import javax.persistence.EntityManager; 
-import javax.persistence.PersistenceContext; 
-import javax.transaction.UserTransaction; 
-import org.junit.Assert; 
-import org.jboss.arquillian.container.test.api.Deployment; 
-import org.jboss.arquillian.junit.Arquillian; 
-import org.jboss.shrinkwrap.api.ShrinkWrap; 
-import org.jboss.shrinkwrap.api.spec.WebArchive; 
-import org.junit.Before; 
-import org.junit.Test; 
-import org.junit.runner.RunWith; 
-import uk.co.jemos.podam.api.PodamFactory; 
-import uk.co.jemos.podam.api.PodamFactoryImpl; 
+
+import javax.inject.Inject;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.transaction.UserTransaction;
+import org.junit.Assert;
+import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.arquillian.junit.Arquillian;
+import org.jboss.shrinkwrap.api.ShrinkWrap;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 /**
  *
  * @author Mauro
  */
-@RunWith(Arquillian.class) 
+@RunWith(Arquillian.class)
 public class PhotoPersistenceTest {
+
     /**
      * @generated
      */
     public static final String DEPLOY = "Prueba";
-    
+
     /**
      * @generated
      */
-    @Inject 
-    UserTransaction utx; 
-    
-    
+    @Inject
+    UserTransaction utx;
+
     /**
      * @generated
      */
     @PersistenceContext
     private EntityManager em;
-    
+
     /**
      * @generated
      */
     @Inject
     private PhotoPersistence photoPersistence;
-    
-    private List<PhotoEntity> data = new ArrayList(); 
-    
+
+    private List<PhotoEntity> data = new ArrayList();
+
     /**
-     * @return 
-     * @generated
+     * @return @generated
      */
     @Deployment
     public static WebArchive createDeployment() {
@@ -70,8 +71,8 @@ public class PhotoPersistenceTest {
                 .addAsResource("META-INF/persistence.xml", "META-INF/persistence.xml")
                 .addAsWebInfResource("META-INF/beans.xml", "beans.xml");
     }
-    
-     /**
+
+    /**
      * @generated
      */
     @Before
@@ -90,33 +91,35 @@ public class PhotoPersistenceTest {
             }
         }
     }
-    
-     /**
+
+    /**
      * @generated
      */
-    private void clearData() { 
-        em.createQuery("delete from PhotoEntity").executeUpdate(); 
-    } 
-    
-     /**
-     * @generated
-     */
-    private void insertData() { 
-        for (int i = 0; i < 3; i++) { 
-            PodamFactory factory = new PodamFactoryImpl(); 
-            PhotoEntity entity = PhotoConverter.refDTO2Entity(factory.manufacturePojo(PhotoDTO.class)); 
-            em.persist(entity); 
-            data.add(entity); 
-        } 
+    private void clearData() {
+        em.createQuery("delete from PhotoEntity").executeUpdate();
     }
-    
+
+    /**
+     * @generated
+     */
+    private void insertData() {
+        for (int i = 0; i < 3; i++) {
+            PodamFactory factory = new PodamFactoryImpl();
+            PhotoEntity entity = PhotoConverter.refDTO2Entity(factory.manufacturePojo(PhotoDTO.class));
+            em.persist(entity);
+            data.add(entity);
+        }
+    }
+
     /**
      * @generated
      */
     @Test
     public void createPhotoTest() {
-        PodamFactory factory = new PodamFactoryImpl();
-        PhotoEntity newEntity = PhotoConverter.refDTO2Entity(factory.manufacturePojo(PhotoDTO.class));
+
+        PhotoEntity newEntity = new PhotoEntity();
+        newEntity.setName(generateRandom(String.class));
+        newEntity.setImage(generateRandom(String.class));
 
         PhotoEntity result = photoPersistence.create(newEntity);
 
@@ -127,8 +130,5 @@ public class PhotoPersistenceTest {
         Assert.assertEquals(newEntity.getName(), entity.getName());
         Assert.assertEquals(newEntity.getImage(), entity.getImage());
     }
-    
-   
-    
-    
+
 }
