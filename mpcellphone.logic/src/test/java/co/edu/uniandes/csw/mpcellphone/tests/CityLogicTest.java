@@ -115,7 +115,7 @@ public class CityLogicTest {
      * @generated
      */
     @Test
-    public void createStateTest() {
+    public void createCityTest() {
         CityDTO dto = new CityDTO();
         dto.setName(generateRandom(String.class));
 
@@ -132,8 +132,26 @@ public class CityLogicTest {
      * @generated
      */
     @Test
-    public void getStatesTest() {
+    public void getCitiesTest() {
         List<CityDTO> list = cityLogic.getCities(null, null);
+        Assert.assertEquals(data.size(), list.size());
+        for (CityDTO dto : list) {
+            boolean found = false;
+            for (CityEntity entity : data) {
+                if (dto.getId().equals(entity.getId())) {
+                    found = true;
+                }
+            }
+            Assert.assertTrue(found);
+        }
+    }
+    
+    /**
+     * @generated
+     */
+    @Test
+    public void getAllCitiesTest() {
+        List<CityDTO> list = cityLogic.getAllCities();
         Assert.assertEquals(data.size(), list.size());
         for (CityDTO dto : list) {
             boolean found = false;
@@ -150,7 +168,7 @@ public class CityLogicTest {
      * @generated
      */
     @Test
-    public void getStateTest() {
+    public void getCityTest() {
         CityEntity entity = data.get(0);
         CityDTO dto = cityLogic.getCity(entity.getId());
         Assert.assertNotNull(dto);
@@ -161,7 +179,7 @@ public class CityLogicTest {
      * @generated
      */
     @Test
-    public void getStatePaginationTest() {
+    public void getCityPaginationTest() {
         //Page 1
         List<CityDTO> dto1 = cityLogic.getCities(1, 2);
         Assert.assertNotNull(dto1);
@@ -196,7 +214,7 @@ public class CityLogicTest {
      * Test countCellphone method
      */ 
     @Test
-    public void countStateTest(){
+    public void countCitiesTest(){
         Assert.assertEquals(data.size(), cityLogic.countCities()); 
     }
     
