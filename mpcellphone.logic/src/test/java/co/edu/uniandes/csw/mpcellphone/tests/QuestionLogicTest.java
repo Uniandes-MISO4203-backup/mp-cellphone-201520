@@ -132,5 +132,26 @@ public class QuestionLogicTest {
         //Assert.assertEquals(dto.getQuestion(), entity.getQuestion());
     }
 
-    
+    @Test
+    public void getQuestionsTest() {
+        List<QuestionDTO> list = questionLogic.getQuestions(null, null);
+        Assert.assertEquals(data.size(), list.size());
+        for (QuestionDTO dto : list) {
+            boolean found = false;
+            for (QuestionEntity entity : data) {
+                if (dto.getId().equals(entity.getId())) {
+                    found = true;
+                }
+            }
+            Assert.assertTrue(found);
+        }
+    }
+
+    @Test
+    public void getUserTest() {
+        QuestionEntity entity = data.get(0);
+        QuestionDTO dto = questionLogic.getQuestion(entity.getId());
+        Assert.assertNotNull(dto);
+        Assert.assertEquals(entity.getQuestion(), dto.getQuestion());
+    }
 }
