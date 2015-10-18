@@ -34,11 +34,18 @@ public class StateLogic implements IStateLogic {
         return StateConverter.listEntity2DTO(persistence.findAll(page, maxRecords));
     }
 
+    /**
+     * @param id
+     * @return 
+     */
     @Override
     public StateDTO getState(Long id) {
         return StateConverter.fullEntity2DTO(persistence.find(id));
     }
 
+    /**
+     * @return 
+     */
     @Override
     public int countStates() {
         return persistence.count();
