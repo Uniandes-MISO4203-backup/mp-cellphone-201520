@@ -5,10 +5,10 @@
  */
 package co.edu.uniandes.csw.mpcellphone.tests;
 
-import co.edu.uniandes.csw.mpcellphone.converters.PhotoConverter;
-import co.edu.uniandes.csw.mpcellphone.dtos.PhotoDTO;
 import co.edu.uniandes.csw.mpcellphone.entities.PhotoEntity;
+import co.edu.uniandes.csw.mpcellphone.entities.ProductEntity;
 import co.edu.uniandes.csw.mpcellphone.persistence.PhotoPersistence;
+import co.edu.uniandes.csw.mpcellphone.persistence.ProductPersistence;
 import static co.edu.uniandes.csw.mpcellphone.tests._TestUtil.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -55,6 +55,12 @@ public class PhotoPersistenceTest {
      */
     @Inject
     private PhotoPersistence photoPersistence;
+    
+    /**
+     * @generated
+     */
+    @Inject
+    private ProductPersistence productPersistence;
 
     private List<PhotoEntity> data = new ArrayList();
 
@@ -119,6 +125,14 @@ public class PhotoPersistenceTest {
         PhotoEntity newEntity = new PhotoEntity();
         newEntity.setName(generateRandom(String.class));
         newEntity.setImage(generateRandom(String.class));
+        
+        ProductEntity newProductEntity = new ProductEntity();
+        newProductEntity.setName(generateRandom(String.class));
+        newProductEntity.setPrice(generateRandom(Long.class));
+
+        ProductEntity resultProduct = productPersistence.create(newProductEntity);
+        
+        newEntity.setProduct(resultProduct);
 
         PhotoEntity result = photoPersistence.create(newEntity);
 
