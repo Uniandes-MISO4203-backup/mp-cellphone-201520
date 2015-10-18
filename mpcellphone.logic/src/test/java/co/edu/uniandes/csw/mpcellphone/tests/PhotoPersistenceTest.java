@@ -9,8 +9,6 @@ import co.edu.uniandes.csw.mpcellphone.converters.PhotoConverter;
 import co.edu.uniandes.csw.mpcellphone.dtos.PhotoDTO;
 import co.edu.uniandes.csw.mpcellphone.entities.PhotoEntity;
 import co.edu.uniandes.csw.mpcellphone.persistence.PhotoPersistence;
-import uk.co.jemos.podam.api.PodamFactory;
-import uk.co.jemos.podam.api.PodamFactoryImpl;
 import static co.edu.uniandes.csw.mpcellphone.tests._TestUtil.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -104,8 +102,9 @@ public class PhotoPersistenceTest {
      */
     private void insertData() {
         for (int i = 0; i < 3; i++) {
-            PodamFactory factory = new PodamFactoryImpl();
-            PhotoEntity entity = PhotoConverter.refDTO2Entity(factory.manufacturePojo(PhotoDTO.class));
+            PhotoEntity entity = new PhotoEntity();
+            entity.setName(generateRandom(String.class));
+            entity.setImage(generateRandom(String.class));
             em.persist(entity);
             data.add(entity);
         }
@@ -129,6 +128,65 @@ public class PhotoPersistenceTest {
 
         Assert.assertEquals(newEntity.getName(), entity.getName());
         Assert.assertEquals(newEntity.getImage(), entity.getImage());
+    }
+    
+     /**
+     * @generated
+     */
+    @Test
+    public void getPhotoTest() {
+        PhotoEntity entity = data.get(0);
+        PhotoEntity newEntity = photoPersistence.find(entity.getId());
+        Assert.assertNotNull(newEntity);
+        Assert.assertEquals(entity.getName(), newEntity.getName());
+    }
+    
+    /**
+     * @generated
+     */
+    @Test
+    public void deletePhotoTest() {
+        PhotoEntity entity = data.get(0);
+        photoPersistence.delete(entity.getId());
+        PhotoEntity deleted = em.find(PhotoEntity.class, entity.getId());
+        Assert.assertNull(deleted);
+    }
+
+    /**
+     * @generated
+     */
+    @Test
+    public void updatePhotoTest() {
+        PhotoEntity entity = data.get(0);
+
+        PhotoEntity newEntity = new PhotoEntity();
+        newEntity.setId(entity.getId());
+        newEntity.setName(generateRandom(String.class));
+        newEntity.setImage(generateRandom(String.class));
+
+        photoPersistence.update(newEntity);
+
+        PhotoEntity resp = em.find(PhotoEntity.class, entity.getId());
+
+        Assert.assertEquals(newEntity.getName(), resp.getName());
+    }
+    
+    /**
+     * @generated
+     */
+    @Test
+    public void getPhotosTest() {
+        List<PhotoEntity> list = photoPersistence.findAll(null, null);
+        Assert.assertEquals(data.size(), list.size());
+        for (PhotoEntity ent : list) {
+            boolean found = false;
+            for (PhotoEntity entity : data) {
+                if (ent.getId().equals(entity.getId())) {
+                    found = true;
+                }
+            }
+            Assert.assertTrue(found);
+        }
     }
 
 }
