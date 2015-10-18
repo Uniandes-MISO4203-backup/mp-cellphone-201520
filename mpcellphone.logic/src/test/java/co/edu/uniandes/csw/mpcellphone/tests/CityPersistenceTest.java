@@ -6,9 +6,13 @@
 package co.edu.uniandes.csw.mpcellphone.tests;
 
 import co.edu.uniandes.csw.mpcellphone.converters.CityConverter;
+import co.edu.uniandes.csw.mpcellphone.converters.StateConverter;
 import co.edu.uniandes.csw.mpcellphone.dtos.CityDTO;
+import co.edu.uniandes.csw.mpcellphone.dtos.StateDTO;
 import co.edu.uniandes.csw.mpcellphone.entities.CityEntity;
+import co.edu.uniandes.csw.mpcellphone.entities.StateEntity;
 import co.edu.uniandes.csw.mpcellphone.persistence.CityPersistence;
+import co.edu.uniandes.csw.mpcellphone.persistence.StatePersistence;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject; 
@@ -55,6 +59,12 @@ public class CityPersistenceTest {
      */
     @Inject
     private CityPersistence cityPersistence;
+    
+    /**
+     * @generated
+     */
+    @Inject
+    private StatePersistence statePersistence;
     
     private List<CityEntity> data = new ArrayList(); 
     
@@ -118,8 +128,14 @@ public class CityPersistenceTest {
         PodamFactory factory = new PodamFactoryImpl();
         CityEntity newEntity = CityConverter.basicDTO2Entity(factory.manufacturePojo(CityDTO.class));
 
-        CityEntity result = cityPersistence.create(newEntity);
+        StateEntity newStateEntity = StateConverter.basicDTO2Entity(factory.manufacturePojo(StateDTO.class));
 
+        StateEntity resultState = statePersistence.create(newStateEntity);
+        
+        newEntity.setState(resultState);
+        
+        CityEntity result = cityPersistence.create(newEntity);
+        
         Assert.assertNotNull(result);
 
         CityEntity entity = em.find(CityEntity.class, result.getId());
@@ -127,6 +143,7 @@ public class CityPersistenceTest {
         Assert.assertEquals(newEntity.getName(), entity.getName());
         Assert.assertEquals(newEntity.getLatitude(), entity.getLatitude());
         Assert.assertEquals(newEntity.getLongitude(), entity.getLongitude());
+        Assert.assertEquals(newEntity.getState().getName(), entity.getState().getName());
     }
     
       /**
