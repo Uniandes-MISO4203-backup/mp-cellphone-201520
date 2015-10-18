@@ -27,19 +27,20 @@
                 <tr>                   
                     <th>N° Order</th>
                     <th>Date</th>
-                    <th>Provider</th>
-                    <th>Shipping Address</th>
+                    <th>Client</th>
+                    <th>Payment Method</th>
                     <th>Total Sale</th>
-                    <th ng-if="ctrl.recordActions">Actions</th>
+                    <th ng-if="recordActions">Actions</th>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="record in records">
-                    <td><div>{{record.product.name}}</div></td> 
-                    <td><div> <a text="record.quantity" onbeforesave="verify(record.quantity)" onaftersave="postVerify(record)">{{ record.quantity }}</a></div></td>        
-                    <td><div>{{record.product.price | currency}}</div></td>
-                    <td><div>{{subtotal(record)| currency}}</div></td>
-                    <td><button ng-repeat="(key, action) in ctrl.recordActions" id="{{$parent.$index}}-{{key}}-btn" class="btn btn-default btn-sm" ng-show="action.show()" ng-click="action.fn(record)"><span class="glyphicon glyphicon-{{action.icon}}"></span> {{action.displayName}}</button></td>
+                <tr ng-repeat="orderProvider in orderListProvider">
+                    <td><div>{{orderProvider.orderId.id}}</div></td> 
+                    <td><div>{{orderProvider.orderId.dateOrder}} </div></td>        
+                    <td><div>{{orderProvider.orderId.client.name}} </div></td>
+                    <td><div>{{orderProvider.orderId.paymentMethod.methodName}}</div></td>
+                    <td><div>{{orderProvider.orderId.totalSale | currency}}</div></td>
+                    <td><button ng-repeat="(key, action) in recordActions" id="{{$parent.$index}}-{{key}}-btn" class="btn btn-default btn-sm" ng-show="action.show()" ng-click="action.fn(record)"><span class="glyphicon glyphicon-{{action.icon}}"></span> {{action.displayName}}</button></td>
                 </tr>
             </tbody>
         </table>

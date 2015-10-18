@@ -11,8 +11,10 @@
                 $log.log(user.id);
                 svc.getSaleByClient(user.id).then(function(data){
                     $scope.orderList = data;
-                    $log.log($scope.orderList);
-                });                               
+                });
+                svc.getSaleByProvider(user.id).then(function (data){
+                    $scope.orderListProvider = data;
+                });
                 $scope.recordActions = {
                     viewDetail: {
                         displayName: 'View Detail',
