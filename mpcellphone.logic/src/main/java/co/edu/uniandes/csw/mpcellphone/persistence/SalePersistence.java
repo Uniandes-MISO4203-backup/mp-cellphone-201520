@@ -22,7 +22,7 @@ public class SalePersistence extends CrudPersistence<SalesEntity> {
     }
 
      public List<SaleDTO> getSaleByClient(Integer page, Integer maxRecords, Long idClient) {
-        Query q = em.createQuery("select u from " + entityClass.getSimpleName() + " u where u.orderId.client.id = :idC");
+        Query q = em.createQuery("select u from " + entityClass.getSimpleName() + " u where u.clientId.id = :idC");
         if (page != null && maxRecords != null) {
             q.setFirstResult((page - 1) * maxRecords);
             q.setMaxResults(maxRecords);

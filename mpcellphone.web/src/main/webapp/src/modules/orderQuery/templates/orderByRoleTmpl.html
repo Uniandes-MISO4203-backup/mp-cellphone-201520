@@ -6,19 +6,18 @@
                 <tr>                   
                     <th>N° Order</th>
                     <th>Date</th>
-                    <th>Provider</th>
-                    <th>Shipping Address</th>
+                    <th>Payment Method</th>
                     <th>Total Sale</th>
                     <th ng-if="recordActions">Actions</th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="order in orderList">
-                    <td><div>{{}}</div></td> 
-                    <td><div> </div></td>        
-                    <td><div>{{}}</div></td>
-                    <td><div>{{}}</div></td>
-                    <td><button ng-repeat="(key, action) in ctrl.recordActions" id="{{$parent.$index}}-{{key}}-btn" class="btn btn-default btn-sm" ng-show="action.show()" ng-click="action.fn(record)"><span class="glyphicon glyphicon-{{action.icon}}"></span> {{action.displayName}}</button></td>
+                    <td><div>{{order.orderId.id}}</div></td> 
+                    <td><div>{{order.orderId.dateOrder}} </div></td>        
+                    <td><div>{{order.orderId.paymentMethod.methodName}}</div></td>
+                    <td><div>{{order.orderId.totalSale | currency}}</div></td>
+                    <td><button ng-repeat="(key, action) in recordActions" id="{{$parent.$index}}-{{key}}-btn" class="btn btn-default btn-sm" ng-show="action.show()" ng-click="action.fn(record)"><span class="glyphicon glyphicon-{{action.icon}}"></span> {{action.displayName}}</button></td>
                 </tr>
             </tbody>
         </table>
