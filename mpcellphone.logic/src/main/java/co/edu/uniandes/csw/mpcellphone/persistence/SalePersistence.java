@@ -2,16 +2,9 @@ package co.edu.uniandes.csw.mpcellphone.persistence;
 
 import co.edu.uniandes.csw.mpcellphone.converters.SalesConverter;
 import co.edu.uniandes.csw.mpcellphone.dtos.SaleDTO;
-import co.edu.uniandes.csw.mpcellphone.ejbs.SaleLogic;
 import co.edu.uniandes.csw.mpcellphone.entities.SalesEntity;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.ejb.Stateless;
-import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 /**

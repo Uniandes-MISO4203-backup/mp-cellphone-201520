@@ -110,15 +110,18 @@ public class ClientLogicTest {
     private void insertData() {
         String name = generateRandom(String.class);
         String userId = generateRandom(String.class);
+        String email = generateRandom(String.class);
         for (int i = 0; i < 3; i++) {
             ClientEntity entity = new ClientEntity();
         	entity.setName(name);
         	entity.setUserId(userId);
+        	entity.setEmail(email);
             em.persist(entity);
             data.add(entity);
             UserEntity entityU = new UserEntity();
         	entityU.setName(name);
         	entityU.setStormpath(userId);
+        	entityU.setEmail(email);
             em.persist(entityU);
             dataU.add(entityU);
         }
@@ -132,6 +135,7 @@ public class ClientLogicTest {
         ClientDTO dto = new ClientDTO();
         dto.setName(generateRandom(String.class));
         dto.setUserId(generateRandom(String.class));
+        dto.setEmail(generateRandom(String.class));
 
         ClientDTO result = clientLogic.createClient(dto);
 
@@ -141,8 +145,15 @@ public class ClientLogicTest {
 
         Assert.assertEquals(dto.getName(), entity.getName());
         Assert.assertEquals(dto.getUserId(), entity.getUserId());
+        Assert.assertEquals(dto.getEmail(), entity.getEmail());
     }
 
+
+    @Test
+    public void countClientsTest(){
+        int size = clientLogic.countClients();
+        Assert.assertEquals(data.size(), size);
+    }
     /**
      * @generated
      */
@@ -171,8 +182,28 @@ public class ClientLogicTest {
         Assert.assertNotNull(dto);
         Assert.assertEquals(entity.getName(), dto.getName());
         Assert.assertEquals(entity.getUserId(), dto.getUserId());
+        Assert.assertEquals(entity.getEmail(), dto.getEmail());
     }
 
+    @Test
+    public void getClientByUserIdTest() {
+        ClientEntity entity = data.get(0);
+        ClientDTO dto = clientLogic.getClientByUserId(entity.getUserId());
+        Assert.assertNotNull(dto);
+        Assert.assertEquals(entity.getName(), dto.getName());
+        Assert.assertEquals(entity.getUserId(), dto.getUserId());
+        Assert.assertEquals(entity.getEmail(), dto.getEmail());
+    }
+
+    @Test
+    public void getClientByEmailTest() {
+        ClientEntity entity = data.get(0);
+        ClientDTO dto = clientLogic.getClientByEmail(entity.getEmail());
+        Assert.assertNotNull(dto);
+        Assert.assertEquals(entity.getName(), dto.getName());
+        Assert.assertEquals(entity.getUserId(), dto.getUserId());
+        Assert.assertEquals(entity.getEmail(), dto.getEmail());
+    }
     /**
      * @generated
      */
@@ -187,25 +218,24 @@ public class ClientLogicTest {
     /**
      * @generated
      */
-    /*
     @Test
     public void updateClientTest() {
+        String name = generateRandom(String.class);
+        String email = generateRandom(String.class);
+        
         ClientEntity entity = data.get(0);
+        
+        ClientDTO dto = clientLogic.getClient(entity.getId());
+        dto.setName(name);
+        dto.setEmail(email);
+        
+        ClientDTO updDto = clientLogic.updateClient(dto);
+        
+        Assert.assertNotNull(updDto);
 
-        ClientDTO dto = new ClientDTO();
-
-        dto.setId(entity.getId());
-        dto.setName(generateRandom(String.class));
-        dto.setUserId(entity.getUserId());
-
-        clientLogic.updateClient(dto);
-
-        ClientEntity resp = em.find(ClientEntity.class, entity.getId());
-
-        Assert.assertEquals(dto.getName(), resp.getName());
-        Assert.assertEquals(dto.getUserId(), resp.getUserId());
+        Assert.assertEquals(updDto.getName(), name);
+        Assert.assertEquals(updDto.getEmail(), email);
     }
-    */
     
 
     /**

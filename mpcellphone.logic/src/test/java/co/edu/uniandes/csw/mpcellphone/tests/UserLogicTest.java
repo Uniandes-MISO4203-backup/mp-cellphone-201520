@@ -148,7 +148,8 @@ public class UserLogicTest {
         
         UserEntity entity = data.get(0);
         
-        UserDTO dto = userLogic.getUserByUserId(entity.getStormpath());
+        UserDTO dto = new UserDTO();
+        dto.setId(entity.getId());
         dto.setName(name);
         dto.setRole(role);
         dto.setEmail(email);

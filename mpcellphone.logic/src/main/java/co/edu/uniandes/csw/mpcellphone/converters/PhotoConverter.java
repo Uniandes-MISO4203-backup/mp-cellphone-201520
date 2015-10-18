@@ -76,7 +76,7 @@ public abstract class PhotoConverter {
      * @generated
      * @return
      */
-    private static PhotoEntity basicDTO2Entity(PhotoDTO dto) {
+    public static PhotoEntity basicDTO2Entity(PhotoDTO dto) {
         if (dto != null) {
             PhotoEntity entity = new PhotoEntity();
             entity.setId(dto.getId());

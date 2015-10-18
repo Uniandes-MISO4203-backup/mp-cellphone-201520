@@ -142,6 +142,8 @@ public class PhotoPersistenceTest {
 
         Assert.assertEquals(newEntity.getName(), entity.getName());
         Assert.assertEquals(newEntity.getImage(), entity.getImage());
+        Assert.assertEquals(newEntity.getProduct().getName(), entity.getProduct().getName());
+        Assert.assertEquals(newEntity.getProduct().getPrice(), entity.getProduct().getPrice());        
     }
     
      /**
