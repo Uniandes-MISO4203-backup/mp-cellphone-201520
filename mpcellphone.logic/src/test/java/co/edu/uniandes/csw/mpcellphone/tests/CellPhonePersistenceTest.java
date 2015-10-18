@@ -216,5 +216,42 @@ public class CellPhonePersistenceTest {
             Assert.assertTrue(found);
         }
     }
-
+    
+     /**
+     * Test countCellphone method
+     */ 
+    @Test
+    public void countCellPhonesTest(){
+        Assert.assertEquals(data.size(), cellPhonePersistence.count()); 
+    }
+    
+     /**
+     * Method to test cellPhoneModelTest
+     */
+    @Test
+    public void getCellPhoneModelTest(){        
+        List<String> cellPhones = cellPhonePersistence.getCellPhoneModel();
+        Assert.assertNotNull(cellPhones);
+        for(String model: cellPhones){
+            Assert.assertNotNull(model);
+        }
+        List<String> list = em.createNamedQuery("CellPhone.getCellPhoneModel").getResultList();
+        Assert.assertEquals(cellPhones.size(), list.size());
+        Assert.assertArrayEquals(list.toArray(), cellPhones.toArray());
+    }
+    
+    /**
+     * Method to test cellPhoneBrandTest
+     */
+    @Test
+    public void getCellPhoneBrandTest(){        
+        List<String> cellPhones = cellPhonePersistence.getCellPhoneBrand();
+        Assert.assertNotNull(cellPhones);
+        for(String brand: cellPhones){
+            Assert.assertNotNull(brand);
+        }
+        List<String> list = em.createNamedQuery("CellPhone.getCellPhoneBrand").getResultList();
+        Assert.assertEquals(cellPhones.size(), list.size());
+        Assert.assertArrayEquals(list.toArray(), cellPhones.toArray());
+    }
 }
