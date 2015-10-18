@@ -65,7 +65,7 @@ public abstract class PaymentMethodConverter {
      * @param dto
      * @return 
      */
-    private static PaymentMethodEntity basicDTO2Entity(PaymentMethodDTO dto) {
+    public static PaymentMethodEntity basicDTO2Entity(PaymentMethodDTO dto) {
         if (dto != null) {
             PaymentMethodEntity entity = new PaymentMethodEntity();
             entity.setId(dto.getId());
