@@ -114,6 +114,12 @@ public class QuestionLogicTest {
         }
     }
 
+    @Test
+    public void countQuestionsTest(){
+        int size = questionLogic.countQuestion();
+        Assert.assertEquals(data.size(), size);
+    }
+    
         /**
      * @generated
      */
