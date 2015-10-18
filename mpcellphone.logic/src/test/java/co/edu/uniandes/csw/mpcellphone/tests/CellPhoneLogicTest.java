@@ -22,6 +22,8 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import uk.co.jemos.podam.api.PodamFactory;
+import uk.co.jemos.podam.api.PodamFactoryImpl;
 
 /**
  * @generated
@@ -101,9 +103,8 @@ public class CellPhoneLogicTest {
      */
     private void insertData() {
         for (int i = 0; i < 3; i++) {
-            CellPhoneEntity entity = new CellPhoneEntity();
-        	entity.setName(generateRandom(String.class));
-        	entity.setBrand(generateRandom(String.class));
+            PodamFactory factory = new PodamFactoryImpl();
+            CellPhoneEntity entity = factory.manufacturePojo(CellPhoneEntity.class);
             em.persist(entity);
             data.add(entity);
         }
@@ -122,10 +123,8 @@ public class CellPhoneLogicTest {
      */
     @Test
     public void createCellPhoneTest() {
-        CellPhoneDTO dto = new CellPhoneDTO();
-        dto.setName(generateRandom(String.class));
-        dto.setBrand(generateRandom(String.class));
-
+        PodamFactory factory = new PodamFactoryImpl();
+        CellPhoneDTO dto = factory.manufacturePojo(CellPhoneDTO.class);
         CellPhoneDTO result = cellPhoneLogic.createCellPhone(dto);
 
         Assert.assertNotNull(result);

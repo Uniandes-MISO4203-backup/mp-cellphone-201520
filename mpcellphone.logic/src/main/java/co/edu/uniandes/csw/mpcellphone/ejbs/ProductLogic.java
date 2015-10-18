@@ -77,11 +77,21 @@ public class ProductLogic implements IProductLogic {
         return ProductConverter.listEntity2DTO(persistence.findByName(name));
     }
     
+    /**
+     * Return list of cellphone with name matches with param name
+     * @param name
+     * @return 
+     */
     @Override
     public List<ProductDTO> getByCellPhoneName(String name){
         return ProductConverter.listEntity2DTO(persistence.getByCellPhoneName(name));
     }
     
+    /**
+     * Return the cheapest Product
+     * @param idProvider
+     * @return 
+     */
     @Override
     public ProductDTO getCheaperProduct(Long idProvider){       
         return ProductConverter.fullEntity2DTO(persistence.getCheaperProduct(idProvider));

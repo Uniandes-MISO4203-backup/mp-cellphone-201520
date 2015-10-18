@@ -28,9 +28,14 @@ public class ProductPersistence extends CrudPersistence<ProductEntity> {
     }
     
     public List<ProductEntity> getByCellPhoneName(String name) {
-        Map<String, Object> params = new HashMap<String, Object>();
-        params.put("name", "%" + name.toUpperCase() + "%");
-        return executeListNamedQuery("Product.getByCellPhoneName", params);
+        try{
+            Map<String, Object> params = new HashMap<String, Object>();
+            params.put("name", "%" + name.toUpperCase() + "%");
+            return executeListNamedQuery("Product.getByCellPhoneName", params);
+        } catch(NoResultException e){
+            Logger.getLogger(ProductPersistence.class.getName()).log(Level.SEVERE, null, e);
+            return Collections.emptyList();
+        }
     }
      
      public ProductEntity getCheaperProduct (Long idProvider){
