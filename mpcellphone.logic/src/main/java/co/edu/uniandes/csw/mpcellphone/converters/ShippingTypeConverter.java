@@ -76,7 +76,7 @@ public class ShippingTypeConverter {
      * @param dto
      * @return 
      */
-    private static ShippingTypeEntity basicDTO2Entity(ShippingTypeDTO dto) {
+    public static ShippingTypeEntity basicDTO2Entity(ShippingTypeDTO dto) {
         if (dto != null) {
             ShippingTypeEntity entity = new ShippingTypeEntity();
             entity.setId(dto.getId());
