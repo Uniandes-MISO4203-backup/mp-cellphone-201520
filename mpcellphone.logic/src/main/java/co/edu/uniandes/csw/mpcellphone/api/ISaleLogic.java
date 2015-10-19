@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.mpcellphone.api;
 
+import co.edu.uniandes.csw.mpcellphone.dtos.ProductDTO;
 import co.edu.uniandes.csw.mpcellphone.dtos.SaleDTO;
 import java.util.List;
 
@@ -17,6 +18,7 @@ public interface ISaleLogic {
     public List<SaleDTO> getSales(Integer page, Integer maxRecords);
     public List<SaleDTO> getSaleByClient(Integer page, Integer maxRecords, Long userId);
     public List<SaleDTO> getSaleByProvider(Integer page, Integer maxRecords, Long userId);
+    public List<ProductDTO> getProductsBySale(Integer page, Integer maxRecords, Long userId, Long orderId);
     public SaleDTO getSale(Long id);
     public SaleDTO createSale(SaleDTO dto);
     public SaleDTO updateSale(SaleDTO dto);

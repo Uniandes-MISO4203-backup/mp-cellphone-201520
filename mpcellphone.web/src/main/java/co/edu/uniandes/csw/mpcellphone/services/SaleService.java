@@ -1,6 +1,7 @@
 package co.edu.uniandes.csw.mpcellphone.services;
 
 import co.edu.uniandes.csw.mpcellphone.api.ISaleLogic;
+import co.edu.uniandes.csw.mpcellphone.dtos.ProductDTO;
 import co.edu.uniandes.csw.mpcellphone.dtos.SaleDTO;
 import co.edu.uniandes.csw.mpcellphone.providers.StatusCreated;
 import java.util.List;
@@ -96,6 +97,22 @@ public class SaleService {
         }
         return saleLogic.getSaleByProvider(page, maxRecords, id);
     }    
+    
+    /**
+     * Metodo GET, para obtener la lista de productos asociados a una orden
+     * @param id
+     * @param orderId
+     * @return 
+     * @author cv.hernandez10s
+     */
+    @GET
+    @Path("/viewDetail/{id: \\d+}/{orderId: \\d+}")
+    public List<ProductDTO> getProductsBySale(@PathParam("id") Long id, @PathParam("orderId") Long orderId) {
+        if (page != null && maxRecords != null) {
+            this.response.setIntHeader("X-Total-Count", saleLogic.countSale());
+        }
+        return saleLogic.getProductsBySale(page, maxRecords, id, orderId);
+    }  
     
     /**
      * Metodo PUT, encargado de actualizar informacion de la orden

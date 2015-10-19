@@ -1,6 +1,8 @@
 package co.edu.uniandes.csw.mpcellphone.persistence;
 
+import co.edu.uniandes.csw.mpcellphone.converters.ProductConverter;
 import co.edu.uniandes.csw.mpcellphone.converters.SalesConverter;
+import co.edu.uniandes.csw.mpcellphone.dtos.ProductDTO;
 import co.edu.uniandes.csw.mpcellphone.dtos.SaleDTO;
 import co.edu.uniandes.csw.mpcellphone.entities.SalesEntity;
 import java.util.List;
@@ -21,7 +23,7 @@ public class SalePersistence extends CrudPersistence<SalesEntity> {
         this.entityClass = SalesEntity.class;
     }
 
-     public List<SaleDTO> getSaleByClient(Integer page, Integer maxRecords, Long idClient) {
+    public List<SaleDTO> getSaleByClient(Integer page, Integer maxRecords, Long idClient) {
         Query q = em.createQuery("select u from " + entityClass.getSimpleName() + " u where u.clientId.id = :idC");
         if (page != null && maxRecords != null) {
             q.setFirstResult((page - 1) * maxRecords);
@@ -30,12 +32,21 @@ public class SalePersistence extends CrudPersistence<SalesEntity> {
         return SalesConverter.listEntity2DTO(q.setParameter("idC", idClient).getResultList());
     }
 
-     public List<SaleDTO> getSaleByProvider(Integer page, Integer maxRecords, Long idProvider) {
+    public List<SaleDTO> getSaleByProvider(Integer page, Integer maxRecords, Long idProvider) {
         Query q = em.createQuery("select u from " + entityClass.getSimpleName() + " u where u.providerId.id = :idP");
         if (page != null && maxRecords != null) {
             q.setFirstResult((page - 1) * maxRecords);
             q.setMaxResults(maxRecords);
         }
         return SalesConverter.listEntity2DTO(q.setParameter("idP", idProvider).getResultList());
+    }
+    
+    public List<ProductDTO> getProductsBySale(Integer page, Integer maxRecords, Long idClient, Long idOrder) {
+        Query q = em.createQuery("select u.productId from " + entityClass.getSimpleName() + " u where u.clientId.id = :idC and u.orderId.id = :idO");
+        if (page != null && maxRecords != null) {
+            q.setFirstResult((page - 1) * maxRecords);
+            q.setMaxResults(maxRecords);
+        }
+        return ProductConverter.listEntity2DTO(q.setParameter("idC", idClient).setParameter("idO", idOrder).getResultList());
     }
 }

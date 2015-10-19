@@ -17,7 +17,7 @@
                     <td><div>{{order.orderId.dateOrder | date:'fullDate'}} </div></td>        
                     <td><div>{{order.orderId.paymentMethod.methodName}}</div></td>
                     <td><div>{{order.orderId.totalSale | currency}}</div></td>
-                    <td><button ng-repeat="(key, action) in recordActions" id="{{$parent.$index}}-{{key}}-btn" class="btn btn-default btn-sm" ng-show="action.show()" ng-click="action.fn(record)"><span class="glyphicon glyphicon-{{action.icon}}"></span> {{action.displayName}}</button></td>
+                    <td><button ng-repeat="(key, action) in recordActions" id="{{$parent.$index}}-{{key}}-btn" class="btn btn-default btn-sm" ng-show="action.show()" ng-click="action.fn(order)"><span class="glyphicon glyphicon-{{action.icon}}"></span> {{action.displayName}}</button></td>
                 </tr>
             </tbody>
         </table>
@@ -36,11 +36,11 @@
             <tbody>
                 <tr ng-repeat="orderProvider in orderListProvider">
                     <td><div>{{orderProvider.orderId.id}}</div></td> 
-                    <td><div>{{orderProvider.orderId.dateOrder | date:'yyyy-MM-dd'}} </div></td>        
+                    <td><div>{{orderProvider.orderId.dateOrder | date:'fullDate'}} </div></td>        
                     <td><div>{{orderProvider.orderId.client.name}} </div></td>
                     <td><div>{{orderProvider.orderId.paymentMethod.methodName}}</div></td>
                     <td><div>{{orderProvider.orderId.totalSale | currency}}</div></td>
-                    <td><button ng-repeat="(key, action) in recordActions" id="{{$parent.$index}}-{{key}}-btn" class="btn btn-default btn-sm" ng-show="action.show()" ng-click="action.fn(record)"><span class="glyphicon glyphicon-{{action.icon}}"></span> {{action.displayName}}</button></td>
+                    <td><button ng-repeat="(key, action) in recordActions" id="{{$parent.$index}}-{{key}}-btn" class="btn btn-default btn-sm" ng-show="action.show()" ng-click="action.fn(orderProvider)"><span class="glyphicon glyphicon-{{action.icon}}"></span> {{action.displayName}}</button></td>
                 </tr>
             </tbody>
         </table>

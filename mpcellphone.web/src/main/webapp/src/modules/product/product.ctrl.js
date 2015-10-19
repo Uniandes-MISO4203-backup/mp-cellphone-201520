@@ -91,7 +91,6 @@
             if (!$('#profile').length){
                 var orderListItem = $('<li>');
                 var orderListLink = $('<a href="#/orderLists">');
-                //To-Do verificar el icono
                 var orderListIcon = $('<span>').addClass('glyphicon glyphicon-barcode');
                 orderListItem.append(orderListLink);
                 orderListLink.text(' Order List');

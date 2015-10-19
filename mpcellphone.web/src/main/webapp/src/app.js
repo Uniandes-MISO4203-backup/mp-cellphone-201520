@@ -59,6 +59,9 @@
             }).when('/orderLists', {
                 templateUrl: 'src/modules/orderQuery/templates/orderByRoleTmpl.html',
                 controller: 'orderQueryCtrl'
+            }).when('/viewDetail', {
+                templateUrl: 'src/modules/orderQuery/templates/viewDetail.html',
+                controller: 'orderQueryCtrl'
             }).otherwise('/catalog');
         }]);
 
