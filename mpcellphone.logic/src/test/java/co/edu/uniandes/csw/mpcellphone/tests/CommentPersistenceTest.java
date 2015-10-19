@@ -5,10 +5,11 @@
  */
 package co.edu.uniandes.csw.mpcellphone.tests;
 
-import co.edu.uniandes.csw.mpcellphone.entities.ShippingTypeEntity;
-import co.edu.uniandes.csw.mpcellphone.persistence.ShippingTypePersistence;
+import co.edu.uniandes.csw.mpcellphone.entities.CommentEntity;
 import static co.edu.uniandes.csw.mpcellphone.tests._TestUtil.*;
+import co.edu.uniandes.csw.mpcellphone.persistence.CommentPersistence;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.inject.Inject; 
 import javax.persistence.EntityManager; 
@@ -28,7 +29,7 @@ import org.junit.runner.RunWith;
  * @author Mauro
  */
 @RunWith(Arquillian.class) 
-public class ShippingTypePersistenceTest {
+public class CommentPersistenceTest {
     /**
      * @generated
      */
@@ -51,9 +52,9 @@ public class ShippingTypePersistenceTest {
      * @generated
      */
     @Inject
-    private ShippingTypePersistence shippingTypePersistence;
+    private CommentPersistence commentPersistence;
     
-    private List<ShippingTypeEntity> data = new ArrayList(); 
+    private List<CommentEntity> data = new ArrayList(); 
     
     /**
      * @return 
@@ -62,8 +63,8 @@ public class ShippingTypePersistenceTest {
     @Deployment
     public static WebArchive createDeployment() {
         return ShrinkWrap.create(WebArchive.class, DEPLOY + ".war")
-                .addPackage(ShippingTypeEntity.class.getPackage())
-                .addPackage(ShippingTypePersistence.class.getPackage())
+                .addPackage(CommentEntity.class.getPackage())
+                .addPackage(CommentPersistence.class.getPackage())
                 .addAsResource("META-INF/persistence.xml", "META-INF/persistence.xml")
                 .addAsWebInfResource("META-INF/beans.xml", "beans.xml");
     }
@@ -92,7 +93,7 @@ public class ShippingTypePersistenceTest {
      * @generated
      */
     private void clearData() { 
-        em.createQuery("delete from ShippingTypeEntity").executeUpdate(); 
+        em.createQuery("delete from CommentEntity").executeUpdate(); 
     } 
     
      /**
@@ -100,9 +101,10 @@ public class ShippingTypePersistenceTest {
      */
     private void insertData() { 
         for (int i = 0; i < 3; i++) { 
-            ShippingTypeEntity entity = new ShippingTypeEntity();
-            entity.setName(generateRandom(String.class));
-            entity.setValueType(generateRandom(Long.class));
+            CommentEntity entity = new CommentEntity();
+            entity.setComment(generateRandom(String.class));
+            entity.setClientId(generateRandom(Long.class));
+            entity.setProductId(generateRandom(Long.class));
             em.persist(entity); 
             data.add(entity); 
         } 
@@ -112,41 +114,45 @@ public class ShippingTypePersistenceTest {
      * @generated
      */
     @Test
-    public void createShippingTypeTest() {        
-        ShippingTypeEntity newEntity = new ShippingTypeEntity();
-        newEntity.setName(generateRandom(String.class));
-        newEntity.setValueType(generateRandom(Long.class));
+    public void createStateTest() {
+        CommentEntity newEntity = new CommentEntity();
+        newEntity.setComment(generateRandom(String.class));
+        newEntity.setDate(generateRandom(Date.class));
+        newEntity.setClientId(generateRandom(Long.class));
+        newEntity.setProductId(generateRandom(Long.class));
 
-        ShippingTypeEntity result = shippingTypePersistence.create(newEntity);
+        CommentEntity result = commentPersistence.create(newEntity);
 
         Assert.assertNotNull(result);
 
-        ShippingTypeEntity entity = em.find(ShippingTypeEntity.class, result.getId());
+        CommentEntity entity = em.find(CommentEntity.class, result.getId());
 
-        Assert.assertEquals(newEntity.getName(), entity.getName());
-        Assert.assertEquals(newEntity.getValueType(), entity.getValueType());
+        Assert.assertEquals(newEntity.getComment(), entity.getComment());
+        Assert.assertEquals(newEntity.getDate(), entity.getDate());
+        Assert.assertEquals(newEntity.getClientId(), entity.getClientId());
+        Assert.assertEquals(newEntity.getProductId(), entity.getProductId());  
     }
 
     /**
      * @generated
      */
     @Test
-    public void getShippingTypeTest() {
-        ShippingTypeEntity entity = data.get(0);
-        ShippingTypeEntity newEntity = shippingTypePersistence.find(entity.getId());
+    public void getStateTest() {
+        CommentEntity entity = data.get(0);
+        CommentEntity newEntity = commentPersistence.find(entity.getId());
         Assert.assertNotNull(newEntity);
-        Assert.assertEquals(entity.getName(), newEntity.getName());
-        Assert.assertEquals(entity.getValueType(), newEntity.getValueType());
+        Assert.assertEquals(entity.getComment(), newEntity.getComment());
+        Assert.assertEquals(newEntity.getDate(), entity.getDate());
     }
 
     /**
      * @generated
      */
     @Test
-    public void deleteShippingTypeTest() {
-        ShippingTypeEntity entity = data.get(0);
-        shippingTypePersistence.delete(entity.getId());
-        ShippingTypeEntity deleted = em.find(ShippingTypeEntity.class, entity.getId());
+    public void deleteStateTest() {
+        CommentEntity entity = data.get(0);
+        commentPersistence.delete(entity.getId());
+        CommentEntity deleted = em.find(CommentEntity.class, entity.getId());
         Assert.assertNull(deleted);
     }
 
@@ -154,32 +160,36 @@ public class ShippingTypePersistenceTest {
      * @generated
      */
     @Test
-    public void updateShippingTypeTest() {
-        ShippingTypeEntity entity = data.get(0);
+    public void updateStateTest() {
+        CommentEntity entity = data.get(0);
+        
+        CommentEntity newEntity = new CommentEntity();
+        newEntity.setComment(generateRandom(String.class));
+        newEntity.setDate(generateRandom(Date.class));
+        newEntity.setClientId(generateRandom(Long.class));
+        newEntity.setProductId(generateRandom(Long.class));
 
-        ShippingTypeEntity newEntity = new ShippingTypeEntity();
-        newEntity.setName(generateRandom(String.class));
-        newEntity.setValueType(generateRandom(Long.class));
         newEntity.setId(entity.getId());
 
-        shippingTypePersistence.update(newEntity);
+        commentPersistence.update(newEntity);
 
-        ShippingTypeEntity resp = em.find(ShippingTypeEntity.class, entity.getId());
-
-        Assert.assertEquals(newEntity.getName(), resp.getName());
-        Assert.assertEquals(newEntity.getValueType(), resp.getValueType());
+        CommentEntity resp = em.find(CommentEntity.class, entity.getId());
+        Assert.assertEquals(newEntity.getComment(), resp.getComment());
+        Assert.assertEquals(newEntity.getClientId(), resp.getClientId());
+        Assert.assertEquals(newEntity.getProductId(), resp.getProductId());   
+        
     }
     
         /**
      * @generated
      */
     @Test
-    public void getShippingTypesTest() {
-        List<ShippingTypeEntity> list = shippingTypePersistence.findAll(null, null);
+    public void getStatesTest() {
+        List<CommentEntity> list = commentPersistence.findAll(null, null);
         Assert.assertEquals(data.size(), list.size());
-        for (ShippingTypeEntity ent : list) {
+        for (CommentEntity ent : list) {
             boolean found = false;
-            for (ShippingTypeEntity entity : data) {
+            for (CommentEntity entity : data) {
                 if (ent.getId().equals(entity.getId())) {
                     found = true;
                 }
