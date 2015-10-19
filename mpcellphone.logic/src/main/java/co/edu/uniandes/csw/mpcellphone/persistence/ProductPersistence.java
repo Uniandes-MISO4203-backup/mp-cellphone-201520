@@ -197,7 +197,9 @@ public class ProductPersistence extends CrudPersistence<ProductEntity> {
         try {
             Map<String, Object> params = new HashMap<String, Object>();
             params.put("imei", imei);
-            return executeSingleNamedQuery("Product.getByImei", params);
+            List<ProductEntity> result = executeListNamedQuery("Product.getByImei", params);
+            if(result.size()>0)return result.get(0);
+            return new ProductEntity();
         } catch (Exception e) {            
             Logger.getLogger(ProductPersistence.class.getName()).log(Level.SEVERE, null, e);
             return new ProductEntity();
