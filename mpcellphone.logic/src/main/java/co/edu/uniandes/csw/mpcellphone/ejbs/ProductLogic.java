@@ -17,7 +17,6 @@ public class ProductLogic implements IProductLogic {
 
     @Inject private ProductPersistence persistence;
 
-    private static final String PARAM1="Not supported yet.";
     /**
      * @generated
      */
@@ -143,27 +142,44 @@ public class ProductLogic implements IProductLogic {
     public List<ProductDTO> getByCity(String city) {
         return ProductConverter.listEntity2DTO(persistence.getByCity(city));
     }
-    //Para Obtener la lista de un modelo especifico filtrado por ciudad, Desarrollado por Miguel Olivares
+    
+    /**
+     * Para Obtener la lista de un modelo especifico filtrado por ciudad, Desarrollado por Miguel Olivares
+     * @param minPrice
+     * @param maxPrice
+     * @return 
+     */
     @Override
     public List<ProductDTO> getByPriceRange(Long minPrice, Long maxPrice) {
         return ProductConverter.listEntity2DTO(persistence.getByPriceRange(minPrice, maxPrice));
     }
-    //Para Obtener la lista de un modelo especifico filtrado por descuento, Desarrollado por Miguel Olivares
+    
+    /**
+     * Para Obtener la lista de un modelo especifico filtrado por descuento, Desarrollado por Miguel Olivares
+     * @return 
+     */
     @Override
     public List<ProductDTO> getByDiscount(){
         return ProductConverter.listEntity2DTO(persistence.getByDiscount());
     }
-    //Para Obtener la lista de un modelo especifico filtrado por ciudad, Desarrollado por Miguel Olivares
+    
+    /**
+     * Para Obtener la lista de un modelo especifico filtrado por ciudad, Desarrollado por Miguel Olivares
+     * @param category
+     * @return 
+     */
     @Override
     public List<ProductDTO> getByCategory(String category) {
         return ProductConverter.listEntity2DTO(persistence.getByCategory(category));
     }
     
-    //Para Obtener la lista de categorias, desarrollado por Miguel Olivares
+    /**
+     * Para Obtener la lista de categorias, desarrollado por Miguel Olivares
+     * @return 
+     */
     @Override
     public List<ProductDTO> getCategories(){
-        return ProductConverter.listString2DTO(persistence.getCategories());
-        
+        return ProductConverter.listString2DTO(persistence.getCategories());        
     }
     /**
      * 

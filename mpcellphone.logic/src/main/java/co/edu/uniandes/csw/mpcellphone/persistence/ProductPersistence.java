@@ -164,9 +164,14 @@ public class ProductPersistence extends CrudPersistence<ProductEntity> {
      * @return Lista de productos de un proveeedor
      */
     public List<ProductEntity> getProductsByProvider(Integer page, Integer maxRecords,Long idProvider){
-        Query q = em.createNamedQuery("Product.getProductsByProvider");
+        try{
+            Query q = em.createNamedQuery("Product.getProductsByProvider");
             q.setParameter(PARAM_1, idProvider);
-        return q.setFirstResult(maxRecords * (page-1)).setMaxResults(maxRecords).getResultList();
+            return q.setFirstResult(maxRecords * (page-1)).setMaxResults(maxRecords).getResultList();
+        } catch(NoResultException e){
+            Logger.getLogger(ProductPersistence.class.getName()).log(Level.SEVERE, null, e);
+            return Collections.emptyList();
+        }
     }
     /**
      * Ejecuta consulta para tener el total de productos de un proveedor.
@@ -174,9 +179,14 @@ public class ProductPersistence extends CrudPersistence<ProductEntity> {
      * @return 
      */
     public int getCountProductsByProvider(Long idProvider){
-        Map<String, Object> params = new HashMap<String, Object>();
-        params.put(PARAM_1, idProvider);
-        return ((Long) executeSingleNamedQuery("Product.getCountProductsByProvider", params)).intValue();
+        try{
+            Map<String, Object> params = new HashMap<String, Object>();
+            params.put(PARAM_1, idProvider);
+            return ((Long) executeSingleNamedQuery("Product.getCountProductsByProvider", params)).intValue();
+        } catch(NoResultException e){
+            Logger.getLogger(ProductPersistence.class.getName()).log(Level.SEVERE, null, e);
+            return 0;
+        }
     }
     /**
      * Ejecuta consulta para obtener producto basado en un imei

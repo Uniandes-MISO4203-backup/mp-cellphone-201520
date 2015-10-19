@@ -379,7 +379,7 @@ public class ProductLogicTest {
         Long price = Long.MAX_VALUE;
         ProductEntity cheapest = null;
         for(ProductEntity entity: data){
-            if(entity.getProvider().getId()==id&&entity.getPrice()<price){
+            if(entity.getProvider().getId().equals(id)&&entity.getPrice()<price){
                 price=entity.getPrice();
                 cheapest=entity;
             }
@@ -527,5 +527,195 @@ public class ProductLogicTest {
                 Assert.fail();
             }
         }
+    }
+    /**
+     * Method to test getByPriceRange method
+     */
+    @Test
+    public void getByPriceRangeTest(){
+        Long minPrice =null;
+        Long maxPrice = null;
+        
+        for(ProductEntity entity: data){
+            if(minPrice==null||entity.getPrice()<minPrice)minPrice=entity.getPrice();
+            if(maxPrice==null||entity.getPrice()>maxPrice)maxPrice=entity.getPrice();
+        }
+        List<ProductDTO> products = productLogic.getByPriceRange(minPrice, maxPrice);
+        Assert.assertNotNull(products);
+        
+        Assert.assertEquals(data.size(), products.size());
+        for (ProductDTO dto : products) {
+            Assert.assertNotNull(dto);
+            boolean found = false;
+            for (ProductEntity cacheEntity : data) {
+                if (cacheEntity.getId().equals(dto.getId())) {
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                Assert.fail();
+            }
+        }
+        
+    }
+    /**
+     * Method to test getByDiscountTest()
+     */
+    @Test
+    public void getByDiscountTest(){
+        
+        List<ProductEntity> cache = new ArrayList<ProductEntity>();
+        List<ProductDTO> products = productLogic.getByDiscount();
+
+        for (ProductEntity entity : data) {
+            if (entity.getDiscount()>0) {
+                cache.add(entity);
+            }
+        }
+        Assert.assertEquals(cache.size(), products.size());
+        for (ProductDTO dto : products) {
+            Assert.assertNotNull(dto);
+            boolean found = false;
+            for (ProductEntity cacheEntity : cache) {
+                if (cacheEntity.getId().equals(dto.getId())) {
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                Assert.fail();
+            }
+        }
+        
+    }
+    /**
+     * Method to test getByCategory 
+     */
+    @Test
+    public void getByCategoryTest(){
+        String name = data.get(0).getCategory();
+        List<ProductEntity> cache = new ArrayList<ProductEntity>();
+        List<ProductDTO> list = productLogic.getByCategory(name);
+
+        for (ProductEntity entity : data) {
+            if (entity.getCategory().equals(name)) {
+                cache.add(entity);
+            }
+        }
+        Assert.assertEquals(cache.size(), list.size());
+        for (ProductDTO dto : list) {
+            Assert.assertNotNull(dto);
+            boolean found = false;
+            for (ProductEntity cacheEntity : cache) {
+                if (cacheEntity.getId().equals(dto.getId())) {
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                Assert.fail();
+            }
+        }
+    }
+    
+    /**
+     * Method to test getCategories
+     */
+    public void getCategoriesTest(){
+        List<String> cache = new ArrayList<String>();
+        for(ProductEntity entity: data){
+            boolean found =false;
+            for(String name:cache){
+                if(entity.getCategory().equals(name)){
+                    found=true;
+                    break;
+                }
+            }
+            if(!found)cache.add(entity.getCategory());            
+        }
+        List<ProductDTO> list = productLogic.getCategories();
+        Assert.assertEquals(cache.size(), list.size());
+        for (ProductDTO dto : list) {
+            Assert.assertNotNull(dto);
+            boolean found = false;
+            for (String name : cache) {
+                if (name.equals(dto.getCategory())) {
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                Assert.fail();
+            }
+        }        
+    }
+    /**
+     * Method to test getProductsByProvider
+     */
+    @Test
+    public void getProductsByProviderTest(){
+        Long idProvider = data.get(0).getProvider().getId();
+        List<ProductEntity> cache = new ArrayList<ProductEntity>();
+        for(ProductEntity entity: data){
+            if(entity.getProvider().getId().equals(idProvider)){
+                cache.add(entity);
+            }
+        }
+        List<ProductDTO> list = productLogic.getProductsByProvider(1, data.size(), idProvider);
+        Assert.assertNotNull(list);
+        Assert.assertEquals(cache.size(), list.size());
+        for (ProductDTO dto : list) {
+            Assert.assertNotNull(dto);
+            boolean found = false;
+            for (ProductEntity entity : cache) {
+                if (entity.getId().equals(dto.getId())) {
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                Assert.fail();
+            }
+        }
+    }
+    
+    /**
+     * Method to test countProductsByProvider
+     */
+    @Test
+    public void countProductsByProviderTest(){
+        Long idProvider = data.get(0).getProvider().getId();
+        List<ProductEntity> cache = new ArrayList<ProductEntity>();
+        for(ProductEntity entity: data){
+            if(entity.getProvider().getId().equals(idProvider)){
+                cache.add(entity);
+            }
+        }
+        int count = productLogic.countProductsByProvider(idProvider);
+        Assert.assertEquals(cache.size(), count);
+    }
+    
+    /**
+     * Method to test getProductByImei
+     */
+    @Test
+    public void getProductByImeiTest(){
+        String imei = generateRandom(String.class);
+        ProductEntity choose = null;
+        for(ProductEntity entity: data){
+            if(entity.getImei().equals(imei)){
+                choose = entity;
+            }
+            ProductDTO dto = productLogic.getProductByImei(entity.getImei());
+            Assert.assertNotNull(dto);
+            Assert.assertEquals(entity.getId(), dto.getId());            
+        }
+        ProductDTO dto = productLogic.getProductByImei(imei);
+        if(choose==null){
+            Assert.assertNull(dto.getId());
+        }else{
+            Assert.assertEquals(choose.getId(), dto.getId());
+        }        
     }
 }
