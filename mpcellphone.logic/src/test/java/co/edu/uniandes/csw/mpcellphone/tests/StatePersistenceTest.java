@@ -5,9 +5,8 @@
  */
 package co.edu.uniandes.csw.mpcellphone.tests;
 
-import co.edu.uniandes.csw.mpcellphone.converters.StateConverter;
-import co.edu.uniandes.csw.mpcellphone.dtos.StateDTO;
 import co.edu.uniandes.csw.mpcellphone.entities.StateEntity;
+import static co.edu.uniandes.csw.mpcellphone.tests._TestUtil.*;
 import co.edu.uniandes.csw.mpcellphone.persistence.StatePersistence;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,9 +21,7 @@ import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.WebArchive; 
 import org.junit.Before; 
 import org.junit.Test; 
-import org.junit.runner.RunWith; 
-import uk.co.jemos.podam.api.PodamFactory; 
-import uk.co.jemos.podam.api.PodamFactoryImpl; 
+import org.junit.runner.RunWith;
 
 /**
  *
@@ -103,8 +100,8 @@ public class StatePersistenceTest {
      */
     private void insertData() { 
         for (int i = 0; i < 3; i++) { 
-            PodamFactory factory = new PodamFactoryImpl(); 
-            StateEntity entity = StateConverter.basicDTO2Entity(factory.manufacturePojo(StateDTO.class)); 
+            StateEntity entity = new StateEntity();
+            entity.setName(generateRandom(String.class));
             em.persist(entity); 
             data.add(entity); 
         } 
@@ -115,8 +112,8 @@ public class StatePersistenceTest {
      */
     @Test
     public void createStateTest() {
-        PodamFactory factory = new PodamFactoryImpl();
-        StateEntity newEntity = StateConverter.basicDTO2Entity(factory.manufacturePojo(StateDTO.class));
+        StateEntity newEntity = new StateEntity();
+        newEntity.setName(generateRandom(String.class));
 
         StateEntity result = statePersistence.create(newEntity);
 
@@ -155,9 +152,10 @@ public class StatePersistenceTest {
     @Test
     public void updateStateTest() {
         StateEntity entity = data.get(0);
+        
+        StateEntity newEntity = new StateEntity();
+        newEntity.setName(generateRandom(String.class));
 
-        PodamFactory factory = new PodamFactoryImpl();
-        StateEntity newEntity = StateConverter.basicDTO2Entity(factory.manufacturePojo(StateDTO.class));
         newEntity.setId(entity.getId());
 
         statePersistence.update(newEntity);

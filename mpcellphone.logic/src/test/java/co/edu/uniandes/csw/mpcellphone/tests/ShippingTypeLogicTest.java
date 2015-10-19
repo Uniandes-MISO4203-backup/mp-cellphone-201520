@@ -1,11 +1,11 @@
 package co.edu.uniandes.csw.mpcellphone.tests;
 
-import co.edu.uniandes.csw.mpcellphone.api.IStateLogic;
-import co.edu.uniandes.csw.mpcellphone.converters.StateConverter;
-import co.edu.uniandes.csw.mpcellphone.dtos.StateDTO;
-import co.edu.uniandes.csw.mpcellphone.ejbs.StateLogic;
-import co.edu.uniandes.csw.mpcellphone.entities.StateEntity;
-import co.edu.uniandes.csw.mpcellphone.persistence.StatePersistence;
+import co.edu.uniandes.csw.mpcellphone.api.IShippingTypeLogic;
+import co.edu.uniandes.csw.mpcellphone.converters.ShippingTypeConverter;
+import co.edu.uniandes.csw.mpcellphone.dtos.ShippingTypeDTO;
+import co.edu.uniandes.csw.mpcellphone.ejbs.ShippingTypeLogic;
+import co.edu.uniandes.csw.mpcellphone.entities.ShippingTypeEntity;
+import co.edu.uniandes.csw.mpcellphone.persistence.ShippingTypePersistence;
 import static co.edu.uniandes.csw.mpcellphone.tests._TestUtil.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +27,7 @@ import org.junit.runner.RunWith;
  * @generated
  */
 @RunWith(Arquillian.class)
-public class StateLogicTest {
+public class ShippingTypeLogicTest {
     public static final String DEPLOY = "Prueba";
 
     /**
@@ -36,12 +36,12 @@ public class StateLogicTest {
     @Deployment
     public static WebArchive createDeployment() {
         return ShrinkWrap.create(WebArchive.class, DEPLOY + ".war")
-                .addPackage(StateEntity.class.getPackage())
-                .addPackage(StateDTO.class.getPackage())
-                .addPackage(StateConverter.class.getPackage())
-                .addPackage(StateLogic.class.getPackage())
-                .addPackage(IStateLogic.class.getPackage())
-                .addPackage(StatePersistence.class.getPackage())
+                .addPackage(ShippingTypeEntity.class.getPackage())
+                .addPackage(ShippingTypeDTO.class.getPackage())
+                .addPackage(ShippingTypeConverter.class.getPackage())
+                .addPackage(ShippingTypeLogic.class.getPackage())
+                .addPackage(IShippingTypeLogic.class.getPackage())
+                .addPackage(ShippingTypePersistence.class.getPackage())
                 .addAsResource("META-INF/persistence.xml", "META-INF/persistence.xml")
                 .addAsWebInfResource("META-INF/beans.xml", "beans.xml");
     }
@@ -50,7 +50,7 @@ public class StateLogicTest {
      * @generated
      */
     @Inject
-    private IStateLogic stateLogic;
+    private IShippingTypeLogic shippingTypeLogic;
 
     /**
      * @generated
@@ -88,22 +88,22 @@ public class StateLogicTest {
      * @generated
      */
     private void clearData() {
-        em.createQuery("delete from StateEntity").executeUpdate();
+        em.createQuery("delete from ShippingTypeEntity").executeUpdate();
     }
 
     /**
      * @generated
      */
-    private List<StateEntity> data = new ArrayList<StateEntity>();
+    private List<ShippingTypeEntity> data = new ArrayList<ShippingTypeEntity>();
 
     /**
      * @generated
      */
     private void insertData() {
         for (int i = 0; i < 3; i++) {
-            
-            StateEntity entity = new StateEntity();
+            ShippingTypeEntity entity = new ShippingTypeEntity();
             entity.setName(generateRandom(String.class));
+            entity.setValueType(generateRandom(Long.class));
             em.persist(entity);
             data.add(entity);
         }
@@ -113,15 +113,16 @@ public class StateLogicTest {
      * @generated
      */
     @Test
-    public void createStateTest() {
-        StateDTO dto = new StateDTO();
+    public void createShippingTypeTest() {
+        ShippingTypeDTO dto = new ShippingTypeDTO();
         dto.setName(generateRandom(String.class));
+        dto.setValueType(generateRandom(Long.class));
 
-        StateDTO result = stateLogic.createState(dto);
+        ShippingTypeDTO result = shippingTypeLogic.createShippingType(dto);
 
         Assert.assertNotNull(result);
 
-        StateEntity entity = em.find(StateEntity.class, result.getId());
+        ShippingTypeEntity entity = em.find(ShippingTypeEntity.class, result.getId());
 
         Assert.assertEquals(dto.getName(), entity.getName());
     }
@@ -130,12 +131,12 @@ public class StateLogicTest {
      * @generated
      */
     @Test
-    public void getStatesTest() {
-        List<StateDTO> list = stateLogic.getStates(null, null);
+    public void getShippingTypeTest() {
+        List<ShippingTypeDTO> list = shippingTypeLogic.getShippingTypes(null, null);
         Assert.assertEquals(data.size(), list.size());
-        for (StateDTO dto : list) {
+        for (ShippingTypeDTO dto : list) {
             boolean found = false;
-            for (StateEntity entity : data) {
+            for (ShippingTypeEntity entity : data) {
                 if (dto.getId().equals(entity.getId())) {
                     found = true;
                 }
@@ -148,9 +149,9 @@ public class StateLogicTest {
      * @generated
      */
     @Test
-    public void getStateTest() {
-        StateEntity entity = data.get(0);
-        StateDTO dto = stateLogic.getState(entity.getId());
+    public void getShippingTypesTest() {
+        ShippingTypeEntity entity = data.get(0);
+        ShippingTypeDTO dto = shippingTypeLogic.getShippingType(entity.getId());
         Assert.assertNotNull(dto);
         Assert.assertEquals(entity.getName(), dto.getName());
     }
@@ -159,19 +160,19 @@ public class StateLogicTest {
      * @generated
      */
     @Test
-    public void getStatePaginationTest() {
+    public void getShippingTypePaginationTest() {
         //Page 1
-        List<StateDTO> dto1 = stateLogic.getStates(1, 2);
+        List<ShippingTypeDTO> dto1 = shippingTypeLogic.getShippingTypes(1, 2);
         Assert.assertNotNull(dto1);
         Assert.assertEquals(2, dto1.size());
         //Page 2
-        List<StateDTO> dto2 = stateLogic.getStates(2, 2);
+        List<ShippingTypeDTO> dto2 = shippingTypeLogic.getShippingTypes(2, 2);
         Assert.assertNotNull(dto2);
         Assert.assertEquals(1, dto2.size());
 
-        for (StateDTO dto : dto1) {
+        for (ShippingTypeDTO dto : dto1) {
             boolean found = false;
-            for (StateEntity entity : data) {
+            for (ShippingTypeEntity entity : data) {
                 if (dto.getId().equals(entity.getId())) {
                     found = true;
                 }
@@ -179,9 +180,9 @@ public class StateLogicTest {
             Assert.assertTrue(found);
         }
 
-        for (StateDTO dto : dto2) {
+        for (ShippingTypeDTO dto : dto2) {
             boolean found = false;
-            for (StateEntity entity : data) {
+            for (ShippingTypeEntity entity : data) {
                 if (dto.getId().equals(entity.getId())) {
                     found = true;
                 }
@@ -194,8 +195,8 @@ public class StateLogicTest {
      * Test countCellphone method
      */ 
     @Test
-    public void countStateTest(){
-        Assert.assertEquals(data.size(), stateLogic.countStates()); 
+    public void countShippingTypeTest(){
+        Assert.assertEquals(data.size(), shippingTypeLogic.countShippingType()); 
     }
     
 }

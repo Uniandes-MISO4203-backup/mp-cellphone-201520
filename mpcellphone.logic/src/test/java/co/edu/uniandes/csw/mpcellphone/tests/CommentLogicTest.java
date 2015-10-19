@@ -1,13 +1,14 @@
 package co.edu.uniandes.csw.mpcellphone.tests;
 
-import co.edu.uniandes.csw.mpcellphone.api.IStateLogic;
-import co.edu.uniandes.csw.mpcellphone.converters.StateConverter;
-import co.edu.uniandes.csw.mpcellphone.dtos.StateDTO;
-import co.edu.uniandes.csw.mpcellphone.ejbs.StateLogic;
-import co.edu.uniandes.csw.mpcellphone.entities.StateEntity;
-import co.edu.uniandes.csw.mpcellphone.persistence.StatePersistence;
+import co.edu.uniandes.csw.mpcellphone.api.ICommentLogic;
+import co.edu.uniandes.csw.mpcellphone.converters.CommentConverter;
+import co.edu.uniandes.csw.mpcellphone.dtos.CommentDTO;
+import co.edu.uniandes.csw.mpcellphone.ejbs.CommentLogic;
+import co.edu.uniandes.csw.mpcellphone.entities.CommentEntity;
+import co.edu.uniandes.csw.mpcellphone.persistence.CommentPersistence;
 import static co.edu.uniandes.csw.mpcellphone.tests._TestUtil.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -27,7 +28,7 @@ import org.junit.runner.RunWith;
  * @generated
  */
 @RunWith(Arquillian.class)
-public class StateLogicTest {
+public class CommentLogicTest {
     public static final String DEPLOY = "Prueba";
 
     /**
@@ -36,12 +37,12 @@ public class StateLogicTest {
     @Deployment
     public static WebArchive createDeployment() {
         return ShrinkWrap.create(WebArchive.class, DEPLOY + ".war")
-                .addPackage(StateEntity.class.getPackage())
-                .addPackage(StateDTO.class.getPackage())
-                .addPackage(StateConverter.class.getPackage())
-                .addPackage(StateLogic.class.getPackage())
-                .addPackage(IStateLogic.class.getPackage())
-                .addPackage(StatePersistence.class.getPackage())
+                .addPackage(CommentEntity.class.getPackage())
+                .addPackage(CommentDTO.class.getPackage())
+                .addPackage(CommentConverter.class.getPackage())
+                .addPackage(CommentLogic.class.getPackage())
+                .addPackage(ICommentLogic.class.getPackage())
+                .addPackage(CommentPersistence.class.getPackage())
                 .addAsResource("META-INF/persistence.xml", "META-INF/persistence.xml")
                 .addAsWebInfResource("META-INF/beans.xml", "beans.xml");
     }
@@ -50,7 +51,7 @@ public class StateLogicTest {
      * @generated
      */
     @Inject
-    private IStateLogic stateLogic;
+    private ICommentLogic stateLogic;
 
     /**
      * @generated
@@ -88,13 +89,13 @@ public class StateLogicTest {
      * @generated
      */
     private void clearData() {
-        em.createQuery("delete from StateEntity").executeUpdate();
+        em.createQuery("delete from CommentEntity").executeUpdate();
     }
 
     /**
      * @generated
      */
-    private List<StateEntity> data = new ArrayList<StateEntity>();
+    private List<CommentEntity> data = new ArrayList<CommentEntity>();
 
     /**
      * @generated
@@ -102,8 +103,11 @@ public class StateLogicTest {
     private void insertData() {
         for (int i = 0; i < 3; i++) {
             
-            StateEntity entity = new StateEntity();
-            entity.setName(generateRandom(String.class));
+            CommentEntity entity = new CommentEntity();
+            entity.setComment(generateRandom(String.class));
+            entity.setDate(generateRandom(Date.class));
+            entity.setClientId(generateRandom(Long.class));
+            entity.setProductId(generateRandom(Long.class));
             em.persist(entity);
             data.add(entity);
         }
@@ -113,29 +117,35 @@ public class StateLogicTest {
      * @generated
      */
     @Test
-    public void createStateTest() {
-        StateDTO dto = new StateDTO();
-        dto.setName(generateRandom(String.class));
+    public void createCommentTest() {
+        CommentDTO dto = new CommentDTO();
+        dto.setComment(generateRandom(String.class));
+        dto.setDate(generateRandom(Date.class));
+        dto.setClientId(generateRandom(Long.class));
+        dto.setProductId(generateRandom(Long.class));
 
-        StateDTO result = stateLogic.createState(dto);
+        CommentDTO result = stateLogic.createComment(dto);
 
         Assert.assertNotNull(result);
 
-        StateEntity entity = em.find(StateEntity.class, result.getId());
-
-        Assert.assertEquals(dto.getName(), entity.getName());
+        CommentEntity entity = em.find(CommentEntity.class, result.getId());
+        
+        Assert.assertEquals(dto.getComment(), entity.getComment());
+        Assert.assertEquals(dto.getDate(), entity.getDate());
+        Assert.assertEquals(dto.getClientId(), entity.getClientId());
+        Assert.assertEquals(dto.getProductId(), entity.getProductId());  
     }
 
     /**
      * @generated
      */
     @Test
-    public void getStatesTest() {
-        List<StateDTO> list = stateLogic.getStates(null, null);
+    public void getCommentTest() {
+        List<CommentDTO> list = stateLogic.getComments(null, null);
         Assert.assertEquals(data.size(), list.size());
-        for (StateDTO dto : list) {
+        for (CommentDTO dto : list) {
             boolean found = false;
-            for (StateEntity entity : data) {
+            for (CommentEntity entity : data) {
                 if (dto.getId().equals(entity.getId())) {
                     found = true;
                 }
@@ -148,30 +158,34 @@ public class StateLogicTest {
      * @generated
      */
     @Test
-    public void getStateTest() {
-        StateEntity entity = data.get(0);
-        StateDTO dto = stateLogic.getState(entity.getId());
-        Assert.assertNotNull(dto);
-        Assert.assertEquals(entity.getName(), dto.getName());
+    public void getCommentsTest() {
+        CommentEntity entity = data.get(0);
+        CommentDTO dto = stateLogic.getComment(entity.getId());
+        Assert.assertNotNull(dto);     
+        
+         Assert.assertEquals(entity.getComment(), dto.getComment());
+        Assert.assertEquals(entity.getDate(), dto.getDate());
+        Assert.assertEquals(entity.getClientId(), dto.getClientId());
+        Assert.assertEquals(entity.getProductId(), dto.getProductId()); 
     }
 
     /**
      * @generated
      */
     @Test
-    public void getStatePaginationTest() {
+    public void getCommentPaginationTest() {
         //Page 1
-        List<StateDTO> dto1 = stateLogic.getStates(1, 2);
+        List<CommentDTO> dto1 = stateLogic.getComments(1, 2);
         Assert.assertNotNull(dto1);
         Assert.assertEquals(2, dto1.size());
         //Page 2
-        List<StateDTO> dto2 = stateLogic.getStates(2, 2);
+        List<CommentDTO> dto2 = stateLogic.getComments(2, 2);
         Assert.assertNotNull(dto2);
         Assert.assertEquals(1, dto2.size());
 
-        for (StateDTO dto : dto1) {
+        for (CommentDTO dto : dto1) {
             boolean found = false;
-            for (StateEntity entity : data) {
+            for (CommentEntity entity : data) {
                 if (dto.getId().equals(entity.getId())) {
                     found = true;
                 }
@@ -179,9 +193,9 @@ public class StateLogicTest {
             Assert.assertTrue(found);
         }
 
-        for (StateDTO dto : dto2) {
+        for (CommentDTO dto : dto2) {
             boolean found = false;
-            for (StateEntity entity : data) {
+            for (CommentEntity entity : data) {
                 if (dto.getId().equals(entity.getId())) {
                     found = true;
                 }
@@ -194,8 +208,8 @@ public class StateLogicTest {
      * Test countCellphone method
      */ 
     @Test
-    public void countStateTest(){
-        Assert.assertEquals(data.size(), stateLogic.countStates()); 
+    public void countCommentTest(){
+        Assert.assertEquals(data.size(), stateLogic.countComment()); 
     }
     
 }

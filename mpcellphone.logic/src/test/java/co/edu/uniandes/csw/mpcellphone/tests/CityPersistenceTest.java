@@ -5,14 +5,11 @@
  */
 package co.edu.uniandes.csw.mpcellphone.tests;
 
-import co.edu.uniandes.csw.mpcellphone.converters.CityConverter;
-import co.edu.uniandes.csw.mpcellphone.converters.StateConverter;
-import co.edu.uniandes.csw.mpcellphone.dtos.CityDTO;
-import co.edu.uniandes.csw.mpcellphone.dtos.StateDTO;
 import co.edu.uniandes.csw.mpcellphone.entities.CityEntity;
 import co.edu.uniandes.csw.mpcellphone.entities.StateEntity;
 import co.edu.uniandes.csw.mpcellphone.persistence.CityPersistence;
 import co.edu.uniandes.csw.mpcellphone.persistence.StatePersistence;
+import static co.edu.uniandes.csw.mpcellphone.tests._TestUtil.generateRandom;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject; 
@@ -26,9 +23,7 @@ import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.WebArchive; 
 import org.junit.Before; 
 import org.junit.Test; 
-import org.junit.runner.RunWith; 
-import uk.co.jemos.podam.api.PodamFactory; 
-import uk.co.jemos.podam.api.PodamFactoryImpl; 
+import org.junit.runner.RunWith;
 
 /**
  *
@@ -113,8 +108,10 @@ public class CityPersistenceTest {
      */
     private void insertData() { 
         for (int i = 0; i < 3; i++) { 
-            PodamFactory factory = new PodamFactoryImpl(); 
-            CityEntity entity = CityConverter.basicDTO2Entity(factory.manufacturePojo(CityDTO.class)); 
+            
+            CityEntity entity= new CityEntity();
+            entity.setName(generateRandom(String.class));
+            
             em.persist(entity); 
             data.add(entity); 
         } 
@@ -125,10 +122,12 @@ public class CityPersistenceTest {
      */
     @Test
     public void createCityTest() {
-        PodamFactory factory = new PodamFactoryImpl();
-        CityEntity newEntity = CityConverter.basicDTO2Entity(factory.manufacturePojo(CityDTO.class));
+        
+        CityEntity newEntity= new CityEntity();
+        newEntity.setName(generateRandom(String.class));
 
-        StateEntity newStateEntity = StateConverter.basicDTO2Entity(factory.manufacturePojo(StateDTO.class));
+        StateEntity newStateEntity = new StateEntity();
+        newStateEntity.setName(generateRandom(String.class));
 
         StateEntity resultState = statePersistence.create(newStateEntity);
         
@@ -177,8 +176,8 @@ public class CityPersistenceTest {
     public void updateCityTest() {
         CityEntity entity = data.get(0);
 
-        PodamFactory factory = new PodamFactoryImpl();
-        CityEntity newEntity = CityConverter.basicDTO2Entity(factory.manufacturePojo(CityDTO.class));
+        CityEntity newEntity = new CityEntity();
+        newEntity.setName(generateRandom(String.class));
         newEntity.setId(entity.getId());
 
         cityPersistence.update(newEntity);
