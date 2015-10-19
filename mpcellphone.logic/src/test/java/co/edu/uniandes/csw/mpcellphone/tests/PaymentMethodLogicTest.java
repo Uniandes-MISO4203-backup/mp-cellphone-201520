@@ -1,11 +1,11 @@
 package co.edu.uniandes.csw.mpcellphone.tests;
 
-import co.edu.uniandes.csw.mpcellphone.api.IStateLogic;
-import co.edu.uniandes.csw.mpcellphone.converters.StateConverter;
-import co.edu.uniandes.csw.mpcellphone.dtos.StateDTO;
-import co.edu.uniandes.csw.mpcellphone.ejbs.StateLogic;
-import co.edu.uniandes.csw.mpcellphone.entities.StateEntity;
-import co.edu.uniandes.csw.mpcellphone.persistence.StatePersistence;
+import co.edu.uniandes.csw.mpcellphone.api.IPaymentMethodLogic;
+import co.edu.uniandes.csw.mpcellphone.converters.PaymentMethodConverter;
+import co.edu.uniandes.csw.mpcellphone.dtos.PaymentMethodDTO;
+import co.edu.uniandes.csw.mpcellphone.ejbs.PaymentMethodLogic;
+import co.edu.uniandes.csw.mpcellphone.entities.PaymentMethodEntity;
+import co.edu.uniandes.csw.mpcellphone.persistence.PaymentMethodPersistence;
 import static co.edu.uniandes.csw.mpcellphone.tests._TestUtil.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +27,7 @@ import org.junit.runner.RunWith;
  * @generated
  */
 @RunWith(Arquillian.class)
-public class StateLogicTest {
+public class PaymentMethodLogicTest {
     public static final String DEPLOY = "Prueba";
 
     /**
@@ -36,12 +36,12 @@ public class StateLogicTest {
     @Deployment
     public static WebArchive createDeployment() {
         return ShrinkWrap.create(WebArchive.class, DEPLOY + ".war")
-                .addPackage(StateEntity.class.getPackage())
-                .addPackage(StateDTO.class.getPackage())
-                .addPackage(StateConverter.class.getPackage())
-                .addPackage(StateLogic.class.getPackage())
-                .addPackage(IStateLogic.class.getPackage())
-                .addPackage(StatePersistence.class.getPackage())
+                .addPackage(PaymentMethodEntity.class.getPackage())
+                .addPackage(PaymentMethodDTO.class.getPackage())
+                .addPackage(PaymentMethodConverter.class.getPackage())
+                .addPackage(PaymentMethodLogic.class.getPackage())
+                .addPackage(IPaymentMethodLogic.class.getPackage())
+                .addPackage(PaymentMethodPersistence.class.getPackage())
                 .addAsResource("META-INF/persistence.xml", "META-INF/persistence.xml")
                 .addAsWebInfResource("META-INF/beans.xml", "beans.xml");
     }
@@ -50,7 +50,7 @@ public class StateLogicTest {
      * @generated
      */
     @Inject
-    private IStateLogic stateLogic;
+    private IPaymentMethodLogic paymentMethodLogic;
 
     /**
      * @generated
@@ -88,22 +88,21 @@ public class StateLogicTest {
      * @generated
      */
     private void clearData() {
-        em.createQuery("delete from StateEntity").executeUpdate();
+        em.createQuery("delete from PaymentMethodEntity").executeUpdate();
     }
 
     /**
      * @generated
      */
-    private List<StateEntity> data = new ArrayList<StateEntity>();
+    private List<PaymentMethodEntity> data = new ArrayList<PaymentMethodEntity>();
 
     /**
      * @generated
      */
     private void insertData() {
         for (int i = 0; i < 3; i++) {
-            
-            StateEntity entity = new StateEntity();
-            entity.setName(generateRandom(String.class));
+            PaymentMethodEntity entity = new PaymentMethodEntity();
+            entity.setMethodName(generateRandom(String.class));
             em.persist(entity);
             data.add(entity);
         }
@@ -113,29 +112,29 @@ public class StateLogicTest {
      * @generated
      */
     @Test
-    public void createStateTest() {
-        StateDTO dto = new StateDTO();
-        dto.setName(generateRandom(String.class));
+    public void createShippingTypeTest() {
+        PaymentMethodDTO dto = new PaymentMethodDTO();
+        dto.setMethodName(generateRandom(String.class));
 
-        StateDTO result = stateLogic.createState(dto);
+        PaymentMethodDTO result = paymentMethodLogic.createPaymentMethod(dto);
 
         Assert.assertNotNull(result);
 
-        StateEntity entity = em.find(StateEntity.class, result.getId());
+        PaymentMethodEntity entity = em.find(PaymentMethodEntity.class, result.getId());
 
-        Assert.assertEquals(dto.getName(), entity.getName());
+        Assert.assertEquals(dto.getMethodName(), entity.getMethodName());
     }
 
     /**
      * @generated
      */
     @Test
-    public void getStatesTest() {
-        List<StateDTO> list = stateLogic.getStates(null, null);
+    public void getShippingTypeTest() {
+        List<PaymentMethodDTO> list = paymentMethodLogic.getPaymentMethods(null, null);
         Assert.assertEquals(data.size(), list.size());
-        for (StateDTO dto : list) {
+        for (PaymentMethodDTO dto : list) {
             boolean found = false;
-            for (StateEntity entity : data) {
+            for (PaymentMethodEntity entity : data) {
                 if (dto.getId().equals(entity.getId())) {
                     found = true;
                 }
@@ -148,30 +147,30 @@ public class StateLogicTest {
      * @generated
      */
     @Test
-    public void getStateTest() {
-        StateEntity entity = data.get(0);
-        StateDTO dto = stateLogic.getState(entity.getId());
+    public void getShippingTypesTest() {
+        PaymentMethodEntity entity = data.get(0);
+        PaymentMethodDTO dto = paymentMethodLogic.getPaymentMethod(entity.getId());
         Assert.assertNotNull(dto);
-        Assert.assertEquals(entity.getName(), dto.getName());
+        Assert.assertEquals(entity.getMethodName(), dto.getMethodName());
     }
 
     /**
      * @generated
      */
     @Test
-    public void getStatePaginationTest() {
+    public void getShippingTypePaginationTest() {
         //Page 1
-        List<StateDTO> dto1 = stateLogic.getStates(1, 2);
+        List<PaymentMethodDTO> dto1 = paymentMethodLogic.getPaymentMethods(1, 2);
         Assert.assertNotNull(dto1);
         Assert.assertEquals(2, dto1.size());
         //Page 2
-        List<StateDTO> dto2 = stateLogic.getStates(2, 2);
+        List<PaymentMethodDTO> dto2 = paymentMethodLogic.getPaymentMethods(2, 2);
         Assert.assertNotNull(dto2);
         Assert.assertEquals(1, dto2.size());
 
-        for (StateDTO dto : dto1) {
+        for (PaymentMethodDTO dto : dto1) {
             boolean found = false;
-            for (StateEntity entity : data) {
+            for (PaymentMethodEntity entity : data) {
                 if (dto.getId().equals(entity.getId())) {
                     found = true;
                 }
@@ -179,9 +178,9 @@ public class StateLogicTest {
             Assert.assertTrue(found);
         }
 
-        for (StateDTO dto : dto2) {
+        for (PaymentMethodDTO dto : dto2) {
             boolean found = false;
-            for (StateEntity entity : data) {
+            for (PaymentMethodEntity entity : data) {
                 if (dto.getId().equals(entity.getId())) {
                     found = true;
                 }
@@ -194,8 +193,8 @@ public class StateLogicTest {
      * Test countCellphone method
      */ 
     @Test
-    public void countStateTest(){
-        Assert.assertEquals(data.size(), stateLogic.countStates()); 
+    public void countShippingTypeTest(){
+        Assert.assertEquals(data.size(), paymentMethodLogic.countPaymentMethod()); 
     }
     
 }

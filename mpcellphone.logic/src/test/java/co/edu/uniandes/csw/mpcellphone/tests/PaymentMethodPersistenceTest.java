@@ -5,10 +5,8 @@
  */
 package co.edu.uniandes.csw.mpcellphone.tests;
 
-import co.edu.uniandes.csw.mpcellphone.converters.ShippingTypeConverter;
-import co.edu.uniandes.csw.mpcellphone.dtos.ShippingTypeDTO;
-import co.edu.uniandes.csw.mpcellphone.entities.ShippingTypeEntity;
-import co.edu.uniandes.csw.mpcellphone.persistence.ShippingTypePersistence;
+import co.edu.uniandes.csw.mpcellphone.entities.PaymentMethodEntity;
+import co.edu.uniandes.csw.mpcellphone.persistence.PaymentMethodPersistence;
 import static co.edu.uniandes.csw.mpcellphone.tests._TestUtil.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +28,7 @@ import org.junit.runner.RunWith;
  * @author Mauro
  */
 @RunWith(Arquillian.class) 
-public class ShippingTypePersistenceTest {
+public class PaymentMethodPersistenceTest {
     /**
      * @generated
      */
@@ -53,9 +51,9 @@ public class ShippingTypePersistenceTest {
      * @generated
      */
     @Inject
-    private ShippingTypePersistence shippingTypePersistence;
+    private PaymentMethodPersistence paymentMethodPersistence;
     
-    private List<ShippingTypeEntity> data = new ArrayList(); 
+    private List<PaymentMethodEntity> data = new ArrayList(); 
     
     /**
      * @return 
@@ -64,8 +62,8 @@ public class ShippingTypePersistenceTest {
     @Deployment
     public static WebArchive createDeployment() {
         return ShrinkWrap.create(WebArchive.class, DEPLOY + ".war")
-                .addPackage(ShippingTypeEntity.class.getPackage())
-                .addPackage(ShippingTypePersistence.class.getPackage())
+                .addPackage(PaymentMethodEntity.class.getPackage())
+                .addPackage(PaymentMethodPersistence.class.getPackage())
                 .addAsResource("META-INF/persistence.xml", "META-INF/persistence.xml")
                 .addAsWebInfResource("META-INF/beans.xml", "beans.xml");
     }
@@ -94,7 +92,7 @@ public class ShippingTypePersistenceTest {
      * @generated
      */
     private void clearData() { 
-        em.createQuery("delete from ShippingTypeEntity").executeUpdate(); 
+        em.createQuery("delete from PaymentMethodEntity").executeUpdate(); 
     } 
     
      /**
@@ -102,9 +100,8 @@ public class ShippingTypePersistenceTest {
      */
     private void insertData() { 
         for (int i = 0; i < 3; i++) { 
-            ShippingTypeEntity entity = new ShippingTypeEntity();
-            entity.setName(generateRandom(String.class));
-            entity.setValueType(generateRandom(Long.class));
+            PaymentMethodEntity entity = new PaymentMethodEntity();
+            entity.setMethodName(generateRandom(String.class));
             em.persist(entity); 
             data.add(entity); 
         } 
@@ -115,18 +112,16 @@ public class ShippingTypePersistenceTest {
      */
     @Test
     public void createShippingTypeTest() {        
-        ShippingTypeEntity newEntity = new ShippingTypeEntity();
-        newEntity.setName(generateRandom(String.class));
-        newEntity.setValueType(generateRandom(Long.class));
+        PaymentMethodEntity newEntity = new PaymentMethodEntity();
+        newEntity.setMethodName(generateRandom(String.class));
 
-        ShippingTypeEntity result = shippingTypePersistence.create(newEntity);
+        PaymentMethodEntity result = paymentMethodPersistence.create(newEntity);
 
         Assert.assertNotNull(result);
 
-        ShippingTypeEntity entity = em.find(ShippingTypeEntity.class, result.getId());
+        PaymentMethodEntity entity = em.find(PaymentMethodEntity.class, result.getId());
 
-        Assert.assertEquals(newEntity.getName(), entity.getName());
-        Assert.assertEquals(newEntity.getValueType(), entity.getValueType());
+        Assert.assertEquals(newEntity.getMethodName(), entity.getMethodName());
     }
 
     /**
@@ -134,11 +129,10 @@ public class ShippingTypePersistenceTest {
      */
     @Test
     public void getShippingTypeTest() {
-        ShippingTypeEntity entity = data.get(0);
-        ShippingTypeEntity newEntity = shippingTypePersistence.find(entity.getId());
+        PaymentMethodEntity entity = data.get(0);
+        PaymentMethodEntity newEntity = paymentMethodPersistence.find(entity.getId());
         Assert.assertNotNull(newEntity);
-        Assert.assertEquals(entity.getName(), newEntity.getName());
-        Assert.assertEquals(entity.getValueType(), newEntity.getValueType());
+        Assert.assertEquals(entity.getMethodName(), newEntity.getMethodName());
     }
 
     /**
@@ -146,9 +140,9 @@ public class ShippingTypePersistenceTest {
      */
     @Test
     public void deleteShippingTypeTest() {
-        ShippingTypeEntity entity = data.get(0);
-        shippingTypePersistence.delete(entity.getId());
-        ShippingTypeEntity deleted = em.find(ShippingTypeEntity.class, entity.getId());
+        PaymentMethodEntity entity = data.get(0);
+        paymentMethodPersistence.delete(entity.getId());
+        PaymentMethodEntity deleted = em.find(PaymentMethodEntity.class, entity.getId());
         Assert.assertNull(deleted);
     }
 
@@ -157,19 +151,17 @@ public class ShippingTypePersistenceTest {
      */
     @Test
     public void updateShippingTypeTest() {
-        ShippingTypeEntity entity = data.get(0);
+        PaymentMethodEntity entity = data.get(0);
 
-        ShippingTypeEntity newEntity = new ShippingTypeEntity();
-        newEntity.setName(generateRandom(String.class));
-        newEntity.setValueType(generateRandom(Long.class));
+        PaymentMethodEntity newEntity = new PaymentMethodEntity();
+        newEntity.setMethodName(generateRandom(String.class));
         newEntity.setId(entity.getId());
 
-        shippingTypePersistence.update(newEntity);
+        paymentMethodPersistence.update(newEntity);
 
-        ShippingTypeEntity resp = em.find(ShippingTypeEntity.class, entity.getId());
+        PaymentMethodEntity resp = em.find(PaymentMethodEntity.class, entity.getId());
 
-        Assert.assertEquals(newEntity.getName(), resp.getName());
-        Assert.assertEquals(newEntity.getValueType(), resp.getValueType());
+        Assert.assertEquals(newEntity.getMethodName(), resp.getMethodName());
     }
     
         /**
@@ -177,11 +169,11 @@ public class ShippingTypePersistenceTest {
      */
     @Test
     public void getShippingTypesTest() {
-        List<ShippingTypeEntity> list = shippingTypePersistence.findAll(null, null);
+        List<PaymentMethodEntity> list = paymentMethodPersistence.findAll(null, null);
         Assert.assertEquals(data.size(), list.size());
-        for (ShippingTypeEntity ent : list) {
+        for (PaymentMethodEntity ent : list) {
             boolean found = false;
-            for (ShippingTypeEntity entity : data) {
+            for (PaymentMethodEntity entity : data) {
                 if (ent.getId().equals(entity.getId())) {
                     found = true;
                 }
