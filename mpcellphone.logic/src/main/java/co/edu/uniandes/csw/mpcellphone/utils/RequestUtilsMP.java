@@ -10,14 +10,13 @@ import javax.ws.rs.client.ClientBuilder;
  */
 public class RequestUtilsMP {
     
-    public static String URLBASE = "http://localhost:8080/mpcellphone.web/webresources";
-    public static String PATHIMEI= "/imei/check";
+    public static final String URLBASE = "http://localhost:8080/mpcellphone.web/webresources";
+    public static final String PATHIMEI= "/imei/check";
     
     public static boolean isStolenImei(String imei){
         Client cliente = ClientBuilder.newClient();
         StolenImeiDTO request = cliente.target(URLBASE + PATHIMEI).path("/" + imei)
                 .request().get(StolenImeiDTO.class);
-        System.out.println(request+"**********************************");
         return request!=null&&request.getId()!=null;
     }
 }

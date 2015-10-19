@@ -4,50 +4,48 @@
         function (CrudCreator, $scope, svc, model, $location, authSvc, $log) {
             CrudCreator.extendController(this, svc, $scope, model, 'orderQuery', 'Order List');
             var user = authSvc.getCurrentUser();
-            svc.getRoleOQ().then(function(data){
-                $scope.userRole=data.role;
+            svc.getRoleOQ().then(function (data) {
+                $scope.userRole = data.role;
             });
             if (user) {
                 $log.log(user.id);
-                svc.getSaleByClient(user.id).then(function(data){
+                svc.getSaleByClient(user.id).then(function (data) {
                     $scope.orderList = data;
                 });
-                svc.getSaleByProvider(user.id).then(function (data){
+                svc.getSaleByProvider(user.id).then(function (data) {
                     $scope.orderListProvider = data;
                 });
+                $scope.globalActions = {
+                    viewDetail: {
+                        displayName: 'Return',
+                        icon: 'circle-arrow-left',
+                        class: 'primary',
+                        fn: function () {
+                            $location.path('/orderList');
+                        },
+                        show: function () {
+                            return true;
+                        }
+                    }};
                 $scope.recordActions = {
                     viewDetail: {
                         displayName: 'View Detail',
                         icon: 'list-alt',
                         class: 'primary',
                         fn: function (record) {
-                            $location.path('/login');
+                            $location.path('/viewDetail');
+                            svc.getProductsBySale(user.id, record.orderId.id).then(function (data) {
+                                $scope.products = data;
+                                $log.log($scope.products);
+                            });
                         },
                         show: function () {
                             return true;
                         }
                     }};
-
-                svc.getRoleOQ().then(function (data) {
-                    switch (data.role) {
-                        case "client":
-                            
-                            break;
-                        case "provider":
-                            
-                            break;
-                        default:
-                            $location.path('/#/catalog');
-                            break;
-                    }
-                });
             }
             else {
                 $location.path('/login');
             }
-        }]);
-    mod.controller('shoppingCartCtrl', ['CrudCreator', '$scope', 'cartItemModel', function (CrudCreator, $scope, model) {
-            CrudCreator.extendCompChildCtrl(this, $scope, model, 'shoppingCart', 'client');
-            this.loadRefOptions();
         }]);
 })(window.angular);
