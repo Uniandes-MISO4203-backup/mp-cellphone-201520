@@ -9,7 +9,6 @@ import co.edu.uniandes.csw.mpcellphone.entities.CommentEntity;
 import static co.edu.uniandes.csw.mpcellphone.tests._TestUtil.*;
 import co.edu.uniandes.csw.mpcellphone.persistence.CommentPersistence;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import javax.inject.Inject; 
 import javax.persistence.EntityManager; 
@@ -103,7 +102,6 @@ public class CommentPersistenceTest {
         for (int i = 0; i < 3; i++) { 
             CommentEntity entity = new CommentEntity();
             entity.setComment(generateRandom(String.class));
-            entity.setDate(generateRandom(Date.class));
             entity.setClientId(generateRandom(Long.class));
             entity.setProductId(generateRandom(Long.class));
             
@@ -119,7 +117,6 @@ public class CommentPersistenceTest {
     public void createStateTest() {
         CommentEntity newEntity = new CommentEntity();
         newEntity.setComment(generateRandom(String.class)); 
-        newEntity.setDate(generateRandom(Date.class));
         newEntity.setClientId(generateRandom(Long.class));
         newEntity.setProductId(generateRandom(Long.class));
 
@@ -130,7 +127,6 @@ public class CommentPersistenceTest {
         CommentEntity entity = em.find(CommentEntity.class, result.getId());
 
         Assert.assertEquals(newEntity.getComment(), entity.getComment());
-        Assert.assertEquals(newEntity.getDate(), entity.getDate());
         Assert.assertEquals(newEntity.getClientId(), entity.getClientId());
         Assert.assertEquals(newEntity.getProductId(), entity.getProductId());  
     }
@@ -166,7 +162,6 @@ public class CommentPersistenceTest {
         
         CommentEntity newEntity = new CommentEntity();
         newEntity.setComment(generateRandom(String.class));
-        entity.setDate(generateRandom(Date.class));
         entity.setClientId(generateRandom(Long.class));
         entity.setProductId(generateRandom(Long.class));
 
@@ -177,7 +172,6 @@ public class CommentPersistenceTest {
         CommentEntity resp = em.find(CommentEntity.class, entity.getId());
 
         Assert.assertEquals(newEntity.getComment(), resp.getComment());
-        Assert.assertEquals(newEntity.getDate(), resp.getDate());
         Assert.assertEquals(newEntity.getClientId(), resp.getClientId());
         Assert.assertEquals(newEntity.getProductId(), resp.getProductId());  
     }

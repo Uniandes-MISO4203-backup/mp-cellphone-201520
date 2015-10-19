@@ -105,7 +105,6 @@ public class CommentLogicTest {
             
             CommentEntity entity = new CommentEntity();
             entity.setComment(generateRandom(String.class));
-            entity.setDate(generateRandom(Date.class));
             entity.setClientId(generateRandom(Long.class));
             entity.setProductId(generateRandom(Long.class));
             em.persist(entity);
@@ -120,7 +119,6 @@ public class CommentLogicTest {
     public void createCommentTest() {
         CommentDTO dto = new CommentDTO();
         dto.setComment(generateRandom(String.class));
-        dto.setDate(generateRandom(Date.class));
         dto.setClientId(generateRandom(Long.class));
         dto.setProductId(generateRandom(Long.class));
 
@@ -131,7 +129,6 @@ public class CommentLogicTest {
         CommentEntity entity = em.find(CommentEntity.class, result.getId());
         
         Assert.assertEquals(dto.getComment(), entity.getComment());
-        Assert.assertEquals(dto.getDate(), entity.getDate());
         Assert.assertEquals(dto.getClientId(), entity.getClientId());
         Assert.assertEquals(dto.getProductId(), entity.getProductId());  
     }
@@ -164,7 +161,6 @@ public class CommentLogicTest {
         Assert.assertNotNull(dto);     
         
          Assert.assertEquals(entity.getComment(), dto.getComment());
-        Assert.assertEquals(entity.getDate(), dto.getDate());
         Assert.assertEquals(entity.getClientId(), dto.getClientId());
         Assert.assertEquals(entity.getProductId(), dto.getProductId()); 
     }
