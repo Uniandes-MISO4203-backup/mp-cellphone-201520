@@ -22,8 +22,6 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import uk.co.jemos.podam.api.PodamFactory;
-import uk.co.jemos.podam.api.PodamFactoryImpl;
 
 /**
  * @generated
@@ -103,9 +101,9 @@ public class StateLogicTest {
      */
     private void insertData() {
         for (int i = 0; i < 3; i++) {
-            PodamFactory factory = new PodamFactoryImpl();                 
-            StateEntity entity = StateConverter.basicDTO2Entity(
-                    factory.manufacturePojo(StateDTO.class)); 
+            
+            StateEntity entity = new StateEntity();
+            entity.setName(generateRandom(String.class));
             em.persist(entity);
             data.add(entity);
         }
