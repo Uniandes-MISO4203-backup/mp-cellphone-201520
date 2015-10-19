@@ -49,4 +49,13 @@ public class SalePersistence extends CrudPersistence<SalesEntity> {
         }
         return ProductConverter.listEntity2DTO(q.setParameter("idC", idClient).setParameter("idO", idOrder).getResultList());
     }
+    /*
+    public List<ProductDTO> getSalesByDate(Integer page, Integer maxRecords, String initial, String finalDate) {
+        Query q = em.createQuery("select u.productId from " + entityClass.getSimpleName() + " u where u.clientId.id = :idC and u.orderId.id = :idO");
+        if (page != null && maxRecords != null) {
+            q.setFirstResult((page - 1) * maxRecords);
+            q.setMaxResults(maxRecords);
+        }
+        return ProductConverter.listEntity2DTO(q.setParameter("idC", idClient).setParameter("idO", idOrder).getResultList());
+    }*/
 }

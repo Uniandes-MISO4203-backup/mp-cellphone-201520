@@ -20,8 +20,8 @@ import javax.persistence.NamedQuery;
  */
 @Entity
 @NamedQueries({
-    @NamedQuery(name = "Sales.getSaleByClient", query = "SELECT u FROM SalesEntity u where u.orderId.client.id = :clientId"),
-    @NamedQuery(name = "Sales.getSaleByProvider", query = "SELECT u FROM SalesEntity u where u.productId.provider.id = :providerId"),
+    @NamedQuery(name = "Sales.getSaleByClient", query = "SELECT u FROM SalesEntity u where u.clientId.id = :clientId"),
+    @NamedQuery(name = "Sales.getSaleByProvider", query = "SELECT u FROM SalesEntity u where u.providerId.id = :providerId"),
 })
 public class SalesEntity implements Serializable{
     
