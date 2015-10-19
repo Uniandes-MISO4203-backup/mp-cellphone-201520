@@ -33,7 +33,7 @@ import org.junit.runner.RunWith;
  */
 @RunWith(Arquillian.class)
 public class UserLogicTest {
-    public static final String DEPLOY = "Prueba";
+    public static final String  DEPLOY = "Prueba";
 
     @Deployment
     public static WebArchive createDeployment() {

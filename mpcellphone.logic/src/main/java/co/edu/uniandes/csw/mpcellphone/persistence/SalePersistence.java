@@ -38,5 +38,4 @@ public class SalePersistence extends CrudPersistence<SalesEntity> {
         }
         return SalesConverter.listEntity2DTO(q.setParameter("idP", idProvider).getResultList());
     }
-
 }

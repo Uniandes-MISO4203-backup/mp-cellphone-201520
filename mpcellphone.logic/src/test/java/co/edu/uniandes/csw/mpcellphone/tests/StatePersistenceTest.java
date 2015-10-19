@@ -5,8 +5,6 @@
  */
 package co.edu.uniandes.csw.mpcellphone.tests;
 
-import co.edu.uniandes.csw.mpcellphone.converters.StateConverter;
-import co.edu.uniandes.csw.mpcellphone.dtos.StateDTO;
 import co.edu.uniandes.csw.mpcellphone.entities.StateEntity;
 import static co.edu.uniandes.csw.mpcellphone.tests._TestUtil.*;
 import co.edu.uniandes.csw.mpcellphone.persistence.StatePersistence;

@@ -21,7 +21,7 @@
                         icon: 'list-alt',
                         class: 'primary',
                         fn: function (record) {
-                            
+                            $location.path('/login');
                         },
                         show: function () {
                             return true;
