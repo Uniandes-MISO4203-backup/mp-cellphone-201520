@@ -6,11 +6,13 @@
 package co.edu.uniandes.csw.mpcellphone.persistence;
 
 import co.edu.uniandes.csw.mpcellphone.entities.PaymentMethodEntity;
+import javax.ejb.Stateless;
 
 /**
  * Clase encargada de contener la comunicacion con la persistencia
  * @author Cindy Hernandez - cv.hernandez10
  */
+@Stateless
 public class PaymentMethodPersistence extends CrudPersistence<PaymentMethodEntity>{
 
     /**
