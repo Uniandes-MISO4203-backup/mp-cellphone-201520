@@ -21,7 +21,7 @@
                         icon: 'circle-arrow-left',
                         class: 'primary',
                         fn: function () {
-                            $location.path('/orderList');
+                            $location.path('/orderLists');
                         },
                         show: function () {
                             return true;
