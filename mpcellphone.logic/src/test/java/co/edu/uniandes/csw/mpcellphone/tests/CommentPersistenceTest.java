@@ -103,8 +103,10 @@ public class CommentPersistenceTest {
         for (int i = 0; i < 3; i++) { 
             CommentEntity entity = new CommentEntity();
             entity.setComment(generateRandom(String.class));
+            entity.setDate(generateRandom(Date.class));
             entity.setClientId(generateRandom(Long.class));
             entity.setProductId(generateRandom(Long.class));
+            
             em.persist(entity); 
             data.add(entity); 
         } 
@@ -116,7 +118,7 @@ public class CommentPersistenceTest {
     @Test
     public void createStateTest() {
         CommentEntity newEntity = new CommentEntity();
-        newEntity.setComment(generateRandom(String.class));
+        newEntity.setComment(generateRandom(String.class)); 
         newEntity.setDate(generateRandom(Date.class));
         newEntity.setClientId(generateRandom(Long.class));
         newEntity.setProductId(generateRandom(Long.class));
@@ -142,7 +144,6 @@ public class CommentPersistenceTest {
         CommentEntity newEntity = commentPersistence.find(entity.getId());
         Assert.assertNotNull(newEntity);
         Assert.assertEquals(entity.getComment(), newEntity.getComment());
-        Assert.assertEquals(newEntity.getDate(), entity.getDate());
     }
 
     /**
@@ -165,26 +166,27 @@ public class CommentPersistenceTest {
         
         CommentEntity newEntity = new CommentEntity();
         newEntity.setComment(generateRandom(String.class));
-        newEntity.setDate(generateRandom(Date.class));
-        newEntity.setClientId(generateRandom(Long.class));
-        newEntity.setProductId(generateRandom(Long.class));
+        entity.setDate(generateRandom(Date.class));
+        entity.setClientId(generateRandom(Long.class));
+        entity.setProductId(generateRandom(Long.class));
 
         newEntity.setId(entity.getId());
 
         commentPersistence.update(newEntity);
 
         CommentEntity resp = em.find(CommentEntity.class, entity.getId());
+
         Assert.assertEquals(newEntity.getComment(), resp.getComment());
+        Assert.assertEquals(newEntity.getDate(), resp.getDate());
         Assert.assertEquals(newEntity.getClientId(), resp.getClientId());
-        Assert.assertEquals(newEntity.getProductId(), resp.getProductId());   
-        
+        Assert.assertEquals(newEntity.getProductId(), resp.getProductId());  
     }
     
         /**
      * @generated
      */
     @Test
-    public void getStatesTest() {
+    public void getCommentsTest() {
         List<CommentEntity> list = commentPersistence.findAll(null, null);
         Assert.assertEquals(data.size(), list.size());
         for (CommentEntity ent : list) {
