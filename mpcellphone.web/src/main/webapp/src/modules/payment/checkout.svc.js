@@ -15,7 +15,7 @@
     mod.service('saleService', ['CrudCreator', 'saleContext', function (CrudCreator, context) {
             CrudCreator.extendService(this, context);
         }]);
-    mod.service('productService', ['CrudCreator', 'productContext', function (CrudCreator, context) {
+    mod.service('shippingProductService', ['CrudCreator', 'shippingProductContext', function (CrudCreator, context) {
             CrudCreator.extendService(this, context);
             this.updateProduct = function (record) {
                 this.fetchRecords().then(function (data) {
@@ -30,7 +30,7 @@
                 });
             };
         }]);
-    mod.service('userService', ['CrudCreator', 'userContext', function (CrudCreator, context) {
+    mod.service('shippingUserService', ['CrudCreator', 'userContext', function (CrudCreator, context) {
             CrudCreator.extendService(this, context);
         }]);
 })(window.angular);

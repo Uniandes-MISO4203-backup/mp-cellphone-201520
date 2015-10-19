@@ -97,7 +97,7 @@
                 orderListLink.prepend(orderListIcon);
                 $(".dropdown-menu").prepend(orderListItem);
                 $(".dropdown-menu").prepend("<li><a href = '#' id = 'profile'><span class = 'glyphicon glyphicon-user'></span> My Profile</a></li>");
-            }
+            };
             var currentUser = authSvc.getCurrentUser();
             if (currentUser){
                 adminService.darRole().then(function (data){
@@ -114,7 +114,7 @@
                         }
                     }
                 });
-            }
+            };
             $(".dropdown-menu > li > a").click(function () {
                 $("#admin").hide();
                 $("#carrito").hide();
@@ -326,7 +326,7 @@
                         return true;
                     }
                 }
-            ]
+            ];
             var findItemProv = function (record){
                 svc.findItemProv(record.provider.id).then(function (provider) {
                     $scope.records = [];
@@ -346,7 +346,7 @@
                         return true;
                     }
                 }
-            ]
+            ];
             this.fetchRecords().then(function (data){
                 tmp = data;
                 var groups = [{
@@ -382,9 +382,10 @@
                 $scope.currentGroup = groups[0];
             });
             var findByDiscount = function(){
-               svc.getByDiscount().then(function(data){
-                   $scope.records = data;
-            });
+                svc.getByDiscount().then(function(data){
+                   $scope.records = data;               
+                });
+            };
             //Para listar por descuento Desarrollado por Miguel Olivares
             this.discountActions = [{
                     name: 'BestDiscounts',
@@ -398,7 +399,7 @@
                         return true;
                     }
                 }
-            ]
-        };
+            ];
+       
     }]);
 })(window.angular);
