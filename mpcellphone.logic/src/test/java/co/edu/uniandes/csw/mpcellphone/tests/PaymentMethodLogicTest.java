@@ -90,6 +90,27 @@ public class PaymentMethodLogicTest {
     private void clearData() {
         em.createQuery("delete from PaymentMethodEntity").executeUpdate();
     }
+    
+    
+    
+    /**
+     * @generated
+     */
+    @Test
+    public void updatePhotoTest() {
+        PaymentMethodEntity entity = data.get(0);
+
+        PaymentMethodDTO dto = new PaymentMethodDTO();
+
+        dto.setId(entity.getId());
+        entity.setMethodName(generateRandom(String.class));
+
+        paymentMethodLogic.updatePaymentMethod(dto);
+
+        PaymentMethodEntity resp = em.find(PaymentMethodEntity.class, entity.getId());
+
+        Assert.assertEquals(dto.getMethodName(), resp.getMethodName());
+    }
 
     /**
      * @generated
