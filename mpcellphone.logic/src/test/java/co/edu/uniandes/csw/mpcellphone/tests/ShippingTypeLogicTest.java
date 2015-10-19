@@ -219,4 +219,16 @@ public class ShippingTypeLogicTest {
         Assert.assertEquals(data.size(), shippingTypeLogic.countShippingType()); 
     }
     
+    /**
+     * @generated
+     */
+    @Test
+    public void deleteCellPhoneTest() {
+        ShippingTypeEntity entity = data.get(0);
+        shippingTypeLogic.deleteShippingType(entity.getId());
+        ShippingTypeEntity deleted = em.find(ShippingTypeEntity.class, entity.getId());
+        Assert.assertNull(deleted);
+    }
+    
+    
 }

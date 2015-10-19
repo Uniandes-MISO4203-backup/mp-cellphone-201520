@@ -133,7 +133,7 @@ public class PaymentMethodLogicTest {
      * @generated
      */
     @Test
-    public void createShippingTypeTest() {
+    public void createPaymentMethodTest() {
         PaymentMethodDTO dto = new PaymentMethodDTO();
         dto.setMethodName(generateRandom(String.class));
 
@@ -150,7 +150,7 @@ public class PaymentMethodLogicTest {
      * @generated
      */
     @Test
-    public void getShippingTypeTest() {
+    public void getPaymentMethodTest() {
         List<PaymentMethodDTO> list = paymentMethodLogic.getPaymentMethods(null, null);
         Assert.assertEquals(data.size(), list.size());
         for (PaymentMethodDTO dto : list) {
@@ -168,7 +168,7 @@ public class PaymentMethodLogicTest {
      * @generated
      */
     @Test
-    public void getShippingTypesTest() {
+    public void getPaymentMethodsTest() {
         PaymentMethodEntity entity = data.get(0);
         PaymentMethodDTO dto = paymentMethodLogic.getPaymentMethod(entity.getId());
         Assert.assertNotNull(dto);
@@ -179,7 +179,7 @@ public class PaymentMethodLogicTest {
      * @generated
      */
     @Test
-    public void getShippingTypePaginationTest() {
+    public void getPaymentMethodPaginationTest() {
         //Page 1
         List<PaymentMethodDTO> dto1 = paymentMethodLogic.getPaymentMethods(1, 2);
         Assert.assertNotNull(dto1);
@@ -214,8 +214,21 @@ public class PaymentMethodLogicTest {
      * Test countCellphone method
      */ 
     @Test
-    public void countShippingTypeTest(){
+    public void countPaymentMethodTest(){
         Assert.assertEquals(data.size(), paymentMethodLogic.countPaymentMethod()); 
+    }
+    
+    
+    
+    /**
+     * @generated
+     */
+    @Test
+    public void deleteCellPhoneTest() {
+        PaymentMethodEntity entity = data.get(0);
+        paymentMethodLogic.deletePaymentMethod(entity.getId());
+        PaymentMethodEntity deleted = em.find(PaymentMethodEntity.class, entity.getId());
+        Assert.assertNull(deleted);
     }
     
 }
