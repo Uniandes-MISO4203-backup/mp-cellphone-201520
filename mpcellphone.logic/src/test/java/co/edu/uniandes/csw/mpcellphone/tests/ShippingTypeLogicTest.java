@@ -144,6 +144,26 @@ public class ShippingTypeLogicTest {
             Assert.assertTrue(found);
         }
     }
+    
+        /**
+     * @generated
+     */
+    @Test
+    public void updatePhotoTest() {
+        ShippingTypeEntity entity = data.get(0);
+
+        ShippingTypeDTO dto = new ShippingTypeDTO();
+
+        dto.setId(entity.getId());
+        dto.setName(generateRandom(String.class));
+        dto.setValueType(generateRandom(Long.class));
+
+        shippingTypeLogic.updateShippingType(dto);
+
+        ShippingTypeEntity resp = em.find(ShippingTypeEntity.class, entity.getId());
+
+        Assert.assertEquals(dto.getName(), resp.getName());
+    }
 
     /**
      * @generated
@@ -198,5 +218,17 @@ public class ShippingTypeLogicTest {
     public void countShippingTypeTest(){
         Assert.assertEquals(data.size(), shippingTypeLogic.countShippingType()); 
     }
+    
+    /**
+     * @generated
+     */
+    @Test
+    public void deleteCellPhoneTest() {
+        ShippingTypeEntity entity = data.get(0);
+        shippingTypeLogic.deleteShippingType(entity.getId());
+        ShippingTypeEntity deleted = em.find(ShippingTypeEntity.class, entity.getId());
+        Assert.assertNull(deleted);
+    }
+    
     
 }
