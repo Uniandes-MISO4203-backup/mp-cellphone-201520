@@ -166,7 +166,12 @@
                 }
             };
             $scope.pay = function () {
-                $('body').append('<div class="mask">');
+                $('body').append('<div class="mask modal" style="display:block;">');
+                $('.mask').append('<div class="modal-body">' + 
+                                    '<div class="progress-bar progress-bar-striped active"  role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 50%; height: 25px; margin: 45vh 25vw;">' +
+                                    '<span class="sr-only">100% Complete</span>' +
+                                    '</div>' +
+                                    '</div>')
                 $scope.submitPayment();
             };
             $scope.finish = function () {
