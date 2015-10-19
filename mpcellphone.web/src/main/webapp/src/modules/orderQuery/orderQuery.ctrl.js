@@ -15,18 +15,29 @@
                 svc.getSaleByProvider(user.id).then(function (data) {
                     $scope.orderListProvider = data;
                 });
+                $scope.globalActions = {
+                    viewDetail: {
+                        displayName: 'Return',
+                        icon: 'circle-arrow-left',
+                        class: 'primary',
+                        fn: function () {
+                            $location.path('/orderList');
+                        },
+                        show: function () {
+                            return true;
+                        }
+                    }};
                 $scope.recordActions = {
                     viewDetail: {
                         displayName: 'View Detail',
                         icon: 'list-alt',
                         class: 'primary',
                         fn: function (record) {
-                            $log.log(record);
-                            $location.path('/viewDetail/'+user.id+'/'+record.orderId.id);
+                            $location.path('/viewDetail');
                             svc.getProductsBySale(user.id, record.orderId.id).then(function (data) {
-                                $log.log(data);
+                                $scope.products = data;
+                                $log.log($scope.products);
                             });
-                            $log.log(record);
                         },
                         show: function () {
                             return true;

@@ -1,22 +1,22 @@
 <!--cv.hernandez10-->
 <div ng-controller="orderQueryCtrl">
+    <toolbar name="name" display-name="displayName" actions="globalActions"></toolbar>
     <div>
         <table class="table table-striped table-bordered">
             <thead>
-                <!--Validación para determinar que campos muestra -->
-                <tr>                   
-                    <th>Id</th>
+                <tr>
+                    <th>Brand </th>
                     <th>Article </th>
                     <th>Price</th>
                 </tr>
             </thead>
-            <!--<tbody>
+            <tbody>
                 <tr ng-repeat="product in products">
-                    <td><div>{{product.id}}</div></td> 
+                    <td><div>{{product.cellPhone.brand}}</div></td> 
                     <td><div>{{product.name}}</div></td> 
                     <td><div>{{product.price | currency}}</div></td>
                 </tr>
-            </tbody>-->
+            </tbody>
         </table>
         <!-- <div class="text-center">
             <pagination ng-show="ctrl.numPages > 1" num-pages="ctrl.numPages" total-items="ctrl.totalItems"

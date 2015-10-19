@@ -12,7 +12,7 @@
                 return this.api.one('provider',providerId).get();
             };
             this.getProductsBySale = function (clientId,orderId){
-                return this.api.one('viewDetail', clientId, orderId).get();
+                return this.api.one('viewDetail/'+clientId+'/'+orderId).get();
             };
     }]);
 })(window.angular);
