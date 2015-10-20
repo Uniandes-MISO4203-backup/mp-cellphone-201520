@@ -51,7 +51,7 @@ public class AdminLogic implements IAdminLogic {
      */
     @Override
     public AdminDTO createAdmin(AdminDTO dto) {
-        AdminEntity entity = AdminConverter.refDTO2Entity(dto);
+        AdminEntity entity = AdminConverter.basicDTO2Entity(dto);
         persistence.create(entity);
         return AdminConverter.refEntity2DTO(entity);
     }
@@ -61,7 +61,7 @@ public class AdminLogic implements IAdminLogic {
      */
     @Override
     public AdminDTO updateAdmin(AdminDTO dto) {
-        AdminEntity entity = persistence.update(AdminConverter.refDTO2Entity(dto));
+        AdminEntity entity = persistence.update(AdminConverter.basicDTO2Entity(dto));
         return AdminConverter.refEntity2DTO(entity);
     }
 
