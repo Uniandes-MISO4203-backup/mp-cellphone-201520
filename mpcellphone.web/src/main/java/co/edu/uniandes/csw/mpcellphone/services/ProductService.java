@@ -29,6 +29,7 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.xml.ws.soap.AddressingFeature;
 import org.apache.shiro.SecurityUtils;
 
 /**
@@ -59,17 +60,17 @@ public class ProductService {
     @POST
     @StatusCreated
     public ProductDTO createProduct(ProductDTO dto){
-        if(provider==null)throw new WebApplicationException(Response.status(Response.NOT_FOUND)
+        if(provider==null)throw new WebApplicationException(Response.status(Response.Status.NOT_FOUND)
                     .entity("Forbidden access.")
                     .type("text/plain").build());
         dto.setProvider(provider);
         ProductDTO dtoSearch= productLogic.getProductByImei(dto.getImei());
         if(dtoSearch!=null&&dtoSearch.getId()!=null)
-            throw new WebApplicationException(Response.status(Response.NOT_FOUND)
+            throw new WebApplicationException(Response.status(Response.Status.NOT_FOUND)
                     .entity("There is already a cellphone registered with the same Imei Id.")
                     .type("text/plain").build());
         if(RequestUtilsMP.isStolenImei(dto.getImei()))
-            throw new WebApplicationException(Response.status(Response.NOT_FOUND)
+            throw new WebApplicationException(Response.status(Response.Status.NOT_FOUND)
                     .entity("The Imei id appears in the police database for stolen cellphones. "
                             + "Please contact with a police office near to your home")
                     .type("text/plain").build());
