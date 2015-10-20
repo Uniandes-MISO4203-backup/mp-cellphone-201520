@@ -15,6 +15,7 @@
         <sonar.jacoco.outReportPath>target/jacoco</sonar.jacoco.outReportPath>
         <sonar.jacoco.outItReportPath>target/jacoco-it</sonar.jacoco.outItReportPath>
         <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
+        <org.slf4j.version>1.7.12</org.slf4j.version>
     </properties>
     <dependencies>
         <dependency>
@@ -25,7 +26,7 @@
         <dependency>
             <groupId>org.glassfish.main.extras</groupId>
             <artifactId>glassfish-embedded-all</artifactId>
-            <version>3.1.2.2</version>
+            <version>4.0</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -121,6 +122,17 @@
             <artifactId>stormpath-sdk-impl</artifactId>
             <version>1.0.RC2</version>
             <type>jar</type>
+        </dependency>
+        <!-- Logger implementation -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${org.slf4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>${org.slf4j.version}</version>
         </dependency>
     </dependencies>
     <build>
