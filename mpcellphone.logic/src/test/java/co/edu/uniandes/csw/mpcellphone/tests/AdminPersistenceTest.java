@@ -132,6 +132,7 @@ public class AdminPersistenceTest {
 
         Assert.assertEquals(newEntity.getName(), entity.getName());
         Assert.assertEquals(newEntity.getEmail(), entity.getEmail());
+        Assert.assertEquals(newEntity.getUser().getName(), entity.getUser().getName());
     }
 
     /**
