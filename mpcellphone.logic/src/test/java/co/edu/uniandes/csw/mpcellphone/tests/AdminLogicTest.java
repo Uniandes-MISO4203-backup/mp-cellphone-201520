@@ -6,8 +6,10 @@
 package co.edu.uniandes.csw.mpcellphone.tests;
 
 import co.edu.uniandes.csw.mpcellphone.api.IAdminLogic;
+import co.edu.uniandes.csw.mpcellphone.api.IUserLogic;
 import co.edu.uniandes.csw.mpcellphone.converters.AdminConverter;
 import co.edu.uniandes.csw.mpcellphone.dtos.AdminDTO;
+import co.edu.uniandes.csw.mpcellphone.dtos.UserDTO;
 import co.edu.uniandes.csw.mpcellphone.ejbs.AdminLogic;
 import co.edu.uniandes.csw.mpcellphone.entities.AdminEntity;
 import co.edu.uniandes.csw.mpcellphone.persistence.AdminPersistence;
@@ -51,6 +53,9 @@ public class AdminLogicTest {
     @Inject
     private IAdminLogic adminLogic;
     
+    @Inject
+    private IUserLogic userLogic;
+    
     @PersistenceContext
     private EntityManager em;
 
@@ -93,6 +98,29 @@ public class AdminLogicTest {
             data.add(entityU);
         }
     }
+    
+    @Test
+    public void createAdminTest() {
+        String name = generateRandom(String.class);
+        String email = generateRandom(String.class);
+        String userName = generateRandom(String.class);
+        
+        UserDTO dtoUser = new UserDTO();
+        dtoUser.setName(userName);
+        
+        UserDTO resultUser = userLogic.createUser(dtoUser);   
+        
+        AdminDTO dto = new AdminDTO();
+        dto.setName(name);
+        dto.setEmail(email);
+        dto.setUser(resultUser);
+        AdminDTO result = adminLogic.createAdmin(dto);
+        Assert.assertNotNull(result);
+        AdminEntity entity = em.find(AdminEntity.class, result.getId());
+        Assert.assertEquals(dto.getName(), entity.getName());
+        Assert.assertEquals(dto.getEmail(), entity.getEmail());
+    }
+    
 
     @Test
     public void countAdminsTest(){
@@ -120,49 +148,36 @@ public class AdminLogicTest {
         AdminEntity entity = data.get(0);
         AdminDTO dto = adminLogic.getAdmin(entity.getId());
         Assert.assertEquals(entity.getName(), dto.getName());
-    }
-    
-    /*
-    @Test
-    public void createAdminTest() {
-        String name = generateRandom(String.class);
-        String email = generateRandom(String.class);
-        
-        AdminDTO dto = new AdminDTO();
-        dto.setName(name);
-        dto.setEmail(email);
-
-        //AdminDTO result = adminLogic.createAdmin(dto);
-        AdminDTO result = dto;
-
-        Assert.assertNotNull(result);
-
-        AdminEntity entity = em.find(AdminEntity.class, result.getId());
-
-        Assert.assertEquals(dto.getName(), entity.getName());
-        Assert.assertEquals(dto.getEmail(), entity.getEmail());
-    }
-    */
+    }    
     
     @Test
     public void updateAdminTest() {
         String name = generateRandom(String.class);
         String email = generateRandom(String.class);
+        String userName = generateRandom(String.class);
         
         AdminEntity entity = data.get(0);
+        
+        UserDTO dtoUser = new UserDTO();
+        dtoUser.setName(userName);
+        
+        UserDTO resultUser = userLogic.createUser(dtoUser);   
+        
         
         AdminDTO dto = new AdminDTO();
         dto.setId(entity.getId());
         dto.setName(name);
+        dto.setUser(resultUser);
         dto.setEmail(email);
         
-        //AdminDTO updDto = adminLogic.updateAdmin(dto);
-        AdminDTO updDto = dto;
+        AdminDTO updDto = adminLogic.updateAdmin(dto);
+        //AdminDTO updDto = dto;
         
         Assert.assertNotNull(updDto);
 
         Assert.assertEquals(updDto.getName(), name);
         Assert.assertEquals(updDto.getEmail(), email);
+        Assert.assertEquals(updDto.getUser().getName(), userName);
         
     }
 

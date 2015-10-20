@@ -113,7 +113,7 @@ public class AdminPersistenceTest {
      * @generated
      */
     @Test
-    public void createClientTest() {
+    public void createAdminTest() {
         AdminEntity newEntity = new AdminEntity();
         newEntity.setName(generateRandom(String.class));
         
@@ -132,13 +132,14 @@ public class AdminPersistenceTest {
 
         Assert.assertEquals(newEntity.getName(), entity.getName());
         Assert.assertEquals(newEntity.getEmail(), entity.getEmail());
+        Assert.assertEquals(newEntity.getUser().getName(), entity.getUser().getName());
     }
 
     /**
      * @generated
      */
     @Test
-    public void getClientsTest() {
+    public void getAdmindsTest() {
         List<AdminEntity> list = clientPersistence.findAll(null, null);
         Assert.assertEquals(data.size(), list.size());
         for (AdminEntity ent : list) {
@@ -156,7 +157,7 @@ public class AdminPersistenceTest {
      * @generated
      */
     @Test
-    public void getClientTest() {
+    public void getAdminTest() {
         AdminEntity entity = data.get(0);
         AdminEntity newEntity = clientPersistence.find(entity.getId());
         Assert.assertNotNull(newEntity);
@@ -168,7 +169,7 @@ public class AdminPersistenceTest {
      * @generated
      */
     @Test
-    public void deleteClientTest() {
+    public void deleteAdminTest() {
         AdminEntity entity = data.get(0);
         clientPersistence.delete(entity.getId());
         AdminEntity deleted = em.find(AdminEntity.class, entity.getId());
@@ -179,7 +180,7 @@ public class AdminPersistenceTest {
      * @generated
      */
     @Test
-    public void updateClientTest() {
+    public void updateAdminTest() {
         AdminEntity entity = data.get(0);
 
         AdminEntity newEntity = new AdminEntity();
@@ -200,7 +201,7 @@ public class AdminPersistenceTest {
      * @generated
      */
     @Test
-    public void getClientPaginationTest() {
+    public void getAdminPaginationTest() {
         //Page 1
         List<AdminEntity> ent1 = clientPersistence.findAll(1, 2);
         Assert.assertNotNull(ent1);
