@@ -112,7 +112,7 @@ public class TaxtPersistenceTest {
      * @generated
      */
     @Test
-    public void createStateTest() {
+    public void createTaxTest() {
         TaxEntity newEntity = new TaxEntity();
         newEntity.setTaxName(generateRandom(String.class));
         newEntity.setPercentage(generateRandom(Long.class));
@@ -131,7 +131,7 @@ public class TaxtPersistenceTest {
      * @generated
      */
     @Test
-    public void getStateTest() {
+    public void getTaxTest() {
         TaxEntity entity = data.get(0);
         TaxEntity newEntity = statePersistence.find(entity.getId());
         Assert.assertNotNull(newEntity);
@@ -143,7 +143,7 @@ public class TaxtPersistenceTest {
      * @generated
      */
     @Test
-    public void deleteStateTest() {
+    public void deleteTaxTest() {
         TaxEntity entity = data.get(0);
         statePersistence.delete(entity.getId());
         TaxEntity deleted = em.find(TaxEntity.class, entity.getId());
@@ -154,7 +154,7 @@ public class TaxtPersistenceTest {
      * @generated
      */
     @Test
-    public void updateStateTest() {
+    public void updateTaxTest() {
         TaxEntity entity = data.get(0);
         
         TaxEntity newEntity = new TaxEntity();
@@ -175,7 +175,7 @@ public class TaxtPersistenceTest {
      * @generated
      */
     @Test
-    public void getStatesTest() {
+    public void getTaxesTest() {
         List<TaxEntity> list = statePersistence.findAll(null, null);
         Assert.assertEquals(data.size(), list.size());
         for (TaxEntity ent : list) {
