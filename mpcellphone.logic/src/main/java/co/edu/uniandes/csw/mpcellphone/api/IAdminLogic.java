@@ -11,4 +11,5 @@ public interface IAdminLogic {
     public AdminDTO updateAdmin(AdminDTO dto);
     public void deleteAdmin(Long id);
     public AdminDTO getAdminByUserId(String userId);
+     public List<AdminDTO> findByName(String name);
 }

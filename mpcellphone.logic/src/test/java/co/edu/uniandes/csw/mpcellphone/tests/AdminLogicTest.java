@@ -12,6 +12,7 @@ import co.edu.uniandes.csw.mpcellphone.dtos.AdminDTO;
 import co.edu.uniandes.csw.mpcellphone.dtos.UserDTO;
 import co.edu.uniandes.csw.mpcellphone.ejbs.AdminLogic;
 import co.edu.uniandes.csw.mpcellphone.entities.AdminEntity;
+import co.edu.uniandes.csw.mpcellphone.entities.UserEntity;
 import co.edu.uniandes.csw.mpcellphone.persistence.AdminPersistence;
 import static co.edu.uniandes.csw.mpcellphone.tests._TestUtil.generateRandom;
 import java.util.ArrayList;
@@ -91,9 +92,14 @@ public class AdminLogicTest {
         String name = generateRandom(String.class);
         String email = generateRandom(String.class);
         for (int i = 0; i < 3; i++) {
+            UserEntity entityUser = new UserEntity();
+            entityUser.setName(generateRandom(String.class));
+            entityUser.setStormpath(generateRandom(String.class));
+            em.persist(entityUser);
             AdminEntity entityU = new AdminEntity();
-        	entityU.setName(name);
-                entityU.setEmail(email);
+            entityU.setUser(entityUser);
+            entityU.setName(name);
+            entityU.setEmail(email);
             em.persist(entityU);
             data.add(entityU);
         }
@@ -187,6 +193,44 @@ public class AdminLogicTest {
         adminLogic.deleteAdmin(entity.getId());
         AdminEntity deleted = em.find(AdminEntity.class, entity.getId());
         Assert.assertNull(deleted);
+    }
+    
+    /**
+     * @generated
+     */
+    @Test
+    public void findByName() {
+        String name = data.get(0).getName();
+        List<AdminEntity> cache = new ArrayList<AdminEntity>();
+        List<AdminDTO> list = adminLogic.findByName(name);
+
+        for (AdminEntity entity : data) {
+            if (entity.getName().equals(name)) {
+                cache.add(entity);
+            }
+        }
+        Assert.assertEquals(cache.size(), list.size());
+        for (AdminDTO dto : list) {
+            boolean found = false;
+            for (AdminEntity cacheEntity : cache) {
+                if (cacheEntity.getName().equals(dto.getName())) {
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                Assert.fail();
+            }
+        }
+    }
+    
+    @Test
+    public void getAdminByUserIdTest() {
+        AdminEntity entity = data.get(0);
+        AdminDTO dto = adminLogic.getAdminByUserId(entity.getUser().getStormpath());
+        Assert.assertNotNull(dto);
+        Assert.assertEquals(entity.getName(), dto.getName());
+        Assert.assertEquals(entity.getEmail(), dto.getEmail());
     }
 
 }

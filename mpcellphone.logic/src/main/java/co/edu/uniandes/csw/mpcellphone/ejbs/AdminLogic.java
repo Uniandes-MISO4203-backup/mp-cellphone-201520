@@ -76,6 +76,7 @@ public class AdminLogic implements IAdminLogic {
     /**
      * @generated
      */
+    @Override
     public List<AdminDTO> findByName(String name) {
         return AdminConverter.listEntity2DTO(persistence.findByName(name));
     }
