@@ -2,9 +2,11 @@ package co.edu.uniandes.csw.mpcellphone.tests;
 
 import co.edu.uniandes.csw.mpcellphone.ejbs.ClientLogic;
 import co.edu.uniandes.csw.mpcellphone.api.IClientLogic;
+import co.edu.uniandes.csw.mpcellphone.api.IUserLogic;
 import co.edu.uniandes.csw.mpcellphone.converters.ClientConverter;
 import co.edu.uniandes.csw.mpcellphone.dtos.ClientDTO;
 import co.edu.uniandes.csw.mpcellphone.entities.ClientEntity;
+import co.edu.uniandes.csw.mpcellphone.entities.UserEntity;
 import co.edu.uniandes.csw.mpcellphone.persistence.ClientPersistence;
 import static co.edu.uniandes.csw.mpcellphone.tests._TestUtil.*;
 import java.util.ArrayList;
@@ -37,10 +39,12 @@ public class ClientLogicTest {
     public static WebArchive createDeployment() {
         return ShrinkWrap.create(WebArchive.class, DEPLOY + ".war")
                 .addPackage(ClientEntity.class.getPackage())
+                .addPackage(UserEntity.class.getPackage())
                 .addPackage(ClientDTO.class.getPackage())
                 .addPackage(ClientConverter.class.getPackage())
                 .addPackage(ClientLogic.class.getPackage())
                 .addPackage(IClientLogic.class.getPackage())
+                .addPackage(IUserLogic.class.getPackage())
                 .addPackage(ClientPersistence.class.getPackage())
                 .addAsResource("META-INF/persistence.xml", "META-INF/persistence.xml")
                 .addAsWebInfResource("META-INF/beans.xml", "beans.xml");
@@ -52,6 +56,8 @@ public class ClientLogicTest {
     @Inject
     private IClientLogic clientLogic;
 
+    @Inject
+    private IUserLogic userLogic;
     /**
      * @generated
      */
@@ -89,6 +95,7 @@ public class ClientLogicTest {
      */
     private void clearData() {
         em.createQuery("delete from ClientEntity").executeUpdate();
+        em.createQuery("delete from UserEntity where role='client'").executeUpdate();
     }
 
     /**
@@ -96,16 +103,27 @@ public class ClientLogicTest {
      */
     private List<ClientEntity> data = new ArrayList<ClientEntity>();
 
+    private List<UserEntity> dataU = new ArrayList<UserEntity>();
     /**
      * @generated
      */
     private void insertData() {
+        String name = generateRandom(String.class);
+        String userId = generateRandom(String.class);
+        String email = generateRandom(String.class);
         for (int i = 0; i < 3; i++) {
             ClientEntity entity = new ClientEntity();
-        	entity.setName(generateRandom(String.class));
-        	entity.setUserId(generateRandom(String.class));
+        	entity.setName(name);
+        	entity.setUserId(userId);
+        	entity.setEmail(email);
             em.persist(entity);
             data.add(entity);
+            UserEntity entityU = new UserEntity();
+        	entityU.setName(name);
+        	entityU.setStormpath(userId);
+        	entityU.setEmail(email);
+            em.persist(entityU);
+            dataU.add(entityU);
         }
     }
 
@@ -117,6 +135,7 @@ public class ClientLogicTest {
         ClientDTO dto = new ClientDTO();
         dto.setName(generateRandom(String.class));
         dto.setUserId(generateRandom(String.class));
+        dto.setEmail(generateRandom(String.class));
 
         ClientDTO result = clientLogic.createClient(dto);
 
@@ -126,8 +145,15 @@ public class ClientLogicTest {
 
         Assert.assertEquals(dto.getName(), entity.getName());
         Assert.assertEquals(dto.getUserId(), entity.getUserId());
+        Assert.assertEquals(dto.getEmail(), entity.getEmail());
     }
 
+
+    @Test
+    public void countClientsTest(){
+        int size = clientLogic.countClients();
+        Assert.assertEquals(data.size(), size);
+    }
     /**
      * @generated
      */
@@ -156,8 +182,28 @@ public class ClientLogicTest {
         Assert.assertNotNull(dto);
         Assert.assertEquals(entity.getName(), dto.getName());
         Assert.assertEquals(entity.getUserId(), dto.getUserId());
+        Assert.assertEquals(entity.getEmail(), dto.getEmail());
     }
 
+    @Test
+    public void getClientByUserIdTest() {
+        ClientEntity entity = data.get(0);
+        ClientDTO dto = clientLogic.getClientByUserId(entity.getUserId());
+        Assert.assertNotNull(dto);
+        Assert.assertEquals(entity.getName(), dto.getName());
+        Assert.assertEquals(entity.getUserId(), dto.getUserId());
+        Assert.assertEquals(entity.getEmail(), dto.getEmail());
+    }
+
+    @Test
+    public void getClientByEmailTest() {
+        ClientEntity entity = data.get(0);
+        ClientDTO dto = clientLogic.getClientByEmail(entity.getEmail());
+        Assert.assertNotNull(dto);
+        Assert.assertEquals(entity.getName(), dto.getName());
+        Assert.assertEquals(entity.getUserId(), dto.getUserId());
+        Assert.assertEquals(entity.getEmail(), dto.getEmail());
+    }
     /**
      * @generated
      */
@@ -174,21 +220,23 @@ public class ClientLogicTest {
      */
     @Test
     public void updateClientTest() {
+        String name = generateRandom(String.class);
+        String email = generateRandom(String.class);
+        
         ClientEntity entity = data.get(0);
+        
+        ClientDTO dto = clientLogic.getClient(entity.getId());
+        dto.setName(name);
+        dto.setEmail(email);
+        
+        ClientDTO updDto = clientLogic.updateClient(dto);
+        
+        Assert.assertNotNull(updDto);
 
-        ClientDTO dto = new ClientDTO();
-
-        dto.setId(entity.getId());
-        dto.setName(generateRandom(String.class));
-        dto.setUserId(generateRandom(String.class));
-
-        clientLogic.updateClient(dto);
-
-        ClientEntity resp = em.find(ClientEntity.class, entity.getId());
-
-        Assert.assertEquals(dto.getName(), resp.getName());
-        Assert.assertEquals(dto.getUserId(), resp.getUserId());
+        Assert.assertEquals(updDto.getName(), name);
+        Assert.assertEquals(updDto.getEmail(), email);
     }
+    
 
     /**
      * @generated

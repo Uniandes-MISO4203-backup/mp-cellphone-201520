@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.mpcellphone.ejbs;
 
+import co.edu.uniandes.csw.mpcellphone.utils.MailUtilsMP;
 import co.edu.uniandes.csw.mpcellphone.api.IOrderLogic;
 import co.edu.uniandes.csw.mpcellphone.converters.OrderConverter;
 import co.edu.uniandes.csw.mpcellphone.dtos.OrderDTO;
@@ -12,6 +13,8 @@ import co.edu.uniandes.csw.mpcellphone.entities.OrderEntity;
 import co.edu.uniandes.csw.mpcellphone.pdf.GenerateFactura;
 import co.edu.uniandes.csw.mpcellphone.persistence.OrderPersistence;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
@@ -26,12 +29,13 @@ public class OrderLogic implements IOrderLogic {
     @Inject
     private OrderPersistence persistence;
 
+    @Override
     public int countOrder() {
         return persistence.count();
     }
 
     /**
-     * Metodo encargado de obtener las órdenes de un cliente
+     * Metodo encargado de obtener las ï¿½rdenes de un cliente
      *
      * @param page
      * @param maxRecords
@@ -54,7 +58,7 @@ public class OrderLogic implements IOrderLogic {
     }
 
     /**
-     * Metodo que permite realizar la creación de una orden
+     * Metodo que permite realizar la creaciï¿½n de una orden
      *
      * @param dto
      * @return
@@ -67,10 +71,10 @@ public class OrderLogic implements IOrderLogic {
         try {
             GenerateFactura p = new GenerateFactura();
             factura = p.generate(dto);
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ex) {
+            Logger.getLogger(OrderLogic.class.getName()).log(Level.SEVERE, null, ex);
         }
-        String emailMsg = "<html><body><br />Señor(a)" + dto.getClient().getName() 
+        String emailMsg = "<html><body><br />Seï¿½or(a)" + dto.getClient().getName() 
                 + "<br /><br />"
                 + "Los datos de su compra son: <br /><br /> "
                 + "<br />Forma de Pago: " + dto.getPaymentMethod().getMethodName()
@@ -78,13 +82,13 @@ public class OrderLogic implements IOrderLogic {
                 + "<br /><br />Atentamente,"
                 + "<br /><br /><br />MarketPhone";
         String subject = "Factura de su Compra en MarketPhone";
-        mailUtilsMP.sendEmailMPAttach(emailMsg, dto.getClient().getEmail(), subject, factura);
+        MailUtilsMP.sendEmailMPAttach(emailMsg, dto.getClient().getEmail(), subject, factura);
 
         return OrderConverter.fullEntity2DTO(entity);
     }
 
     /**
-     * Metodo que permite actualizar la información de una orden
+     * Metodo que permite actualizar la informaciï¿½n de una orden
      *
      * @param dto
      * @return

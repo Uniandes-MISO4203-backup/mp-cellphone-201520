@@ -1,0 +1,27 @@
+<!--cv.hernandez10-->
+<div>
+    <toolbar name="name" display-name="displayName" actions="globalActions"></toolbar>
+    <div>
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>Brand </th>
+                    <th>Article </th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="product in detailOrderList">
+                    <td><div>{{product.cellPhone.brand}}</div></td> 
+                    <td><div>{{product.cellPhone.name}}</div></td> 
+                    <td><div>{{product.price | currency}}</div></td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- <div class="text-center">
+            <pagination ng-show="ctrl.numPages > 1" num-pages="ctrl.numPages" total-items="ctrl.totalItems"
+                        ng-model="ctrl.currentPage" ng-change="ctrl.pageChanged()" items-per-page="ctrl.itemsPerPage"
+                        max-size="ctrl.maxSize" class="pagination-md" boundary-links="true" rotate="false"></pagination>
+        </div> -->
+    </div>
+</div>

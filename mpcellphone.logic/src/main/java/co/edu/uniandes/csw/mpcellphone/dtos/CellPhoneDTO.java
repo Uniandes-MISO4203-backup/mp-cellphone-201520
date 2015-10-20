@@ -9,12 +9,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class CellPhoneDTO {
 
     private Long id;
-    private String name;
-    private String description;
-    private String model;
-    private String imei;
     private String brand;
-    private String image;
+    private String name;
     /**
      * @generated
      */
@@ -32,62 +28,6 @@ public class CellPhoneDTO {
     /**
      * @generated
      */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * @generated
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    /**
-     * @generated
-     */
-    public String getDescription() {
-        return description;
-    }
-
-    /**
-     * @generated
-     */
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    /**
-     * @generated
-     */
-    public String getModel() {
-        return model;
-    }
-
-    /**
-     * @generated
-     */
-    public void setModel(String model) {
-        this.model = model;
-    }
-
-    /**
-     * @generated
-     */
-    public String getImei() {
-        return imei;
-    }
-
-    /**
-     * @generated
-     */
-    public void setImei(String imei) {
-        this.imei = imei;
-    }
-
-    /**
-     * @generated
-     */
     public String getBrand() {
         return brand;
     }
@@ -99,18 +39,13 @@ public class CellPhoneDTO {
         this.brand = brand;
     }
 
-    /**
-     * @generated
-     */
-    public String getImage() {
-        return image;
+    public String getName() {
+        return name;
     }
 
-    /**
-     * @generated
-     */
-    public void setImage(String image) {
-        this.image = image;
+    public void setName(String name) {
+        this.name = name;
     }
-
+    
+    
 }

@@ -1,61 +1,106 @@
+<script>
+jQuery(document).ready(function ($) {
+    setInterval(
+    function () {
+        moveRight();
+    }, 5000
+    );
 
+    var slideWidth = $('#slider ul li').width();
+    var slideHeight = $('#slider ul li').height();
 
+    $('#slider').css({width: slideWidth, height: slideHeight});
 
+    $('#slider ul li:last-child').prependTo('#slider ul');
+
+    function moveLeft() {
+        $('#slider ul').animate({
+            left: +slideWidth
+        }, 200, function () {
+            $('#slider ul li:last-child').prependTo('#slider ul');
+            $('#slider ul').css('left', '');
+        });
+    }
+    ;
+
+    function moveRight() {
+        $('#slider ul').animate({
+            left: -slideWidth
+        }, 200, function () {
+            $('#slider ul li:first-child').appendTo('#slider ul');
+            $('#slider ul').css('left', '');
+        });
+    }
+    ;
+
+    $('a.controlprev').click(function () {
+        moveLeft();
+    });
+
+    $('a.controlnext').click(function () {
+        moveRight();
+    });
+
+});
+</script>
 <div ng-hide="ctrl.editMode">
     <div class="col-sm-12">
         <div ng-repeat="record in records" ng-show = "cheap(currentGroup, priceItem, record)">
             <div class="col-sm-4 well text-center">
                 <div class="col-md-12">
-                    <div class="img-thumbnail" id="cover" ng-if="record.cellPhone.image">
-                        <a ng-href="{{record.cellPhone.image}}" target="_blank">
-                            <img class="img-responsive" style="height: 20vw;" ng-src="{{record.cellPhone.image}}" alt="{{record.cellPhone.image}}">
+                    <div class="img-thumbnail" id="cover" ng-if="record.image">
+                        <a href="javascript:;" ng-repeat="action in ctrl.prodductInfoActions" id="{{$parent.$index}}-{{action.name}}-btn" ng-show="action.show()" ng-click="action.fn(record)">
+                            <div>
+                                <img class="img-responsive" style="height: 20vw;" ng-src="{{record.image}}" alt="{{record.image}}">
+                            </div>
+                            <div style="width: 100%; margin: auto;">Click to watch more</div>
                         </a>
                     </div>
                 </div>
                 <div class="caption" >
-                    <p><strong>Cellphone:</strong> {{record.cellPhone.name}}</p>
-                    <p><strong>Price:</strong> {{record.price | currency}}</p>
-                    <p><strong>Discount</strong> {{record.discount | number:1}} %</p>
+                    <p><strong>Cellphone:</strong> {{record.name}}</p>
+                    <p><strong>Price:</strong> {{record.price| currency}}</p>
+                    <p><strong>Discount:</strong> {{record.discount| number:1}} %</p>
                     <p><strong>Provider:</strong> {{record.provider.name}}</p>
                 </div>
                 <p class="text-center">               
-                    <div class="btn-group">
-                        <button ng-repeat="action in ctrl.recordActions" id="{{$parent.$index}}-{{action.name}}-btn" class="btn btn-{{action.class || 'default'}}" ng-show="action.show()" ng-click="action.fn(record)">
-                            <span class="glyphicon glyphicon-{{action.icon}}"></span> {{action.displayName}}
-                        </button>
-                        <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="caret"></span>
-                            <span class="sr-only">Toggle Dropdown</span>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a href="javascript:;" ng-repeat="action in ctrl.commentActions" id="{{$parent.$index}}-{{action.name}}-btn" ng-show="action.show()" ng-click="action.fn(record)">
-                                    <span class="glyphicon glyphicon-{{action.icon}}"></span> {{action.displayName}}
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:;" ng-repeat="action in ctrl.questionActions" id="{{$parent.$index}}-{{action.name}}-btn" ng-show="action.show()" ng-click="action.fn(record)">
-                                    <span class="glyphicon glyphicon-{{action.icon}}"></span> {{action.displayName}}
-                                </a>
-                            </li>
-                            <li role="separator" class="divider"></li>
-                            <li>
-                                <a href="javascript:;" ng-repeat="action in ctrl.cheapestActions" id="{{$parent.$index}}-{{action.name}}-btn" ng-show="action.show()" ng-click="action.fn(record)">
-                                    <span class="glyphicon glyphicon-{{action.icon}}"></span> {{action.displayName}}
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:;" ng-repeat="action in ctrl.cheapestProvActions" id="{{$parent.$index}}-{{action.name}}-btn" ng-show="action.show()" ng-click="action.fn(record)">
-                                    <span class="glyphicon glyphicon-{{action.icon}}"></span> {{action.displayName}}
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:;" ng-repeat="action in ctrl.discountActions" id="{{$parent.$index}}-{{action.name}}-btn" ng-show="action.show()" ng-click="action.fn(record)">
-                                    <span class="glyphicon glyphicon-{{action.icon}}"></span> {{action.displayName}}
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
+                <div class="btn-group">
+                    <button ng-repeat="action in ctrl.recordActions" id="{{$parent.$index}}-{{action.name}}-btn" class="btn btn-{{action.class|| 'default'}}" ng-show="action.show()" ng-click="action.fn(record)">
+                        <span class="glyphicon glyphicon-{{action.icon}}"></span> {{action.displayName}}
+                    </button>
+                    <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="caret"></span>
+                        <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="javascript:;" ng-repeat="action in ctrl.commentActions" id="{{$parent.$index}}-{{action.name}}-btn" ng-show="action.show()" ng-click="action.fn(record)">
+                                <span class="glyphicon glyphicon-{{action.icon}}"></span> {{action.displayName}}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:;" ng-repeat="action in ctrl.questionActions" id="{{$parent.$index}}-{{action.name}}-btn" ng-show="action.show()" ng-click="action.fn(record)">
+                                <span class="glyphicon glyphicon-{{action.icon}}"></span> {{action.displayName}}
+                            </a>
+                        </li>
+                        <li role="separator" class="divider"></li>
+                        <li>
+                            <a href="javascript:;" ng-repeat="action in ctrl.cheapestActions" id="{{$parent.$index}}-{{action.name}}-btn" ng-show="action.show()" ng-click="action.fn(record)">
+                                <span class="glyphicon glyphicon-{{action.icon}}"></span> {{action.displayName}}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:;" ng-repeat="action in ctrl.cheapestProvActions" id="{{$parent.$index}}-{{action.name}}-btn" ng-show="action.show()" ng-click="action.fn(record)">
+                                <span class="glyphicon glyphicon-{{action.icon}}"></span> {{action.displayName}}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:;" ng-repeat="action in ctrl.discountActions" id="{{$parent.$index}}-{{action.name}}-btn" ng-show="action.show()" ng-click="action.fn(record)">
+                                <span class="glyphicon glyphicon-{{action.icon}}"></span> {{action.displayName}}
+                            </a>
+                        </li>
+                    </ul>
+                </div>
                 </p>
             </div>
         </div>
@@ -118,8 +163,43 @@
         </div>
     </div>
 </div>
+<!-- Para las fotos de los dispositivos //-->
+<div class="modal fade" id="productInfo" tabindex="-1" role="dialog" 
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" id = "titleProductQuestion">Cellphone information</h4>
+            </div>
 
-<!-- Para búsqueda avanzada //-->
+            <!-- Modal Body -->
+            <div class="modal-body"> 
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="panel panel-default">
+                            <div class="panel-body text-center" >
+                                <div id="image"></div>
+                                <div id="info"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="panel panel-default" >
+                            <div id="slider" style="width: 100%; " class="slider">
+                                <a href="" class='controlnext'>>></a>
+                                <a href="" class='controlprev'><<</a>
+                                <ul id="slider-ul" style="text-align: center;"></ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Para busqueda avanzada //-->
 <div class="modal fade" id="myModalHorizontal" tabindex="-1" role="dialog" 
      aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -127,63 +207,65 @@
             <!-- Modal Header -->
             <div class="modal-header">
                 <button type="button" class="close" 
-                   data-dismiss="modal">
-                       <span aria-hidden="true">&times;</span>
-                       <span class="sr-only">Close</span>
+                        data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
                 </button>
-                <h4 class="modal-title" id="myModalLabel">
-                    Advanced Search
-                </h4>
+                <h4 class="modal-title" id="myModalLabel">Advanced Search</h4>
             </div>
-            
+
             <!-- Modal Body -->
             <div class="modal-body">
-                
                 <form class="form-horizontal" role="form" >
-                  <div class="form-group">
-                    <label  class="col-sm-2 control-label"
-                              for="inputEmail3">Model</label>
-                    <div class="col-sm-10">
-                        <select  class="form-control" id = "model">
-                        </select>
+                    <!--Filtro modelo -->
+                    <div class="form-group">
+                        <label  class="col-sm-2 control-label" for="model">Model</label>
+                        <div class="col-sm-10">
+                            <select  class="form-control" id="model"></select>
+                        </div>
                     </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="col-sm-2 control-label"
-                          for="inputPassword3" >City</label>
-                    <div class="col-sm-10">
-                        <select  class="form-control" id = "cities" title="test">
-                        </select>
+                    <!--Filtro Ciudad -->
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="city" >City</label>
+                        <div class="col-sm-10">
+                            <select  class="form-control" id="cities"></select>
+                        </div>
                     </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="col-sm-2 control-label"
-                          for="inputPassword3" >Provider</label>
-                    <div class="col-sm-10">
-                        <select  class="form-control" id = "providers">
-                        </select>
+                    <!--Filtro Proveedor -->
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="provider" >Provider</label>
+                        <div class="col-sm-10"> 
+                            <select class="form-control" id="providers"></select>
+                        </div>
                     </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="col-sm-2 control-label"
-                          for="inputPassword3" >Category</label>
-                    <div class="col-sm-10">
-                        <select class="form-control" id = "categories" >
-                            
-                        </select>
+                    <!--Filtro Precio inferior -->
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="price1" >Price $</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" id="price1" step="50000" min="100000">
+                        </div>
                     </div>
-                  </div>
+                    <!--Filtro Precio superior -->
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="price2" >To $</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" id="price2" step="50000">
+                        </div>
+                    </div>
+                    <!--Filtro Categoria -->
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="category" >Category</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" id = "categories" ></select>
+                        </div>
+                    </div>
                 </form>
-                </div>
-            
+            </div>
+
             <!-- Modal Footer -->
             <div class="modal-footer">
-                <button type="button" class="btn btn-default"
-                        data-dismiss="modal">submit
-                            Close
-                </button>
-                <button type="submit" class="btn btn-primary" id = "advancedForm">Search
-                 </button>          
+                <button type="button" class="btn btn-default" data-dismiss="modal">Submit Close</button>
+                <button type="submit" class="btn btn-primary" id="advancedForm">Search</button>          
             </div>
         </div>
     </div>

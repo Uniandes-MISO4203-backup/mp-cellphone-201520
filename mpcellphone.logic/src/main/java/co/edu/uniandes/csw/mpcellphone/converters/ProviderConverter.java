@@ -35,7 +35,6 @@ public abstract class ProviderConverter {
             dto.setCity(entity.getCity());
             dto.setCountry(entity.getCountry());
             dto.setCalification(entity.getCalification());
-
             return dto;
         } else {
             return null;
@@ -51,7 +50,6 @@ public abstract class ProviderConverter {
         if (dto != null) {
             ProviderEntity entity = new ProviderEntity();
             entity.setId(dto.getId());
-
             return entity;
         } else {
             return null;
@@ -75,7 +73,6 @@ public abstract class ProviderConverter {
             dto.setCity(entity.getCity());
             dto.setCountry(entity.getCountry());
             dto.setCalification(entity.getCalification());
-
             return dto;
         } else {
             return null;
@@ -99,7 +96,6 @@ public abstract class ProviderConverter {
             entity.setCity(dto.getCity());
             entity.setCountry(dto.getCountry());
             entity.setCalification(dto.getCalification());
-
             return entity;
         } else {
             return null;
@@ -167,12 +163,11 @@ public abstract class ProviderConverter {
     }
 
     //Para convertir de lista de String a Lista DTO desarrollado por Miguel Olivares
-    public static List<ProviderDTO> listString2DTO(List<String> Models) {
+    public static List<ProviderDTO> listString2DTO(List<String> models) {
         List<ProviderDTO> dtos = new ArrayList<ProviderDTO>();
-        if (Models != null) {
-            for (String name : Models) {
+        if (models != null) {
+            for (String name : models) {
                 ProviderDTO dto = new ProviderDTO();
-                
                 dto.setName(name);
                 dtos.add(dto);
             }

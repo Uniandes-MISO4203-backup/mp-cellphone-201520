@@ -1,8 +1,10 @@
 package co.edu.uniandes.csw.mpcellphone.ejbs;
 
 import co.edu.uniandes.csw.mpcellphone.api.IProviderLogic;
+import co.edu.uniandes.csw.mpcellphone.api.IUserLogic;
 import co.edu.uniandes.csw.mpcellphone.converters.ProviderConverter;
 import co.edu.uniandes.csw.mpcellphone.dtos.ProviderDTO;
+import co.edu.uniandes.csw.mpcellphone.dtos.UserDTO;
 import co.edu.uniandes.csw.mpcellphone.entities.ProviderEntity;
 import co.edu.uniandes.csw.mpcellphone.persistence.ProviderPersistence;
 import java.util.List;
@@ -16,6 +18,8 @@ import javax.inject.Inject;
 public class ProviderLogic implements IProviderLogic {
 
     @Inject private ProviderPersistence persistence;
+    
+    @Inject private IUserLogic userLogic;
 
     /**
      * @return 
@@ -67,6 +71,10 @@ public class ProviderLogic implements IProviderLogic {
     @Override
     public ProviderDTO updateProvider(ProviderDTO dto) {
         ProviderEntity entity = persistence.update(ProviderConverter.fullDTO2Entity(dto));
+        UserDTO dtoU = userLogic.getUserByUserId(dto.getUserId());
+        dtoU.setName(dto.getName());
+        dtoU.setEmail(dto.getEmail());
+        dtoU = userLogic.updateUser(dtoU);
         return ProviderConverter.fullEntity2DTO(entity);
     }
 

@@ -4,15 +4,9 @@ import co.edu.uniandes.csw.mpcellphone.api.IOrderLogic;
 import co.edu.uniandes.csw.mpcellphone.dtos.ClientDTO;
 import co.edu.uniandes.csw.mpcellphone.dtos.OrderDTO;
 import co.edu.uniandes.csw.mpcellphone.providers.StatusCreated;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
-import java.util.Properties;
 import javax.inject.Inject;
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -26,7 +20,6 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.subject.Subject;
 
 /**
  * Servicio REST de Order
@@ -49,12 +42,10 @@ public class OrderService {
     private Integer maxRecords;
 
     private ClientDTO client = (ClientDTO) SecurityUtils.getSubject().getSession().getAttribute("Client");
-    @javax.ws.rs.core.Context
-    private ServletContext context;
+    
 
     /**
      * Metodo POST del servicio, para crear datos
-     *
      * @param dto
      * @return
      */
@@ -62,14 +53,12 @@ public class OrderService {
     @StatusCreated
     public OrderDTO createOrder(OrderDTO dto) {
         dto.setDateOrder(new Date());
-        ClientDTO client = (ClientDTO) SecurityUtils.getSubject().getSession().getAttribute("Client");
         dto.setClient(client);
         return orderLogic.createOrder(dto);
     }
 
     /**
      * Metodo GET, para obtener el listado de ordenes
-     *
      * @return
      */
     @GET

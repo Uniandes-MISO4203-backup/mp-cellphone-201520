@@ -28,7 +28,6 @@ public abstract class CartItemConverter {
             dto.setId(entity.getId());
             dto.setName(entity.getName());
             dto.setQuantity(entity.getQuantity());
-
             return dto;
         } else {
             return null;
@@ -44,7 +43,6 @@ public abstract class CartItemConverter {
         if (dto != null) {
             CartItemEntity entity = new CartItemEntity();
             entity.setId(dto.getId());
-
             return entity;
         } else {
             return null;
@@ -62,7 +60,6 @@ public abstract class CartItemConverter {
             dto.setQuantity(entity.getQuantity());
             dto.setClient(ClientConverter.refEntity2DTO(entity.getClient()));
             dto.setProduct(ProductConverter.refEntity2DTO(entity.getProduct()));
-
             return dto;
         } else {
             return null;
@@ -80,7 +77,6 @@ public abstract class CartItemConverter {
             entity.setQuantity(dto.getQuantity());
             entity.setClient(ClientConverter.refDTO2Entity(dto.getClient()));
             entity.setProduct(ProductConverter.refDTO2Entity(dto.getProduct()));
-
             return entity;
         } else {
             return null;
@@ -92,8 +88,7 @@ public abstract class CartItemConverter {
      */
     public static CartItemDTO fullEntity2DTO(CartItemEntity entity) {
         if (entity != null) {
-            CartItemDTO dto = basicEntity2DTO(entity);
-            return dto;
+            return basicEntity2DTO(entity);
         } else {
             return null;
         }
@@ -103,9 +98,8 @@ public abstract class CartItemConverter {
      * @generated
      */
     public static CartItemEntity fullDTO2Entity(CartItemDTO dto) {
-        if (dto != null) {
-            CartItemEntity entity = basicDTO2Entity(dto);
-            return entity;
+        if (dto != null) { 
+            return basicDTO2Entity(dto);
         } else {
             return null;
         }
@@ -114,7 +108,6 @@ public abstract class CartItemConverter {
     /**
      * @generated
      */
-
     public static List<CartItemDTO> listEntity2DTO(List<CartItemEntity> entities) {
         List<CartItemDTO> dtos = new ArrayList<CartItemDTO>();
         if (entities != null) {

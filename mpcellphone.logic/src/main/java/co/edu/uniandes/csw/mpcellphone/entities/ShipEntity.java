@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 /**
  * Entidad referente a los datos de envio
@@ -31,6 +32,9 @@ public class ShipEntity implements Serializable {
     private String address;
     
     private Long stimatedTime;
+    
+    @OneToOne
+    private ShippingTypeEntity shipType;
 
     public Long getId() {
         return id;
@@ -79,6 +83,13 @@ public class ShipEntity implements Serializable {
     public void setStimatedTime(Long stimatedTime) {
         this.stimatedTime = stimatedTime;
     }
-    
+
+    public ShippingTypeEntity getShipType() {
+        return shipType;
+    }
+
+    public void setShipType(ShippingTypeEntity shipType) {
+        this.shipType = shipType;
+    }
     
 }

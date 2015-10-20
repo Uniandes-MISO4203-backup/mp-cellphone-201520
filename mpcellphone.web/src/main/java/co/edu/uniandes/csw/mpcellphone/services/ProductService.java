@@ -1,19 +1,18 @@
 package co.edu.uniandes.csw.mpcellphone.services;
 
-import co.edu.uniandes.csw.mpcellphone.api.IClientLogic;
 import co.edu.uniandes.csw.mpcellphone.api.ICommentLogic;
 import co.edu.uniandes.csw.mpcellphone.api.IProductLogic;
 import co.edu.uniandes.csw.mpcellphone.api.IProviderLogic;
 import co.edu.uniandes.csw.mpcellphone.api.IQuestionLogic;
 import co.edu.uniandes.csw.mpcellphone.api.ICellPhoneLogic;
 import co.edu.uniandes.csw.mpcellphone.dtos.CellPhoneDTO;
-import co.edu.uniandes.csw.mpcellphone.dtos.ClientDTO;
 import co.edu.uniandes.csw.mpcellphone.dtos.CommentDTO;
 import co.edu.uniandes.csw.mpcellphone.dtos.ProductDTO;
 import co.edu.uniandes.csw.mpcellphone.dtos.ProviderDTO;
 import co.edu.uniandes.csw.mpcellphone.dtos.QuestionDTO;
-import co.edu.uniandes.csw.mpcellphone.persistence.CellPhonePersistence;
 import co.edu.uniandes.csw.mpcellphone.providers.StatusCreated;
+import co.edu.uniandes.csw.mpcellphone.utils.RequestUtilsMP;
+import javax.ws.rs.core.Response;
 import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
@@ -26,8 +25,11 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.xml.ws.soap.AddressingFeature;
 import org.apache.shiro.SecurityUtils;
 
 /**
@@ -42,24 +44,37 @@ public class ProductService {
     @Inject private IProviderLogic providerLogic;
     @Inject private IQuestionLogic questionLogic;
     @Inject private ICommentLogic commentLogic;
-    @Inject private IClientLogic clientLogic;
     @Inject private ICellPhoneLogic cellPhoneLogic;
-    @Inject private CellPhonePersistence cellPhonePersistence;
     @Context private HttpServletResponse response;
     @QueryParam("page") private Integer page;
     @QueryParam("maxRecords") private Integer maxRecords;
     @QueryParam("q")
     private String cellPhoneName;
-    private String cellPhoneModel;
     private ProviderDTO provider = (ProviderDTO) SecurityUtils.getSubject().getSession().getAttribute("Provider");
-    private final ClientDTO client = (ClientDTO)SecurityUtils.getSubject().getSession().getAttribute("Client");
+    private static final String xTotalCount = "X-Total-Count";
+    
     
     /**
      * @generated
      */
     @POST
     @StatusCreated
-    public ProductDTO createProduct(ProductDTO dto) {
+    public ProductDTO createProduct(ProductDTO dto){
+        if(provider==null)throw new WebApplicationException(Response.status(Response.Status.NOT_FOUND)
+                    .entity("Forbidden access.")
+                    .type("text/plain").build());
+        dto.setProvider(provider);
+        ProductDTO dtoSearch= productLogic.getProductByImei(dto.getImei());
+        if(dtoSearch!=null&&dtoSearch.getId()!=null)
+            throw new WebApplicationException(Response.status(Response.Status.NOT_FOUND)
+                    .entity("There is already a cellphone registered with the same Imei Id.")
+                    .type("text/plain").build());
+        if(RequestUtilsMP.isStolenImei(dto.getImei()))
+            throw new WebApplicationException(Response.status(Response.Status.NOT_FOUND)
+                    .entity("The Imei id appears in the police database for stolen cellphones. "
+                            + "Please contact with a police office near to your home")
+                    .type("text/plain").build());
+            
         return productLogic.createProduct(dto);
     }
 
@@ -95,13 +110,16 @@ public class ProductService {
     @GET
     public List<ProductDTO> getProducts() {
         if (provider != null) {
-            return providerLogic.getProvider(provider.getId()).getProducts();
+            if (page != null && maxRecords != null) {
+                this.response.setIntHeader(xTotalCount, productLogic.countProductsByProvider(provider.getId()));
+            }
+            return productLogic.getProductsByProvider(page, maxRecords,provider.getId());
         } else {
             if (cellPhoneName != null) {
                 return productLogic.getByCellPhoneName(cellPhoneName);
             } else {
                 if (page != null && maxRecords != null) {
-                    this.response.setIntHeader("X-Total-Count", productLogic.countProducts());
+                    this.response.setIntHeader(xTotalCount, productLogic.countProducts());
                 }
                 return productLogic.getProducts(page, maxRecords);
             }
@@ -123,8 +141,12 @@ public class ProductService {
     @PUT
     @Path("{id: \\d+}")
     public ProductDTO updateProduct(@PathParam("id") Long id, ProductDTO dto) {
-        dto.setId(id);
-        return productLogic.updateProduct(dto);
+        if(dto.getProvider()!=null){            
+            dto.setId(id);
+            return productLogic.updateProduct(dto);
+        }else{
+             return null;
+        }
     }
 
     /**
@@ -133,7 +155,9 @@ public class ProductService {
     @DELETE
     @Path("{id: \\d+}")
     public void deleteProduct(@PathParam("id") Long id) {
-        productLogic.deleteProduct(id);
+        if(provider!=null){
+            productLogic.deleteProduct(id);
+        }
     }
     
     /**
@@ -159,7 +183,7 @@ public class ProductService {
         List<CommentDTO> listComments;
         if (page != null && maxRecords != null)
         {
-            this.response.setIntHeader("X-Total-Count", commentLogic.countComment());
+            this.response.setIntHeader(xTotalCount, commentLogic.countComment());
         }
         listComments = commentLogic.getComments(page, maxRecords);
         
@@ -249,10 +273,11 @@ public class ProductService {
     /**
      * Servicio para obtener la lista de de filtro por precios
      * Creado por ma.olivares10
+     * @param minPrice
      */
     @GET
     @Path("/getByPriceRange/{minPrice}/{maxPrice}")
-    public List<ProductDTO> getByPriceRange(@PathParam("minPrice") Integer minPrice, @PathParam("maxPrixe") Integer maxPrice) {
+    public List<ProductDTO> getByPriceRange(@PathParam("minPrice") Long minPrice, @PathParam("maxPrice") Long maxPrice) {
         
         return productLogic.getByPriceRange(minPrice, maxPrice);
     }

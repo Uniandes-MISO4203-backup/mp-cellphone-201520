@@ -8,6 +8,7 @@ package co.edu.uniandes.csw.mpcellphone.ejbs;
 import co.edu.uniandes.csw.mpcellphone.api.IUserLogic;
 import co.edu.uniandes.csw.mpcellphone.converters.UserConverter;
 import co.edu.uniandes.csw.mpcellphone.dtos.UserDTO;
+import co.edu.uniandes.csw.mpcellphone.entities.UserEntity;
 import co.edu.uniandes.csw.mpcellphone.persistence.UserPersistence;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -40,6 +41,42 @@ public class UserLogic implements IUserLogic{
     @Override
     public UserDTO getUserByUserName(String userName) {
         return UserConverter.refEntity2DTO(persistence.getUserByUserName(userName));
+    }
+
+    @Override
+    public UserDTO getUserByUserId(String userId) {
+        return UserConverter.refEntity2DTO(persistence.getUserByUserId(userId));
+    }
+
+    /**
+     * @param dto
+     * @return 
+     * @generated
+     */
+    @Override
+    public UserDTO createUser(UserDTO dto) {
+        UserEntity entity = UserConverter.fullDTO2Entity(dto);
+        persistence.create(entity);
+        return UserConverter.fullEntity2DTO(entity);
+    }
+
+    /**
+     * @param dto
+     * @return 
+     * @generated
+     */
+    @Override
+    public UserDTO updateUser(UserDTO dto) {
+        UserEntity entity = persistence.update(UserConverter.fullDTO2Entity(dto));
+        return UserConverter.fullEntity2DTO(entity);
+    }
+    /**
+     * @param id
+     * @generated
+     */
+    @Override
+    public void deleteUser(Long id) {
+        persistence.delete(id);
     }
 }
 

@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.mpcellphone.ejbs;
 
+import co.edu.uniandes.csw.mpcellphone.utils.MailUtilsMP;
 import co.edu.uniandes.csw.mpcellphone.api.IQuestionLogic;
 import co.edu.uniandes.csw.mpcellphone.converters.QuestionConverter;
 import co.edu.uniandes.csw.mpcellphone.dtos.QuestionDTO;
@@ -24,7 +25,7 @@ public class QuestionLogic implements IQuestionLogic {
     @Inject private QuestionPersistence persistence;
     
     /**
-     * Metodo encargado de obtener las órdenes de un cliente
+     * Metodo encargado de obtener las ï¿½rdenes de un cliente
      * @param page
      * @param maxRecords
      * @return 
@@ -53,7 +54,7 @@ public class QuestionLogic implements IQuestionLogic {
         QuestionEntity entity = QuestionConverter.fullDTO2Entity(dto);
         persistence.create(entity);
         //Send email
-        String emailMsg="<html><body><br />Señor(a) "+dto.getProvider().getName() +
+        String emailMsg="<html><body><br />Seï¿½or(a) "+dto.getProvider().getName() +
                 "<br /><br />" +
                 "Usted ha recibido una nueva pregunta: <br /><br /> " +
                 "<br />Producto: " + dto.getProduct().getName() + 
@@ -62,7 +63,7 @@ public class QuestionLogic implements IQuestionLogic {
                 "<br /><br />Atentamente," + 
                 "<br /><br /><br />MarketPhone";
         String subject = "Ha recibido un mensaje de MarketPhone";
-        mailUtilsMP.sendEmailMP(emailMsg, dto.getProvider().getEmail(), subject);
+        MailUtilsMP.sendEmailMP(emailMsg, dto.getProvider().getEmail(), subject);
         return QuestionConverter.fullEntity2DTO(entity);
     }
 

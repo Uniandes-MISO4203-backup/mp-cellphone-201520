@@ -14,7 +14,7 @@
                     else
                     {
                          $location.path('/login');
-                    } 
+                    }
                 });
             }
             else

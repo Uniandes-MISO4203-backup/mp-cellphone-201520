@@ -7,28 +7,34 @@
         'clientModule',
         'productModule',
         'providerModule',
+        'photoModule',
         'ngRoute',
         'ngCrud',
         'xeditable',
-        'paymentModule', 
-        'adminModule'
+        'paymentModule',
+        'adminModule',
+        'orderQueryModule'
     ]);
 
     mainApp.config(['$routeProvider', 'CrudTemplateURL', 'CrudCtrlAlias', function ($routeProvider, tplUrl, alias) {
             $routeProvider
-            .when('/cellPhone', {
-                //templateUrl: 'src/modules/cellPhone/cellphoneTmpl.html', //tplUrl, Se cambiar tplUrl por la nueva plantilla
+                    .when('/cellPhone', {
+                        //templateUrl: 'src/modules/cellPhone/cellphoneTmpl.html', //tplUrl, Se cambiar tplUrl por la nueva plantilla
+                        templateUrl: tplUrl,
+                        controller: 'cellPhoneCtrl',
+                        controllerAs: alias
+                    })
+                    .when('/client', {
+                        templateUrl: tplUrl,
+                        controller: 'clientCtrl',
+                        controllerAs: alias
+                    }).when('/products', {
                 templateUrl: tplUrl,
-                controller: 'cellPhoneCtrl', 
+                controller: 'productsCtrl',
                 controllerAs: alias
-            })
-            .when('/client', {
+            }).when('/photo', {
                 templateUrl: tplUrl,
-                controller: 'clientCtrl',
-                controllerAs: alias
-            }).when('/products', {
-                templateUrl: tplUrl, //
-                controller: 'productsCtrl', 
+                controller: 'photoCtrl',
                 controllerAs: alias
             }).when('/provider', {
                 templateUrl: tplUrl,
@@ -50,6 +56,12 @@
                 templateUrl: tplUrl,
                 controller: 'adminCtrl',
                 controllerAs: alias
+            }).when('/orderLists', {
+                templateUrl: 'src/modules/orderQuery/templates/orderByRoleTmpl.html',
+                controller: 'orderQueryCtrl'
+            }).when('/viewDetail', {
+                templateUrl: 'src/modules/orderQuery/templates/viewDetail.html',
+                controller: 'orderQueryCtrl'
             }).otherwise('/catalog');
         }]);
 
@@ -68,6 +80,7 @@
         }]);
 
     mainApp.run(function (editableOptions) {
-        editableOptions.theme = 'bs3'; // bootstrap3 theme. For Xeditable plugin Angular
+        // bootstrap3 theme. For Xeditable plugin Angular
+        editableOptions.theme = 'bs3';
     });
 })(window.angular);

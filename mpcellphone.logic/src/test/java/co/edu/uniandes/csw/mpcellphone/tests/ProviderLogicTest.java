@@ -5,6 +5,7 @@ import co.edu.uniandes.csw.mpcellphone.api.IProviderLogic;
 import co.edu.uniandes.csw.mpcellphone.converters.ProviderConverter;
 import co.edu.uniandes.csw.mpcellphone.dtos.ProviderDTO;
 import co.edu.uniandes.csw.mpcellphone.entities.ProviderEntity;
+import co.edu.uniandes.csw.mpcellphone.entities.UserEntity;
 import co.edu.uniandes.csw.mpcellphone.persistence.ProviderPersistence;
 import static co.edu.uniandes.csw.mpcellphone.tests._TestUtil.*;
 import java.util.ArrayList;
@@ -96,16 +97,28 @@ public class ProviderLogicTest {
      */
     private List<ProviderEntity> data = new ArrayList<ProviderEntity>();
 
+    private List<UserEntity> dataU = new ArrayList<UserEntity>();
+
     /**
      * @generated
      */
     private void insertData() {
+        String name = generateRandom(String.class);
+        String userId = generateRandom(String.class);
+        String email = generateRandom(String.class);
         for (int i = 0; i < 3; i++) {
             ProviderEntity entity = new ProviderEntity();
-        	entity.setName(generateRandom(String.class));
-        	entity.setUserId(generateRandom(String.class));
+        	entity.setName(name);
+        	entity.setUserId(userId);
+        	entity.setEmail(email);
             em.persist(entity);
             data.add(entity);
+            UserEntity entityU = new UserEntity();
+        	entityU.setName(name);
+        	entityU.setStormpath(userId);
+        	entityU.setEmail(email);
+            em.persist(entityU);
+            dataU.add(entityU);
         }
     }
 
@@ -117,6 +130,7 @@ public class ProviderLogicTest {
         ProviderDTO dto = new ProviderDTO();
         dto.setName(generateRandom(String.class));
         dto.setUserId(generateRandom(String.class));
+        dto.setEmail(generateRandom(String.class));
 
         ProviderDTO result = providerLogic.createProvider(dto);
 
@@ -126,6 +140,7 @@ public class ProviderLogicTest {
 
         Assert.assertEquals(dto.getName(), entity.getName());
         Assert.assertEquals(dto.getUserId(), entity.getUserId());
+        Assert.assertEquals(dto.getEmail(), entity.getEmail());
     }
 
     /**
@@ -146,6 +161,14 @@ public class ProviderLogicTest {
         }
     }
 
+
+    @Test
+    public void countProvidersTest(){
+        int size = providerLogic.countProviders();
+        Assert.assertEquals(data.size(), size);
+    }
+    
+
     /**
      * @generated
      */
@@ -153,9 +176,9 @@ public class ProviderLogicTest {
     public void getProviderTest() {
         ProviderEntity entity = data.get(0);
         ProviderDTO dto = providerLogic.getProvider(entity.getId());
-        Assert.assertNotNull(dto);
         Assert.assertEquals(entity.getName(), dto.getName());
         Assert.assertEquals(entity.getUserId(), dto.getUserId());
+        Assert.assertEquals(entity.getEmail(), dto.getEmail());
     }
 
     /**
@@ -169,25 +192,23 @@ public class ProviderLogicTest {
         Assert.assertNull(deleted);
     }
 
-    /**
-     * @generated
-     */
     @Test
     public void updateProviderTest() {
+        String name = generateRandom(String.class);
+        String email = generateRandom(String.class);
+        
         ProviderEntity entity = data.get(0);
+        
+        ProviderDTO dto = providerLogic.getProvider(entity.getId());
+        dto.setName(name);
+        dto.setEmail(email);
+        
+        ProviderDTO updDto = providerLogic.updateProvider(dto);
+        
+        Assert.assertNotNull(updDto);
 
-        ProviderDTO dto = new ProviderDTO();
-
-        dto.setId(entity.getId());
-        dto.setName(generateRandom(String.class));
-        dto.setUserId(generateRandom(String.class));
-
-        providerLogic.updateProvider(dto);
-
-        ProviderEntity resp = em.find(ProviderEntity.class, entity.getId());
-
-        Assert.assertEquals(dto.getName(), resp.getName());
-        Assert.assertEquals(dto.getUserId(), resp.getUserId());
+        Assert.assertEquals(updDto.getName(), name);
+        Assert.assertEquals(updDto.getEmail(), email);
     }
 
     /**
@@ -253,4 +274,26 @@ public class ProviderLogicTest {
             }
         }
     }
+
+    @Test
+    public void getProviderByUserIdTest() {
+        ProviderEntity entity = data.get(0);
+        ProviderDTO dto = providerLogic.getProviderByUserId(entity.getUserId());
+        Assert.assertNotNull(dto);
+        Assert.assertEquals(entity.getName(), dto.getName());
+        Assert.assertEquals(entity.getUserId(), dto.getUserId());
+        Assert.assertEquals(entity.getEmail(), dto.getEmail());
+    }
+
+    @Test
+    public void getProviderByEmailTest() {
+        ProviderEntity entity = data.get(0);
+        ProviderDTO dto = providerLogic.getProviderByEmail(entity.getEmail());
+        Assert.assertNotNull(dto);
+        Assert.assertEquals(entity.getName(), dto.getName());
+        Assert.assertEquals(entity.getUserId(), dto.getUserId());
+        Assert.assertEquals(entity.getEmail(), dto.getEmail());
+    }
+
+
 }

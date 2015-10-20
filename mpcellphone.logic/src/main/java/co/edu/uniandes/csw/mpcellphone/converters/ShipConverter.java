@@ -31,7 +31,7 @@ public abstract class ShipConverter {
             dto.setCity(entity.getCity());
             dto.setCountry(entity.getCountry());
             dto.setStimatedTime(entity.getStimatedTime());
-
+            dto.setShipType(ShippingTypeConverter.refEntity2DTO(entity.getShipType()));            
             return dto;
         } else {
             return null;
@@ -47,7 +47,6 @@ public abstract class ShipConverter {
         if (dto != null) {
             ShipEntity entity = new ShipEntity();
             entity.setId(dto.getId());
-
             return entity;
         } else {
             return null;
@@ -67,7 +66,7 @@ public abstract class ShipConverter {
             dto.setCity(entity.getCity());
             dto.setCountry(entity.getCountry());
             dto.setStimatedTime(entity.getStimatedTime());
-
+            dto.setShipType(ShippingTypeConverter.refEntity2DTO(entity.getShipType()));
             return dto;
         } else {
             return null;
@@ -87,7 +86,7 @@ public abstract class ShipConverter {
             entity.setCity(dto.getCity());
             entity.setCountry(dto.getCountry());
             entity.setStimatedTime(dto.getStimatedTime());
-
+            entity.setShipType(ShippingTypeConverter.refDTO2Entity(dto.getShipType()));
             return entity;
         } else {
             return null;
@@ -99,9 +98,8 @@ public abstract class ShipConverter {
      * @return 
      */
     public static ShipDTO fullEntity2DTO(ShipEntity entity) {
-        if (entity != null) {
-            ShipDTO dto = basicEntity2DTO(entity);
-            return dto;
+        if (entity != null) { 
+            return basicEntity2DTO(entity);
         } else {
             return null;
         }
@@ -113,8 +111,7 @@ public abstract class ShipConverter {
      */
     public static ShipEntity fullDTO2Entity(ShipDTO dto) {
         if (dto != null) {
-            ShipEntity entity = basicDTO2Entity(dto);
-            return entity;
+            return basicDTO2Entity(dto);
         } else {
             return null;
         }

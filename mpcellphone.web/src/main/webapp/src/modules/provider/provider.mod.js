@@ -64,10 +64,9 @@
                 type: 'Integer',
                 required: true,
                 visible: false
-            }], 
+            }],
         childs: [{
                 name: 'products',
                 displayName: 'Products',
-                //template: '', //override generic template
                 ctrl: 'productsCtrl'            }        ]});
 })(window.angular);

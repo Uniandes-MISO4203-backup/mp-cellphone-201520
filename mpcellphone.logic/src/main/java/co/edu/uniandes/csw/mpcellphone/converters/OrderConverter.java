@@ -38,8 +38,7 @@ public abstract class OrderConverter {
             dto.setTotalTax(entity.getTotalTax());
             dto.setClient(ClientConverter.refEntity2DTO(entity.getClient()));
             dto.setPaymentMethod(PaymentMethodConverter.refEntity2DTO(entity.getPaymentMethod()));
-            dto.setTax(TaxConverter.refEntity2DTO(entity.getTax()));
-            
+            dto.setTax(TaxConverter.refEntity2DTO(entity.getTax()));            
             return dto;
         } else {
             return null;
@@ -55,7 +54,6 @@ public abstract class OrderConverter {
         if (dto != null) {
             OrderEntity entity = new OrderEntity();
             entity.setId(dto.getId());
-
             return entity;
         } else {
             return null;
@@ -83,7 +81,6 @@ public abstract class OrderConverter {
             dto.setTotalTax(entity.getTotalTax());
             dto.setPaymentMethod(PaymentMethodConverter.refEntity2DTO(entity.getPaymentMethod()));
             dto.setTax(TaxConverter.refEntity2DTO(entity.getTax()));
-
             return dto;
         } else {
             return null;
@@ -110,8 +107,7 @@ public abstract class OrderConverter {
             entity.setTotalSale(dto.getTotalSale());
             entity.setTotalTax(dto.getTotalTax());
             entity.setPaymentMethod(PaymentMethodConverter.refDTO2Entity(dto.getPaymentMethod()));
-            entity.setTax(TaxConverter.refDTO2Entity(dto.getTax()));
-            
+            entity.setTax(TaxConverter.refDTO2Entity(dto.getTax()));            
             return entity;
         } else {
             return null;
@@ -124,8 +120,7 @@ public abstract class OrderConverter {
      */
     public static OrderDTO fullEntity2DTO(OrderEntity entity) {
         if (entity != null) {
-            OrderDTO dto = basicEntity2DTO(entity);
-            return dto;
+            return basicEntity2DTO(entity);
         } else {
             return null;
         }
@@ -137,8 +132,7 @@ public abstract class OrderConverter {
      */
     public static OrderEntity fullDTO2Entity(OrderDTO dto) {
         if (dto != null) {
-            OrderEntity entity = basicDTO2Entity(dto);
-            return entity;
+            return basicDTO2Entity(dto);
         } else {
             return null;
         }

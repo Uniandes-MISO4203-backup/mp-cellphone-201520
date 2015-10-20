@@ -26,12 +26,7 @@ public abstract class CellPhoneConverter {
             CellPhoneDTO dto = new CellPhoneDTO();
             dto.setId(entity.getId());
             dto.setName(entity.getName());
-            dto.setDescription(entity.getDescription());
-            dto.setModel(entity.getModel());
-            dto.setImei(entity.getImei());
             dto.setBrand(entity.getBrand());
-            dto.setImage(entity.getImage());
-
             return dto;
         } else {
             return null;
@@ -47,7 +42,6 @@ public abstract class CellPhoneConverter {
         if (dto != null) {
             CellPhoneEntity entity = new CellPhoneEntity();
             entity.setId(dto.getId());
-
             return entity;
         } else {
             return null;
@@ -55,6 +49,8 @@ public abstract class CellPhoneConverter {
     }
 
     /**
+     * @param entity
+     * @return 
      * @generated
      */
     private static CellPhoneDTO basicEntity2DTO(CellPhoneEntity entity) {
@@ -62,12 +58,7 @@ public abstract class CellPhoneConverter {
             CellPhoneDTO dto = new CellPhoneDTO();
             dto.setId(entity.getId());
             dto.setName(entity.getName());
-            dto.setDescription(entity.getDescription());
-            dto.setModel(entity.getModel());
-            dto.setImei(entity.getImei());
             dto.setBrand(entity.getBrand());
-            dto.setImage(entity.getImage());
-
             return dto;
         } else {
             return null;
@@ -75,6 +66,8 @@ public abstract class CellPhoneConverter {
     }
 
     /**
+     * @param dto
+     * @return 
      * @generated
      */
     private static CellPhoneEntity basicDTO2Entity(CellPhoneDTO dto) {
@@ -82,12 +75,7 @@ public abstract class CellPhoneConverter {
             CellPhoneEntity entity = new CellPhoneEntity();
             entity.setId(dto.getId());
             entity.setName(dto.getName());
-            entity.setDescription(dto.getDescription());
-            entity.setModel(dto.getModel());
-            entity.setImei(dto.getImei());
             entity.setBrand(dto.getBrand());
-            entity.setImage(dto.getImage());
-
             return entity;
         } else {
             return null;
@@ -95,33 +83,36 @@ public abstract class CellPhoneConverter {
     }
 
     /**
+     * @param entity 
+     * @return 
      * @generated
      */
     public static CellPhoneDTO fullEntity2DTO(CellPhoneEntity entity) {
-        if (entity != null) {
-            CellPhoneDTO dto = basicEntity2DTO(entity);
-            return dto;
+        if (entity != null) { 
+            return basicEntity2DTO(entity);
         } else {
             return null;
         }
     }
 
     /**
+     * @param dto 
+     * @return
      * @generated
      */
     public static CellPhoneEntity fullDTO2Entity(CellPhoneDTO dto) {
         if (dto != null) {
-            CellPhoneEntity entity = basicDTO2Entity(dto);
-            return entity;
+            return basicDTO2Entity(dto);
         } else {
             return null;
         }
     }
 
     /**
+     * @param entities 
+     * @return 
      * @generated
      */
-
     public static List<CellPhoneDTO> listEntity2DTO(List<CellPhoneEntity> entities) {
         List<CellPhoneDTO> dtos = new ArrayList<CellPhoneDTO>();
         if (entities != null) {
@@ -133,6 +124,8 @@ public abstract class CellPhoneConverter {
     }
 
     /**
+     * @param dtos
+     * @return
      * @generated
      */
     public static List<CellPhoneEntity> listDTO2Entity(List<CellPhoneDTO> dtos) {
@@ -144,14 +137,20 @@ public abstract class CellPhoneConverter {
         }
         return entities;
     }
-    //Para convertir de lista de String a Lista DTO
-    public static List<CellPhoneDTO> listString2DTO(List<String> Models) {
+    
+    
+    /**
+     * @param Models
+     * @return
+     * Para convertir de lista de String a Lista DTO
+     * 
+     */
+    public static List<CellPhoneDTO> listString2DTO(List<String> models) {
         List<CellPhoneDTO> dtos = new ArrayList<CellPhoneDTO>();
-        if (Models != null) {
-            for (String name : Models) {
+        if (models != null) {
+            for (String name : models) {
                 CellPhoneDTO dto = new CellPhoneDTO();
-                //dtos.add(basicEntity2DTO(Models));
-                dto.setModel(name);
+                dto.setName(name);
                 dtos.add(dto);
             }
         }

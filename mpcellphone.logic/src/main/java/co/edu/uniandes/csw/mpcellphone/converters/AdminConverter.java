@@ -1,7 +1,6 @@
 package co.edu.uniandes.csw.mpcellphone.converters;
 
 import co.edu.uniandes.csw.mpcellphone.dtos.AdminDTO;
-import co.edu.uniandes.csw.mpcellphone.dtos.UserDTO;
 import co.edu.uniandes.csw.mpcellphone.entities.AdminEntity;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,14 +24,12 @@ public abstract class AdminConverter {
      */
     public static AdminDTO refEntity2DTO(AdminEntity entity) {
         if (entity != null) {
-            AdminDTO dto = new AdminDTO();
-            
+            AdminDTO dto = new AdminDTO();            
             dto.setId(entity.getId());
             dto.setName(entity.getName());
             dto.setEmail(entity.getEmail());
             //Converter para el usuario
-            dto.setUser(UserConverter.refEntity2DTO(entity.getUser()));
-                    
+            dto.setUser(UserConverter.refEntity2DTO(entity.getUser()));                    
             return dto;
         } else {
             return null;
@@ -48,7 +45,6 @@ public abstract class AdminConverter {
         if (dto != null) {
             AdminEntity entity = new AdminEntity();
             entity.setId(dto.getId());
-
             return entity;
         } else {
             return null;
@@ -62,7 +58,6 @@ public abstract class AdminConverter {
             dto.setName(entity.getName());
             dto.setUser(UserConverter.refEntity2DTO(entity.getUser()));          
             dto.setEmail(entity.getEmail());
-
             return dto;
         } else {
             return null;
@@ -72,14 +67,13 @@ public abstract class AdminConverter {
     /**
      * @generated
      */
-    private static AdminEntity basicDTO2Entity(AdminDTO dto) {
+    public static AdminEntity basicDTO2Entity(AdminDTO dto) {
         if (dto != null) {
             AdminEntity entity = new AdminEntity();
             entity.setId(dto.getId());
             entity.setName(dto.getName());
             entity.setUser(UserConverter.refDTO2Entity(dto.getUser()));
-            entity.setEmail(dto.getEmail());
-          
+            entity.setEmail(dto.getEmail());          
             return entity;
         } else {
             return null;
@@ -89,7 +83,6 @@ public abstract class AdminConverter {
     /**
      * @generated
      */
-
     public static List<AdminDTO> listEntity2DTO(List<AdminEntity> entities) {
         List<AdminDTO> dtos = new ArrayList<AdminDTO>();
         if (entities != null) {
@@ -109,5 +102,4 @@ public abstract class AdminConverter {
         }
         return entities;
     }
-
 }

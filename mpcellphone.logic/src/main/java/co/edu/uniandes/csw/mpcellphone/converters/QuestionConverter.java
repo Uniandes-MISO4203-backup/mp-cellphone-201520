@@ -33,7 +33,6 @@ public abstract class QuestionConverter {
             dto.setClient(ClientConverter.refEntity2DTO(entity.getClient()));
             dto.setProduct(ProductConverter.refEntity2DTO(entity.getProduct()));
             dto.setProvider(ProviderConverter.refEntity2DTO(entity.getProvider()));
-
             return dto;
         } else {
             return null;
@@ -49,7 +48,6 @@ public abstract class QuestionConverter {
         if (dto != null) {
             QuestionEntity entity = new QuestionEntity();
             entity.setId(dto.getId());
-
             return entity;
         } else {
             return null;
@@ -68,7 +66,6 @@ public abstract class QuestionConverter {
             dto.setClient(ClientConverter.refEntity2DTO(entity.getClient()));
             dto.setProduct(ProductConverter.fullEntity2DTO(entity.getProduct()));
             dto.setProvider(ProviderConverter.fullEntity2DTO(entity.getProvider()));
-
             return dto;
         } else {
             return null;
@@ -87,7 +84,6 @@ public abstract class QuestionConverter {
             entity.setClient(ClientConverter.refDTO2Entity(dto.getClient()));
             entity.setProduct(ProductConverter.refDTO2Entity(dto.getProduct()));
             entity.setProvider(ProviderConverter.refDTO2Entity(dto.getProvider()));
-
             return entity;
         } else {
             return null;
@@ -101,8 +97,7 @@ public abstract class QuestionConverter {
      */
     public static QuestionDTO fullEntity2DTO(QuestionEntity entity) {
         if (entity != null) {
-            QuestionDTO dto = basicEntity2DTO(entity);
-            return dto;
+            return basicEntity2DTO(entity);
         } else {
             return null;
         }
@@ -115,8 +110,7 @@ public abstract class QuestionConverter {
      */
     public static QuestionEntity fullDTO2Entity(QuestionDTO dto) {
         if (dto != null) {
-            QuestionEntity entity = basicDTO2Entity(dto);
-            return entity;
+            return basicDTO2Entity(dto);
         } else {
             return null;
         }
@@ -148,6 +142,5 @@ public abstract class QuestionConverter {
             }
         }
         return entities;
-    }
-    
+    }    
 }

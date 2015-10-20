@@ -30,14 +30,13 @@ public class CellPhoneService {
     @Context private HttpServletResponse response;
     @QueryParam("page") private Integer page;
     @QueryParam("maxRecords") private Integer maxRecords;
-    //private String cellPhoneModel;
-
+   
     /**
      * @generated
      */
     @POST
     @StatusCreated
-    public CellPhoneDTO createCellPhone(CellPhoneDTO dto) {
+    public CellPhoneDTO createCellPhone(CellPhoneDTO dto) { 
         return cellPhoneLogic.createCellPhone(dto);
     }
 
@@ -77,9 +76,7 @@ public class CellPhoneService {
     @DELETE
     @Path("{id: \\d+}")
     public void deleteCellPhone(@PathParam("id") Long id) {
-        cellPhoneLogic.deleteCellPhone(id);
-        
+        cellPhoneLogic.deleteCellPhone(id);        
     }
-    
     
 }

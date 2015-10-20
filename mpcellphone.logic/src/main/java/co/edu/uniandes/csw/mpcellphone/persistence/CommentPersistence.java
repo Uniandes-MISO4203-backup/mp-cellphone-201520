@@ -6,11 +6,13 @@
 package co.edu.uniandes.csw.mpcellphone.persistence;
 
 import co.edu.uniandes.csw.mpcellphone.entities.CommentEntity;
+import javax.ejb.Stateless;
 
 /**
  *
  * @author jh.rubiano10
  */
+@Stateless
 public class CommentPersistence extends CrudPersistence<CommentEntity>{
     public CommentPersistence(){
         this.entityClass = CommentEntity.class;

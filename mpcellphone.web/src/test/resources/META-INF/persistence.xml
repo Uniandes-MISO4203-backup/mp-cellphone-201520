@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+    <persistence-unit name="mpcellphonePU" transaction-type="JTA"> 
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+        <class>co.edu.uniandes.csw.mpcellphone.entities.AdminEntity</class>
+        <class>co.edu.uniandes.csw.mpcellphone.entities.CartItemEntity</class>
+        <class>co.edu.uniandes.csw.mpcellphone.entities.CellPhoneEntity</class>
+        <class>co.edu.uniandes.csw.mpcellphone.entities.CityEntity</class>
+        <class>co.edu.uniandes.csw.mpcellphone.entities.ClientEntity</class>
+        <class>co.edu.uniandes.csw.mpcellphone.entities.CommentEntity</class>
+        <class>co.edu.uniandes.csw.mpcellphone.entities.OrderEntity</class>
+        <class>co.edu.uniandes.csw.mpcellphone.entities.PaymentMethodEntity</class>
+        <class>co.edu.uniandes.csw.mpcellphone.entities.PhotoEntity</class>
+        <class>co.edu.uniandes.csw.mpcellphone.entities.ProductEntity</class>
+        <class>co.edu.uniandes.csw.mpcellphone.entities.ProviderEntity</class>
+        <class>co.edu.uniandes.csw.mpcellphone.entities.QuestionEntity</class>
+        <class>co.edu.uniandes.csw.mpcellphone.entities.SalesEntity</class>
+        <class>co.edu.uniandes.csw.mpcellphone.entities.ShipEntity</class>
+        <class>co.edu.uniandes.csw.mpcellphone.entities.ShippingTypeEntity</class>
+        <class>co.edu.uniandes.csw.mpcellphone.entities.StateEntity</class>
+        <class>co.edu.uniandes.csw.mpcellphone.entities.StolenImeiEntity</class>
+        <class>co.edu.uniandes.csw.mpcellphone.entities.TaxEntity</class>
+        <class>co.edu.uniandes.csw.mpcellphone.entities.UserEntity</class>
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+        <shared-cache-mode>NONE</shared-cache-mode>
+        <properties>
+            <property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
+            <property name="eclipselink.target-database" value="Derby"/>            
+            <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.ClientDriver"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/jdbcmpcellphoneTest"/>
+            <property name="javax.persistence.jdbc.user" value="APP"/>
+            <property name="javax.persistence.jdbc.password" value="APP"/>
+            <property name="eclipselink.logging.level" value="FINE"/>     
+            <property name="eclipselink.logging.parameters" value="true"/>
+        </properties>
+    </persistence-unit>
+</persistence>

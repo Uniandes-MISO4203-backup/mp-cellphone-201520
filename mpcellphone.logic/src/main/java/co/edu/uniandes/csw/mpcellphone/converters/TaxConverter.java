@@ -91,8 +91,7 @@ public abstract class TaxConverter {
      */
     public static TaxDTO fullEntity2DTO(TaxEntity entity) {
         if (entity != null) {
-            TaxDTO dto = basicEntity2DTO(entity);
-            return dto;
+            return basicEntity2DTO(entity);
         } else {
             return null;
         }
@@ -104,8 +103,7 @@ public abstract class TaxConverter {
      */
     public static TaxEntity fullDTO2Entity(TaxDTO dto) {
         if (dto != null) {
-            TaxEntity entity = basicDTO2Entity(dto);
-            return entity;
+            return basicDTO2Entity(dto);
         } else {
             return null;
         }

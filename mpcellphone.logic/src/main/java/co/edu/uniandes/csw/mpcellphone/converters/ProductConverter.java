@@ -32,6 +32,12 @@ public abstract class ProductConverter {
             dto.setCellPhone(CellPhoneConverter.refEntity2DTO(entity.getCellPhone()));
             dto.setProvider(ProviderConverter.refEntity2DTO(entity.getProvider()));
             dto.setCategory(entity.getCategory());
+            dto.setDescription(entity.getDescription());
+            dto.setImage(entity.getImage());
+            dto.setImei(entity.getImei());
+            dto.setPhotos(PhotoConverter.listEntity2DTO(entity.getPhotos()));
+            dto.setProductState(entity.getProductState());
+            dto.setCity(CityConverter.refEntity2DTO(entity.getCity()));
             return dto;
         } else {
             return null;
@@ -47,7 +53,6 @@ public abstract class ProductConverter {
         if (dto != null) {
             ProductEntity entity = new ProductEntity();
             entity.setId(dto.getId());
-
             return entity;
         } else {
             return null;
@@ -55,6 +60,8 @@ public abstract class ProductConverter {
     }
 
     /**
+     * @param entity 
+     * @return 
      * @generated
      */
     private static ProductDTO basicEntity2DTO(ProductEntity entity) {
@@ -67,7 +74,12 @@ public abstract class ProductConverter {
             dto.setCellPhone(CellPhoneConverter.refEntity2DTO(entity.getCellPhone()));
             dto.setProvider(ProviderConverter.refEntity2DTO(entity.getProvider()));
             dto.setCategory(entity.getCategory());
-
+            dto.setPhotos(PhotoConverter.listEntity2DTO(entity.getPhotos()));
+            dto.setDescription(entity.getDescription());
+            dto.setImage(entity.getImage());
+            dto.setImei(entity.getImei());
+            dto.setProductState(entity.getProductState());
+            dto.setCity(CityConverter.refEntity2DTO(entity.getCity()));
             return dto;
         } else {
             return null;
@@ -75,6 +87,8 @@ public abstract class ProductConverter {
     }
 
     /**
+     * @param dto 
+     * @return 
      * @generated
      */
     private static ProductEntity basicDTO2Entity(ProductDTO dto) {
@@ -87,7 +101,12 @@ public abstract class ProductConverter {
             entity.setCellPhone(CellPhoneConverter.refDTO2Entity(dto.getCellPhone()));
             entity.setProvider(ProviderConverter.refDTO2Entity(dto.getProvider()));
             entity.setCategory(dto.getCategory());
-
+            entity.setPhotos(PhotoConverter.listDTO2Entity(dto.getPhotos()));
+            entity.setDescription(dto.getDescription());
+            entity.setImage(dto.getImage());
+            entity.setImei(dto.getImei());
+            entity.setProductState(dto.getProductState());
+            entity.setCity(CityConverter.refDTO2Entity(dto.getCity()));
             return entity;
         } else {
             return null;
@@ -95,33 +114,36 @@ public abstract class ProductConverter {
     }
 
     /**
+     * @param  entity 
+     * @return 
      * @generated
      */
     public static ProductDTO fullEntity2DTO(ProductEntity entity) {
         if (entity != null) {
-            ProductDTO dto = basicEntity2DTO(entity);
-            return dto;
+            return basicEntity2DTO(entity);
         } else {
             return null;
         }
     }
 
     /**
+     * @param dto 
+     * @return 
      * @generated
      */
     public static ProductEntity fullDTO2Entity(ProductDTO dto) {
         if (dto != null) {
-            ProductEntity entity = basicDTO2Entity(dto);
-            return entity;
+            return basicDTO2Entity(dto);
         } else {
             return null;
         }
     }
 
     /**
+     * @param entities 
+     * @return 
      * @generated
      */
-
     public static List<ProductDTO> listEntity2DTO(List<ProductEntity> entities) {
         List<ProductDTO> dtos = new ArrayList<ProductDTO>();
         if (entities != null) {
@@ -133,6 +155,8 @@ public abstract class ProductConverter {
     }
 
     /**
+     * @param dtos 
+     * @return 
      * @generated
      */
     public static List<ProductEntity> listDTO2Entity(List<ProductDTO> dtos) {
@@ -146,6 +170,9 @@ public abstract class ProductConverter {
     }
 
     /**
+     * @param dto 
+     * @param  parent 
+     * @return 
      * @generated
      */
     public static ProductEntity childDTO2Entity(ProductDTO dto, ProviderEntity parent){
@@ -155,6 +182,9 @@ public abstract class ProductConverter {
     }
 
     /**
+     * @param dtos
+     * @param  parent 
+     * @return 
      * @generated
      */
     public static List<ProductEntity> childListDTO2Entity(List<ProductDTO> dtos, ProviderEntity parent) {
@@ -167,19 +197,35 @@ public abstract class ProductConverter {
         return entities;
     }
     
-    //Para convertir de lista de String a Lista DTO
-    public static List<ProductDTO> listString2DTO(List<String> Models) {
+    /**
+     * @param  models 
+     * @return 
+     * @generated
+     */
+    public static List<ProductDTO> listString2DTO(List<String> models) {
         List<ProductDTO> dtos = new ArrayList<ProductDTO>();
-        if (Models != null) {
-            for (String name : Models) {
+        if (models != null) {
+            for (String name : models) {
                 ProductDTO dto = new ProductDTO();
-                //dtos.add(basicEntity2DTO(Models));
                 dto.setCategory(name);
                 dtos.add(dto);
             }
         }
         return dtos;
     }
-    
-    
+    /**
+     * 
+     * @param entity
+     * @return 
+     */
+    public static ProductDTO simpleEntity2DTO(ProductEntity entity){
+        if(entity!=null){
+            ProductDTO dto = new ProductDTO();
+            dto.setId(entity.getId());
+            dto.setImei(entity.getImei());
+            return dto;
+        }else{
+            return null;
+        }
+    }
 }

@@ -96,6 +96,8 @@ public class ProviderPersistenceTest {
             ProviderEntity entity = new ProviderEntity();
             entity.setName(generateRandom(String.class));
             entity.setUserId(generateRandom(String.class));
+            entity.setEmail(generateRandom(String.class));
+            entity.setCity(generateRandom(String.class));
             em.persist(entity);
             data.add(entity);
         }
@@ -108,6 +110,8 @@ public class ProviderPersistenceTest {
     public void createProviderTest() {
         ProviderEntity newEntity = new ProviderEntity();
         newEntity.setName(generateRandom(String.class));
+        newEntity.setUserId(generateRandom(String.class));
+        newEntity.setEmail(generateRandom(String.class));    
         newEntity.setUserId(generateRandom(String.class));
 
         ProviderEntity result = providerPersistence.create(newEntity);
@@ -136,6 +140,48 @@ public class ProviderPersistenceTest {
             }
             Assert.assertTrue(found);
         }
+    }
+    
+    /**
+     * @generated
+     */
+    @Test
+    public void getProvidersOrderedTest() {
+        List<String> list = providerPersistence.getProviders();
+        Assert.assertEquals(data.size(), list.size());
+        for (String pro : list) {
+            boolean found = false;
+            for (ProviderEntity entity : data) {
+                if (pro.equals(entity.getName())) {
+                    found = true;
+                }
+            }
+            Assert.assertTrue(found);
+        }
+    }
+    
+    /**
+     * @generated
+     */
+    @Test
+    public void getProviderByUserIdTest() {
+        String name = data.get(0).getUserId();
+        ProviderEntity ent = providerPersistence.getProviderByUserId(name);
+
+        Assert.assertNotNull(ent);
+        Assert.assertEquals(ent.getUserId(), name);
+    }
+    
+    /**
+     * @generated
+     */
+    @Test
+    public void getProviderByEmailTest() {
+        String name = data.get(0).getEmail();
+        ProviderEntity ent = providerPersistence.getProviderByEmail(name);
+
+        Assert.assertNotNull(ent);
+        Assert.assertEquals(ent.getEmail(), name);
     }
 
     /**
@@ -221,7 +267,7 @@ public class ProviderPersistenceTest {
      * @generated
      */
     @Test
-    public void findByName() {
+    public void findByNameTest() {
         String name = data.get(0).getName();
         List<ProviderEntity> cache = new ArrayList<ProviderEntity>();
         List<ProviderEntity> list = providerPersistence.findByName(name);
@@ -244,5 +290,38 @@ public class ProviderPersistenceTest {
                 Assert.fail();
             }
         }
+    }
+    
+    
+    /**
+     * Method to test getCategories
+     */
+    public void getCitiesTest(){
+        List<String> cache = new ArrayList<String>();
+        for(ProviderEntity entity: data){
+            boolean found =false;
+            for(String name:cache){
+                if(entity.getCity().equals(name)){
+                    found=true;
+                    break;
+                }
+            }
+            if(!found)cache.add(entity.getCity());            
+        }
+        List<String> list = providerPersistence.getCities();
+        Assert.assertEquals(cache.size(), list.size());
+        for (String category : list) {
+            Assert.assertNotNull(category);
+            boolean found = false;
+            for (String name : cache) {
+                if (name.equals(category)) {
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                Assert.fail();
+            }
+        }        
     }
 }

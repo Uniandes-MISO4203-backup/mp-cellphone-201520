@@ -20,8 +20,7 @@ public abstract class CrudPersistence<T> {
      */
     public int count() {
         Query count = em.createQuery("select count(u) from " + entityClass.getSimpleName() + " u");
-        int regCount = Integer.parseInt(count.getSingleResult().toString());
-        return regCount;
+        return Integer.parseInt(count.getSingleResult().toString());
     }
 
     /**

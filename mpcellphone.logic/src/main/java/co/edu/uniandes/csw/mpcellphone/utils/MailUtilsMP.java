@@ -1,9 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package co.edu.uniandes.csw.mpcellphone.ejbs;
+package co.edu.uniandes.csw.mpcellphone.utils;
 
 import java.util.Properties;
 import java.util.logging.Level;
@@ -25,10 +20,9 @@ import javax.mail.internet.MimeMultipart;
  * @author g.gonzalez10
  */
 @Stateless
-public class mailUtilsMP {
+public class MailUtilsMP{
 
-
-    // Lógica para generar el email
+    // Lï¿½gica para generar el email
     static Properties mailServerProperties;
     static Session getMailSession;
     static MimeMessage generateMailMessage;
@@ -36,17 +30,16 @@ public class mailUtilsMP {
     static BodyPart generateBodyPartMessage;
     static BodyPart generateBodyPartAttach;
 
-    
-    
     /**
-     * Metodo para envío de correo sin anexos
+     * Metodo para envï¿½o de correo sin anexos
+     *
      * @param message
      * @param emailRecipient
-     * @param subject 
+     * @param subject
      */
     public static void sendEmailMP(String message, String emailRecipient, String subject) {
         try {
-            
+
             //Step1		
             mailServerProperties = System.getProperties();
             mailServerProperties.put("mail.smtp.port", "587");
@@ -68,22 +61,23 @@ public class mailUtilsMP {
             transport.connect("smtp.gmail.com", "marketphone201520@gmail.com", "Market2015");
             transport.sendMessage(generateMailMessage, generateMailMessage.getAllRecipients());
             transport.close();
-            
+
         } catch (Exception e) {
             Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
         }
     }
-    
+
     /**
-     * Metodo para envío de correo con anexos
+     * Metodo para envï¿½o de correo con anexos
+     *
      * @param message
      * @param emailRecipient
-     * @param subject 
-     * @param fileAttach 
+     * @param subject
+     * @param fileAttach
      */
     public static void sendEmailMPAttach(String message, String emailRecipient, String subject, String fileAttach) {
         try {
-            
+
             //Step1		
             mailServerProperties = System.getProperties();
             mailServerProperties.put("mail.smtp.port", "587");
@@ -92,7 +86,7 @@ public class mailUtilsMP {
 
             //Construir el mensaje con el archivo adjunto
             generateBodyPartMessage = new MimeBodyPart();
-            generateBodyPartMessage.setContent(message, "text/html"); 
+            generateBodyPartMessage.setContent(message, "text/html");
             generateBodyPartAttach = new MimeBodyPart();
             generateBodyPartAttach.setDataHandler(new DataHandler(new FileDataSource(fileAttach)));
             generateBodyPartAttach.setFileName(fileAttach);
@@ -103,8 +97,8 @@ public class mailUtilsMP {
             generateMailMessage = new MimeMessage(getMailSession);
             generateMailMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(emailRecipient));
             generateMailMessage.setSubject(subject);
-            generateMailMessage.setContent(generateMultiPartMessage); 
-            
+            generateMailMessage.setContent(generateMultiPartMessage);
+
             //Enviar mensaje
             Transport transport = getMailSession.getTransport("smtp");
 
@@ -112,11 +106,10 @@ public class mailUtilsMP {
             transport.connect("smtp.gmail.com", "marketphone201520@gmail.com", "Market2015");
             transport.sendMessage(generateMailMessage, generateMailMessage.getAllRecipients());
             transport.close();
-            
+
         } catch (Exception e) {
             Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
         }
     }
-
 
 }

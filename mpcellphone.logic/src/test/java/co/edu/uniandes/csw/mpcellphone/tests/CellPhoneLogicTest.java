@@ -22,6 +22,8 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import uk.co.jemos.podam.api.PodamFactory;
+import uk.co.jemos.podam.api.PodamFactoryImpl;
 
 /**
  * @generated
@@ -101,16 +103,19 @@ public class CellPhoneLogicTest {
      */
     private void insertData() {
         for (int i = 0; i < 3; i++) {
-            CellPhoneEntity entity = new CellPhoneEntity();
-        	entity.setName(generateRandom(String.class));
-        	entity.setDescription(generateRandom(String.class));
-        	entity.setModel(generateRandom(String.class));
-        	entity.setImei(generateRandom(String.class));
-        	entity.setBrand(generateRandom(String.class));
-        	entity.setImage(generateRandom(String.class));
+            PodamFactory factory = new PodamFactoryImpl();
+            CellPhoneEntity entity = factory.manufacturePojo(CellPhoneEntity.class);
             em.persist(entity);
             data.add(entity);
         }
+    }
+    
+    /**
+     * Test countCellphone method
+     */ 
+    @Test
+    public void countCellPhonesTest(){
+        Assert.assertEquals(data.size(), cellPhoneLogic.countCellPhones()); 
     }
 
     /**
@@ -118,26 +123,15 @@ public class CellPhoneLogicTest {
      */
     @Test
     public void createCellPhoneTest() {
-        CellPhoneDTO dto = new CellPhoneDTO();
-        dto.setName(generateRandom(String.class));
-        dto.setDescription(generateRandom(String.class));
-        dto.setModel(generateRandom(String.class));
-        dto.setImei(generateRandom(String.class));
-        dto.setBrand(generateRandom(String.class));
-        dto.setImage(generateRandom(String.class));
-
+        PodamFactory factory = new PodamFactoryImpl();
+        CellPhoneDTO dto = factory.manufacturePojo(CellPhoneDTO.class);
         CellPhoneDTO result = cellPhoneLogic.createCellPhone(dto);
 
         Assert.assertNotNull(result);
 
         CellPhoneEntity entity = em.find(CellPhoneEntity.class, result.getId());
-
         Assert.assertEquals(dto.getName(), entity.getName());
-        Assert.assertEquals(dto.getDescription(), entity.getDescription());
-        Assert.assertEquals(dto.getModel(), entity.getModel());
-        Assert.assertEquals(dto.getImei(), entity.getImei());
         Assert.assertEquals(dto.getBrand(), entity.getBrand());
-        Assert.assertEquals(dto.getImage(), entity.getImage());
     }
 
     /**
@@ -167,11 +161,7 @@ public class CellPhoneLogicTest {
         CellPhoneDTO dto = cellPhoneLogic.getCellPhone(entity.getId());
         Assert.assertNotNull(dto);
         Assert.assertEquals(entity.getName(), dto.getName());
-        Assert.assertEquals(entity.getDescription(), dto.getDescription());
-        Assert.assertEquals(entity.getModel(), dto.getModel());
-        Assert.assertEquals(entity.getImei(), dto.getImei());
         Assert.assertEquals(entity.getBrand(), dto.getBrand());
-        Assert.assertEquals(entity.getImage(), dto.getImage());
     }
 
     /**
@@ -196,22 +186,14 @@ public class CellPhoneLogicTest {
 
         dto.setId(entity.getId());
         dto.setName(generateRandom(String.class));
-        dto.setDescription(generateRandom(String.class));
-        dto.setModel(generateRandom(String.class));
-        dto.setImei(generateRandom(String.class));
         dto.setBrand(generateRandom(String.class));
-        dto.setImage(generateRandom(String.class));
 
         cellPhoneLogic.updateCellPhone(dto);
 
         CellPhoneEntity resp = em.find(CellPhoneEntity.class, entity.getId());
 
         Assert.assertEquals(dto.getName(), resp.getName());
-        Assert.assertEquals(dto.getDescription(), resp.getDescription());
-        Assert.assertEquals(dto.getModel(), resp.getModel());
-        Assert.assertEquals(dto.getImei(), resp.getImei());
         Assert.assertEquals(dto.getBrand(), resp.getBrand());
-        Assert.assertEquals(dto.getImage(), resp.getImage());
     }
 
     /**
@@ -247,34 +229,66 @@ public class CellPhoneLogicTest {
             }
             Assert.assertTrue(found);
         }
-    }
-
+    }  
     /**
-     * @generated
+     * Method to test findByName
      */
     @Test
-    public void findByName() {
-        String name = data.get(0).getName();
-        List<CellPhoneEntity> cache = new ArrayList<CellPhoneEntity>();
-        List<CellPhoneDTO> list = cellPhoneLogic.findByName(name);
-
-        for (CellPhoneEntity entity : data) {
-            if (entity.getName().equals(name)) {
-                cache.add(entity);
-            }
-        }
-        Assert.assertEquals(cache.size(), list.size());
-        for (CellPhoneDTO dto : list) {
-            boolean found = false;
-            for (CellPhoneEntity cacheEntity : cache) {
-                if (cacheEntity.getName().equals(dto.getName())) {
-                    found = true;
-                    break;
+    public void findByNameTest(){
+        for(CellPhoneEntity entity: data){
+            int nameQuantity = 0;
+            for(CellPhoneEntity entityTest: data){
+                if(entityTest.getName().equals(entity.getName())){
+                    nameQuantity++;
                 }
             }
-            if (!found) {
-                Assert.fail();
+            List<CellPhoneDTO> cellPhones = cellPhoneLogic.findByName(entity.getName());
+            Assert.assertNotNull(cellPhones);
+            Assert.assertEquals(nameQuantity, cellPhones.size());
+            for(CellPhoneDTO dto: cellPhones){
+                Assert.assertNotNull(dto);
+                Assert.assertEquals(entity.getName(), dto.getName());
             }
         }
+    }
+    
+    /**
+     * Method to test cellPhoneModelTest
+     */
+    @Test
+    public void getCellPhoneModelTest(){        
+        List<CellPhoneDTO> cellPhones = cellPhoneLogic.getCellPhoneModel();
+        Assert.assertNotNull(cellPhones);
+        for(CellPhoneDTO dto: cellPhones){
+            Assert.assertNotNull(dto);
+            Assert.assertNotNull(dto.getName());
+        }
+        List<String> list = em.createNamedQuery("CellPhone.getCellPhoneModel").getResultList();
+        Assert.assertEquals(cellPhones.size(), list.size());
+        ArrayList<String> names = new ArrayList<String>();
+        for(CellPhoneDTO dto: cellPhones){
+            names.add(dto.getName());
+        }
+        Assert.assertArrayEquals(list.toArray(), names.toArray());
+    }
+    
+    /**
+     * Method to test cellPhoneBrandTest
+     */
+    @Test
+    public void getCellPhoneBrandTest(){        
+        List<CellPhoneDTO> cellPhones = cellPhoneLogic.getCellPhoneBrand();
+        Assert.assertNotNull(cellPhones);
+        for(CellPhoneDTO dto: cellPhones){
+            Assert.assertNotNull(dto);
+            Assert.assertNotNull(dto.getName());
+        }
+        List<String> list = em.createNamedQuery("CellPhone.getCellPhoneBrand").getResultList();
+        Assert.assertEquals(cellPhones.size(), list.size());
+        ArrayList<String> names = new ArrayList<String>();
+        for(CellPhoneDTO dto: cellPhones){
+            names.add(dto.getName());
+        }
+        Assert.assertArrayEquals(list.toArray(), names.toArray());
     }
 }

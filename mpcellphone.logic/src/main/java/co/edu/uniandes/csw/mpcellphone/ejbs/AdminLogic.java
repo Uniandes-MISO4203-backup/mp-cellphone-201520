@@ -41,6 +41,7 @@ public class AdminLogic implements IAdminLogic {
     /**
      * @generated
      */
+    @Override
     public AdminDTO getAdmin(Long id) {
         return AdminConverter.refEntity2DTO(persistence.find(id));
     }
@@ -48,8 +49,9 @@ public class AdminLogic implements IAdminLogic {
     /**
      * @generated
      */
+    @Override
     public AdminDTO createAdmin(AdminDTO dto) {
-        AdminEntity entity = AdminConverter.refDTO2Entity(dto);
+        AdminEntity entity = AdminConverter.basicDTO2Entity(dto);
         persistence.create(entity);
         return AdminConverter.refEntity2DTO(entity);
     }
@@ -57,14 +59,16 @@ public class AdminLogic implements IAdminLogic {
     /**
      * @generated
      */
+    @Override
     public AdminDTO updateAdmin(AdminDTO dto) {
-        AdminEntity entity = persistence.update(AdminConverter.refDTO2Entity(dto));
+        AdminEntity entity = persistence.update(AdminConverter.basicDTO2Entity(dto));
         return AdminConverter.refEntity2DTO(entity);
     }
 
     /**
      * @generated
      */
+    @Override
     public void deleteAdmin(Long id) {
         persistence.delete(id);
     }
@@ -72,6 +76,7 @@ public class AdminLogic implements IAdminLogic {
     /**
      * @generated
      */
+    @Override
     public List<AdminDTO> findByName(String name) {
         return AdminConverter.listEntity2DTO(persistence.findByName(name));
     }

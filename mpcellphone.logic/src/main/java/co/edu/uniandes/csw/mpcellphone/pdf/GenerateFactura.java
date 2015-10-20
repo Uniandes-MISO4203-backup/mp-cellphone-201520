@@ -16,24 +16,26 @@ import java.io.FileOutputStream;
 
 
 public class GenerateFactura {
+    
+    private static final String FUENTE = "Comic Sans MS";
 
     public String generate(OrderDTO order) throws Exception {
         Document document = new Document();
-
+        
         Paragraph title = new Paragraph("Factura de Compra",
-                FontFactory.getFont("Comic Sans MS", 20, Font.BOLD));
+                FontFactory.getFont(FUENTE, 20, Font.BOLD));
         title.setAlignment(Element.ALIGN_CENTER);
 
         Paragraph encabezado = new Paragraph("Usuario Gracias por tu compra!!!",
-                FontFactory.getFont("Comic Sans MS", 16, Font.BOLDITALIC));
+                FontFactory.getFont(FUENTE, 16, Font.BOLDITALIC));
 
         Paragraph parrafo = new Paragraph("Datos de la compra: ",
-                FontFactory.getFont("Comic Sans MS", 14, Font.ITALIC));
+                FontFactory.getFont(FUENTE, 14, Font.ITALIC));
 
         PdfPTable datos = new PdfPTable(2);
         datos.addCell("Nombre: ");
         datos.addCell(order.getClient().getName());
-        datos.addCell("Correo electrónico");
+        datos.addCell("Correo electrï¿½nico");
         datos.addCell(order.getClient().getEmail());
         datos.addCell("Valor Impuestos");
         datos.addCell(order.getTotalTax());
