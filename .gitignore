@@ -22,4 +22,5 @@ nbactions.xml
 
 #Tests
 /mpcellphone.logic/derby.log
+/mpcellphone.web/derby.log
 
