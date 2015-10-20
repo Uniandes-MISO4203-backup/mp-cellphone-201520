@@ -23,6 +23,8 @@ import com.stormpath.shiro.realm.ApplicationRealm;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
@@ -127,6 +129,7 @@ public class UserService {
                         .build();
             }                
         } catch (AuthenticationException e){
+            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, e);
             rta = Response.status(Response.Status.BAD_REQUEST)
                     .entity(e.getMessage())
                     .type(MediaType.TEXT_PLAIN)
@@ -143,6 +146,7 @@ public class UserService {
             currentUser.logout();
             return Response.ok().build();
         } catch (Exception e) {
+            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, e);
             return Response.status(Response.Status.BAD_REQUEST)
                     .entity(e.getMessage())
                     .type(MediaType.TEXT_PLAIN)
@@ -164,6 +168,7 @@ public class UserService {
             user.setRole(userLogin.getRole());
             return Response.ok(user).build();
         } catch (AuthenticationException e) {
+            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, e);
             return Response.status(Response.Status.BAD_REQUEST)
                     .entity(e.getMessage())
                     .type(MediaType.TEXT_PLAIN)
@@ -217,6 +222,7 @@ public class UserService {
             createU(CLIENT,acctClient,user);
             rta = Response.ok().build();
         } catch (ResourceException e) {
+            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, e);
             rta = Response.status(e.getStatus())
                     .entity(e.getMessage())
                     .type(MediaType.TEXT_PLAIN)
@@ -238,6 +244,7 @@ public class UserService {
             createU(PROVIDER,acctProvider,user);
             rta = Response.ok().build();
         } catch (ResourceException e) {
+            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, e);
             rta = Response.status(e.getStatus())
                     .entity(e.getMessage())
                     .type(MediaType.TEXT_PLAIN)
@@ -257,6 +264,7 @@ public class UserService {
             createU(ADMIN,acctAdmin,user);
             rta = Response.ok().build();
         } catch (ResourceException e) {
+            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, e);
             rta = Response.status(e.getStatus())
                     .entity(e.getMessage())
                     .type(MediaType.TEXT_PLAIN)
@@ -290,6 +298,7 @@ public class UserService {
             }
             return rta;
         } catch (ResourceException e) {
+            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, e);
             return Response.status(e.getStatus())
                     .entity(e.getMessage())
                     .type(MediaType.TEXT_PLAIN)
