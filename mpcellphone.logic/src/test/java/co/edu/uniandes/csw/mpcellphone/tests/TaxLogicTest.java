@@ -227,4 +227,12 @@ public class TaxLogicTest {
         Assert.assertNull(deleted);
     }
     
+    /**
+     * Test countPhotos method
+     */ 
+    @Test
+    public void countCitiesTest(){
+        Assert.assertEquals(data.size(), taxLogic.countTax()); 
+    }
+    
 }
