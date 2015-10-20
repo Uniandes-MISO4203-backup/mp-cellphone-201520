@@ -112,7 +112,7 @@
                 var data = $scope.payment.creditCardHolder;
                 for (var i = 0; i < $scope.creditCardHolders.length; i++) {
                     creditCard = $scope.creditCardHolders[i];
-                    if ($scope.creditCardHolders[i].id === data) {
+                    if ($scope.creditCardHolders[i].id == data) {
                         break;
                     }
                 }
