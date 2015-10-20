@@ -12,7 +12,7 @@ import co.edu.uniandes.csw.mpcellphone.dtos.ProviderDTO;
 import co.edu.uniandes.csw.mpcellphone.dtos.QuestionDTO;
 import co.edu.uniandes.csw.mpcellphone.providers.StatusCreated;
 import co.edu.uniandes.csw.mpcellphone.utils.RequestUtilsMP;
-import com.sun.jersey.api.Responses;
+import javax.ws.rs.core.Response;
 import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
@@ -59,17 +59,17 @@ public class ProductService {
     @POST
     @StatusCreated
     public ProductDTO createProduct(ProductDTO dto){
-        if(provider==null)throw new WebApplicationException(Response.status(Responses.NOT_FOUND)
+        if(provider==null)throw new WebApplicationException(Response.status(Response.NOT_FOUND)
                     .entity("Forbidden access.")
                     .type("text/plain").build());
         dto.setProvider(provider);
         ProductDTO dtoSearch= productLogic.getProductByImei(dto.getImei());
         if(dtoSearch!=null&&dtoSearch.getId()!=null)
-            throw new WebApplicationException(Response.status(Responses.NOT_FOUND)
+            throw new WebApplicationException(Response.status(Response.NOT_FOUND)
                     .entity("There is already a cellphone registered with the same Imei Id.")
                     .type("text/plain").build());
         if(RequestUtilsMP.isStolenImei(dto.getImei()))
-            throw new WebApplicationException(Response.status(Responses.NOT_FOUND)
+            throw new WebApplicationException(Response.status(Response.NOT_FOUND)
                     .entity("The Imei id appears in the police database for stolen cellphones. "
                             + "Please contact with a police office near to your home")
                     .type("text/plain").build());
