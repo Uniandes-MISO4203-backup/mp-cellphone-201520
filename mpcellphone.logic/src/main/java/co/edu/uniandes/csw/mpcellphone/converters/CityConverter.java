@@ -9,9 +9,6 @@ import java.util.List;
  * @author m.amaya11
  */
 public abstract class CityConverter {
-    
-    private CityConverter(){
-    }
 
     /**
      * @param entity
