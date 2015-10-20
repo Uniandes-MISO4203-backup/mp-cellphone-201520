@@ -50,7 +50,7 @@ public class TaxLogicTest {
      * @generated
      */
     @Inject
-    private ITaxLogic stateLogic;
+    private ITaxLogic taxLogic;
 
     /**
      * @generated
@@ -119,7 +119,7 @@ public class TaxLogicTest {
         dto.setTaxName(generateRandom(String.class));
         dto.setPercentage(generateRandom(Long.class));
 
-        TaxDTO result = stateLogic.createTax(dto);
+        TaxDTO result = taxLogic.createTax(dto);
 
         Assert.assertNotNull(result);
 
@@ -134,7 +134,7 @@ public class TaxLogicTest {
      */
     @Test
     public void getTaxsTest() {
-        List<TaxDTO> list = stateLogic.getTaxs(null, null);
+        List<TaxDTO> list = taxLogic.getTaxs(null, null);
         Assert.assertEquals(data.size(), list.size());
         for (TaxDTO dto : list) {
             boolean found = false;
@@ -153,7 +153,7 @@ public class TaxLogicTest {
     @Test
     public void getTaxTest() {
         TaxEntity entity = data.get(0);
-        TaxDTO dto = stateLogic.getTax(entity.getId());
+        TaxDTO dto = taxLogic.getTax(entity.getId());
         Assert.assertNotNull(dto);
         Assert.assertEquals(entity.getTaxName(), dto.getTaxName());
         Assert.assertEquals(entity.getPercentage(), dto.getPercentage());
@@ -165,11 +165,11 @@ public class TaxLogicTest {
     @Test
     public void getTaxPaginationTest() {
         //Page 1
-        List<TaxDTO> dto1 = stateLogic.getTaxs(1, 2);
+        List<TaxDTO> dto1 = taxLogic.getTaxs(1, 2);
         Assert.assertNotNull(dto1);
         Assert.assertEquals(2, dto1.size());
         //Page 2
-        List<TaxDTO> dto2 = stateLogic.getTaxs(2, 2);
+        List<TaxDTO> dto2 = taxLogic.getTaxs(2, 2);
         Assert.assertNotNull(dto2);
         Assert.assertEquals(1, dto2.size());
 
@@ -192,6 +192,39 @@ public class TaxLogicTest {
             }
             Assert.assertTrue(found);
         }
+    }
+    
+    /**
+     * @generated
+     */
+    @Test
+    public void updatePhotoTest() {
+        TaxEntity entity = data.get(0);
+
+        TaxDTO dto = new TaxDTO();
+
+        dto.setId(entity.getId());
+        dto.setTaxName(generateRandom(String.class));
+        dto.setPercentage(generateRandom(Long.class));
+
+        taxLogic.updateTax(dto);
+
+        TaxEntity resp = em.find(TaxEntity.class, entity.getId());
+
+        Assert.assertEquals(dto.getTaxName(), resp.getTaxName());
+        Assert.assertEquals(dto.getPercentage(), resp.getPercentage());
+    }
+    
+    
+    /**
+     * @generated
+     */
+    @Test
+    public void deleteCellPhoneTest() {
+        TaxEntity entity = data.get(0);
+        taxLogic.deleteTax(entity.getId());
+        TaxEntity deleted = em.find(TaxEntity.class, entity.getId());
+        Assert.assertNull(deleted);
     }
     
 }
