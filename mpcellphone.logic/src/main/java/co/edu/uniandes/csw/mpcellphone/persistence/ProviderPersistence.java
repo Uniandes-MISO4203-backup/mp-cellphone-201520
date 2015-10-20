@@ -1,6 +1,7 @@
 package co.edu.uniandes.csw.mpcellphone.persistence;
 
 import co.edu.uniandes.csw.mpcellphone.entities.ProviderEntity;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -27,7 +28,9 @@ public class ProviderPersistence extends CrudPersistence<ProviderEntity> {
         try {
             Map<String, Object> params = new HashMap<String, Object>();
             params.put("user_id", userId);
-            return this.executeSingleNamedQuery("Provider.getByUserId", params);
+            List<ProviderEntity> list = new ArrayList<ProviderEntity>();
+            list =  this.executeListNamedQuery("Provider.getByUserId", params);
+            return list.get(0);
         } catch (NoResultException e) {            
             Logger.getLogger(ProviderPersistence.class.getName()).log(Level.SEVERE, null, e);
             return new ProviderEntity();
@@ -38,7 +41,9 @@ public class ProviderPersistence extends CrudPersistence<ProviderEntity> {
         try {
             Map<String, Object> params = new HashMap<String, Object>();
             params.put("email", email);
-            return this.executeSingleNamedQuery("Provider.getByEmail", params);
+            List<ProviderEntity> list = new ArrayList<ProviderEntity>();
+            list = this.executeListNamedQuery("Provider.getByEmail", params);
+            return list.get(0);
         } catch (NoResultException e) {            
             Logger.getLogger(ProviderPersistence.class.getName()).log(Level.SEVERE, null, e);
             return new ProviderEntity();
