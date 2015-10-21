@@ -12,7 +12,6 @@ import co.edu.uniandes.csw.mpcellphone.dtos.ProviderDTO;
 import co.edu.uniandes.csw.mpcellphone.dtos.QuestionDTO;
 import co.edu.uniandes.csw.mpcellphone.providers.StatusCreated;
 import co.edu.uniandes.csw.mpcellphone.utils.RequestUtilsMP;
-import javax.ws.rs.core.Response;
 import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
@@ -29,7 +28,6 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.xml.ws.soap.AddressingFeature;
 import org.apache.shiro.SecurityUtils;
 
 /**
