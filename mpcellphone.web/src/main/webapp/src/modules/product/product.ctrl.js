@@ -6,6 +6,7 @@
         ['CrudCreator', '$scope', 'productService', 'productModel', 'cartItemService', '$location', 'authService', 'adminService','$filter',
         function (CrudCreator, $scope, svc, model, cartItemSvc, $location, authSvc, adminService,$filter) {
             CrudCreator.extendController(this, svc, $scope, model, 'product', 'Products');
+            $scope.prodSelComment = 0;  
             this.searchByName = function (cellPhoneName) {
                 var search;
                 if (cellPhoneName) {
@@ -192,7 +193,7 @@
                     var txt = "";
                     var cont = 0;
                     for (var i = 0; i < data.length; i++){
-                        if (Number(data[i].product_id) === Number(id)){
+                        if (Number(data[i].productId) === Number(id)){
                             if (txt !== ""){
                                 txt += "<hr>";
                             }
@@ -212,7 +213,7 @@
                     fn: function (record){
                         tmp = authSvc;
                         if (authSvc.getCurrentUser()){
-                            ProducSelComment = record;
+                            $scope.prodSelComment = record;
                             $('#titleProduct').html("Comments: Cellphone - " + record.name);
                             $("#comment").val("").attr("placeholder", authSvc.getCurrentUser().name + " Says: ");
                             $("#cantidad").html("<center>" + maximoCaracteres + "</center>");
@@ -268,11 +269,10 @@
                             if ($("#comment").val().length !== 0){
                                 svc.saveComment({
                                     comment: $("#comment").val(),
-                                    product_id: ProducSelComment.id,
-                                    client_id: authSvc.getCurrentUser().id,
-                                    date: new Date().toISOString().substring(0, 10)
+                                    productId: $scope.prodSelComment.id,
+                                    clientId: authSvc.getCurrentUser().id
                                 }).then(function () {
-                                    getComments(ProducSelComment.id);
+                                    getComments($scope.prodSelComment.id);
                                     $("#comment").val("").attr("placeholder", authSvc.getCurrentUser().name + " Says: ");
                                     $("#cantidad").html("<center>" + maximoCaracteres + "</center>");
                                     $('#comment').focus();
