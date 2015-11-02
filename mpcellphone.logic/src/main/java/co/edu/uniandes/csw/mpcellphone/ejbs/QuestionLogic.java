@@ -21,14 +21,16 @@ import javax.inject.Inject;
  */
 @Stateless
 public class QuestionLogic implements IQuestionLogic {
-    
-    @Inject private QuestionPersistence persistence;
-    
+
+    @Inject
+    private QuestionPersistence persistence;
+
     /**
      * Metodo encargado de obtener las �rdenes de un cliente
+     *
      * @param page
      * @param maxRecords
-     * @return 
+     * @return
      */
     @Override
     public List<QuestionDTO> getQuestions(Integer page, Integer maxRecords) {
@@ -47,25 +49,28 @@ public class QuestionLogic implements IQuestionLogic {
 
     /**
      * @param dto
-     * @return 
+     * @return
      */
     @Override
     public QuestionDTO createQuestion(QuestionDTO dto) {
         QuestionEntity entity = QuestionConverter.fullDTO2Entity(dto);
         persistence.create(entity);
         //Send email
-        String emailMsg="<html><body><br />Se�or(a) "+dto.getProvider().getName() +
-                "<br /><br />" +
-                "Usted ha recibido una nueva pregunta: <br /><br /> " +
-                "<br />Producto: " + dto.getProduct().getName() + 
-                "<br />Cliente: " + dto.getClient().getName() + 
-                "<br />Pregunta: "+entity.getQuestion() +
-                "<br /><br />Atentamente," + 
-                "<br /><br /><br />MarketPhone";
+        String emailMsg = "<html><body><br />Se�or(a) " + dto.getProvider().getName()
+                + "<br /><br />"
+                + "Usted ha recibido una nueva pregunta: <br /><br /> "
+                + "<br />Producto: " + dto.getProduct().getName()
+                + "<br />Cliente: " + dto.getClient().getName()
+                + "<br />Pregunta: " + entity.getQuestion()
+                + "<br /><br />Atentamente,"
+                + "<br /><br /><br />MarketPhone";
         String subject = "Ha recibido un mensaje de MarketPhone";
         MailUtilsMP.sendEmailMP(emailMsg, dto.getProvider().getEmail(), subject);
         return QuestionConverter.fullEntity2DTO(entity);
     }
 
-    
+    public List<QuestionDTO> getByProviderId(Long idProvider) {
+        return QuestionConverter.listEntity2DTO(persistence.getByProviderId(idProvider));
+    }
+
 }

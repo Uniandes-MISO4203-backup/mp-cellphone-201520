@@ -11,6 +11,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -19,6 +21,9 @@ import javax.persistence.TemporalType;
  * @author g.gonzalez10
  */
 @Entity
+@NamedQueries({
+    @NamedQuery(name = "Question.getByProviderId", query = "select q from QuestionEntity q WHERE q.provider.id = :idProvider"),
+})
 public class QuestionEntity implements Serializable {
     
     @Id

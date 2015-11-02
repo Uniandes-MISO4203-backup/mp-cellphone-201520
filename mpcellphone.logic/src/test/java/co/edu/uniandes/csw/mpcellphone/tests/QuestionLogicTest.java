@@ -2,9 +2,6 @@ package co.edu.uniandes.csw.mpcellphone.tests;
 
 import co.edu.uniandes.csw.mpcellphone.ejbs.QuestionLogic;
 import co.edu.uniandes.csw.mpcellphone.api.IQuestionLogic;
-import co.edu.uniandes.csw.mpcellphone.converters.ClientConverter;
-import co.edu.uniandes.csw.mpcellphone.converters.ProductConverter;
-import co.edu.uniandes.csw.mpcellphone.converters.ProviderConverter;
 import co.edu.uniandes.csw.mpcellphone.converters.QuestionConverter;
 import co.edu.uniandes.csw.mpcellphone.dtos.QuestionDTO;
 import co.edu.uniandes.csw.mpcellphone.entities.QuestionEntity;
