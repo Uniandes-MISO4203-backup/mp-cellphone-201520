@@ -62,6 +62,9 @@
             }).when('/viewDetail', {
                 templateUrl: 'src/modules/orderQuery/templates/viewDetail.html',
                 controller: 'orderQueryCtrl'
+            }).when('/tracking', {
+                templateUrl: 'src/modules/tracking/tracking.html',
+                controller: 'trackingCtrl'
             }).otherwise('/catalog');
         }]);
 
