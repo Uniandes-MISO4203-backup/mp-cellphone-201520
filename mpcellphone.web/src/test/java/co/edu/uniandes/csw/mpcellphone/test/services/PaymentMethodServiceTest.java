@@ -1,7 +1,6 @@
 package co.edu.uniandes.csw.mpcellphone.test.services;
 
 import co.edu.uniandes.csw.mpcellphone.dtos.PaymentMethodDTO;
-import co.edu.uniandes.csw.mpcellphone.dtos.UserDTO;
 import co.edu.uniandes.csw.mpcellphone.providers.EJBExceptionMapper;
 import co.edu.uniandes.csw.mpcellphone.services.PaymentMethodService;
 import co.edu.uniandes.csw.mpcellphone.shiro.ApiKeyProperties;
@@ -14,11 +13,9 @@ import java.util.List;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
-import javax.ws.rs.core.Cookie;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import org.codehaus.jackson.map.ObjectMapper;
-import org.glassfish.jersey.filter.LoggingFilter;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.junit.Arquillian;
@@ -87,110 +84,60 @@ public class PaymentMethodServiceTest {
         }
     }
 
-    private Cookie login(String username, String password) {
-        Client clienteWS = ClientBuilder.newClient();
-
-        UserDTO user = new UserDTO();
-        user.setUserName(username);
-        user.setPassword(password);
-
-        Response response
-                = clienteWS.target(URLBASE)
-                .register(LoggingFilter.class)
-                .path("users")
-                .path("login")
-                .request(MediaType.APPLICATION_JSON)
-                .post(Entity.entity(user, MediaType.APPLICATION_JSON));
-
-        UserDTO foundUser = (UserDTO) response.readEntity(UserDTO.class);
-
-        if (foundUser != null && response.getStatus() == Ok) {
-            return response.getCookies().get("JSESSIONID");
-        } else {
-            return null;
-        }
-    }
-
     @Test
     @RunAsClient
     public void t1CreatePaymentMethodService() throws IOException {
-        //Cookie cookieSessionId = login("Test", "tesT12345");
-
-        //if (cookieSessionId != null) {
-            PaymentMethodDTO method = methodOraculo.get(0);
-            Client cliente = ClientBuilder.newClient();
-            Response response = cliente.target(URLBASE + PATH).request()
-                    .post(Entity.entity(method, MediaType.APPLICATION_JSON));
-            PaymentMethodDTO methodTest = (PaymentMethodDTO) response.readEntity(PaymentMethodDTO.class);
-            Assert.assertEquals(Created, response.getStatus());
-            Assert.assertEquals(method.getMethodName(), methodTest.getMethodName());
-        //} else {
-          //  Assert.fail("Access denied or Invalid credentials!");
-        //}
+        PaymentMethodDTO method = methodOraculo.get(0);
+        Client cliente = ClientBuilder.newClient();
+        Response response = cliente.target(URLBASE + PATH).request()
+                .post(Entity.entity(method, MediaType.APPLICATION_JSON));
+        PaymentMethodDTO methodTest = (PaymentMethodDTO) response.readEntity(PaymentMethodDTO.class);
+        Assert.assertEquals(Created, response.getStatus());
+        Assert.assertEquals(method.getMethodName(), methodTest.getMethodName());
     }
 
     @Test
     @RunAsClient
     public void t2GetPaymentMethodService() throws IOException {
-//        Cookie cookieSessionId = login("Test", "tesT12345");
-//        if (cookieSessionId != null) {
-            Client cliente = ClientBuilder.newClient();
-            Response response = cliente.target(URLBASE + PATH).request().get();
-            String stringPaymentMethod = response.readEntity(String.class);
-            List<PaymentMethodDTO> listPaymentMethodTest = new ObjectMapper().readValue(stringPaymentMethod, List.class);
-            Assert.assertEquals(Ok, response.getStatus());
-            Assert.assertEquals(1, listPaymentMethodTest.size());
-//        } else {
-//            Assert.fail("Access denied or Invalid credentials!");
-//        }
+        Client cliente = ClientBuilder.newClient();
+        Response response = cliente.target(URLBASE + PATH).request().get();
+        String stringPaymentMethod = response.readEntity(String.class);
+        List<PaymentMethodDTO> listPaymentMethodTest = new ObjectMapper().readValue(stringPaymentMethod, List.class);
+        Assert.assertEquals(Ok, response.getStatus());
+        Assert.assertEquals(1, listPaymentMethodTest.size());
     }
 
     @Test
     @RunAsClient
     public void t3GetPaymentMethodById() {
-        //Cookie cookieSessionId = login("Test", "tesT12345");
-        //if (cookieSessionId != null) {
-            Client cliente = ClientBuilder.newClient();
-            PaymentMethodDTO methodTest = cliente.target(URLBASE + PATH).path("/" + methodOraculo.get(0).getId())
-                    .request().get(PaymentMethodDTO.class);
-            Assert.assertEquals(methodTest.getMethodName(), methodOraculo.get(0).getMethodName());
-        //} else {
-            //Assert.fail("Access denied or Invalid credentials!");
-        //}
+        Client cliente = ClientBuilder.newClient();
+        PaymentMethodDTO methodTest = cliente.target(URLBASE + PATH).path("/" + methodOraculo.get(0).getId())
+                .request().get(PaymentMethodDTO.class);
+        Assert.assertEquals(methodTest.getMethodName(), methodOraculo.get(0).getMethodName());
     }
 
     @Test
     @RunAsClient
     public void t4UpdatePaymentMethodService() throws IOException {
-        //Cookie cookieSessionId = login("Test", "tesT12345");
-        //if (cookieSessionId != null) {
-            PaymentMethodDTO method = methodOraculo.get(0);
-            PodamFactory factory = new PodamFactoryImpl();
-            PaymentMethodDTO methodChanged = factory.manufacturePojo(PaymentMethodDTO.class);
-            method.setMethodName(methodChanged.getMethodName());
-            Client cliente = ClientBuilder.newClient();
-            Response response = cliente.target(URLBASE + PATH).path("/" + method.getId())
-                    .request().put(Entity.entity(method, MediaType.APPLICATION_JSON));
-            PaymentMethodDTO methodTest = (PaymentMethodDTO) response.readEntity(PaymentMethodDTO.class);
-            Assert.assertEquals(Ok, response.getStatus());
-            Assert.assertEquals(method.getMethodName(), methodTest.getMethodName());
-        //} else {
-         //   Assert.fail("Access denied or Invalid credentials!");
-        //}
+        PaymentMethodDTO method = methodOraculo.get(0);
+        PodamFactory factory = new PodamFactoryImpl();
+        PaymentMethodDTO methodChanged = factory.manufacturePojo(PaymentMethodDTO.class);
+        method.setMethodName(methodChanged.getMethodName());
+        Client cliente = ClientBuilder.newClient();
+        Response response = cliente.target(URLBASE + PATH).path("/" + method.getId())
+                .request().put(Entity.entity(method, MediaType.APPLICATION_JSON));
+        PaymentMethodDTO methodTest = (PaymentMethodDTO) response.readEntity(PaymentMethodDTO.class);
+        Assert.assertEquals(Ok, response.getStatus());
+        Assert.assertEquals(method.getMethodName(), methodTest.getMethodName());
 
     }
 
     @Test
     @RunAsClient
     public void t5DeletePaymentMethodService() {
-//        Cookie cookieSessionId = login("Test", "tesT12345");
-//        if (cookieSessionId != null) {
-            Client cliente = ClientBuilder.newClient();
-            PaymentMethodDTO method = methodOraculo.get(0);
-            Response response = cliente.target(URLBASE + PATH).path("/" + method.getId()).request().delete();
-            Assert.assertEquals(OkWithoutContent, response.getStatus());
-//        } else {
-//            Assert.fail("Access denied or Invalid credentials!");
-//        }
+        Client cliente = ClientBuilder.newClient();
+        PaymentMethodDTO method = methodOraculo.get(0);
+        Response response = cliente.target(URLBASE + PATH).path("/" + method.getId()).request().delete();
+        Assert.assertEquals(OkWithoutContent, response.getStatus());
     }
 }
