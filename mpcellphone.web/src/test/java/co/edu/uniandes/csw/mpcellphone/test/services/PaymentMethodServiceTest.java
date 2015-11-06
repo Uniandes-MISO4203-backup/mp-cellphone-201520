@@ -59,9 +59,6 @@ public class PaymentMethodServiceTest {
                 .addAsLibraries(resolver.artifact("co.edu.uniandes.csw.mpcellphone:mpcellphone.logic:1.0").resolveAsFiles())
                 // Se agregan los compilados de los paquetes de servicios
                 .addPackage(ApplicationConfig.class.getPackage())
-                .addPackage(AuthcFilter.class.getPackage())
-                .addPackage(AuthzFilter.class.getPackage())
-                .addPackage(ApiKeyProperties.class.getPackage())
                 .addPackage(PaymentMethodService.class.getPackage())
                 .addPackage(EJBExceptionMapper.class.getPackage())
                 // El archivo que contiene la configuracion a la base de datos. 
