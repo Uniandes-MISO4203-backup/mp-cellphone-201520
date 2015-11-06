@@ -6,9 +6,6 @@
 package co.edu.uniandes.csw.mpcellphone.persistence;
 
 import co.edu.uniandes.csw.mpcellphone.entities.PhotoEntity;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import javax.ejb.Stateless;
 
 /**

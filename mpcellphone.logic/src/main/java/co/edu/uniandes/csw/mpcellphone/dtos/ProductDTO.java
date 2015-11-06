@@ -24,6 +24,9 @@ public class ProductDTO {
     private String imei;       
     private String description;       
     private String image;
+    
+    private int rateCount;
+    private int rate;
 
     /**
      * @return 
@@ -200,6 +203,21 @@ public class ProductDTO {
     public void setCity(CityDTO city) {
         this.city = city;
     }
-    
+
+    public int getRate() {
+        return rate;
+    }
+
+    public int getRateCount() {
+        return rateCount;
+    }
+
+    public void setRate(int rate) {
+        this.rate = rate;
+    }
+
+    public void setRateCount(int rateCount) {
+        this.rateCount = rateCount;
+    }
     
 }

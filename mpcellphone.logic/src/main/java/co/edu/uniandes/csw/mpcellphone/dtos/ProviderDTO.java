@@ -21,6 +21,9 @@ public class ProviderDTO {
     private String country;
     private List<ProductDTO> products;
     private Integer calification;
+    
+    private int rateCount;
+    private int rate;
 
     /**
      * @return 
@@ -206,4 +209,21 @@ public class ProviderDTO {
         this.products = products;
     }
 
+    public int getRate() {
+        return rate;
+    }
+
+    public int getRateCount() {
+        return rateCount;
+    }
+
+    public void setRate(int rate) {
+        this.rate = rate;
+    }
+
+    public void setRateCount(int rateCount) {
+        this.rateCount = rateCount;
+    }
+
+    
 }
