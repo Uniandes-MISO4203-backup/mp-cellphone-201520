@@ -8,6 +8,9 @@
                     <th>Brand </th>
                     <th>Article </th>
                     <th>Price</th>
+                    <th>My Rate Product</th>
+                    <th>Provider</th>
+                    <th>My Rate Provider</th>
                 </tr>
             </thead>
             <tbody>
@@ -15,9 +18,22 @@
                     <td><div>{{product.cellPhone.brand}}</div></td> 
                     <td><div>{{product.cellPhone.name}}</div></td> 
                     <td><div>{{product.price | currency}}</div></td>
+                    <td><div class="col-lg-6 product-rate " data-score="{{product.rate}}"></div>
+                        <div class="col-lg-6" >
+                            <div ng-if="product.rate>0">
+                                <button class="btn btn-primary btn-sm " ng-click="">Update</button>
+                            </div>
+                            <div ng-if="product.rate<=0">
+                                <button class="btn btn-default btn-sm " ng-click="">Rate</button>
+                            </div>                            
+                        </div></td>
+                    <td><div>{{product.provider.name}}</div></td>
+                    <td><div class="col-lg-6 product-rate " data-score="{{product.rate}}"></div>
+                        <div class="col-lg-6" ><button class="btn btn-primary btn-sm " ng-click="">Rate</button></div></td>
                 </tr>
             </tbody>
         </table>
+            
         <!-- <div class="text-center">
             <pagination ng-show="ctrl.numPages > 1" num-pages="ctrl.numPages" total-items="ctrl.totalItems"
                         ng-model="ctrl.currentPage" ng-change="ctrl.pageChanged()" items-per-page="ctrl.itemsPerPage"
@@ -25,3 +41,11 @@
         </div> -->
     </div>
 </div>
+<script>jQuery(document).ready(function ($) {
+   $.fn.raty.defaults.path = 'src/plugins/raty';
+   $(function() {
+        $('.product-rate').raty({
+            readOnly:true
+        }); 
+   });
+});</script>
