@@ -154,14 +154,7 @@
                         <exclude>**/*IT.java</exclude>
                     </excludes>
                 </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>co.edu.uniandes.csw</groupId>
-                        <artifactId>MPLoCAnn</artifactId>
-                        <version>0.0.1</version>
-                   </dependency>
-                </dependencies> 
-<executions>
+                <executions>
                     <execution>
                         <id>run-unit-tests</id>
                         <goals>
