@@ -89,6 +89,7 @@
                     $("#admin").hide();
                     $("#carrito").hide();
                     $("#products").hide();
+                    $("#questions").hide();
                     if (!$('#profile').length) {
                         var orderListItem = $('<li>');
                         var orderListLink = $('<a href="#/orderLists">');
@@ -109,6 +110,7 @@
                             } else {
                                 if (data.role === "provider") {
                                     $("#products").show();
+                                    $("#questions").show();
                                     $("#profile").attr("href", "#/provider");
                                 } else {
                                     $("#carrito").show();
@@ -121,7 +123,8 @@
                     $(".dropdown-menu > li > a").click(function () {
                         $("#admin").hide();
                         $("#carrito").hide();
-                        $("products").hide();
+                        $("#products").hide();
+                        $("#questions").hide();
                     });
                     $scope.priceItem = "";
                     $scope.cheap = function (prov, price, record) {

@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.mpcellphone.persistence;
 
+import co.edu.uniandes.csw.mp.ann.MPLoCAnn;
 import co.edu.uniandes.csw.mpcellphone.entities.QuestionEntity;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,6 +25,7 @@ public class QuestionPersistence extends CrudPersistence<QuestionEntity> {
         this.entityClass = QuestionEntity.class;
     }
 
+    @MPLoCAnn(tier="Back-end", reqId="REQ-12")
     public List<QuestionEntity> getByProviderId(Long idProvider) {
         try {
             Map<String, Object> params = new HashMap<String, Object>();

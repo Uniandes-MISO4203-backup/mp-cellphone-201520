@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.mpcellphone.ejbs;
 
+import co.edu.uniandes.csw.mp.ann.MPLoCAnn;
 import co.edu.uniandes.csw.mpcellphone.utils.MailUtilsMP;
 import co.edu.uniandes.csw.mpcellphone.api.IQuestionLogic;
 import co.edu.uniandes.csw.mpcellphone.converters.QuestionConverter;
@@ -69,8 +70,33 @@ public class QuestionLogic implements IQuestionLogic {
         return QuestionConverter.fullEntity2DTO(entity);
     }
 
+    @MPLoCAnn(tier="Back-end", reqId="REQ-12")
     public List<QuestionDTO> getByProviderId(Long idProvider) {
         return QuestionConverter.listEntity2DTO(persistence.getByProviderId(idProvider));
     }
+    
+        /**
+     * Metodo que permite actualizar la informaci�n de una orden
+     *
+     * @param dto
+     * @return
+     */
+    @Override
+    @MPLoCAnn(tier="Back-end", reqId="REQ-12")
+    public QuestionDTO updateQuestion(QuestionDTO dto) {
+        QuestionEntity entity = persistence.update(QuestionConverter.fullDTO2Entity(dto));
+        return QuestionConverter.fullEntity2DTO(entity);
+    }
+
+    /**
+     * Metodo que permite eliminar una pregunta
+     *
+     * @param id
+     */
+    @Override
+    @MPLoCAnn(tier="Back-end", reqId="REQ-12")
+    public void deleteQuestion(Long id) {
+        persistence.delete(id);
+    }  
 
 }

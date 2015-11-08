@@ -12,6 +12,7 @@
         'ngCrud',
         'xeditable',
         'paymentModule',
+        'questionModule',
         'adminModule',
         'orderQueryModule'
     ]);
@@ -55,6 +56,10 @@
             }).when('/admin', {
                 templateUrl: tplUrl,
                 controller: 'adminCtrl',
+                controllerAs: alias
+            }).when('/question', {
+                templateUrl: tplUrl,
+                controller: 'questionCtrl',
                 controllerAs: alias
             }).when('/orderLists', {
                 templateUrl: 'src/modules/orderQuery/templates/orderByRoleTmpl.html',
