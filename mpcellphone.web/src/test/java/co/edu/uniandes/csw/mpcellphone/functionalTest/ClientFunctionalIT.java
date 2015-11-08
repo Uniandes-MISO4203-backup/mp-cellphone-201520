@@ -61,7 +61,7 @@ public class ClientFunctionalIT {
     
     /**
      * Metodo que crea el empaquetamiento y el despliegue de la aplicacion
-     * BookBasico
+     * Mpcellphone
      *
      * @return Archive - war
      */
@@ -93,20 +93,20 @@ public class ClientFunctionalIT {
     
     @BeforeClass 
     public static void setUp() { 
-        // Crea una instancia del driver de Chrome sobre el que se ejecutara la aplicación. 
+        // Crea una instancia del driver de Firefox sobre el que se ejecutara la aplicacion. 
         driver = new FirefoxDriver();
     }
 
     @Before 
     public void setUpTest() {  
         insertData(); 
-        // El browser va a la url de despliegue. Se ejecuta al iniciar cada uno de los métodos de prueba indicados con @Test
+        // El browser va a la url de despliegue. Se ejecuta al iniciar cada uno de los metodos de prueba indicados con @Test
         driver.get(deploymentURL.toString());  
     }
     
     @AfterClass 
     public static void tearDown() throws Exception { 
-        //Se ejecuta al terminar todos los métodos de prueba indicados con @Test Cierra el browser 
+        //Se ejecuta al terminar todos los metodos de prueba indicados con @Test Cierra el browser 
         driver.quit(); 
     }
     

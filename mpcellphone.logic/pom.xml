@@ -71,7 +71,19 @@
             <artifactId>spoon-core</artifactId>
             <version>4.3.0</version>
         </dependency> 
+        <dependency>
+           <groupId>co.edu.uniandes.csw</groupId>
+           <artifactId>MPLoCAnn</artifactId>
+           <version>0.0.1</version>
+        </dependency>
     </dependencies>
+    <repositories>
+        <repository>
+           <id>csw-uniandes</id>
+           <name>csw uniandes</name>
+           <url>http://157.253.236.129:8081/content/repositories/releases/</url>
+        </repository>
+    </repositories>
     <build>
         <pluginManagement>
             <plugins>
@@ -150,6 +162,24 @@
                         </goals>    
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>fr.inria.gforge.spoon</groupId>
+                <artifactId>spoon-maven-plugin</artifactId>
+                <version>2.1</version>
+                <executions>
+                   <execution>
+                      <phase>generate-sources</phase>
+                      <goals>
+                         <goal>generate</goal>
+                      </goals>
+                  </execution>
+                </executions>
+                <configuration>
+                   <processors>
+                      <processor>co.edu.uniandes.csw.mp.ann.MPLoCAnnSpoonProcessor</processor>
+                   </processors>
+                </configuration>
             </plugin>
         </plugins>                               
     </build>
