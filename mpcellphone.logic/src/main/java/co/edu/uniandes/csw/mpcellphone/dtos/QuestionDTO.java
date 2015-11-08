@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.mpcellphone.dtos;
 
+import co.edu.uniandes.csw.mp.ann.MPLoCAnn;
 import java.util.Date;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -22,6 +23,8 @@ public class QuestionDTO {
     private ClientDTO client;
     private ProductDTO product;
     private ProviderDTO provider;
+    private String state;
+    private String father;
 
     public Long getId() {
         return id;
@@ -71,6 +74,34 @@ public class QuestionDTO {
         this.provider = provider;
     }
 
+    @MPLoCAnn(tier="Back-end", reqId="REQ-12")
+    public String getState() {
+        return state;
+    }
 
+    @MPLoCAnn(tier="Back-end", reqId="REQ-12")
+    public void setState(String state) {
+        this.state = state;
+    }
 
+    @MPLoCAnn(tier="Back-end", reqId="REQ-12")
+    public String getFather() {
+        return father;
+    }
+
+    @MPLoCAnn(tier="Back-end", reqId="REQ-12")
+    public void setFather(String father) {
+        this.father = father;
+    }
+    
+    @MPLoCAnn(tier="Back-end", reqId="REQ-12")
+    public String getStateName() {
+        if(state == null){
+            return "Without answer";
+        }
+        else{
+            return "Answered";
+        }
+    }
+    
 }

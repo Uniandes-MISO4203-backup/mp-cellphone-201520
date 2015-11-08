@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.mpcellphone.services;
 
 import co.edu.uniandes.csw.mp.ann.MPLoCAnn;
 import co.edu.uniandes.csw.mpcellphone.api.IQuestionLogic;
+import co.edu.uniandes.csw.mpcellphone.dtos.ProviderDTO;
 import co.edu.uniandes.csw.mpcellphone.dtos.QuestionDTO;
 import co.edu.uniandes.csw.mpcellphone.providers.StatusCreated;
 import java.util.List;
@@ -23,6 +24,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import org.apache.shiro.SecurityUtils;
 
 /**
  *
@@ -37,6 +39,8 @@ public class QuestionService {
     @QueryParam("page") private Integer page;
     @Context private HttpServletResponse response;
     @QueryParam("maxRecords") private Integer maxRecords;
+    
+    private final ProviderDTO provider = (ProviderDTO)SecurityUtils.getSubject().getSession().getAttribute("Provider");
      
     
     /**
@@ -85,10 +89,8 @@ public class QuestionService {
     @GET
     @MPLoCAnn(tier="Services", reqId="REQ-12")
     public List<QuestionDTO> getQuestions() {
-        if (page != null && maxRecords != null) {
-            this.response.setIntHeader("X-Total-Count", questionLogic.countQuestion());
-        }
-        return questionLogic.getQuestions(page, maxRecords);
+        List<QuestionDTO> list = questionLogic.getByProviderId(provider.getId());
+        return list;
     }
 
     /**
@@ -103,5 +105,23 @@ public class QuestionService {
         return questionLogic.getQuestion(id);
     }
 
+     /**
+     * @param dto
+     * @return 
+     * @generated
+     */
+    @POST
+    @StatusCreated
+    @MPLoCAnn(tier="Services", reqId="REQ-12")
+    public QuestionDTO saveAnswer(QuestionDTO dto) { 
+        return questionLogic.createAnswer(dto);
+    }
+    
+    
+    @Path("/byFather")    
+    @GET
+    public List<QuestionDTO> getByFatherId(QuestionDTO question){   
+        return questionLogic.getByFatherId(question.getId());
+    }
     
 }

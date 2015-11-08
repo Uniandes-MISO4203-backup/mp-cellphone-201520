@@ -36,5 +36,17 @@ public class QuestionPersistence extends CrudPersistence<QuestionEntity> {
             return new ArrayList<QuestionEntity>();
         }
     }
+    
+    @MPLoCAnn(tier="Back-end", reqId="REQ-12")
+    public List<QuestionEntity> getByFatherId(Long idFather) {
+        try {
+            Map<String, Object> params = new HashMap<String, Object>();
+            params.put("idFather", idFather);
+            return executeListNamedQuery("Question.getByFatherId", params);
+        } catch (NoResultException e) {
+            Logger.getLogger(ProductPersistence.class.getName()).log(Level.SEVERE, null, e);
+            return new ArrayList<QuestionEntity>();
+        }
+    }
 
 }

@@ -21,5 +21,7 @@ public interface IQuestionLogic {
     public QuestionDTO createQuestion(QuestionDTO dto);
     public QuestionDTO updateQuestion(QuestionDTO dto);
     public void deleteQuestion(Long id);
+    public List<QuestionDTO> getByFatherId(Long idProvider);
+    public QuestionDTO createAnswer(QuestionDTO dto);
     
 }

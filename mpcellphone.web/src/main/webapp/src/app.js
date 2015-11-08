@@ -58,7 +58,7 @@
                 controller: 'adminCtrl',
                 controllerAs: alias
             }).when('/question', {
-                templateUrl: tplUrl,
+                templateUrl: 'src/modules/question/questions.tpl.html',
                 controller: 'questionCtrl',
                 controllerAs: alias
             }).when('/orderLists', {

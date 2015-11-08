@@ -69,10 +69,29 @@ public class QuestionLogic implements IQuestionLogic {
         MailUtilsMP.sendEmailMP(emailMsg, dto.getProvider().getEmail(), subject);
         return QuestionConverter.fullEntity2DTO(entity);
     }
-
+    
+      /**
+     * @param dto
+     * @return
+     */
+    @Override
+    @MPLoCAnn(tier="Back-end", reqId="REQ-12")
+    public QuestionDTO createAnswer(QuestionDTO dto) {
+        QuestionEntity entity = QuestionConverter.fullDTO2Entity(dto);
+        persistence.create(entity);
+        return QuestionConverter.fullEntity2DTO(entity);
+    }
+   
+    @Override
     @MPLoCAnn(tier="Back-end", reqId="REQ-12")
     public List<QuestionDTO> getByProviderId(Long idProvider) {
         return QuestionConverter.listEntity2DTO(persistence.getByProviderId(idProvider));
+    }
+
+    @Override
+    @MPLoCAnn(tier="Back-end", reqId="REQ-12")
+    public List<QuestionDTO> getByFatherId(Long idProvider) {
+        return QuestionConverter.listEntity2DTO(persistence.getByFatherId(idProvider));
     }
     
         /**
