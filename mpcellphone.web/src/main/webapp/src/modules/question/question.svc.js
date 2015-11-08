@@ -4,7 +4,7 @@
             CrudCreator.extendService(this, context);
             var self = this;
             this.createAnswer = function(data){
-                self.saveRecord(data);
+                return self.saveRecord(data).then(function(){});
             };
             this.finByFatherId = function(id){
                 return this.api.one('byFather', id).get();

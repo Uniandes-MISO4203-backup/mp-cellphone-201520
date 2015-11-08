@@ -37,12 +37,16 @@
                                     provider: authSvc.getCurrentUser(),
                                     father: $scope.questionSelected.id
                                 };
-                                svc.createAnswer(objEnvia);
-                                alert("Answer has been sent successfully.");
-                                $("#answerTextArea").val("").attr("placeholder", authSvc.getCurrentUser().name + " answers: ");
-                                $('#answerTextArea').focus();
-                                $("#listAnswers").html("<center><b>Loading new answers...</b></center>");
-                                getAnswers($scope.questionSelected.id);
+                                svc.createAnswer(objEnvia).then(
+                                        function (data) {
+                                            alert("Answer has been sent successfully.");
+                                            $("#answerTextArea").val("").attr("placeholder", authSvc.getCurrentUser().name + " answers: ");
+                                            $('#answerTextArea').focus();
+                                            $("#listAnswers").html("<center><b>Loading new answers...</b></center>");
+                                            getAnswers($scope.questionSelected.id);
+                                        }
+                                );
+
                             }
                         }
                     }

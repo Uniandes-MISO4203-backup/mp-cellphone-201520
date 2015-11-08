@@ -57,7 +57,7 @@ public class QuestionLogic implements IQuestionLogic {
         QuestionEntity entity = QuestionConverter.fullDTO2Entity(dto);
         persistence.create(entity);
         //Send email
-        String emailMsg = "<html><body><br />Se�or(a) " + dto.getProvider().getName()
+        String emailMsg = "<html><body><br />Senor(a) " + dto.getProvider().getName()
                 + "<br /><br />"
                 + "Usted ha recibido una nueva pregunta: <br /><br /> "
                 + "<br />Producto: " + dto.getProduct().getName()
@@ -79,6 +79,20 @@ public class QuestionLogic implements IQuestionLogic {
     public QuestionDTO createAnswer(QuestionDTO dto) {
         QuestionEntity entity = QuestionConverter.fullDTO2Entity(dto);
         persistence.create(entity);
+        Long id = Long.parseLong(entity.getFather());
+        QuestionDTO father = getQuestion(id);
+        //Send email
+        String emailMsg = "<html><body><br />Senor(a) " + dto.getProvider().getName()
+                + "<br /><br />"
+                + "Usted ha recibido la respuesta a una pregunta realizada: <br /><br /> "
+                + "<br />Producto: " + dto.getProduct().getName()
+                + "<br />Proveedor: " + dto.getProvider().getName()
+                + "<br />Respuesta :" + father.getQuestion()
+                + "<br />Respuesta :" + entity.getQuestion()
+                + "<br /><br />Atentamente,"
+                + "<br /><br /><br />MarketPhone";
+        String subject = "Ha recibido un mensaje de MarketPhone";
+        MailUtilsMP.sendEmailMP(emailMsg, dto.getProvider().getEmail(), subject);
         return QuestionConverter.fullEntity2DTO(entity);
     }
    
