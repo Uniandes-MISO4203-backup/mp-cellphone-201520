@@ -6,6 +6,8 @@ import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
@@ -36,8 +38,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import uk.co.jemos.podam.api.PodamFactory;
-import uk.co.jemos.podam.api.PodamFactoryImpl;
+//import uk.co.jemos.podam.api.PodamFactory;
+//import uk.co.jemos.podam.api.PodamFactoryImpl;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @RunWith(Arquillian.class)
@@ -54,6 +56,10 @@ public class ClientFunctionalIT {
 
     public static List<ClientDTO> data = new ArrayList();
 
+    
+    @PersistenceContext
+    private EntityManager em;
+    
     // Mediante la anotacion @ArquillianResource se obtiene la URL de despliegue de la aplicacion 
     @ArquillianResource 
     URL deploymentURL;
@@ -112,9 +118,13 @@ public class ClientFunctionalIT {
     
     private void insertData() {
         for (int i = 0; i < 3; i++) {            
-            PodamFactory factory = new PodamFactoryImpl();
-            ClientDTO client = factory.manufacturePojo(ClientDTO.class);
-            client.setName(CLIENTNAME);
+            //PodamFactory factory = new PodamFactoryImpl();
+            ClientDTO client = new ClientDTO();
+        	client.setName(CLIENTNAME);
+            em.persist(client);
+            
+            //ClientDTO client = factory.manufacturePojo(ClientDTO.class);
+            //client.setName(CLIENTNAME);
             Client cliente = ClientBuilder.newClient();
             Response response = cliente.target(URLBASE + PATHCLIENT)
                 .request()
@@ -127,9 +137,10 @@ public class ClientFunctionalIT {
     @After
     public void clearData() {
         for (int i = 0; i < data.size(); i++) {            
-            PodamFactory factory = new PodamFactoryImpl();
-            ClientDTO client = factory.manufacturePojo(ClientDTO.class);
+            //PodamFactory factory = new PodamFactoryImpl();
+            //ClientDTO client = factory.manufacturePojo(ClientDTO.class);
             Client cliente = ClientBuilder.newClient();
+            ClientDTO client = data.get(i);
             Response response = cliente.target(URLBASE + PATHCLIENT + '/' + data.get(i).getId())
                 .request()
                 .delete();
