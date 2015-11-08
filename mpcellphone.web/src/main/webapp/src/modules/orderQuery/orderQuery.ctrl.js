@@ -14,6 +14,20 @@
                     $scope.detailOrderList = data;
                 });
             }
+            (function () {
+                $("#datepicker").datepicker({
+                    showOn: "button",
+                    buttonImage: "src/modules/orderQuery/images/calendar.png",
+                    buttonImageOnly: true,
+                    buttonText: "Select date"
+                });
+                $("#datepicker1").datepicker({
+                    showOn: "button",
+                    buttonImage: "src/modules/orderQuery/images/calendar.png",
+                    buttonImageOnly: true,
+                    buttonText: "Select date"
+                });
+            })();
             if (user) {
                 $log.log(user.id);
                 svc.getSaleByClient(user.id).then(function (data) {

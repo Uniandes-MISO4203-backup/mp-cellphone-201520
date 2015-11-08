@@ -7,3 +7,37 @@
     background-color: rgba(0,0,0,0.3);
 }
 
+.search{
+    width: 50%;
+    margin: 0 auto 20px;
+    text-align: center;
+}
+
+.search-button{
+    margin-left: 50px;
+}
+
+.ui-datepicker-trigger{
+    width: 40px;
+    height: auto;
+    display: inline;
+}
+
+#datepicker, #datepicker1{
+    width: 85%;
+    display: inline-block;
+}
+
+.to{
+    margin: 1px;
+}
+
+.fecha{
+    text-align: center;
+}
+
+.campoFecha{
+    float: none;
+    display: inline-block;
+}
+
