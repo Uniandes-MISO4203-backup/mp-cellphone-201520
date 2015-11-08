@@ -161,13 +161,6 @@
                       <processor>co.edu.uniandes.csw.mp.ann.MPLoCAnnSpoonProcessor</processor>
                    </processors>
                 </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>co.edu.uniandes.csw</groupId>
-                        <artifactId>MPLoCAnn</artifactId>
-                        <version>0.0.1</version>
-                   </dependency>
-                </dependencies> 
             </plugin>
         </plugins>
     </build>
