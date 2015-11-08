@@ -120,11 +120,6 @@
             <scope>test</scope>
             <type>jar</type>
         </dependency>
-        <dependency>
-           <groupId>co.edu.uniandes.csw</groupId>
-           <artifactId>MPLoCAnn</artifactId>
-           <version>0.0.1</version>
-        </dependency>
     </dependencies>
     <repositories>
         <repository>
@@ -142,24 +137,6 @@
                 <configuration>
                     <source>1.7</source>
                     <target>1.7</target>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>fr.inria.gforge.spoon</groupId>
-                <artifactId>spoon-maven-plugin</artifactId>
-                <version>2.1</version>
-                <executions>
-                   <execution>
-                      <phase>generate-sources</phase>
-                      <goals>
-                         <goal>generate</goal>
-                      </goals>
-                  </execution>
-                </executions>
-                <configuration>
-                   <processors>
-                      <processor>co.edu.uniandes.csw.mp.ann.MPLoCAnnSpoonProcessor</processor>
-                   </processors>
                 </configuration>
             </plugin>
         </plugins>

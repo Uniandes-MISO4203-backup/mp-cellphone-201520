@@ -94,14 +94,4 @@ public class QuestionDTO {
         this.father = father;
     }
     
-    @MPLoCAnn(tier="Back-end", reqId="REQ-12")
-    public String getStateName() {
-        if(state == null){
-            return "Without answer";
-        }
-        else{
-            return "Answered";
-        }
-    }
-    
 }

@@ -71,11 +71,6 @@
             <artifactId>spoon-core</artifactId>
             <version>4.3.0</version>
         </dependency> 
-        <dependency>
-           <groupId>co.edu.uniandes.csw</groupId>
-           <artifactId>MPLoCAnn</artifactId>
-           <version>0.0.1</version>
-        </dependency>
     </dependencies>
     <repositories>
         <repository>
@@ -162,24 +157,6 @@
                         </goals>    
                     </execution>
                 </executions>
-            </plugin>
-            <plugin>
-                <groupId>fr.inria.gforge.spoon</groupId>
-                <artifactId>spoon-maven-plugin</artifactId>
-                <version>2.1</version>
-                <executions>
-                   <execution>
-                      <phase>generate-sources</phase>
-                      <goals>
-                         <goal>generate</goal>
-                      </goals>
-                  </execution>
-                </executions>
-                <configuration>
-                   <processors>
-                      <processor>co.edu.uniandes.csw.mp.ann.MPLoCAnnSpoonProcessor</processor>
-                   </processors>
-                </configuration>
             </plugin>
         </plugins>                               
     </build>

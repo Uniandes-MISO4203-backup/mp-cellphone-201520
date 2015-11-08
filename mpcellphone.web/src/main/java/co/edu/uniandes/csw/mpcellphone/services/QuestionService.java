@@ -103,20 +103,7 @@ public class QuestionService {
     @MPLoCAnn(tier="Services", reqId="REQ-12")
     public QuestionDTO getQuestion(@PathParam("id") Long id) {
         return questionLogic.getQuestion(id);
-    }
-
-     /**
-     * @param dto
-     * @return 
-     * @generated
-     */
-    @POST
-    @StatusCreated
-    @MPLoCAnn(tier="Services", reqId="REQ-12")
-    public QuestionDTO saveAnswer(QuestionDTO dto) { 
-        return questionLogic.createAnswer(dto);
-    }
-    
+    }   
     
     @Path("/byFather")    
     @GET
