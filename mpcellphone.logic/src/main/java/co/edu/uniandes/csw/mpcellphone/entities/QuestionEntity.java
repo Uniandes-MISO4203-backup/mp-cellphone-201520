@@ -26,7 +26,7 @@ import javax.persistence.TemporalType;
     @NamedQuery(name = "Question.getByProviderId", 
             query = "select q from QuestionEntity q WHERE q.provider.id = :idProvider and q.father is null"),
     @NamedQuery(name = "Question.getByFatherId", 
-            query = "select q from QuestionEntity q WHERE q.father = :idFather"),
+            query = "select q from QuestionEntity q WHERE q.father like :idFather"),
 })
 public class QuestionEntity implements Serializable {
     

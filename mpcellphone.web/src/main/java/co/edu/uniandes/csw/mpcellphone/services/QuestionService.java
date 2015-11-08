@@ -10,9 +10,9 @@ import co.edu.uniandes.csw.mpcellphone.api.IQuestionLogic;
 import co.edu.uniandes.csw.mpcellphone.dtos.ProviderDTO;
 import co.edu.uniandes.csw.mpcellphone.dtos.QuestionDTO;
 import co.edu.uniandes.csw.mpcellphone.providers.StatusCreated;
+import java.util.Date;
 import java.util.List;
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -35,10 +35,7 @@ import org.apache.shiro.SecurityUtils;
 @Produces(MediaType.APPLICATION_JSON)
 public class QuestionService {
     
-    @Inject private IQuestionLogic questionLogic;     
-    @QueryParam("page") private Integer page;
-    @Context private HttpServletResponse response;
-    @QueryParam("maxRecords") private Integer maxRecords;
+    @Inject private IQuestionLogic questionLogic;
     
     private final ProviderDTO provider = (ProviderDTO)SecurityUtils.getSubject().getSession().getAttribute("Provider");
      
@@ -52,7 +49,13 @@ public class QuestionService {
     @StatusCreated
     @MPLoCAnn(tier="Services", reqId="REQ-12")
     public QuestionDTO createQuestion(QuestionDTO dto) { 
-        return questionLogic.createQuestion(dto);
+        if(dto.getFather() != null){
+            dto.setDate(new Date());
+            return questionLogic.createAnswer(dto);
+        }
+        else{
+            return questionLogic.createQuestion(dto);
+        }
     }
     
     /**
@@ -103,12 +106,12 @@ public class QuestionService {
     @MPLoCAnn(tier="Services", reqId="REQ-12")
     public QuestionDTO getQuestion(@PathParam("id") Long id) {
         return questionLogic.getQuestion(id);
-    }   
+    }
     
-    @Path("/byFather")    
     @GET
-    public List<QuestionDTO> getByFatherId(QuestionDTO question){   
-        return questionLogic.getByFatherId(question.getId());
+    @Path("/byFather/{id: \\d+}")
+    public List<QuestionDTO> getByFatherId(@PathParam("id") Long id) {  
+        return questionLogic.getByFatherId(id);
     }
     
 }

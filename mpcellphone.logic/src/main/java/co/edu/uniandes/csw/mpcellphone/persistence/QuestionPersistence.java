@@ -41,7 +41,7 @@ public class QuestionPersistence extends CrudPersistence<QuestionEntity> {
     public List<QuestionEntity> getByFatherId(Long idFather) {
         try {
             Map<String, Object> params = new HashMap<String, Object>();
-            params.put("idFather", idFather);
+            params.put("idFather", idFather.toString());
             return executeListNamedQuery("Question.getByFatherId", params);
         } catch (NoResultException e) {
             Logger.getLogger(ProductPersistence.class.getName()).log(Level.SEVERE, null, e);

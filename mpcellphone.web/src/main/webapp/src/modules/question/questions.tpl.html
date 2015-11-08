@@ -13,10 +13,9 @@
         <tbody>
             <tr ng-repeat="record in records">
                 <td><div>{{record.question}}</div></td> 
-                <td><div>{{record.date}}</div></td> 
+                <td><div>{{record.date| date:'dd/MM/yyyy'}}</div></td> 
                 <td><div>{{record.product.name}}</div></td> 
-                <td><div>{{record.client.name}}</div></td> 
-                <td><div>{{record.state}}-{{record.stateName}}</div></td> 
+                <td><div>{{record.client.name }}</div></td> 
                 <td style="text-align: center;">
                     <a href="javascript:;" 
                        ng-repeat="action in ctrl.answerAction"
