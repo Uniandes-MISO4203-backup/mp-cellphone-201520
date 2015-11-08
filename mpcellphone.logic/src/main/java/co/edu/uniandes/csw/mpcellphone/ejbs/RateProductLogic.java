@@ -20,8 +20,8 @@ public class RateProductLogic implements IRateProductLogic{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public RateProductDTO updateRate(Long id, int rate) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public RateProductDTO updateRate(RateProductDTO dto) {
+        return RateProductConverter.refEntity2DTO(persistence.update(RateProductConverter.refDTO2Entity(dto)));
     }
 
     public RateProductDTO getRate(Long id) {

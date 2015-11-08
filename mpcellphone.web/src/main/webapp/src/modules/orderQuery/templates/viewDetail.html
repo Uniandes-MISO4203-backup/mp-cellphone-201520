@@ -18,18 +18,16 @@
                     <td><div>{{product.cellPhone.brand}}</div></td> 
                     <td><div>{{product.cellPhone.name}}</div></td> 
                     <td><div>{{product.price | currency}}</div></td>
-                    <td><div class="col-lg-6 product-rate " data-score="{{product.rate}}"></div>
-                        <div class="col-lg-6" >
-                            <div ng-if="product.rate>0">
-                                <button class="btn btn-primary btn-sm " ng-click="">Update</button>
-                            </div>
-                            <div ng-if="product.rate<=0">
-                                <button class="btn btn-default btn-sm " ng-click="">Rate</button>
-                            </div>                            
-                        </div></td>
+                    <td>
+                        <h4>
+                            <uib-rating ng-model="product.rate" ng-click="product.rate=rateProduct()" max="max" readonly="isReadonly" on-hover="hoveringOver(value, product.id)" on-leave="overStar = null" titles="['bad','poor','regular','good','excelent']" aria-labelledby="default-rating"></uib-rating>
+                           
+                        </h4>
+                    </td>
                     <td><div>{{product.provider.name}}</div></td>
-                    <td><div class="col-lg-6 product-rate " data-score="{{product.rate}}"></div>
-                        <div class="col-lg-6" ><button class="btn btn-primary btn-sm " ng-click="">Rate</button></div></td>
+                    <td>
+                      
+                    </td>
                 </tr>
             </tbody>
         </table>
@@ -41,11 +39,3 @@
         </div> -->
     </div>
 </div>
-<script>jQuery(document).ready(function ($) {
-   $.fn.raty.defaults.path = 'src/plugins/raty';
-   $(function() {
-        $('.product-rate').raty({
-            readOnly:true
-        }); 
-   });
-});</script>

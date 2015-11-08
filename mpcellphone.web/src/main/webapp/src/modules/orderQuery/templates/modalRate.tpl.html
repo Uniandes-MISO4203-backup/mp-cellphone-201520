@@ -1,0 +1,15 @@
+<div class="modal-header">
+    <h3 class="modal-title">Rate {{rateContent.name}}!</h3>
+</div>
+<div class="modal-body">
+    <div class="row text-center">
+    <p>Select the number of stars you rate this {{rateContent.name}}</p>
+    <uib-rating ng-model="rate" max="max" readonly="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null" titles="['one','two','three']" aria-labelledby="default-rating"></uib-rating>
+    <span class="label" ng-class="{'label-warning': percent<3, 'label-info': percent>=3 && percent<5, 'label-success': percent>=5}" ng-show="overStar && !isReadonly">{{percent}}/5</span>
+
+    </div></div>
+
+<div class="modal-footer">
+    <button class="btn btn-primary" type="button" ng-click="ok()">Send</button>
+    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+</div>

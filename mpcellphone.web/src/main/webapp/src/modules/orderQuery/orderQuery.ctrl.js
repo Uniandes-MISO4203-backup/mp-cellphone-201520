@@ -12,6 +12,32 @@
                 var id = $location.search().id;
                 svc.getProductsBySale(user.id, id).then(function (data) {
                     $scope.detailOrderList = data;
+                   // $scope.rate = 3;
+                    $scope.max = 5;
+                    $scope.isReadonly = false;
+                    
+
+                    $scope.hoveringOver = function(value, product) {
+                        $scope.overStar = value;
+                        $scope.productId = product;
+                    };
+
+                    $scope.ratingStates = [
+                        {stateOn: 'glyphicon-star', stateOff: 'glyphicon-star-empty'}
+                    ];
+                    $scope.titles = ['No rate','Bad','Poor','Regular','Good','Excelent'];
+                    $scope.rateProduct= function () {
+                        return $scope.overStar
+                        
+                        //var modalInstance = $modal.open({
+                        //    animation: true,
+                        //    templateUrl: 'src/modules/orderQuery/templates/modalRate.tpl.html',
+                        //    controller: 'ModalRateCtrl'                           
+                        //});
+                        //modalInstance.result.then(function () {
+                           
+                        //});                        
+                    }
                 });
             }
             if (user) {
@@ -75,49 +101,31 @@
             else {
                 $location.path('/login');
             }
-        }]).directive('starRating', starRating);
+        }]);
     
-    function starRating() {
-    return {
-      restrict: 'EA',
-      template:
-        '<ul class="star-rating" ng-class="{readonly: readonly}">' +
-        '  <li ng-repeat="star in stars" class="star" ng-class="{filled: star.filled}" ng-click="toggle($index)">' +
-        '    <i class="fa fa-star"></i>' + // or &#9733
-        '  </li>' +
-        '</ul>',
-      scope: {
-        ratingValue: '=ngModel',
-        max: '=?', // optional (default is 5)
-        onRatingSelect: '&?',
-        readonly: '=?'
-      },
-      link: function(scope, element, attributes) {
-        if (scope.max == undefined) {
-          scope.max = 5;
-        }
-        function updateStars() {
-          scope.stars = [];
-          for (var i = 0; i < scope.max; i++) {
-            scope.stars.push({
-              filled: i < scope.ratingValue
-            });
-          }
+    mod.controller('ModalRateCtrl', function ($scope, $modalInstance) {
+        
+        $scope.ok = function () {
+            alert($scope.rate)
+            //$modalInstance.close($scope.itemQuestion);
         };
-        scope.toggle = function(index) {
-          if (scope.readonly == undefined || scope.readonly === false){
-            scope.ratingValue = index + 1;
-            scope.onRatingSelect({
-              rating: index + 1
-            });
-          }
+
+        $scope.cancel = function () {
+            $modalInstance.dismiss('cancel');
         };
-        scope.$watch('ratingValue', function(oldValue, newValue) {
-          if (newValue) {
-            updateStars();
-          }
-        });
-      }
-    };
-  }
+        $scope.rate = 3;
+        $scope.max = 5;
+        $scope.isReadonly = false;
+
+        $scope.hoveringOver = function(value) {
+            $scope.overStar = value;
+            $scope.percent = value;
+        };
+
+        $scope.ratingStates = [
+            {stateOn: 'glyphicon-star', stateOff: 'glyphicon-star-empty'}
+        ];
+        
+    });
+    
 })(window.angular);
