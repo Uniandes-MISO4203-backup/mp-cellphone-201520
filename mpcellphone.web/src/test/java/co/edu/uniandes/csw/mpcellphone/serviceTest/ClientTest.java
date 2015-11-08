@@ -7,6 +7,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
@@ -26,8 +28,8 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
-import uk.co.jemos.podam.api.PodamFactory;
-import uk.co.jemos.podam.api.PodamFactoryImpl;
+//import uk.co.jemos.podam.api.PodamFactory;
+//import uk.co.jemos.podam.api.PodamFactoryImpl;
 
 /**
  * @author cv.hernandez10
@@ -42,8 +44,12 @@ public class ClientTest {
     public final static int Ok = 200;
     public final static int Created = 201;
     public final static int OkWithoutContent = 204;
+    private static final String CLIENTNAME ="Cliente de pruebas";
 
     public static List<ClientDTO> data = new ArrayList();
+
+    @PersistenceContext
+    private EntityManager em;
     
     @Deployment
     public static Archive<?> createDeployment() {
@@ -69,10 +75,13 @@ public class ClientTest {
     }
     
     @BeforeClass
-    public static void setUp() {
+    public void setUp() {
         for (int i = 0; i < 5; i++) {
-            PodamFactory factory = new PodamFactoryImpl();
-            ClientDTO client = factory.manufacturePojo(ClientDTO.class);
+//            PodamFactory factory = new PodamFactoryImpl();
+//            ClientDTO client = factory.manufacturePojo(ClientDTO.class);
+            ClientDTO client = new ClientDTO();
+        	client.setName(CLIENTNAME);
+                em.persist(client);
             data.add(client);
         }
     }
@@ -91,8 +100,11 @@ public class ClientTest {
     @RunAsClient
     public void t1UpdateClientService() throws IOException {
         ClientDTO client = data.get(0);
-        PodamFactory factory = new PodamFactoryImpl();
-        ClientDTO clientChanged = factory.manufacturePojo(ClientDTO.class);
+        //PodamFactory factory = new PodamFactoryImpl();
+        //ClientDTO clientChanged = factory.manufacturePojo(ClientDTO.class);
+        ClientDTO clientChanged = new ClientDTO();
+            clientChanged.setName(CLIENTNAME);
+            em.persist(client);
         client.setName(clientChanged.getName());
         client.setEmail(clientChanged.getEmail());
         Client cliente = ClientBuilder.newClient();
