@@ -58,4 +58,15 @@ public class CityService {
         return cityLogic.getCityByState(page, maxRecords, id);
     }
     
+    /**
+     * Metodo GET, para obtener un dato especifico al enviar un parametro por URL
+     * @param id
+     * @return 
+     */
+    @GET
+    @Path("{id: \\d+}")
+    public CityDTO getCity(@PathParam("id") Long id) {
+        return cityLogic.getCity(id);
+    }
+    
 }

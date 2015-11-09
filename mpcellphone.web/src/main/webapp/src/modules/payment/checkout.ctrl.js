@@ -76,6 +76,12 @@
             $scope.shipping.time = Math.ceil(Math.random() * 5);
             $scope.submitShippingData = function () {
                 var shippingData = {};
+                citySvc.getCityById($scope.shipping.city).then(function (data) {
+                    $scope.c = data.name;
+                });
+                stateSvc.getStateById($scope.shipping.state).then(function (data) {
+                    $scope.s = data.name;
+                });
                 shippingData.state = $scope.shipping.state;
                 shippingData.country = $scope.shipping.country;
                 shippingData.city = $scope.shipping.city;

@@ -31,7 +31,7 @@
                 <div class="col-lg-10">
                     <select class="form-control" type="text" id="city" ng-model="shipping.city">
                         <option>Select a City</option>
-                        <option ng-repeat="a in city">{{a.name}}</option>
+                        <option ng-repeat="a in city" value="{{a.id}}">{{a.name}}</option>
                     </select>
                 </div>
             </div>

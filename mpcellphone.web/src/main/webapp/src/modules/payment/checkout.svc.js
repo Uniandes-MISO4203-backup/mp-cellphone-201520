@@ -35,11 +35,17 @@
         }]);
     mod.service('stateService',['CrudCreator', 'stateContext', function (CrudCreator, context) {
             CrudCreator.extendService(this, context);
+            this.getStateById = function (stateId){
+                return this.api.one(stateId).get();
+            };
         }]);
     mod.service('cityService',['CrudCreator', 'cityContext', function (CrudCreator, context) {
             CrudCreator.extendService(this, context);
             this.getCityByState = function (stateId){
                 return this.api.one('state/'+stateId).get();
+            };
+            this.getCityById = function (cityId){
+                return this.api.one(cityId).get();
             };
         }]);
 })(window.angular);
