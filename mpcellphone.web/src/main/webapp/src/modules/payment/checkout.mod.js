@@ -7,6 +7,8 @@
     mod.constant('shippingTypeContext', 'shipping_type');
     mod.constant('saleContext', 'sale');
     mod.constant('shippingProductContext', 'products');
+    mod.constant('stateContext', 'states');
+    mod.constant('cityContext', 'cities');
 /*
     mod.constant('checkoutModel', {
         fields: [{

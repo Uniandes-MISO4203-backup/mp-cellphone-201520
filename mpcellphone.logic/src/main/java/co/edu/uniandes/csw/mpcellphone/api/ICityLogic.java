@@ -18,5 +18,5 @@ public interface ICityLogic {
     public List<CityDTO> getCities(Integer page, Integer maxRecords);
     public CityDTO getCity(Long id);
     public CityDTO createCity(CityDTO dto);
-    
+    public List<CityDTO> getCityByState(Integer page, Integer maxRecords, Long idState);    
 }

@@ -33,4 +33,13 @@
     mod.service('shippingUserService', ['CrudCreator', 'userContext', function (CrudCreator, context) {
             CrudCreator.extendService(this, context);
         }]);
+    mod.service('stateService',['CrudCreator', 'stateContext', function (CrudCreator, context) {
+            CrudCreator.extendService(this, context);
+        }]);
+    mod.service('cityService',['CrudCreator', 'cityContext', function (CrudCreator, context) {
+            CrudCreator.extendService(this, context);
+            this.getCityByState = function (stateId){
+                return this.api.one('state/'+stateId).get();
+            };
+        }]);
 })(window.angular);
