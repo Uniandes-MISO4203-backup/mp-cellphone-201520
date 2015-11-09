@@ -42,15 +42,35 @@
             };
             $scope.states = [];
             stateSvc.fetchRecords().then(function (data) {
-                $log.log(data);
                 $scope.states = data;
+                setTimeout(function () {
+                    var types = $('#state').children();
+                    while ($(types[0]).text().indexOf('Select a State') === -1) {
+                        $(types[0]).remove();
+                        types = $('#state').children();
+                    }
+                }, 200);
             });
-            $scope.onChangeCity = function (){
-                var state=$('#state').val();
-                citySvc.getCityByState(state).then(function (data){
+            $scope.onChangeCity = function () {
+                var state = $('#state').val();
+                citySvc.getCityByState(state).then(function (data) {
                     $scope.city = data;
+                    setTimeout(function () {
+                        var types = $('#city').children();
+                        while ($(types[0]).text().indexOf('Select a City') === -1) {
+                            $(types[0]).remove();
+                            types = $('#city').children();
+                        }
+                    }, 200);
                 });
             };
+            setTimeout(function () {
+                var types = $('#city').children();
+                while ($(types[0]).text().indexOf('Select a City') === -1) {
+                    $(types[0]).remove();
+                    types = $('#city').children();
+                }
+            }, 200);
             /*-------------- Shipping ------------*/
             $scope.shipping = {};
             $scope.shipping.time = Math.ceil(Math.random() * 5);
