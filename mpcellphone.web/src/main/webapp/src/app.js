@@ -8,6 +8,7 @@
         'productModule',
         'providerModule',
         'photoModule',
+        'rateModule',
         'ngRoute',
         'ngCrud',
         'xeditable',

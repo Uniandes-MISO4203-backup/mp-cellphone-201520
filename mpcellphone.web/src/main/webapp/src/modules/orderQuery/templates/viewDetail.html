@@ -20,13 +20,14 @@
                     <td><div>{{product.price | currency}}</div></td>
                     <td>
                         <h4>
-                            <uib-rating ng-model="product.rate" ng-click="product.rate=rateProduct()" max="max" readonly="isReadonly" on-hover="hoveringOver(value, product.id)" on-leave="overStar = null" titles="['bad','poor','regular','good','excelent']" aria-labelledby="default-rating"></uib-rating>
-                           
+                            <uib-rating ng-model="product.rate" ng-click="product.rate=rateProduct()" max="max" readonly="isReadonly" on-hover="hoveringOver(value, product)" on-leave="overStar = null" titles="['bad','poor','regular','good','excelent']" aria-labelledby="default-rating"></uib-rating>
                         </h4>
                     </td>
                     <td><div>{{product.provider.name}}</div></td>
                     <td>
-                      
+                        <h4>
+                            <uib-rating ng-model="product.provider.rate" ng-click="product.provider.rate=rateProvider()" max="max" readonly="isReadonly" on-hover="hoveringOverProvider(value, product)" on-leave="overStarPro = null" titles="['bad','poor','regular','good','excelent']" aria-labelledby="default-rating"></uib-rating>
+                        </h4>
                     </td>
                 </tr>
             </tbody>

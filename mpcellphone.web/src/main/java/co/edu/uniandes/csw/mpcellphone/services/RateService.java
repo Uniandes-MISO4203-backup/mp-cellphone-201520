@@ -5,7 +5,6 @@ import co.edu.uniandes.csw.mpcellphone.api.IRateProviderLogic;
 import co.edu.uniandes.csw.mpcellphone.dtos.ClientDTO;
 import co.edu.uniandes.csw.mpcellphone.dtos.RateProductDTO;
 import co.edu.uniandes.csw.mpcellphone.dtos.RateProviderDTO;
-import co.edu.uniandes.csw.mpcellphone.providers.StatusCreated;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
@@ -38,7 +37,6 @@ public class RateService {
      */
     @POST
     @Path("/product/")
-    @StatusCreated
     public RateProductDTO rateProduct(RateProductDTO dto) {
         dto.setClient(client);
         RateProductDTO pastDto = rateProductLogic.getRateByProductClient(dto.getProduct().getId(), dto.getClient().getId());
@@ -56,10 +54,13 @@ public class RateService {
      */
     @POST
     @Path("/provider/")
-    @StatusCreated
     public RateProviderDTO rateProvider(RateProviderDTO dto) {
         dto.setClient(client);
-        return questionLogic.createQuestion(dto);
+        RateProviderDTO pastDto = rateProviderLogic.getRateByProviderClient(dto.getProvider().getId(), dto.getClient().getId());
+        if(pastDto.getId()!=null){
+            pastDto.setRate(dto.getRate());
+            return rateProviderLogic.updateRate(pastDto);
+        }
+        return rateProviderLogic.createRate(dto);
     }
-    
 }

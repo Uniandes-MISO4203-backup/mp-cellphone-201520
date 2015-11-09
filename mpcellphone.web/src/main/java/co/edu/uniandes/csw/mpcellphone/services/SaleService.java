@@ -5,7 +5,9 @@ import co.edu.uniandes.csw.mpcellphone.api.ISaleLogic;
 import co.edu.uniandes.csw.mpcellphone.dtos.ClientDTO;
 import co.edu.uniandes.csw.mpcellphone.dtos.ProductDTO;
 import co.edu.uniandes.csw.mpcellphone.dtos.RateProductDTO;
+import co.edu.uniandes.csw.mpcellphone.dtos.RateProviderDTO;
 import co.edu.uniandes.csw.mpcellphone.dtos.SaleDTO;
+import co.edu.uniandes.csw.mpcellphone.api.IRateProviderLogic;
 import co.edu.uniandes.csw.mpcellphone.providers.StatusCreated;
 import java.util.List;
 import javax.inject.Inject;
@@ -36,6 +38,8 @@ public class SaleService {
     private ISaleLogic saleLogic;
     @Inject 
     private IRateProductLogic rateProductLogic;
+     @Inject 
+    private IRateProviderLogic rateProviderLogic;
     @Context 
     private HttpServletResponse response;
     
@@ -123,6 +127,8 @@ public class SaleService {
         for(ProductDTO product: products){
             RateProductDTO rate = rateProductLogic.getRateByProductClient(product.getId(), client.getId());
             product.setRate(rate.getRate());
+            RateProviderDTO ratePr = rateProviderLogic.getRateByProviderClient(product.getProvider().getId(), client.getId());
+            product.getProvider().setRate(ratePr.getRate());
         }
         return products;
     }  

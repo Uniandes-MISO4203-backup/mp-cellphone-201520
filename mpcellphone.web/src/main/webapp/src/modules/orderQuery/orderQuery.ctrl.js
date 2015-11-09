@@ -1,7 +1,7 @@
 (function (ng) {
     var mod = ng.module('mainApp');
-    mod.controller('orderQueryCtrl', ['CrudCreator', '$scope', 'saleService', 'orderQueryModel', '$location', 'authService', '$log',
-        function (CrudCreator, $scope, svc, model, $location, authSvc, $log) {
+    mod.controller('orderQueryCtrl', ['CrudCreator', '$scope', 'saleService', 'rateService','orderQueryModel', '$location', 'authService', '$log',
+        function (CrudCreator, $scope, svc,rateService, model, $location, authSvc, $log) {
             CrudCreator.extendController(this, svc, $scope, model, 'orderQuery', 'Order List');
             var user = authSvc.getCurrentUser();
             svc.getRoleOQ().then(function (data) {
@@ -14,12 +14,16 @@
                     $scope.detailOrderList = data;
                    // $scope.rate = 3;
                     $scope.max = 5;
-                    $scope.isReadonly = false;
-                    
+                    $scope.isReadonly = false;                    
 
                     $scope.hoveringOver = function(value, product) {
                         $scope.overStar = value;
-                        $scope.productId = product;
+                        $scope.product = product;
+                    };
+                    
+                    $scope.hoveringOverProvider = function(value, provider) {
+                        $scope.overStarPro = value;
+                        $scope.provid = provider;
                     };
 
                     $scope.ratingStates = [
@@ -27,16 +31,18 @@
                     ];
                     $scope.titles = ['No rate','Bad','Poor','Regular','Good','Excelent'];
                     $scope.rateProduct= function () {
-                        return $scope.overStar
-                        
-                        //var modalInstance = $modal.open({
-                        //    animation: true,
-                        //    templateUrl: 'src/modules/orderQuery/templates/modalRate.tpl.html',
-                        //    controller: 'ModalRateCtrl'                           
-                        //});
-                        //modalInstance.result.then(function () {
-                           
-                        //});                        
+                        rateService.setRateProduct($scope.product,$scope.overStar)
+                                .then(function () {
+                                   
+                                });
+                        return $scope.overStar;      
+                    }
+                    $scope.rateProvider= function () {
+                        rateService.setRateProvider($scope.provider,$scope.overStarPro)
+                                .then(function () {
+                                   
+                                });
+                        return $scope.overStarPro;      
                     }
                 });
             }

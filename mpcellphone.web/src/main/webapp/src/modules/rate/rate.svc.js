@@ -1,15 +1,15 @@
 (function(ng){
-    var mod = ng.module('rate');
+    var mod = ng.module('rateModule');
     mod.service('rateService', ['CrudCreator','rateContext', function(CrudCreator, context){
             CrudCreator.extendService(this, context);
-            this.setRateProduct = function(productId,value) {
+            this.setRateProduct = function(product,value) {
                  var data = {rate: value,
-                            product_id: productId}
+                            product: product}
                 return this.api.one('product').customPOST(data).then(function(){});
             };
-            this.setRateProvider = function(providerId,value) {
+            this.setRateProvider = function(provider,value) {
                 var data = {rate: value,
-                            provider_id: providerId}
+                            provider: provider}
                 return this.api.one('provider').customPOST(data).then(function(){});
             };
     }]);

@@ -1,9 +1,9 @@
 package co.edu.uniandes.csw.mpcellphone.persistence;
 
 import co.edu.uniandes.csw.mpcellphone.entities.RateProductEntity;
-import java.util.Collections;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.ejb.Stateless;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
@@ -11,6 +11,7 @@ import javax.persistence.Query;
  *
  * @author ca.forero10
  */
+@Stateless
 public class RateProductPersistence  extends CrudPersistence<RateProductEntity> {
     
     public RateProductPersistence(){

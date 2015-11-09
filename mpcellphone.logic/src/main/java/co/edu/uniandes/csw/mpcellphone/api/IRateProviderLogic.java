@@ -10,7 +10,7 @@ import java.util.List;
 public interface IRateProviderLogic {
     
     public RateProviderDTO createRate(RateProviderDTO dto);
-    public RateProviderDTO updateRate(Long id, int rate);
+    public RateProviderDTO updateRate(RateProviderDTO dto);
     public RateProviderDTO getRate(Long id);
     public RateProviderDTO getRateByProviderClient(Long providerId, Long clientId);
     public List<Integer> getRateByProvider(Long providerId);

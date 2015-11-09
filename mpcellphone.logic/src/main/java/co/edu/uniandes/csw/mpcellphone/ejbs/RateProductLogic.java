@@ -3,6 +3,7 @@ package co.edu.uniandes.csw.mpcellphone.ejbs;
 import co.edu.uniandes.csw.mpcellphone.api.IRateProductLogic;
 import co.edu.uniandes.csw.mpcellphone.converters.RateProductConverter;
 import co.edu.uniandes.csw.mpcellphone.dtos.RateProductDTO;
+import co.edu.uniandes.csw.mpcellphone.entities.RateProductEntity;
 import co.edu.uniandes.csw.mpcellphone.persistence.RateProductPersistence;
 import java.util.List;
 import javax.inject.Inject;
@@ -17,7 +18,9 @@ public class RateProductLogic implements IRateProductLogic{
     private RateProductPersistence persistence; 
 
     public RateProductDTO createRate(RateProductDTO dto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        RateProductEntity entity = RateProductConverter.refDTO2Entity(dto);
+        persistence.create(entity);
+        return RateProductConverter.refEntity2DTO(entity);
     }
 
     public RateProductDTO updateRate(RateProductDTO dto) {

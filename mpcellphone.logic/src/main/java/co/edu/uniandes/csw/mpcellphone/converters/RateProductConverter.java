@@ -41,6 +41,9 @@ public abstract class RateProductConverter {
         if (dto != null) {
             RateProductEntity entity = new RateProductEntity();
             entity.setId(dto.getId());
+            entity.setRate(dto.getRate());
+            entity.setClient(ClientConverter.refDTO2Entity(dto.getClient()));
+            entity.setProduct(ProductConverter.refDTO2Entity(dto.getProduct()));
             return entity;
         } else {
             return null;

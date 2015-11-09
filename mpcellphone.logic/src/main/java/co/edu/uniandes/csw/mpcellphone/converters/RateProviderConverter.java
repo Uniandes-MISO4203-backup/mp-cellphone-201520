@@ -42,6 +42,9 @@ public abstract class RateProviderConverter {
         if (dto != null) {
             RateProviderEntity entity = new RateProviderEntity();
             entity.setId(dto.getId());
+            entity.setRate(dto.getRate());
+            entity.setClient(ClientConverter.refDTO2Entity(dto.getClient()));
+            entity.setProvider(ProviderConverter.refDTO2Entity(dto.getProvider()));
             return entity;
         } else {
             return null;
