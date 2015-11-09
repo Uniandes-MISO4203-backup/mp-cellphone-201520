@@ -38,7 +38,7 @@
                         return $scope.overStar;      
                     }
                     $scope.rateProvider= function () {
-                        rateService.setRateProvider($scope.provider,$scope.overStarPro)
+                        rateService.setRateProvider($scope.provid,$scope.overStarPro)
                                 .then(function () {
                                    
                                 });
