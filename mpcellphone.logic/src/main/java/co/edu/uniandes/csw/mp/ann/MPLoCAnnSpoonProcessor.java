@@ -30,12 +30,12 @@ public class MPLoCAnnSpoonProcessor extends AbstractAnnotationProcessor<MPLoCAnn
         // Genera .csv con la información
         try {
             Calendar cal = Calendar.getInstance();
-            // TODO modificar ruta si es necesario
+            // modificar ruta si es necesario
             String ruta = "./data/LoC_Report_"
                     + (cal.get(Calendar.MONTH) + 1) + cal.get(Calendar.DAY_OF_MONTH) + "_" + cal.get(Calendar.HOUR_OF_DAY) + cal.get(Calendar.MINUTE) + ".csv";
             boolean existe = false;
 
-            // Verifica si ya existe para imprimir el encabezado;
+            // Verifica si ya existe para imprimir el encabezado
             File f = new File(ruta);
             if (f.exists()) {
                 existe = true;

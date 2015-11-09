@@ -6,9 +6,26 @@
             this.fetchRecords();
             this.loadRefOptions();
             $scope.questionSelected = 0;
+            var getAnswers = function (fatherId) {
+                svc.finByFatherId(fatherId).then(
+                        function (data) {
+                            var txt = "";
+                            var cont = 0;
+                            for (var i = 0; i < data.length; i++) {
+                                if (cont !== 0) {
+                                    txt += "<hr>";
+                                }
+                                cont++;
+                                txt += cont + ". ";
+                                var fecha = $filter('date')(data[i].date, 'dd/MM/yyyy');
+                                txt += data[i].question + " - " + fecha + "";
+                            }
+                            $("#listAnswers").html(cont !== 0 ? txt : "<center><b>No anwers yet.</b></center>");
+                        }
+                );
+            };
             this.answerAction = [{
                     fn: function (record) {
-                        tmp = authSvc;
                         if (authSvc.getCurrentUser()) {
                             $scope.questionSelected = record;
                             $("#listAnswers").html("<center><b>Loading...</b></center>");
@@ -38,7 +55,7 @@
                                     father: $scope.questionSelected.id
                                 };
                                 svc.createAnswer(objEnvia).then(
-                                        function (data) {
+                                        function () {
                                             alert("Answer has been sent successfully.");
                                             $("#answerTextArea").val("").attr("placeholder", authSvc.getCurrentUser().name + " answers: ");
                                             $('#answerTextArea').focus();
@@ -51,23 +68,5 @@
                         }
                     }
                 }];
-            var getAnswers = function (fatherId) {
-                svc.finByFatherId(fatherId).then(
-                        function (data) {
-                            var txt = "";
-                            var cont = 0;
-                            for (var i = 0; i < data.length; i++) {
-                                if (cont !== 0) {
-                                    txt += "<hr>";
-                                }
-                                cont++;
-                                txt += cont + ". ";
-                                var fecha = $filter('date')(data[i].date, 'dd/MM/yyyy');
-                                txt += data[i].question + " - " + fecha + "";
-                            }
-                            $("#listAnswers").html(cont !== 0 ? txt : "<center><b>No anwers yet.</b></center>");
-                        }
-                );
-            };
         }]);
 })(window.angular);
