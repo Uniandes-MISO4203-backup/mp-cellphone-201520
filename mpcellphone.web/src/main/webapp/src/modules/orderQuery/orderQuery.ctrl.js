@@ -14,36 +14,29 @@
                     $scope.detailOrderList = data;
                    // $scope.rate = 3;
                     $scope.max = 5;
-                    $scope.isReadonly = false;                    
-
+                    $scope.isReadonly = false; 
                     $scope.hoveringOver = function(value, product) {
                         $scope.overStar = value;
                         $scope.product = product;
-                    };
-                    
+                    };                    
                     $scope.hoveringOverProvider = function(value, provider) {
                         $scope.overStarPro = value;
                         $scope.provid = provider;
                     };
-
                     $scope.ratingStates = [
                         {stateOn: 'glyphicon-star', stateOff: 'glyphicon-star-empty'}
                     ];
                     $scope.titles = ['No rate','Bad','Poor','Regular','Good','Excelent'];
                     $scope.rateProduct= function () {
                         rateService.setRateProduct($scope.product,$scope.overStar)
-                                .then(function () {
-                                   
-                                });
+                                .then(function () { });
                         return $scope.overStar;      
-                    }
+                    };
                     $scope.rateProvider= function () {
                         rateService.setRateProvider($scope.provid,$scope.overStarPro)
-                                .then(function () {
-                                   
-                                });
+                                .then(function () { });
                         return $scope.overStarPro;      
-                    }
+                    };
                 });
             }
             (function () {
@@ -54,7 +47,6 @@
                     buttonText: "Select date"
                 });
                 $('#datepicker').datepicker("option", "dateFormat", "yy-mm-dd");
-
                 $("#datepicker1").datepicker({
                     showOn: "button",
                     buttonImage: "src/modules/orderQuery/images/calendar.png",
