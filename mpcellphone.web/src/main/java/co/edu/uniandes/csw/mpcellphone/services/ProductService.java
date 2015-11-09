@@ -12,6 +12,7 @@ import co.edu.uniandes.csw.mpcellphone.dtos.ProviderDTO;
 import co.edu.uniandes.csw.mpcellphone.dtos.QuestionDTO;
 import co.edu.uniandes.csw.mpcellphone.providers.StatusCreated;
 import co.edu.uniandes.csw.mpcellphone.utils.RequestUtilsMP;
+import java.util.Date;
 import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
@@ -94,11 +95,14 @@ public class ProductService {
     /**
      * Servicio para establecer preguntas sobre un producto..
      * Creado por jh.rubiano10
+     * @param dto
+     * @return 
      */
     @POST
     @Path("/comments/")
     @StatusCreated
     public CommentDTO createComment(CommentDTO dto) {
+        dto.setDate(new Date());
         return commentLogic.createComment(dto);
     }
     

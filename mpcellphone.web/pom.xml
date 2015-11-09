@@ -15,8 +15,9 @@
         <dependency>
             <groupId>org.glassfish.main.extras</groupId>
             <artifactId>glassfish-embedded-all</artifactId>
-            <version>3.1.2.2</version>
-            <scope>provided</scope>
+            <version>4.0</version>
+            <scope>test</scope>
+            <type>jar</type>
         </dependency>
         <dependency>
             <groupId>co.edu.uniandes.csw.mpcellphone</groupId>
@@ -73,8 +74,8 @@
         </dependency>
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpcore</artifactId>
-            <version>4.3.3</version>
+            <artifactId>httpclient</artifactId>
+            <version>4.3.5</version>
         </dependency>
         <!-- Shiro -->
         <dependency>
@@ -112,7 +113,21 @@
             <version>1.0.RC2</version>
             <type>jar</type>
         </dependency>
+        <dependency>
+            <groupId>uk.co.jemos.podam</groupId>
+            <artifactId>podam</artifactId>
+            <version>6.0.1.RELEASE</version>
+            <scope>test</scope>
+            <type>jar</type>
+        </dependency>
     </dependencies>
+    <repositories>
+        <repository>
+           <id>csw-uniandes</id>
+           <name>csw uniandes</name>
+           <url>http://157.253.236.129:8081/content/repositories/releases/</url>
+        </repository>
+    </repositories>
     <build>
         <plugins>
             <plugin>

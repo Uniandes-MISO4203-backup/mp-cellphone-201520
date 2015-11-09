@@ -13,6 +13,7 @@
         'ngCrud',
         'xeditable',
         'paymentModule',
+        'questionModule',
         'adminModule',
         'orderQueryModule'
     ]);
@@ -57,12 +58,19 @@
                 templateUrl: tplUrl,
                 controller: 'adminCtrl',
                 controllerAs: alias
+            }).when('/question', {
+                templateUrl: 'src/modules/question/questions.tpl.html',
+                controller: 'questionCtrl',
+                controllerAs: alias
             }).when('/orderLists', {
                 templateUrl: 'src/modules/orderQuery/templates/orderByRoleTmpl.html',
                 controller: 'orderQueryCtrl'
             }).when('/viewDetail', {
                 templateUrl: 'src/modules/orderQuery/templates/viewDetail.html',
                 controller: 'orderQueryCtrl'
+            }).when('/tracking', {
+                templateUrl: 'src/modules/tracking/tracking.html',
+                controller: 'trackingCtrl'
             }).otherwise('/catalog');
         }]);
 

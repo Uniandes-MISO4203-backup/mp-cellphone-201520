@@ -5,8 +5,7 @@ import co.edu.uniandes.csw.mpcellphone.dtos.ProviderDTO;
 import co.edu.uniandes.csw.mpcellphone.providers.StatusCreated;
 import com.stormpath.sdk.account.Account;
 import com.stormpath.sdk.account.AccountStatus;
-import com.stormpath.sdk.client.Client;
-import com.stormpath.shiro.realm.ApplicationRealm;
+import com.stormpath.sdk.client.*;
 import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
@@ -21,8 +20,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.mgt.RealmSecurityManager;
 
 /**
  * @generated
@@ -38,6 +35,8 @@ public class ProviderService {
     @QueryParam("maxRecords") private Integer maxRecords;
 
     /**
+     * @param dto
+     * @return 
      * @generated
      */
     @POST
@@ -47,6 +46,7 @@ public class ProviderService {
     }
 
     /**
+     * @return 
      * @generated
      */
     @GET
@@ -58,6 +58,8 @@ public class ProviderService {
     }
 
     /**
+     * @param id
+     * @return 
      * @generated
      */
     @GET
@@ -67,29 +69,40 @@ public class ProviderService {
     }
 
     private Account updateUser(ProviderDTO user) {
-        ApplicationRealm realm = (ApplicationRealm) ((RealmSecurityManager) SecurityUtils.getSecurityManager()).getRealms();
-        Client clientPr = realm.getClient();
-        Account acct = clientPr.instantiate(Account.class);
-        acct.setEmail(user.getEmail());
-        acct.setGivenName(user.getGivenName());
-        acct.setSurname(user.getSurname());
-        acct.setUsername(user.getGivenName() + " " + user.getSurname());
-        acct.setStatus(AccountStatus.ENABLED);
+        //Instancia el cliente stormpath
+        String path = "/stormpath/apiKey.properties";
+        ApiKey apiKey = ApiKeys.builder().setFileLocation(path).build();
+        Client client = Clients.builder().setApiKey(apiKey).build();
+        //Carga los datos a la cuenta
+        String href = user.getUserId();
+        Account acct = client.getDataStore().getResource(href, Account.class);
+        //Actualiza y persiste los datos
+        acct.setEmail(user.getEmail())
+            .setGivenName(user.getGivenName())
+            .setSurname(user.getSurname())
+            .setUsername(user.getGivenName() + " " + user.getSurname())
+            .setStatus(AccountStatus.ENABLED)
+            .save();
         return acct;
     }
 
     
     /**
+     * @param id
+     * @param dto
+     * @return 
      * @generated
      */
     @PUT
     @Path("{id: \\d+}")
     public ProviderDTO updateProvider(@PathParam("id") Long id, ProviderDTO dto) {
         dto.setId(id);
+        updateUser(dto);
         return providerLogic.updateProvider(dto);
     }
 
     /**
+     * @param id
      * @generated
      */
     @DELETE

@@ -1,0 +1,51 @@
+<div>
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>                   
+                <th>Question</th>
+                <th>Date</th>
+                <th>Product</th>
+                <th>Client</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="record in records">
+                <td><div>{{record.question}}</div></td> 
+                <td><div>{{record.date| date:'dd/MM/yyyy'}}</div></td> 
+                <td><div>{{record.product.name}}</div></td> 
+                <td><div>{{record.client.name }}</div></td> 
+                <td style="text-align: center;">
+                    <a href="javascript:;" 
+                       ng-repeat="action in ctrl.answerAction"
+                       ng-show="action.show()" ng-click="action.fn(record)"
+                       class="btn btn-primary btn-sm" > Answer </a></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<!-- Para las fotos de los dispositivos //-->
+<div class="modal fade" id="questionInfo" tabindex="-1" role="dialog" 
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+               <button type="button" class="close" data-dismiss="modal">&times;</button>
+               <h4 class="modal-title" id = "titleQuestion">Answers</h4>
+           </div>
+            <div class = "modal-body" style = "height: 350px; overflow-y: auto;" id = "listAnswers">
+            </div>
+            <form ng-repeat="action in ctrl.saveAnswer"  id="createAnswer" method="post" class="form-horizontal" ng-submit="action.fn()">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <textarea class="form-control" rows="2" id="answerTextArea" style = "width: 95%; margin: 0 auto; resize:none;"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">   
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-success">Send</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
