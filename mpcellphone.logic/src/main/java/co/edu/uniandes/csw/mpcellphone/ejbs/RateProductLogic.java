@@ -27,10 +27,6 @@ public class RateProductLogic implements IRateProductLogic{
         return RateProductConverter.refEntity2DTO(persistence.update(RateProductConverter.refDTO2Entity(dto)));
     }
 
-    public RateProductDTO getRate(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
     public RateProductDTO getRateByProductClient(Long productId, Long clientId) {
        return RateProductConverter.refEntity2DTO(persistence.findByProductClient(productId, clientId));
     }

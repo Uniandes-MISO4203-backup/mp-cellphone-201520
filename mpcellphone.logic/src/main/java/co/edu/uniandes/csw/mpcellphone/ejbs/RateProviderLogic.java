@@ -27,10 +27,6 @@ public class RateProviderLogic implements IRateProviderLogic{
         return RateProviderConverter.refEntity2DTO(persistence.update(RateProviderConverter.refDTO2Entity(dto)));
     }
 
-    public RateProviderDTO getRate(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
     public RateProviderDTO getRateByProviderClient(Long providerId, Long clientId) {
         return RateProviderConverter.refEntity2DTO(persistence.findByProviderClient(providerId, clientId));
     }
