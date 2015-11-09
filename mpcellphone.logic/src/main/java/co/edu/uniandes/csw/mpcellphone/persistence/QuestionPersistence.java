@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.mpcellphone.persistence;
 
+import co.edu.uniandes.csw.mp.ann.MPLoCAnn;
 import co.edu.uniandes.csw.mpcellphone.entities.QuestionEntity;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,11 +25,24 @@ public class QuestionPersistence extends CrudPersistence<QuestionEntity> {
         this.entityClass = QuestionEntity.class;
     }
 
+    @MPLoCAnn(tier="Back-end", reqId="REQ-12")
     public List<QuestionEntity> getByProviderId(Long idProvider) {
         try {
             Map<String, Object> params = new HashMap<String, Object>();
             params.put("idProvider", idProvider);
             return executeListNamedQuery("Question.getByProviderId", params);
+        } catch (NoResultException e) {
+            Logger.getLogger(ProductPersistence.class.getName()).log(Level.SEVERE, null, e);
+            return new ArrayList<QuestionEntity>();
+        }
+    }
+    
+    @MPLoCAnn(tier="Back-end", reqId="REQ-12")
+    public List<QuestionEntity> getByFatherId(Long idFather) {
+        try {
+            Map<String, Object> params = new HashMap<String, Object>();
+            params.put("idFather", idFather.toString());
+            return executeListNamedQuery("Question.getByFatherId", params);
         } catch (NoResultException e) {
             Logger.getLogger(ProductPersistence.class.getName()).log(Level.SEVERE, null, e);
             return new ArrayList<QuestionEntity>();

@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.mpcellphone.entities;
 
+import co.edu.uniandes.csw.mp.ann.MPLoCAnn;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
@@ -22,7 +23,10 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @NamedQueries({
-    @NamedQuery(name = "Question.getByProviderId", query = "select q from QuestionEntity q WHERE q.provider.id = :idProvider"),
+    @NamedQuery(name = "Question.getByProviderId", 
+            query = "select q from QuestionEntity q WHERE q.provider.id = :idProvider and q.father is null"),
+    @NamedQuery(name = "Question.getByFatherId", 
+            query = "select q from QuestionEntity q WHERE q.father like :idFather"),
 })
 public class QuestionEntity implements Serializable {
     
@@ -30,6 +34,8 @@ public class QuestionEntity implements Serializable {
     @GeneratedValue(generator = "Question")
     private Long id;
     private String question;
+    private String state;
+    private String father;
     
     @Temporal(TemporalType.DATE)
     private Date date;
@@ -90,5 +96,28 @@ public class QuestionEntity implements Serializable {
     public void setProvider(ProviderEntity provider) {
         this.provider = provider;
     }
+
+    
+    @MPLoCAnn(tier="Back-end", reqId="REQ-12")
+    public String getState() {
+        return state;
+    }
+
+    @MPLoCAnn(tier="Back-end", reqId="REQ-12")
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    @MPLoCAnn(tier="Back-end", reqId="REQ-12")
+    public String getFather() {
+        return father;
+    }
+
+    @MPLoCAnn(tier="Back-end", reqId="REQ-12")
+    public void setFather(String father) {
+        this.father = father;
+    }
+    
+    
 
 }

@@ -8,10 +8,12 @@
         'productModule',
         'providerModule',
         'photoModule',
+        'rateModule',
         'ngRoute',
         'ngCrud',
         'xeditable',
         'paymentModule',
+        'questionModule',
         'adminModule',
         'orderQueryModule'
     ]);
@@ -55,6 +57,10 @@
             }).when('/admin', {
                 templateUrl: tplUrl,
                 controller: 'adminCtrl',
+                controllerAs: alias
+            }).when('/question', {
+                templateUrl: 'src/modules/question/questions.tpl.html',
+                controller: 'questionCtrl',
                 controllerAs: alias
             }).when('/orderLists', {
                 templateUrl: 'src/modules/orderQuery/templates/orderByRoleTmpl.html',

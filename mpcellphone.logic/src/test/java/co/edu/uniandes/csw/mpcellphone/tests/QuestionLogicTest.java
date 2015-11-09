@@ -8,6 +8,7 @@ import co.edu.uniandes.csw.mpcellphone.entities.QuestionEntity;
 import co.edu.uniandes.csw.mpcellphone.persistence.QuestionPersistence;
 import static co.edu.uniandes.csw.mpcellphone.tests._TestUtil.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -106,6 +107,9 @@ public class QuestionLogicTest {
         for (int i = 0; i < 3; i++) {
             QuestionEntity entity = new QuestionEntity();
         	entity.setQuestion(generateRandom(String.class));
+        	entity.setDate(new Date());
+        	entity.setState(generateRandom(String.class));
+        	entity.setFather(generateRandom(String.class));
             em.persist(entity);
             data.add(entity);
         }
@@ -124,6 +128,9 @@ public class QuestionLogicTest {
     public void createQuestionTest() {
         QuestionDTO dto = new QuestionDTO();
         dto.setQuestion(generateRandom(String.class));
+        dto.setDate(new Date());
+        dto.setState(generateRandom(String.class));
+        dto.setFather(generateRandom(String.class));
 
         //QuestionDTO result = questionLogic.createQuestion(dto);
         int result = 1;

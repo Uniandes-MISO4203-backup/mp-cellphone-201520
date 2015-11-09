@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.mpcellphone.ejbs;
 
+import co.edu.uniandes.csw.mp.ann.MPLoCAnn;
 import co.edu.uniandes.csw.mpcellphone.utils.MailUtilsMP;
 import co.edu.uniandes.csw.mpcellphone.api.IQuestionLogic;
 import co.edu.uniandes.csw.mpcellphone.converters.QuestionConverter;
@@ -56,7 +57,7 @@ public class QuestionLogic implements IQuestionLogic {
         QuestionEntity entity = QuestionConverter.fullDTO2Entity(dto);
         persistence.create(entity);
         //Send email
-        String emailMsg = "<html><body><br />Se�or(a) " + dto.getProvider().getName()
+        String emailMsg = "<html><body><br />Senor(a) " + dto.getProvider().getName()
                 + "<br /><br />"
                 + "Usted ha recibido una nueva pregunta: <br /><br /> "
                 + "<br />Producto: " + dto.getProduct().getName()
@@ -68,9 +69,67 @@ public class QuestionLogic implements IQuestionLogic {
         MailUtilsMP.sendEmailMP(emailMsg, dto.getProvider().getEmail(), subject);
         return QuestionConverter.fullEntity2DTO(entity);
     }
-
+    
+      /**
+     * @param dto
+     * @return
+     */
+    @Override
+    @MPLoCAnn(tier="Back-end", reqId="REQ-12")
+    public QuestionDTO createAnswer(QuestionDTO dto) {
+        QuestionEntity entity = QuestionConverter.fullDTO2Entity(dto);
+        persistence.create(entity);
+        Long id = Long.parseLong(entity.getFather());
+        QuestionDTO father = getQuestion(id);
+        //Send email
+        String emailMsg = "<html><body><br />Senor(a) " + dto.getProvider().getName()
+                + "<br /><br />"
+                + "Usted ha recibido la respuesta a una pregunta realizada: <br /><br /> "
+                + "<br />Producto: " + dto.getProduct().getName()
+                + "<br />Proveedor: " + dto.getProvider().getName()
+                + "<br />Respuesta :" + father.getQuestion()
+                + "<br />Respuesta :" + entity.getQuestion()
+                + "<br /><br />Atentamente,"
+                + "<br /><br /><br />MarketPhone";
+        String subject = "Ha recibido un mensaje de MarketPhone";
+        MailUtilsMP.sendEmailMP(emailMsg, dto.getProvider().getEmail(), subject);
+        return QuestionConverter.fullEntity2DTO(entity);
+    }
+   
+    @Override
+    @MPLoCAnn(tier="Back-end", reqId="REQ-12")
     public List<QuestionDTO> getByProviderId(Long idProvider) {
         return QuestionConverter.listEntity2DTO(persistence.getByProviderId(idProvider));
     }
+
+    @Override
+    @MPLoCAnn(tier="Back-end", reqId="REQ-12")
+    public List<QuestionDTO> getByFatherId(Long idProvider) {
+        return QuestionConverter.listEntity2DTO(persistence.getByFatherId(idProvider));
+    }
+    
+        /**
+     * Metodo que permite actualizar la informaci�n de una orden
+     *
+     * @param dto
+     * @return
+     */
+    @Override
+    @MPLoCAnn(tier="Back-end", reqId="REQ-12")
+    public QuestionDTO updateQuestion(QuestionDTO dto) {
+        QuestionEntity entity = persistence.update(QuestionConverter.fullDTO2Entity(dto));
+        return QuestionConverter.fullEntity2DTO(entity);
+    }
+
+    /**
+     * Metodo que permite eliminar una pregunta
+     *
+     * @param id
+     */
+    @Override
+    @MPLoCAnn(tier="Back-end", reqId="REQ-12")
+    public void deleteQuestion(Long id) {
+        persistence.delete(id);
+    }  
 
 }
