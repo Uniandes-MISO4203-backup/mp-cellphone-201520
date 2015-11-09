@@ -1,7 +1,9 @@
 package co.edu.uniandes.csw.mpcellphone.services;
 
+import co.edu.uniandes.csw.mp.ann.MPLoCAnn;
 import co.edu.uniandes.csw.mpcellphone.api.IClientLogic;
 import co.edu.uniandes.csw.mpcellphone.dtos.ClientDTO;
+import co.edu.uniandes.csw.mpcellphone.dtos.UserDTO;
 import co.edu.uniandes.csw.mpcellphone.providers.StatusCreated;
 import com.stormpath.sdk.account.Account;
 import com.stormpath.sdk.account.AccountStatus;
@@ -68,6 +70,7 @@ public class ClientService {
         return clientLogic.getClient(id);
     }
 
+    @MPLoCAnn(tier="Services", reqId="REQ-43")
     private Account updateUser(ClientDTO user) {
         //Instancia el cliente stormpath
         String path = "/stormpath/apiKey.properties";
@@ -85,7 +88,6 @@ public class ClientService {
             .save();
         return acct;
     }
-
     
     /**
      * @param id
@@ -102,6 +104,26 @@ public class ClientService {
         return clientLogic.updateClient(dto);
     }
 
+    
+
+    @POST 
+    @Path("/client/chgpwdC")
+    @StatusCreated
+    @MPLoCAnn(tier="Services", reqId="REQ-43")
+    public Account changePasswordC (UserDTO dto) {
+        //Instancia el cliente stormpath
+        String path = "/stormpath/apiKey.properties";
+        ApiKey apiKey = ApiKeys.builder().setFileLocation(path).build();
+        Client client = Clients.builder().setApiKey(apiKey).build();
+        String href = dto.getStormpath();
+        String password = dto.getPassword();
+        Account acct = client.getDataStore().getResource(href, Account.class);
+        //Actualiza y persiste los datos
+        acct.setPassword(password)
+            .save();
+        return acct;
+    }
+    
     /**
      * @param id
      * @generated
