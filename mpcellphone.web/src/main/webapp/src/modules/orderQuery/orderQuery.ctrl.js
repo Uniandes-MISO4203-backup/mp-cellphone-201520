@@ -21,12 +21,15 @@
                     buttonImageOnly: true,
                     buttonText: "Select date"
                 });
+                $('#datepicker').datepicker("option", "dateFormat", "yy-mm-dd");
+
                 $("#datepicker1").datepicker({
                     showOn: "button",
                     buttonImage: "src/modules/orderQuery/images/calendar.png",
                     buttonImageOnly: true,
                     buttonText: "Select date"
                 });
+                $('#datepicker1').datepicker("option", "dateFormat", "yy-mm-dd");
             })();
             if (user) {
                 $log.log(user.id);
@@ -60,6 +63,33 @@
                         }
                     }
                 });
+                $scope.search = function () {
+                    $scope.orderList = $scope.allOrders || $scope.orderList;
+                    var fechaInicial = $('#datepicker').val();
+                    var fechaFinal = $('#datepicker1').val();
+                    $scope.dataEmpty = false;
+                    fechaInicial = fechaInicial.split('-').join('');
+                    fechaFinal = fechaFinal.split('-').join('');
+
+                    var temp = [];
+                    for (var i = 0, l = $scope.orderList.length; i < l; i++) {
+                        var format = $scope.orderList[i].orderId.dateOrder.split('-').join('');
+                        format = parseInt(format.substring(0, 8));
+                        if (format >= fechaInicial &&
+                                format <= fechaFinal) {
+                            temp.push($scope.orderList[i]);
+                        }
+                    }
+                    if (temp.length === 0) {
+                        $scope.dataEmpty = true;
+                        $('#tableData').hide();
+                    }else{
+                        $scope.dataEmpty = false;
+                        $('#tableData').show();
+                    }
+                    $scope.allOrders = $scope.orderList;
+                    $scope.orderList = temp;
+                };
                 $scope.globalActions = {
                     viewDetail: {
                         displayName: 'Return',
