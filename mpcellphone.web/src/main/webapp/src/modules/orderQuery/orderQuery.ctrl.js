@@ -102,7 +102,6 @@
                     $scope.dataEmpty = false;
                     fechaInicial = fechaInicial.split('-').join('');
                     fechaFinal = fechaFinal.split('-').join('');
-
                     var temp = [];
                     for (var i = 0, l = $scope.orderList.length; i < l; i++) {
                         var format = $scope.orderList[i].orderId.dateOrder.split('-').join('');
@@ -151,31 +150,24 @@
             else {
                 $location.path('/login');
             }
-        }]);
-    
-    mod.controller('ModalRateCtrl', function ($scope, $modalInstance) {
-        
+        }]);    
+    mod.controller('ModalRateCtrl', function ($scope, $modalInstance) {        
         $scope.ok = function () {
             alert($scope.rate)
             //$modalInstance.close($scope.itemQuestion);
         };
-
         $scope.cancel = function () {
             $modalInstance.dismiss('cancel');
         };
         $scope.rate = 3;
         $scope.max = 5;
         $scope.isReadonly = false;
-
         $scope.hoveringOver = function(value) {
             $scope.overStar = value;
             $scope.percent = value;
         };
-
         $scope.ratingStates = [
             {stateOn: 'glyphicon-star', stateOff: 'glyphicon-star-empty'}
-        ];
-        
-    });
-    
+        ];        
+    });    
 })(window.angular);
