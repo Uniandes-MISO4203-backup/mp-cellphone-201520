@@ -12,7 +12,10 @@
                     map: map,
                     title: 'Hello World!'
                 });
-            }
+                $scope.ret = function (){
+                    $location.path('/orderLists');
+                };
+            };
         }]);
 })(window.angular);
 

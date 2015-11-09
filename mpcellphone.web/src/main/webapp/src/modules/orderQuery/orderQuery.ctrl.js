@@ -137,6 +137,18 @@
                         show: function () {
                             return true;
                         }
+                    },
+                    tracking: {
+                        displayName: 'Tracking',
+                        icon: 'send',
+                        class: 'primary',
+                        fn: function (record) {
+                            var id = String(record.orderId.id);
+                            $location.path('/tracking').search('id', id);
+                        },
+                        show: function () {
+                            return true;
+                        }
                     }};
             }
             else {

@@ -1,11 +1,20 @@
 <div>
-    <div class="panel panel-success">
+    <div class="panel panel-success panelTracking">
         <div class="panel-heading">
-            <h3 class="panel-title">Panel success</h3>
+            <h3 class="panel-title">Shipping Status</h3>
         </div>
-        <div class="panel-body">
-            <img src="src/modules/tracking/images/envio.png" />
-            <div id="map" style="width: 500px; height: 500px;"></div>
+        <div class="panel-body panelTextTracking">
+            <img id="img" src="src/modules/tracking/images/envio.png" />
+            <div id="map"></div>
+            <div class="panel panel-primary panelStatus">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Status</h3>
+                </div>
+                <div class="panel-body st">
+                    Panel content
+                    <button class="btn btn-default ret" ng-click="ret()">Return</button>
+                </div>
+            </div>
         </div>
     </div>
     <script async defer
