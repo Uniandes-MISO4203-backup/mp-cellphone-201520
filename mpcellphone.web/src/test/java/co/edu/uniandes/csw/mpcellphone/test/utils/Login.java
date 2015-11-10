@@ -34,7 +34,9 @@ public class Login {
     public static void createSampleUser() {
         Client cliente = ClientBuilder.newClient();
         Response response = cliente.target(URLBASE).path(PATH_REGISTER).request().
-                post(Entity.entity(Login.createSampleUserDTO(), MediaType.APPLICATION_JSON));       
+                post(Entity.entity(Login.createSampleUserDTO(), MediaType.APPLICATION_JSON)); 
+        System.out.println("**********************************************************************");
+        System.out.println(response.toString());
     }
     
     /**
@@ -66,12 +68,12 @@ public class Login {
     public static UserDTO createSampleUserDTO(){
         UserDTO client = new UserDTO();
         client.setId(Long.parseLong("1"));
-        client.setName("Test12");
-        client.setRole("client");
+        client.setName("TestFinalCesar");
+        client.setRole("user");
         client.setStormpath("https://api.stormpath.com/v1/accounts/SfnHyNZUy4a7FQUTxXShv");
         client.setPassword("12345TesT");
-        client.setEmail("test@uniandes.edu.co");
-        client.setUserName("test test");
+        client.setEmail("testFinalCesar@uniandes.edu.co");
+        client.setUserName("TestFinalCesar");
         return client;
     }
     

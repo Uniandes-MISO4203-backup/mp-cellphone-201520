@@ -30,6 +30,7 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.resolver.api.DependencyResolvers;
 import org.jboss.shrinkwrap.resolver.api.maven.MavenDependencyResolver;
 import org.junit.AfterClass;
+import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
@@ -100,7 +101,7 @@ public class CartItemFunctionalIT {
     private static void insertData() {
         
         Login.createSampleUser();
-        cookieSessionId = Login.login("Test12", "12345TesT");
+        cookieSessionId = Login.login("TestFinalCesar", "12345TesT");
         for (int i = 0; i < 5; i++) {
             PodamFactory factory = new PodamFactoryImpl();
             cartItems.add(factory.manufacturePojo(CartItemDTO.class));
@@ -126,14 +127,14 @@ public class CartItemFunctionalIT {
      * No Items to add to cart
      * @throws InterruptedException 
      */
-    @Test(expected = NoSuchElementException.class)
-    @RunAsClient
-    public void t1addItemToCart() throws InterruptedException {
-        
-        Thread.sleep(2000);
-        driver.findElement(By.id("0-addToCart-btn"));
-        
-        Thread.sleep(1000);
-    }
     
+    @Test(expected = NoSuchElementException.class)
+   @RunAsClient
+   public void t1addItemToCart() throws InterruptedException {
+       boolean success = false;
+       Thread.sleep(2000);
+       driver.findElement(By.id("0-addToCart-btn")).click();
+       assertTrue(success);
+       Thread.sleep(1000);
+   }
 }
