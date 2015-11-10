@@ -21,8 +21,6 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import org.apache.shiro.SecurityUtils;
 
@@ -92,8 +90,7 @@ public class QuestionService {
     @GET
     @MPLoCAnn(tier="Services", reqId="REQ-12")
     public List<QuestionDTO> getQuestions() {
-        List<QuestionDTO> list = questionLogic.getByProviderId(provider.getId());
-        return list;
+        return questionLogic.getByProviderId(provider.getId());
     }
 
     /**

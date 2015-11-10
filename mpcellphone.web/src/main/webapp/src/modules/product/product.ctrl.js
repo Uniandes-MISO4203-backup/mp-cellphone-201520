@@ -98,12 +98,14 @@
                         orderListLink.text(' Order List');
                         orderListLink.prepend(orderListIcon);
                         $(".dropdown-menu").prepend(orderListItem);
+                        $(".dropdown-menu").prepend("<li><a href = '#' id = 'password'><span class = 'glyphicon glyphicon-lock'></span> Change Password</a></li>");
                         $(".dropdown-menu").prepend("<li><a href = '#' id = 'profile'><span class = 'glyphicon glyphicon-user'></span> My Profile</a></li>");
                     }
                     ;
                     var currentUser = authSvc.getCurrentUser();
                     if (currentUser) {
                         adminService.darRole().then(function (data) {
+                            $("#password").attr("href", "#/password");
                             if (data.role === "admin") {
                                 $("#admin").show();
                                 $("#profile").attr("href", "#/client");

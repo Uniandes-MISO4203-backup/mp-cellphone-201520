@@ -42,20 +42,46 @@
             };
             $scope.states = [];
             stateSvc.fetchRecords().then(function (data) {
-                $log.log(data);
                 $scope.states = data;
+                setTimeout(function () {
+                    var types = $('#state').children();
+                    while ($(types[0]).text().indexOf('Select a State') === -1) {
+                        $(types[0]).remove();
+                        types = $('#state').children();
+                    }
+                }, 200);
             });
-            $scope.onChangeCity = function (){
-                var state=$('#state').val();
-                citySvc.getCityByState(state).then(function (data){
+            $scope.onChangeCity = function () {
+                var state = $('#state').val();
+                citySvc.getCityByState(state).then(function (data) {
                     $scope.city = data;
+                    setTimeout(function () {
+                        var types = $('#city').children();
+                        while ($(types[0]).text().indexOf('Select a City') === -1) {
+                            $(types[0]).remove();
+                            types = $('#city').children();
+                        }
+                    }, 200);
                 });
             };
+            setTimeout(function () {
+                var types = $('#city').children();
+                while ($(types[0]).text().indexOf('Select a City') === -1) {
+                    $(types[0]).remove();
+                    types = $('#city').children();
+                }
+            }, 200);
             /*-------------- Shipping ------------*/
             $scope.shipping = {};
             $scope.shipping.time = Math.ceil(Math.random() * 5);
             $scope.submitShippingData = function () {
                 var shippingData = {};
+                citySvc.getCityById($scope.shipping.city).then(function (data) {
+                    $scope.c = data.name;
+                });
+                stateSvc.getStateById($scope.shipping.state).then(function (data) {
+                    $scope.s = data.name;
+                });
                 shippingData.state = $scope.shipping.state;
                 shippingData.country = $scope.shipping.country;
                 shippingData.city = $scope.shipping.city;
@@ -158,7 +184,7 @@
                         clientId: authSvc.getCurrentUser()}),
                     dataType: 'json',
                     contentType: "application/json"
-                }).success(function (data) {
+                }).success(function () {
                     $log.log("Request success");
                     proSvc.updateProduct($scope.cartItems[i]);
                     ciSvc.deleteRecord($scope.cartItems[i]);
@@ -182,7 +208,7 @@
                         '<div class="progress-bar progress-bar-striped active"  role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 50%; height: 25px; margin: 45vh 25vw;">' +
                         '<span class="sr-only">100% Complete</span>' +
                         '</div>' +
-                        '</div>')
+                        '</div>');
                 $scope.submitPayment();
             };
             $scope.finish = function () {

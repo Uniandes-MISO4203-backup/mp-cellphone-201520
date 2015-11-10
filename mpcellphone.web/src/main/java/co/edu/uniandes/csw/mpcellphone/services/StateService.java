@@ -12,6 +12,7 @@ import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
@@ -36,5 +37,16 @@ public class StateService {
     @GET
     public List<StateDTO> getStates() {        
         return stateLogic.getStates(page, maxRecords);
-    }    
+    }  
+    
+    /**
+     * Metodo GET, para obtener un dato especifico al enviar un parametro por URL
+     * @param id
+     * @return 
+     */
+    @GET
+    @Path("{id: \\d+}")
+    public StateDTO getState(@PathParam("id") Long id) {
+        return stateLogic.getState(id);
+    }
 }

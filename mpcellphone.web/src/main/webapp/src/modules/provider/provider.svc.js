@@ -4,6 +4,6 @@
             CrudCreator.extendService(this, context);
             this.getRolePr = function () {
                 return this.api.one('../users/currentUser').get();
-            }
+            };
         }]);
 })(window.angular);

@@ -72,6 +72,7 @@ public class CityLogic implements ICityLogic {
         return CityConverter.listEntity2DTO(persistence.findAll());
     }
     
+    @Override
     public List<CityDTO> getCityByState(Integer page, Integer maxRecords, Long idState) {
         return persistence.getCityByState(page, maxRecords, idState);
     }

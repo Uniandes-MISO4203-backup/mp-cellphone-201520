@@ -1,7 +1,9 @@
 package co.edu.uniandes.csw.mpcellphone.services;
 
+import co.edu.uniandes.csw.mp.ann.MPLoCAnn;
 import co.edu.uniandes.csw.mpcellphone.api.IProviderLogic;
 import co.edu.uniandes.csw.mpcellphone.dtos.ProviderDTO;
+import co.edu.uniandes.csw.mpcellphone.dtos.UserDTO;
 import co.edu.uniandes.csw.mpcellphone.providers.StatusCreated;
 import com.stormpath.sdk.account.Account;
 import com.stormpath.sdk.account.AccountStatus;
@@ -68,6 +70,7 @@ public class ProviderService {
         return providerLogic.getProvider(id);
     }
 
+    @MPLoCAnn(tier="Services", reqId="REQ-43")
     private Account updateUser(ProviderDTO user) {
         //Instancia el cliente stormpath
         String path = "/stormpath/apiKey.properties";
@@ -86,6 +89,24 @@ public class ProviderService {
         return acct;
     }
 
+    @POST 
+    @Path("/provider/chgpwdP")
+    @StatusCreated
+    @MPLoCAnn(tier="Services", reqId="REQ-43")
+    public Account changePasswordP (UserDTO dto) {
+        //Instancia el cliente stormpath
+        String path = "/stormpath/apiKey.properties";
+        ApiKey apiKey = ApiKeys.builder().setFileLocation(path).build();
+        Client client = Clients.builder().setApiKey(apiKey).build();
+        String href = dto.getStormpath();
+        String password = dto.getPassword();
+        Account acct = client.getDataStore().getResource(href, Account.class);
+        //Actualiza y persiste los datos
+        acct.setPassword(password)
+            .save();
+        return acct;
+    }
+  
     
     /**
      * @param id

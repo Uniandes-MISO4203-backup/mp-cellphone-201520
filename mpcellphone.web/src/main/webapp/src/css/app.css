@@ -41,3 +41,38 @@
     display: inline-block;
 }
 
+.panelTracking{
+    margin-top: 10px;
+}
+
+#map{
+    width: 500px; 
+    height: 300px;
+    display: inline-block;
+}
+
+.panelTextTracking{
+    text-align: center;
+}
+
+.panelStatus{
+    text-align: center;
+    width: 300px;
+    height: 150px;
+    display: inline-block;
+    margin-left: 40px;
+    vertical-align: bottom;
+}
+
+.st{
+    margin-top: 4px;
+}
+
+.ret{
+    display: block;
+    margin: 10px auto;
+}
+
+#img{
+    vertical-align: baseline;
+}

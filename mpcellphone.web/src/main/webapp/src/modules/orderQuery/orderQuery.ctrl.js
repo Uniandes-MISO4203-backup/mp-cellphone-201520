@@ -23,7 +23,7 @@
                     $scope.hoveringOver = function(value, product) {
                         $scope.overStar = value;
                         $scope.product = product;
-                    };                    
+                    };
                     $scope.hoveringOverProvider = function(value, provider) {
                         $scope.overStarPro = value;
                         $scope.provid = provider;
@@ -46,7 +46,7 @@
                                     $scope.alert={type:'success',msg:'provider '+$scope.provid.name+' with '+$scope.overStarPro + ' stars' };
                                     $scope.showAlert = true;
                                         });
-                        return $scope.overStarPro;      
+                        return $scope.overStarPro;
                     };
                 });
             }
@@ -148,16 +148,27 @@
                         show: function () {
                             return true;
                         }
+                    },
+                    tracking: {
+                        displayName: 'Tracking',
+                        icon: 'send',
+                        class: 'primary',
+                        fn: function (record) {
+                            var id = String(record.orderId.id);
+                            $location.path('/tracking').search('id', id);
+                        },
+                        show: function () {
+                            return true;
+                        }
                     }};
             }
             else {
                 $location.path('/login');
             }
-        }]);    
-    mod.controller('ModalRateCtrl', function ($scope, $modalInstance) {        
+        }]);
+    mod.controller('ModalRateCtrl', function ($scope, $modalInstance) {
         $scope.ok = function () {
-            alert($scope.rate)
-            //$modalInstance.close($scope.itemQuestion);
+            alert($scope.rate);
         };
         $scope.cancel = function () {
             $modalInstance.dismiss('cancel');
@@ -171,6 +182,6 @@
         };
         $scope.ratingStates = [
             {stateOn: 'glyphicon-star', stateOff: 'glyphicon-star-empty'}
-        ];        
-    });    
+        ];
+    });
 })(window.angular);

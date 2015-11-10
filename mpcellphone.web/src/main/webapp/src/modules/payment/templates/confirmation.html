@@ -5,9 +5,9 @@
         </div>
         <div class="panel-body">
             <ul>
-                <li>State: {{shippingData.state}}</li>
                 <li>Country: {{shippingData.country}}</li>
-                <li>City: {{shippingData.city}}</li>
+                <li>State: {{s}}</li>
+                <li>City: {{c}}</li>
                 <li>Address: {{shippingData.address}}</li>
                 <li>Estimated Time: {{shippingData.stimatedTime}}</li>
             </ul>
@@ -19,13 +19,11 @@
         </div>
         <div class="panel-body">
             <ul>
-                <!-- <li>Date: {{paymentData.payDate}}</li> -->
-                <li>Payment Method: {{order.paymentMethod}}</li>
-                <li>Card Number: {{order.numberCard}}</li>
-                <li>SVC: {{order.svc}}</li>
-                <li>Bank: {{order.bank}}</li>
-                <!-- <li>Total Tax: {{paymentData.totalTax}}</li> -->
-                <li>Total Sale: {{order.totalSale}}</li>
+                <li>Payment Method: {{payment.creditCardHolder}}</li>
+                <li>Card Number: {{payment.cardNumber}}</li>
+                <li>SVC: {{payment.cardCode}}</li>
+                <li>Bank: {{payment.clientBankName}}</li>
+                <li>Total Sale: {{totalC}}</li>
             </ul> 
         </div>
     </div>
