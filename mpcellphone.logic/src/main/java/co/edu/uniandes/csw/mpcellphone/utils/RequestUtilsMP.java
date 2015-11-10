@@ -12,10 +12,6 @@ public class RequestUtilsMP {
     
     public static final String URLBASE = "http://localhost:8080/mpcellphone.web/webresources";
     public static final String PATHIMEI= "/imei/check";
-
-    public RequestUtilsMP() {
-    }
-    
     
     
     public static boolean isStolenImei(String imei){

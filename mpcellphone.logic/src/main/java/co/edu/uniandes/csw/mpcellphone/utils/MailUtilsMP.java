@@ -30,7 +30,6 @@ public class MailUtilsMP {
     static BodyPart generateBodyPartMessage;
     static BodyPart generateBodyPartAttach;
     
-    private MailUtilsMP(){}
 
     /**
      * Metodo para env�o de correo sin anexos
