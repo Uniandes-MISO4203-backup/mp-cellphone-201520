@@ -184,7 +184,7 @@
                         clientId: authSvc.getCurrentUser()}),
                     dataType: 'json',
                     contentType: "application/json"
-                }).success(function (data) {
+                }).success(function () {
                     $log.log("Request success");
                     proSvc.updateProduct($scope.cartItems[i]);
                     ciSvc.deleteRecord($scope.cartItems[i]);
