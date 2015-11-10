@@ -3,6 +3,7 @@ package co.edu.uniandes.csw.mpcellphone.tests;
 import co.edu.uniandes.csw.mpcellphone.ejbs.CartItemLogic;
 import co.edu.uniandes.csw.mpcellphone.api.ICartItemLogic;
 import co.edu.uniandes.csw.mpcellphone.converters.CartItemConverter;
+import co.edu.uniandes.csw.mpcellphone.converters.ClientConverter;
 import co.edu.uniandes.csw.mpcellphone.dtos.CartItemDTO;
 import co.edu.uniandes.csw.mpcellphone.dtos.ClientDTO;
 import co.edu.uniandes.csw.mpcellphone.entities.CartItemEntity;
@@ -199,6 +200,28 @@ public class CartItemLogicTest {
         dto.setQuantity(generateRandom(Integer.class));
 
         cartItemLogic.updateCartItem(dto);
+
+        CartItemEntity resp = em.find(CartItemEntity.class, entity.getId());
+
+        Assert.assertEquals(dto.getName(), resp.getName());
+        Assert.assertEquals(dto.getQuantity(), resp.getQuantity());
+    }
+    
+    /**
+     * @generated
+     */
+    @Test
+    public void updateCartItemByClientTest() {
+        CartItemEntity entity = data.get(0);
+
+        CartItemDTO dto = new CartItemDTO();
+
+        dto.setId(entity.getId());
+        dto.setName(generateRandom(String.class));
+        dto.setQuantity(generateRandom(Integer.class));
+        dto.setClient(ClientConverter.refEntity2DTO(entity.getClient()));
+
+        cartItemLogic.updateCartItemByClient(entity.getClient().getId(),dto);
 
         CartItemEntity resp = em.find(CartItemEntity.class, entity.getId());
 
