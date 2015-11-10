@@ -36,22 +36,6 @@ public abstract class TaxConverter {
     }
 
     /**
-     * @param dto
-     * @return
-     * @generated
-     */
-    public static TaxEntity refDTO2Entity(TaxDTO dto) {
-        if (dto != null) {
-            TaxEntity entity = new TaxEntity();
-            entity.setId(dto.getId());
-
-            return entity;
-        } else {
-            return null;
-        }
-    }
-
-    /**
      * @param entity
      * @return 
      */
@@ -123,17 +107,4 @@ public abstract class TaxConverter {
         return dtos;
     }
 
-    /**
-     * @param dtos
-     * @return 
-     */
-    public static List<TaxEntity> listDTO2Entity(List<TaxDTO> dtos) {
-        List<TaxEntity> entities = new ArrayList<TaxEntity>();
-        if (dtos != null) {
-            for (TaxDTO dto : dtos) {
-                entities.add(basicDTO2Entity(dto));
-            }
-        }
-        return entities;
-    }
 }

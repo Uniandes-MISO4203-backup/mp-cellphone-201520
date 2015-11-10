@@ -106,8 +106,7 @@ public abstract class OrderConverter {
             entity.setTotalDiscount(dto.getTotalDiscount());
             entity.setTotalSale(dto.getTotalSale());
             entity.setTotalTax(dto.getTotalTax());
-            entity.setPaymentMethod(PaymentMethodConverter.refDTO2Entity(dto.getPaymentMethod()));
-            entity.setTax(TaxConverter.refDTO2Entity(dto.getTax()));            
+            entity.setPaymentMethod(PaymentMethodConverter.refDTO2Entity(dto.getPaymentMethod()));           
             return entity;
         } else {
             return null;

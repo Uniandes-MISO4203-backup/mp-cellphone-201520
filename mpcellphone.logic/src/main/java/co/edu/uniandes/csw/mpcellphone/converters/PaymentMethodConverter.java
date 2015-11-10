@@ -113,18 +113,4 @@ public abstract class PaymentMethodConverter {
         }
         return dtos;
     }
-
-    /**
-     * @param dtos
-     * @return 
-     */
-    public static List<PaymentMethodEntity> listDTO2Entity(List<PaymentMethodDTO> dtos) {
-        List<PaymentMethodEntity> entities = new ArrayList<PaymentMethodEntity>();
-        if (dtos != null) {
-            for (PaymentMethodDTO dto : dtos) {
-                entities.add(basicDTO2Entity(dto));
-            }
-        }
-        return entities;
-    }
 }
