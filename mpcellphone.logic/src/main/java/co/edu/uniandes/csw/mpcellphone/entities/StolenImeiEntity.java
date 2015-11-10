@@ -35,6 +35,21 @@ public class StolenImeiEntity implements Serializable{
     public String getImei() {
         return imei;
     }
-
+    
+     /**
+     * 
+     * @param id
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
+    
+     /**
+     * 
+     * @param imei
+     */
+    public void setImei(String imei) {
+        this.imei = imei;
+    }
     
 }
