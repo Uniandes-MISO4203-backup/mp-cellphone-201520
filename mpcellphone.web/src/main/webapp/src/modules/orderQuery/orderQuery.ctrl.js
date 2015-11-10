@@ -14,11 +14,11 @@
                     $scope.detailOrderList = data;
                    // $scope.rate = 3;
                     $scope.max = 5;
-                    $scope.isReadonly = false; 
+                    $scope.isReadonly = false;
                     $scope.hoveringOver = function(value, product) {
                         $scope.overStar = value;
                         $scope.product = product;
-                    };                    
+                    };
                     $scope.hoveringOverProvider = function(value, provider) {
                         $scope.overStarPro = value;
                         $scope.provid = provider;
@@ -30,12 +30,12 @@
                     $scope.rateProduct= function () {
                         rateService.setRateProduct($scope.product,$scope.overStar)
                                 .then(function () { });
-                        return $scope.overStar;      
+                        return $scope.overStar;
                     };
                     $scope.rateProvider= function () {
                         rateService.setRateProvider($scope.provid,$scope.overStarPro)
                                 .then(function () { });
-                        return $scope.overStarPro;      
+                        return $scope.overStarPro;
                     };
                 });
             }
@@ -154,11 +154,10 @@
             else {
                 $location.path('/login');
             }
-        }]);    
-    mod.controller('ModalRateCtrl', function ($scope, $modalInstance) {        
+        }]);
+    mod.controller('ModalRateCtrl', function ($scope, $modalInstance) {
         $scope.ok = function () {
-            alert($scope.rate)
-            //$modalInstance.close($scope.itemQuestion);
+            alert($scope.rate);
         };
         $scope.cancel = function () {
             $modalInstance.dismiss('cancel');
@@ -172,6 +171,6 @@
         };
         $scope.ratingStates = [
             {stateOn: 'glyphicon-star', stateOff: 'glyphicon-star-empty'}
-        ];        
-    });    
+        ];
+    });
 })(window.angular);
