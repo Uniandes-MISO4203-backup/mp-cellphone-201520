@@ -2,6 +2,7 @@ package co.edu.uniandes.csw.mpcellphone.dtos;
 
 import java.util.List;
 import javax.xml.bind.annotation.XmlRootElement;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  * @generated
@@ -16,6 +17,7 @@ public class ProductDTO {
     private CellPhoneDTO cellPhone;
     private ProviderDTO provider;
     private String category;
+    @PodamExclude
     private List<PhotoDTO> photos;
     private String productState;
     private CityDTO city;
