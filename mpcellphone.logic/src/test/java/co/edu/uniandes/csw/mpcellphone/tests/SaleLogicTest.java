@@ -299,5 +299,13 @@ public class SaleLogicTest {
         Assert.assertEquals(entity.getId(), saleUpdated.getId());
         Assert.assertEquals(entity.getClientId().getId(), saleUpdated.getClientId().getId());
     }
+    
+    @Test
+    public void deleteLogicTest() {
+        SalesEntity entity = data.get(0);
+        saleLogic.deleteSale(entity.getId());
+        ShipEntity deleted = em.find(ShipEntity.class, entity.getId());
+        Assert.assertNull(deleted);
+    }
 
 }
