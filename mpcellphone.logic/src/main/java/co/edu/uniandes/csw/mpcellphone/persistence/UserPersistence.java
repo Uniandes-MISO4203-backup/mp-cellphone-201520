@@ -24,15 +24,6 @@ public class UserPersistence extends CrudPersistence<UserEntity> {
         this.entityClass = UserEntity.class;
     }
     
-    public UserEntity getUsers(){
-        try {
-            return this.executeSingleNamedQuery("User.FindAll");
-        } catch (NoResultException ex) {
-            Logger.getLogger(UserLogic.class.getName()).log(Level.SEVERE, null, ex);
-            return new UserEntity();
-        }
-    }
-    
     public UserEntity getUserByUserName(String userName){
         try {
             Map<String, Object> parametros = new HashMap<String, Object>();
