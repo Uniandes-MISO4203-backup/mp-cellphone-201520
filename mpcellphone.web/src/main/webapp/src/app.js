@@ -8,27 +8,32 @@
         'productModule',
         'providerModule',
         'photoModule',
+        'rateModule',
         'ngRoute',
         'ngCrud',
         'xeditable',
         'paymentModule',
+        'questionModule',
         'adminModule',
         'orderQueryModule'
     ]);
 
     mainApp.config(['$routeProvider', 'CrudTemplateURL', 'CrudCtrlAlias', function ($routeProvider, tplUrl, alias) {
             $routeProvider
-                    .when('/cellPhone', {
-                        //templateUrl: 'src/modules/cellPhone/cellphoneTmpl.html', //tplUrl, Se cambiar tplUrl por la nueva plantilla
-                        templateUrl: tplUrl,
-                        controller: 'cellPhoneCtrl',
-                        controllerAs: alias
-                    })
-                    .when('/client', {
-                        templateUrl: tplUrl,
-                        controller: 'clientCtrl',
-                        controllerAs: alias
-                    }).when('/products', {
+            .when('/cellPhone', {
+                //templateUrl: 'src/modules/cellPhone/cellphoneTmpl.html', //tplUrl, Se cambiar tplUrl por la nueva plantilla
+                templateUrl: tplUrl,
+                controller: 'cellPhoneCtrl',
+                controllerAs: alias
+            }).when('/client', {
+                templateUrl: tplUrl,
+                controller: 'clientCtrl',
+                controllerAs: alias
+            }).when('/password', {
+                templateUrl: 'src/modules/security/security.tpl.html',
+                controller: 'securityCtrl',
+                controllerAs: alias
+            }).when('/products', {
                 templateUrl: tplUrl,
                 controller: 'productsCtrl',
                 controllerAs: alias
@@ -56,11 +61,18 @@
                 templateUrl: tplUrl,
                 controller: 'adminCtrl',
                 controllerAs: alias
+            }).when('/question', {
+                templateUrl: 'src/modules/question/questions.tpl.html',
+                controller: 'questionCtrl',
+                controllerAs: alias
             }).when('/orderLists', {
                 templateUrl: 'src/modules/orderQuery/templates/orderByRoleTmpl.html',
                 controller: 'orderQueryCtrl'
             }).when('/viewDetail', {
                 templateUrl: 'src/modules/orderQuery/templates/viewDetail.html',
+                controller: 'orderQueryCtrl'
+            }).when('/tracking', {
+                templateUrl: 'src/modules/tracking/tracking.html',
                 controller: 'orderQueryCtrl'
             }).otherwise('/catalog');
         }]);

@@ -2,15 +2,13 @@ package co.edu.uniandes.csw.mpcellphone.tests;
 
 import co.edu.uniandes.csw.mpcellphone.ejbs.QuestionLogic;
 import co.edu.uniandes.csw.mpcellphone.api.IQuestionLogic;
-import co.edu.uniandes.csw.mpcellphone.converters.ClientConverter;
-import co.edu.uniandes.csw.mpcellphone.converters.ProductConverter;
-import co.edu.uniandes.csw.mpcellphone.converters.ProviderConverter;
 import co.edu.uniandes.csw.mpcellphone.converters.QuestionConverter;
 import co.edu.uniandes.csw.mpcellphone.dtos.QuestionDTO;
 import co.edu.uniandes.csw.mpcellphone.entities.QuestionEntity;
 import co.edu.uniandes.csw.mpcellphone.persistence.QuestionPersistence;
 import static co.edu.uniandes.csw.mpcellphone.tests._TestUtil.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -109,6 +107,12 @@ public class QuestionLogicTest {
         for (int i = 0; i < 3; i++) {
             QuestionEntity entity = new QuestionEntity();
         	entity.setQuestion(generateRandom(String.class));
+        	entity.setDate(new Date());
+                entity.setProvider(null);
+                entity.setClient(null);
+                entity.setProduct(null);
+        	entity.setState(generateRandom(String.class));
+        	entity.setFather(String.valueOf(generateRandom(Long.class)));
             em.persist(entity);
             data.add(entity);
         }
@@ -118,24 +122,6 @@ public class QuestionLogicTest {
     public void countQuestionsTest(){
         int size = questionLogic.countQuestion();
         Assert.assertEquals(data.size(), size);
-    }
-    
-        /**
-     * @generated
-     */
-    @Test
-    public void createQuestionTest() {
-        QuestionDTO dto = new QuestionDTO();
-        dto.setQuestion(generateRandom(String.class));
-
-        //QuestionDTO result = questionLogic.createQuestion(dto);
-        int result = 1;
-
-        Assert.assertNotNull(result);
-
-        //QuestionEntity entity = em.find(QuestionEntity.class, result.getId());
-
-        //Assert.assertEquals(dto.getQuestion(), entity.getQuestion());
     }
 
     @Test
@@ -152,12 +138,65 @@ public class QuestionLogicTest {
             Assert.assertTrue(found);
         }
     }
+    
+    @Test
+    public void updateProviderTest() {
+        String question = generateRandom(String.class);
+        String father = String.valueOf(generateRandom(Long.class));
+        String state = generateRandom(String.class);
+        Date date = new Date();
+        
+        QuestionEntity entity = data.get(0);
+        
+        QuestionDTO dto = questionLogic.getQuestion(entity.getId());
+        dto.setDate(date);
+        dto.setQuestion(question);
+        dto.setFather(father);
+        dto.setState(state);
+        
+        QuestionDTO updDto = questionLogic.updateQuestion(dto);
+        
+        Assert.assertNotNull(updDto);
+
+        Assert.assertEquals(updDto.getDate(), date);
+        Assert.assertEquals(updDto.getQuestion(), question);
+        Assert.assertEquals(updDto.getFather(), father);
+        Assert.assertEquals(updDto.getState(), state);
+        Assert.assertNull(updDto.getProduct());
+        Assert.assertNull(updDto.getProvider());
+        Assert.assertNull(updDto.getClient());
+    }
 
     @Test
-    public void getUserTest() {
+    public void getQuestionTest() {
         QuestionEntity entity = data.get(0);
         QuestionDTO dto = questionLogic.getQuestion(entity.getId());
         Assert.assertNotNull(dto);
         Assert.assertEquals(entity.getQuestion(), dto.getQuestion());
+    }
+
+    @Test
+    public void getQuestionByFatherIdTest() {
+        QuestionEntity entity = data.get(0);
+        List<QuestionDTO> dtos = questionLogic.getByFatherId(Long.parseLong(entity.getFather()));
+        
+        Assert.assertNotNull(dtos);
+        
+        if(dtos.size() > 0){
+            QuestionDTO question = dtos.get(0);
+            Assert.assertEquals(entity.getId(), question.getId());   
+        }
+        
+    }
+    
+    /*
+     * @generated
+     */
+    @Test
+    public void deleteProviderTest() {
+        QuestionEntity entity = data.get(0);
+        questionLogic.deleteQuestion(entity.getId());
+        QuestionEntity deleted = em.find(QuestionEntity.class, entity.getId());
+        Assert.assertNull(deleted);
     }
 }

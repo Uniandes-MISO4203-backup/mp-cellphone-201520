@@ -1,6 +1,5 @@
 package co.edu.uniandes.csw.mpcellphone.persistence;
 
-import co.edu.uniandes.csw.mpcellphone.dtos.ClientDTO;
 import co.edu.uniandes.csw.mpcellphone.ejbs.ClientLogic;
 import co.edu.uniandes.csw.mpcellphone.entities.ClientEntity;
 import java.util.ArrayList;

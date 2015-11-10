@@ -198,16 +198,16 @@ public class TaxLogicTest {
      * @generated
      */
     @Test
-    public void updatePhotoTest() {
+    public void updateTaxTest() {
         TaxEntity entity = data.get(0);
 
-        TaxDTO dto = new TaxDTO();
-
+        TaxDTO dto = TaxConverter.refEntity2DTO(entity);
+        Assert.assertNotNull(dto);
         dto.setId(entity.getId());
         dto.setTaxName(generateRandom(String.class));
         dto.setPercentage(generateRandom(Long.class));
 
-        taxLogic.updateTax(dto);
+        dto = taxLogic.updateTax(dto);
 
         TaxEntity resp = em.find(TaxEntity.class, entity.getId());
 

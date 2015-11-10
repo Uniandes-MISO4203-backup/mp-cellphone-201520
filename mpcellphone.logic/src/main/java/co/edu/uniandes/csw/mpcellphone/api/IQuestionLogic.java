@@ -16,7 +16,12 @@ public interface IQuestionLogic {
 
     public int countQuestion();
     public List<QuestionDTO> getQuestions(Integer page, Integer maxRecords);
+    public List<QuestionDTO> getByProviderId(Long idProvider);
     public QuestionDTO getQuestion(Long id);
     public QuestionDTO createQuestion(QuestionDTO dto);
+    public QuestionDTO updateQuestion(QuestionDTO dto);
+    public void deleteQuestion(Long id);
+    public List<QuestionDTO> getByFatherId(Long idProvider);
+    public QuestionDTO createAnswer(QuestionDTO dto);
     
 }

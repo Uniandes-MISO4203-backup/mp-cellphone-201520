@@ -126,18 +126,4 @@ public class ShippingTypeConverter {
         }
         return dtos;
     }
-
-    /**
-     * @param dtos
-     * @return 
-     */
-    public static List<ShippingTypeEntity> listDTO2Entity(List<ShippingTypeDTO> dtos) {
-        List<ShippingTypeEntity> entities = new ArrayList<ShippingTypeEntity>();
-        if (dtos != null) {
-            for (ShippingTypeDTO dto : dtos) {
-                entities.add(basicDTO2Entity(dto));
-            }
-        }
-        return entities;
-    }
 }

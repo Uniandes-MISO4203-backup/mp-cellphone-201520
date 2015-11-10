@@ -88,7 +88,7 @@ public class CartItemLogic implements ICartItemLogic {
 
     @Override
     public CartItemDTO getCartItemsByClientById(Long id, Long idClient) {
-        return persistence.getCartItemsByClientById(idClient, idClient);
+        return persistence.getCartItemsByClientById(id, idClient);
     }
 
     @Override

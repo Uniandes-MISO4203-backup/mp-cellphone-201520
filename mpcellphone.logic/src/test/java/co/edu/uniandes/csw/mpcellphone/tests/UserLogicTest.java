@@ -141,6 +141,15 @@ public class UserLogicTest {
     }
     
     @Test
+    public void getUserByUserName() {
+       UserEntity entity = data.get(0);
+       UserDTO dto = userLogic.getUserByUserName(entity.getName());
+       Assert.assertNotNull(dto);
+       Assert.assertEquals(entity.getName(), dto.getName());
+       
+    }
+    
+    @Test
     public void updateUserTest() {
         String name = generateRandom(String.class);
         String role = generateRandom(String.class);

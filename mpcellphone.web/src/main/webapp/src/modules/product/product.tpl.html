@@ -16,7 +16,7 @@ jQuery(document).ready(function ($) {
     function moveLeft() {
         $('#slider ul').animate({
             left: +slideWidth
-        }, 200, function () {
+        }, 1000, function () {
             $('#slider ul li:last-child').prependTo('#slider ul');
             $('#slider ul').css('left', '');
         });
@@ -59,8 +59,8 @@ jQuery(document).ready(function ($) {
                 </div>
                 <div class="caption" >
                     <p><strong>Cellphone:</strong> {{record.name}}</p>
-                    <p><strong>Price:</strong> {{record.price| currency}}</p>
-                    <p><strong>Discount:</strong> {{record.discount| number:1}} %</p>
+                    <p><strong>Price:</strong> {{record.price| currency:2}}</p>
+                    <p><strong>Discount:</strong> {{record.discount| number:2}} %</p>
                     <p><strong>Provider:</strong> {{record.provider.name}}</p>
                 </div>
                 <p class="text-center">               
@@ -122,7 +122,6 @@ jQuery(document).ready(function ($) {
                 <h4 class="modal-title" id = "titleProduct">Comment</h4>
             </div>
             <div class = "modal-body" style = "height: 350px; overflow-y: auto;" id = "listComments">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi aut, quae possimus dolorem iste omnis fugit corporis facere voluptatem quis in dicta, perferendis earum tenetur. Fugit in at corporis deleniti.
             </div>
             <form ng-repeat="action in ctrl.saveComment" id="loginForm" method="post" class="form-horizontal" ng-submit="action.fn()">
                 <div class="modal-body">

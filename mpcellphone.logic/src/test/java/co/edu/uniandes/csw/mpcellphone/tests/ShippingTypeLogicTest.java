@@ -149,16 +149,16 @@ public class ShippingTypeLogicTest {
      * @generated
      */
     @Test
-    public void updatePhotoTest() {
+    public void updateShippingTypeTest() {
         ShippingTypeEntity entity = data.get(0);
 
-        ShippingTypeDTO dto = new ShippingTypeDTO();
-
+        ShippingTypeDTO dto = ShippingTypeConverter.refEntity2DTO(entity);
+        Assert.assertNotNull(dto);
         dto.setId(entity.getId());
         dto.setName(generateRandom(String.class));
         dto.setValueType(generateRandom(Long.class));
 
-        shippingTypeLogic.updateShippingType(dto);
+        dto = shippingTypeLogic.updateShippingType(dto);
 
         ShippingTypeEntity resp = em.find(ShippingTypeEntity.class, entity.getId());
 

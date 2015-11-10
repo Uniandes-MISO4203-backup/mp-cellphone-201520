@@ -24,7 +24,7 @@ public class CommentLogic implements ICommentLogic {
     @Inject private CommentPersistence persistence;
 
     /**
-     * Metodo encargado de obtener las órdenes de un cliente
+     * Metodo encargado de obtener las ordenes de un cliente
      * @param page
      * @param maxRecords
      * @return 

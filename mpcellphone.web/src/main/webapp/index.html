@@ -6,7 +6,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="https://bootswatch.com/cerulean/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="https://bootswatch.com/flatly/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
@@ -21,9 +21,10 @@
         <script src="https://rawgit.com/recursosCSWuniandes/ng-crud/master/dist/ngcrud-mocks.min.js"></script>
         <script src="https://rawgit.com/recursosCSWuniandes/ng-crud-auth/master/dist/ngcrud-auth.min.js"></script>
         <script src="http://vitalets.github.io/angular-xeditable/dist/js/xeditable.min.js"></script>
+        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
         <script src="src/app.js"></script>
         <link href="src/css/slider.css" rel="stylesheet"/>
-
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
         <script src="src/modules/cartItem/cartItem.mod.js"></script>
         <script src="src/modules/cartItem/cartItem.svc.js"></script>
 
@@ -60,6 +61,17 @@
         <script src="src/modules/orderQuery/orderQuery.svc.js"></script>
         <script src="src/modules/orderQuery/orderQuery.ctrl.js"></script>
         
+        <script src="src/modules/rate/rate.mod.js"></script>
+        <script src="src/modules/rate/rate.svc.js"></script>
+        
+        <script src="http://bootstrap-clproject.rhcloud.com/ui-bootstrap-tpls-0.14.3.min.js"></script>
+        <script src="src/modules/tracking/tracking.mod.js"></script>
+        <script src="src/modules/tracking/tracking.svc.js"></script>
+        <script src="src/modules/tracking/tracking.ctrl.js"></script>
+        
+        <script src="src/modules/question/question.mod.js"></script>
+        <script src="src/modules/question/question.svc.js"></script>
+        <script src="src/modules/question/question.ctrl.js"></script>
         <link href="src/css/app.css" rel="stylesheet" type="text/css"/>
         
         <style>
@@ -115,6 +127,7 @@
                             <ul class="nav navbar-nav navbar-right">
                                 <li id = "carrito"><a href="#/shoppingCart"><span class="glyphicon glyphicon-shopping-cart" ></span> My Shopping Cart </a></li>
                                 <li id = "admin"><a href="#/admin"><span class="glyphicon glyphicon-shopping-cart" ></span> Admin </a></li>
+                                <li id = "questions"><a href="#/question"><span class="glyphicon glyphicon-question-sign" ></span> Questions </a></li>
                                 <li id = "products"><a href="#/cellPhone"><span class="glyphicon glyphicon-shopping-cart" ></span> Products </a></li>
                                 <li>
                                     <login-button></login-button>

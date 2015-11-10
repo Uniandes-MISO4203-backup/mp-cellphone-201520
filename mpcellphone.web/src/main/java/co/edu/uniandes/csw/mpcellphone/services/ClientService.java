@@ -1,12 +1,13 @@
 package co.edu.uniandes.csw.mpcellphone.services;
 
+import co.edu.uniandes.csw.mp.ann.MPLoCAnn;
 import co.edu.uniandes.csw.mpcellphone.api.IClientLogic;
 import co.edu.uniandes.csw.mpcellphone.dtos.ClientDTO;
+import co.edu.uniandes.csw.mpcellphone.dtos.UserDTO;
 import co.edu.uniandes.csw.mpcellphone.providers.StatusCreated;
 import com.stormpath.sdk.account.Account;
 import com.stormpath.sdk.account.AccountStatus;
-import com.stormpath.sdk.client.Client;
-import com.stormpath.shiro.realm.ApplicationRealm;
+import com.stormpath.sdk.client.*;
 import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
@@ -21,8 +22,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.mgt.RealmSecurityManager;
 
 /**
  * @generated
@@ -71,19 +70,24 @@ public class ClientService {
         return clientLogic.getClient(id);
     }
 
+    @MPLoCAnn(tier="Services", reqId="REQ-43")
     private Account updateUser(ClientDTO user) {
-        ApplicationRealm realm = (ApplicationRealm) ((RealmSecurityManager) SecurityUtils.getSecurityManager()).getRealms();
-        Client clientR = realm.getClient();
-        Account acct;
-        acct = clientR.instantiate(Account.class);
-        acct.setEmail(user.getEmail());
-        acct.setGivenName(user.getGivenName());
-        acct.setSurname(user.getSurname());
-        acct.setUsername(user.getGivenName() + " " + user.getSurname());
-        acct.setStatus(AccountStatus.ENABLED);
+        //Instancia el cliente stormpath
+        String path = "/stormpath/apiKey.properties";
+        ApiKey apiKey = ApiKeys.builder().setFileLocation(path).build();
+        Client client = Clients.builder().setApiKey(apiKey).build();
+        //Carga los datos a la cuenta
+        String href = user.getUserId();
+        Account acct = client.getDataStore().getResource(href, Account.class);
+        //Actualiza y persiste los datos
+        acct.setEmail(user.getEmail())
+            .setGivenName(user.getGivenName())
+            .setSurname(user.getSurname())
+            .setUsername(user.getGivenName() + " " + user.getSurname())
+            .setStatus(AccountStatus.ENABLED)
+            .save();
         return acct;
     }
-
     
     /**
      * @param id
@@ -94,11 +98,31 @@ public class ClientService {
     @PUT
     @Path("{id: \\d+}")
     public ClientDTO updateClient(@PathParam("id") Long id, ClientDTO dto) {
-        //this.updateUser(dto);
         dto.setId(id);
+        updateUser(dto);
         return clientLogic.updateClient(dto);
     }
 
+    
+
+    @POST 
+    @Path("/client/chgpwdC")
+    @StatusCreated
+    @MPLoCAnn(tier="Services", reqId="REQ-43")
+    public Account changePasswordC (UserDTO dto) {
+        //Instancia el cliente stormpath
+        String path = "/stormpath/apiKey.properties";
+        ApiKey apiKey = ApiKeys.builder().setFileLocation(path).build();
+        Client client = Clients.builder().setApiKey(apiKey).build();
+        String href = dto.getStormpath();
+        String password = dto.getPassword();
+        Account acct = client.getDataStore().getResource(href, Account.class);
+        //Actualiza y persiste los datos
+        acct.setPassword(password)
+            .save();
+        return acct;
+    }
+    
     /**
      * @param id
      * @generated

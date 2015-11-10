@@ -8,6 +8,7 @@ import co.edu.uniandes.csw.mpcellphone.dtos.StateDTO;
 import co.edu.uniandes.csw.mpcellphone.ejbs.CityLogic;
 import co.edu.uniandes.csw.mpcellphone.ejbs.StateLogic;
 import co.edu.uniandes.csw.mpcellphone.entities.CityEntity;
+import co.edu.uniandes.csw.mpcellphone.entities.StateEntity;
 import co.edu.uniandes.csw.mpcellphone.persistence.CityPersistence;
 import static co.edu.uniandes.csw.mpcellphone.tests._TestUtil.*;
 import java.util.ArrayList;
@@ -112,8 +113,12 @@ public class CityLogicTest {
      */
     private void insertData() {
         for (int i = 0; i < 3; i++) {
+            StateEntity stateEntity = new StateEntity();
+            stateEntity.setName(generateRandom(String.class));
+            em.persist(stateEntity);
             CityEntity entity= new CityEntity();
             entity.setName(generateRandom(String.class));
+            entity.setState(stateEntity);
             em.persist(entity);
             data.add(entity);
         }
@@ -232,6 +237,24 @@ public class CityLogicTest {
     @Test
     public void countCitiesTest(){
         Assert.assertEquals(data.size(), cityLogic.countCities()); 
+    }
+    
+    @Test
+    public void getCityByStateTest() {
+        CityEntity city = data.get(0);
+        
+        List<CityDTO> list = cityLogic.getCityByState(1, 10, city.getState().getId());
+        
+        Assert.assertNotNull(list);
+        CityDTO found = null;
+        for (CityDTO ent : list) {
+            if(ent.getId().equals(city.getId())){
+                found = ent;
+                break;
+            }
+        }
+        Assert.assertNotNull(found);
+        Assert.assertEquals(found.getId(), city.getId());
     }
     
 }

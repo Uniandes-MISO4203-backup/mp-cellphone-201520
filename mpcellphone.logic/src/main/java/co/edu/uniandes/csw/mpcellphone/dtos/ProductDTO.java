@@ -2,6 +2,7 @@ package co.edu.uniandes.csw.mpcellphone.dtos;
 
 import java.util.List;
 import javax.xml.bind.annotation.XmlRootElement;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  * @generated
@@ -16,6 +17,7 @@ public class ProductDTO {
     private CellPhoneDTO cellPhone;
     private ProviderDTO provider;
     private String category;
+    @PodamExclude
     private List<PhotoDTO> photos;
     private String productState;
     private CityDTO city;
@@ -24,6 +26,9 @@ public class ProductDTO {
     private String imei;       
     private String description;       
     private String image;
+    
+    private int rateCount;
+    private int rate;
 
     /**
      * @return 
@@ -200,6 +205,21 @@ public class ProductDTO {
     public void setCity(CityDTO city) {
         this.city = city;
     }
-    
+
+    public int getRate() {
+        return rate;
+    }
+
+    public int getRateCount() {
+        return rateCount;
+    }
+
+    public void setRate(int rate) {
+        this.rate = rate;
+    }
+
+    public void setRateCount(int rateCount) {
+        this.rateCount = rateCount;
+    }
     
 }

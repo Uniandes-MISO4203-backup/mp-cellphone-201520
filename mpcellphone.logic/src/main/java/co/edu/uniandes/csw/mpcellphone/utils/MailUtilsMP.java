@@ -20,7 +20,7 @@ import javax.mail.internet.MimeMultipart;
  * @author g.gonzalez10
  */
 @Stateless
-public class MailUtilsMP{
+public class MailUtilsMP {
 
     // L�gica para generar el email
     static Properties mailServerProperties;
@@ -29,6 +29,8 @@ public class MailUtilsMP{
     static MimeMultipart generateMultiPartMessage;
     static BodyPart generateBodyPartMessage;
     static BodyPart generateBodyPartAttach;
+    
+    private MailUtilsMP(){}
 
     /**
      * Metodo para env�o de correo sin anexos

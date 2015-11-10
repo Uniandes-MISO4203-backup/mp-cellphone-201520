@@ -62,7 +62,7 @@ public class SaleLogic implements ISaleLogic {
         persistence.create(entity);
         return SalesConverter.fullEntity2DTO(entity);
     }
-
+           
     @Override
     public List<SaleDTO> getSaleByClient(Integer page, Integer maxRecords, Long userId){
         return persistence.getSaleByClient(page, maxRecords, userId);

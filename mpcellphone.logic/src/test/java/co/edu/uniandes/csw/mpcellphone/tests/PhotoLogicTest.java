@@ -125,6 +125,24 @@ public class PhotoLogicTest {
         PhotoEntity entity = em.find(PhotoEntity.class, result.getId());
 
         Assert.assertEquals(dto.getName(), entity.getName());
+        
+        PhotoDTO dto2 = PhotoConverter.refEntity2DTO(entity);
+        
+        Assert.assertNotNull(dto2);
+        Assert.assertEquals(entity.getId(), dto2.getId());
+        
+        PhotoDTO newDto2 = PhotoConverter.refEntity2DTO(null);
+        Assert.assertNull(newDto2);
+        
+        PhotoEntity entity2 = PhotoConverter.refDTO2Entity(dto2);
+         Assert.assertNotNull(entity2);
+        Assert.assertEquals( entity.getId(),entity2.getId());
+        
+        PhotoEntity entity3 = PhotoConverter.refDTO2Entity(null);
+        Assert.assertNull(entity3);
+        
+        PhotoEntity entity4 = PhotoConverter.basicDTO2Entity(null);
+        Assert.assertNull(entity4);
     }
 
     /**

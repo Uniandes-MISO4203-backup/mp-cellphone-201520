@@ -218,6 +218,24 @@ public class PaymentMethodLogicTest {
         Assert.assertEquals(data.size(), paymentMethodLogic.countPaymentMethod()); 
     }
     
+    /**
+     * Update PaymentMethod product test
+     */
+    @Test
+    public void updateRateTest() {
+        
+        PaymentMethodEntity entity = data.get(0);
+        
+        PaymentMethodDTO dto = PaymentMethodConverter.refEntity2DTO(entity);
+        Assert.assertNotNull(dto);
+        dto.setMethodName("Tarjeta XX");
+        dto = paymentMethodLogic.updatePaymentMethod(dto);
+
+        PaymentMethodEntity resp = em.find(PaymentMethodEntity.class, entity.getId());
+        Assert.assertNotNull(resp);
+        Assert.assertEquals(dto.getMethodName(), resp.getMethodName());
+    }
+    
     
     
     /**

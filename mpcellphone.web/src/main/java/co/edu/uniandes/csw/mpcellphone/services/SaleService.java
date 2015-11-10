@@ -1,8 +1,13 @@
 package co.edu.uniandes.csw.mpcellphone.services;
 
+import co.edu.uniandes.csw.mpcellphone.api.IRateProductLogic;
 import co.edu.uniandes.csw.mpcellphone.api.ISaleLogic;
+import co.edu.uniandes.csw.mpcellphone.dtos.ClientDTO;
 import co.edu.uniandes.csw.mpcellphone.dtos.ProductDTO;
+import co.edu.uniandes.csw.mpcellphone.dtos.RateProductDTO;
+import co.edu.uniandes.csw.mpcellphone.dtos.RateProviderDTO;
 import co.edu.uniandes.csw.mpcellphone.dtos.SaleDTO;
+import co.edu.uniandes.csw.mpcellphone.api.IRateProviderLogic;
 import co.edu.uniandes.csw.mpcellphone.providers.StatusCreated;
 import java.util.List;
 import javax.inject.Inject;
@@ -18,6 +23,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import org.apache.shiro.SecurityUtils;
 
 /**
  * Servicio REST de Sale
@@ -30,8 +36,16 @@ public class SaleService {
 
     @Inject 
     private ISaleLogic saleLogic;
+    @Inject 
+    private IRateProductLogic rateProductLogic;
+     @Inject 
+    private IRateProviderLogic rateProviderLogic;
     @Context 
     private HttpServletResponse response;
+    
+    public final String X_TOTAL_COUNT = "X-Total-Count";
+    
+    private ClientDTO client = (ClientDTO) SecurityUtils.getSubject().getSession().getAttribute("Client");
     
     @QueryParam("page") private Integer page;
     @QueryParam("maxRecords") private Integer maxRecords;
@@ -54,7 +68,7 @@ public class SaleService {
     @GET
     public List<SaleDTO> getSales() {
         if (page != null && maxRecords != null) {
-            this.response.setIntHeader("X-Total-Count", saleLogic.countSale());
+            this.response.setIntHeader(X_TOTAL_COUNT, saleLogic.countSale());
         }
         return saleLogic.getSales(page, maxRecords);
     }
@@ -79,7 +93,7 @@ public class SaleService {
     @Path("/client/{id: \\d+}")
     public List<SaleDTO> getSaleByClient(@PathParam("id") Long id) {
         if (page != null && maxRecords != null) {
-            this.response.setIntHeader("X-Total-Count", saleLogic.countSale());
+            this.response.setIntHeader(X_TOTAL_COUNT, saleLogic.countSale());
         }
         return saleLogic.getSaleByClient(page, maxRecords, id);
     }
@@ -93,7 +107,7 @@ public class SaleService {
     @Path("/provider/{id: \\d+}")
     public List<SaleDTO> getSaleByProvider(@PathParam("id") Long id) {
         if (page != null && maxRecords != null) {
-            this.response.setIntHeader("X-Total-Count", saleLogic.countSale());
+            this.response.setIntHeader(X_TOTAL_COUNT, saleLogic.countSale());
         }
         return saleLogic.getSaleByProvider(page, maxRecords, id);
     }    
@@ -109,9 +123,16 @@ public class SaleService {
     @Path("/viewDetail/{id: \\d+}/{orderId: \\d+}")
     public List<ProductDTO> getProductsBySale(@PathParam("id") Long id, @PathParam("orderId") Long orderId) {
         if (page != null && maxRecords != null) {
-            this.response.setIntHeader("X-Total-Count", saleLogic.countSale());
+            this.response.setIntHeader(X_TOTAL_COUNT, saleLogic.countSale());
         }
-        return saleLogic.getProductsBySale(page, maxRecords, id, orderId);
+        List<ProductDTO> products = saleLogic.getProductsBySale(page, maxRecords, id, orderId);
+        for(ProductDTO product: products){
+            RateProductDTO rate = rateProductLogic.getRateByProductClient(product.getId(), client.getId());
+            product.setRate(rate.getRate());
+            RateProviderDTO ratePr = rateProviderLogic.getRateByProviderClient(product.getProvider().getId(), client.getId());
+            product.getProvider().setRate(ratePr.getRate());
+        }
+        return products;
     }  
     
     /**

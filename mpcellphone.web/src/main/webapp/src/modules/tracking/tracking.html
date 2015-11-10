@@ -1,0 +1,23 @@
+<div>
+    <div class="panel panel-success panelTracking">
+        <div class="panel-heading">
+            <h3 class="panel-title">Shipping Status</h3>
+        </div>
+        <div class="panel-body panelTextTracking">
+            <img id="img" src="src/modules/tracking/images/envio.png" />
+            <div id="map"></div>
+            <div class="panel panel-primary panelStatus">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Status</h3>
+                </div>
+                <div class="panel-body st">
+                    <span>State: En proceso</span>
+                    <button class="btn btn-default ret" ng-click="ret()">Return</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_Wz4fsRdR-nXiE4kQwdQdJP4tn8E6vgc&callback=initMap">
+    </script>
+</div>

@@ -1,7 +1,31 @@
 <div ng-controller="orderQueryCtrl">
     <toolbar name="name" display-name="displayName"></toolbar>
     <div>
-        <table class="table table-striped table-bordered" ng-if="userRole=='client'">
+        <div class="panel panel-success search">
+            <div class="panel-heading">
+                <h3 class="panel-title">Search Transactions by Date</h3>
+            </div>
+            <div class="panel-body">
+                <div class="form-group fecha">
+                    <label class="col-lg-2 control-label campoFecha">From</label>
+                    <div class="col-lg-8 campoFecha">
+                        <input type="text" class="form-control" id="datepicker" placeholder="Initial Date">
+                    </div>
+                </div>
+                <div class="form-group fecha">
+                    <label class="col-lg-2 control-label to campoFecha">To</label>
+                    <div class="col-lg-8 campoFecha">
+                        <input type="text" class="form-control" id="datepicker1" placeholder="Final Date">
+                    </div>
+                </div>
+                <button class=" btn btn-warning search-button" ng-click="search()">Search</button>
+            </div>
+        </div>
+        <div class="alert alert-dismissible alert-warning" ng-if="dataEmpty">
+            <button type="button" class="close" data-dismiss="alert">X</button>
+            <h4>You don't have transactions for the selected dates.</h4>
+        </div>
+        <table class="table table-striped table-bordered" id="tableData" ng-if="userRole == 'client'">
             <thead>
                 <tr>                   
                     <th>N° Order</th>
@@ -14,15 +38,15 @@
             <tbody>
                 <tr ng-repeat="order in orderList">
                     <td><div>{{order.orderId.id}}</div></td> 
-                    <td><div>{{order.orderId.dateOrder | date:'fullDate'}} </div></td>        
+                    <td><div>{{order.orderId.dateOrder| date:'fullDate'}} </div></td>        
                     <td><div>{{order.orderId.paymentMethod.methodName}}</div></td>
-                    <td><div>{{order.orderId.totalSale | currency}}</div></td>
+                    <td><div>{{order.orderId.totalSale| currency}}</div></td>
                     <td><button ng-repeat="(key, action) in recordActions" id="{{$parent.$index}}-{{key}}-btn" class="btn btn-default btn-sm" ng-show="action.show()" ng-click="action.fn(order)"><span class="glyphicon glyphicon-{{action.icon}}"></span> {{action.displayName}}</button></td>
                 </tr>
             </tbody>
         </table>
-        
-        <table class="table table-striped table-bordered" ng-if="userRole=='provider'">
+
+        <table class="table table-striped table-bordered" id="tableData" ng-if="userRole == 'provider'">
             <thead>
                 <tr>                   
                     <th>N° Order</th>
@@ -36,10 +60,10 @@
             <tbody>
                 <tr ng-repeat="orderProvider in orderListProvider">
                     <td><div>{{orderProvider.orderId.id}}</div></td> 
-                    <td><div>{{orderProvider.orderId.dateOrder | date:'fullDate'}} </div></td>        
+                    <td><div>{{orderProvider.orderId.dateOrder| date:'fullDate'}} </div></td>        
                     <td><div>{{orderProvider.orderId.client.name}} </div></td>
                     <td><div>{{orderProvider.orderId.paymentMethod.methodName}}</div></td>
-                    <td><div>{{orderProvider.orderId.totalSale | currency}}</div></td>
+                    <td><div>{{orderProvider.orderId.totalSale| currency}}</div></td>
                     <td><button ng-repeat="(key, action) in recordActions" id="{{$parent.$index}}-{{key}}-btn" class="btn btn-default btn-sm" ng-show="action.show()" ng-click="action.fn(orderProvider)"><span class="glyphicon glyphicon-{{action.icon}}"></span> {{action.displayName}}</button></td>
                 </tr>
             </tbody>

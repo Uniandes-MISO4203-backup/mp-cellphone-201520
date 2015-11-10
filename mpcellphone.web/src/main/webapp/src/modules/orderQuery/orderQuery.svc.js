@@ -15,4 +15,23 @@
                 return this.api.one('viewDetail/'+clientId+'/'+orderId).get();
             };
     }]);
+    mod.service('checkoutService', ['CrudCreator', 'checkoutContext', function (CrudCreator, context) {
+            CrudCreator.extendService(this, context);
+            this.getOrderById = function (orderId){
+                return this.api.one(orderId).get();
+            };
+        }]);
+    mod.service('shippingService', ['CrudCreator', 'shippingContext', function (CrudCreator, context) {
+            CrudCreator.extendService(this, context);
+        }]);
+    mod.service('cityService',['CrudCreator', 'cityContext', function (CrudCreator, context) {
+            CrudCreator.extendService(this, context);
+            this.getCityByState = function (stateId){
+                return this.api.one('state/'+stateId).get();
+            };
+            this.getCityById = function (cityId){
+                return this.api.one(cityId).get();
+            };
+        }]);
+
 })(window.angular);

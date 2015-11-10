@@ -2,8 +2,8 @@
     var mod = ng.module('paymentModule');
     mod.controller('checkoutCtrl', ['CrudCreator', '$scope', 'authService', 'cartItemService', '$location'
                 , 'checkoutService', 'shippingService', 'creditCardService', 'shippingTypeService', '$log',
-        'saleService','shippingProductService',
-        function (CrudCreator, $scope, authSvc, ciSvc, $location, chSvc, shpSvc, ccSvc, stSvc, $log, saleSvc, proSvc) {
+        'shippingProductService', 'stateService', 'cityService',
+        function (CrudCreator, $scope, authSvc, ciSvc, $location, chSvc, shpSvc, ccSvc, stSvc, $log, proSvc, stateSvc, citySvc) {
             $scope.cartItems = [];
             $scope.payment = {};
             $scope.totalCompra = 0;
@@ -26,9 +26,9 @@
                         $scope.shippingTypeHolders.push(data[i]);
                     }
                 }
-                setTimeout(function(){
+                setTimeout(function () {
                     var types = $('#shippingType').children();
-                    while($(types[0]).text().indexOf('Select a Shipping Type') === -1){
+                    while ($(types[0]).text().indexOf('Select a Shipping Type') === -1) {
                         $(types[0]).remove();
                         types = $('#shippingType').children();
                     }
@@ -40,11 +40,48 @@
                 $scope.shippingTypeValue = $(e.options[e.selectedIndex]).attr('data-price');
                 $('.alert.alert-dismissible.alert-success.hidden').removeClass('hidden');
             };
+            $scope.states = [];
+            stateSvc.fetchRecords().then(function (data) {
+                $scope.states = data;
+                setTimeout(function () {
+                    var types = $('#state').children();
+                    while ($(types[0]).text().indexOf('Select a State') === -1) {
+                        $(types[0]).remove();
+                        types = $('#state').children();
+                    }
+                }, 200);
+            });
+            $scope.onChangeCity = function () {
+                var state = $('#state').val();
+                citySvc.getCityByState(state).then(function (data) {
+                    $scope.city = data;
+                    setTimeout(function () {
+                        var types = $('#city').children();
+                        while ($(types[0]).text().indexOf('Select a City') === -1) {
+                            $(types[0]).remove();
+                            types = $('#city').children();
+                        }
+                    }, 200);
+                });
+            };
+            setTimeout(function () {
+                var types = $('#city').children();
+                while ($(types[0]).text().indexOf('Select a City') === -1) {
+                    $(types[0]).remove();
+                    types = $('#city').children();
+                }
+            }, 200);
             /*-------------- Shipping ------------*/
             $scope.shipping = {};
             $scope.shipping.time = Math.ceil(Math.random() * 5);
             $scope.submitShippingData = function () {
                 var shippingData = {};
+                citySvc.getCityById($scope.shipping.city).then(function (data) {
+                    $scope.c = data.name;
+                });
+                stateSvc.getStateById($scope.shipping.state).then(function (data) {
+                    $scope.s = data.name;
+                });
                 shippingData.state = $scope.shipping.state;
                 shippingData.country = $scope.shipping.country;
                 shippingData.city = $scope.shipping.city;
@@ -80,9 +117,9 @@
                         $scope.creditCardHolders.push(data[i]);
                     }
                 }
-                setTimeout(function(){
+                setTimeout(function () {
                     var types = $('#creditCardType').children();
-                    while($(types[0]).text().indexOf('Select a Card Provider') === -1){
+                    while ($(types[0]).text().indexOf('Select a Card Provider') === -1) {
                         $(types[0]).remove();
                         types = $('#creditCardType').children();
                     }
@@ -147,7 +184,7 @@
                         clientId: authSvc.getCurrentUser()}),
                     dataType: 'json',
                     contentType: "application/json"
-                }).success(function (data) {
+                }).success(function () {
                     $log.log("Request success");
                     proSvc.updateProduct($scope.cartItems[i]);
                     ciSvc.deleteRecord($scope.cartItems[i]);
@@ -167,11 +204,11 @@
             };
             $scope.pay = function () {
                 $('body').append('<div class="mask modal" style="display:block;">');
-                $('.mask').append('<div class="modal-body">' + 
-                                    '<div class="progress-bar progress-bar-striped active"  role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 50%; height: 25px; margin: 45vh 25vw;">' +
-                                    '<span class="sr-only">100% Complete</span>' +
-                                    '</div>' +
-                                    '</div>')
+                $('.mask').append('<div class="modal-body">' +
+                        '<div class="progress-bar progress-bar-striped active"  role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 50%; height: 25px; margin: 45vh 25vw;">' +
+                        '<span class="sr-only">100% Complete</span>' +
+                        '</div>' +
+                        '</div>');
                 $scope.submitPayment();
             };
             $scope.finish = function () {

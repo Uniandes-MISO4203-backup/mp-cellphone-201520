@@ -270,7 +270,7 @@ public class SaleLogicTest {
     @Test
     public void getSaleByProviderTest() {
         Long idProvider = data.get(0).getProviderId().getId();
-        List<SaleDTO> list = saleLogic.getSaleByClient(null, null,idProvider);
+        List<SaleDTO> list = saleLogic.getSaleByProvider(null, null,idProvider);
         Assert.assertEquals(1, list.size());
     }
 
@@ -280,6 +280,32 @@ public class SaleLogicTest {
         Long idOrder = data.get(0).getOrderId().getId();
         List<ProductDTO> list = saleLogic.getProductsBySale(null, null,idClient, idOrder);
         Assert.assertEquals(1, list.size());
+    }
+    
+      /**
+     * Update rate product test
+     */
+    @Test
+    public void updateSalesTest() {
+        
+        SalesEntity entity = data.get(0);
+            
+        SaleDTO dto = SalesConverter.refEntity2DTO(entity);
+        Assert.assertNotNull(dto);
+        
+        SaleDTO saleUpdated = saleLogic.updateSale(dto);
+
+        Assert.assertNotNull(saleUpdated);
+        Assert.assertEquals(entity.getId(), saleUpdated.getId());
+        Assert.assertEquals(entity.getClientId().getId(), saleUpdated.getClientId().getId());
+    }
+    
+    @Test
+    public void deleteLogicTest() {
+        SalesEntity entity = data.get(0);
+        saleLogic.deleteSale(entity.getId());
+        ShipEntity deleted = em.find(ShipEntity.class, entity.getId());
+        Assert.assertNull(deleted);
     }
 
 }

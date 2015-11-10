@@ -156,7 +156,8 @@ public class ShipLogicTest {
         
         ShipEntity entity = data.get(0);
         
-        ShipDTO dto = new ShipDTO();
+        ShipDTO dto = ShipConverter.refEntity2DTO(entity);
+        Assert.assertNotNull(dto);
         dto.setId(entity.getId());
         dto.setState(state);
         dto.setCountry(country);
@@ -169,7 +170,6 @@ public class ShipLogicTest {
         Assert.assertEquals(updDto.getState(), state);
         Assert.assertEquals(updDto.getCountry(), country);
         Assert.assertEquals(updDto.getCity(), city);
-        
     }
     
     @Test
