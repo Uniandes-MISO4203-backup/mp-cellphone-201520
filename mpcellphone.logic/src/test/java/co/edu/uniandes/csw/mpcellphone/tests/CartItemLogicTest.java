@@ -298,6 +298,20 @@ public class CartItemLogicTest {
         Assert.assertNotNull(found);
         Assert.assertEquals(entity.getId(), found.getId());
     }
+    
+    
+    /**
+     * Test countProduct method
+     */
+    @Test
+    public void getCartItemsByClientByIdTest() {
+        CartItemEntity entity = data.get(0);
+        CartItemDTO dto = cartItemLogic.getCartItemsByClientById(entity.getId(),
+                entity.getClient().getId());
+        Assert.assertNotNull(dto);
+        Assert.assertEquals(entity.getId(), dto.getId());
+        Assert.assertEquals(entity.getClient().getId(), dto.getClient().getId());
+    }
 
     /**
      * @generated
@@ -319,5 +333,26 @@ public class CartItemLogicTest {
 
         Assert.assertEquals(dto.getName(), entityFound.getName());
         Assert.assertEquals(dto.getQuantity(), entityFound.getQuantity());
+    }
+    
+    /**
+     * Test countProduct method
+     */
+    @Test
+    public void countCartItemsByClientTest() {
+        CartItemEntity entity = data.get(0);
+        int cantidad = cartItemLogic.countCartItemsByClient(entity.getClient().getId());
+        Assert.assertTrue(cantidad > 0);
+    }
+    
+    /**
+     * @generated
+     */
+    @Test
+    public void deleteCartItemByClientTest() {
+        CartItemEntity entity = data.get(0);
+        cartItemLogic.deleteCartItemByClient(entity.getClient().getId(),entity.getId());
+        CartItemEntity deleted = em.find(CartItemEntity.class, entity.getId());
+        Assert.assertNull(deleted);
     }
 }
