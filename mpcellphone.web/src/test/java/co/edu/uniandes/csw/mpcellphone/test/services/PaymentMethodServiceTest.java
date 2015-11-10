@@ -41,7 +41,7 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 public class PaymentMethodServiceTest {
 
     public static final String DEPLOY = "Prueba";
-    public final static List<PaymentMethodDTO> methodOraculo = new ArrayList<>();
+    public final static List<PaymentMethodDTO> methodOraculo = new ArrayList<PaymentMethodDTO>();
     public final static String URLRESOURCES = "src/main/webapp";
     public final static String URLBASE = "http://localhost:8181/mpcellphone.web/webresources";
     public final static String PATH = "/payment_method";

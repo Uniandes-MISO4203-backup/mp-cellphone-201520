@@ -24,7 +24,7 @@ public class UserPersistence extends CrudPersistence<UserEntity> {
         this.entityClass = UserEntity.class;
     }
     
-    public UserEntity getUsers(String userId){
+    public UserEntity getUsers(){
         try {
             return this.executeSingleNamedQuery("User.FindAll");
         } catch (NoResultException ex) {

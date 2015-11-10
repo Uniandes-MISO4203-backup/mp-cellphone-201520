@@ -14,6 +14,10 @@ import co.edu.uniandes.csw.mpcellphone.entities.StolenImeiEntity;
  */
 public abstract class StolenImeiConverter {
     
+    private StolenImeiConverter(){
+        
+    }
+    
     /**
      * 
      * @param entity

@@ -14,6 +14,7 @@ public class StolenImeiLogic implements IStolenImeiLogic{
     
     @Inject private StolenImeiPersistence stolenImeiPersistence;
 
+    @Override
     public StolenImeiDTO getByImei(String imei) {
         return StolenImeiConverter.basicEntity2DTO(stolenImeiPersistence.getByImei(imei));
     }
