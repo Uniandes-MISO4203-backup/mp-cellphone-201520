@@ -4,7 +4,9 @@ import co.edu.uniandes.csw.mpcellphone.ejbs.CartItemLogic;
 import co.edu.uniandes.csw.mpcellphone.api.ICartItemLogic;
 import co.edu.uniandes.csw.mpcellphone.converters.CartItemConverter;
 import co.edu.uniandes.csw.mpcellphone.dtos.CartItemDTO;
+import co.edu.uniandes.csw.mpcellphone.dtos.ClientDTO;
 import co.edu.uniandes.csw.mpcellphone.entities.CartItemEntity;
+import co.edu.uniandes.csw.mpcellphone.entities.ClientEntity;
 import co.edu.uniandes.csw.mpcellphone.persistence.CartItemPersistence;
 import static co.edu.uniandes.csw.mpcellphone.tests._TestUtil.*;
 import java.util.ArrayList;
@@ -28,6 +30,7 @@ import org.junit.runner.RunWith;
  */
 @RunWith(Arquillian.class)
 public class CartItemLogicTest {
+
     public static final String DEPLOY = "Prueba";
 
     /**
@@ -42,6 +45,8 @@ public class CartItemLogicTest {
                 .addPackage(CartItemLogic.class.getPackage())
                 .addPackage(ICartItemLogic.class.getPackage())
                 .addPackage(CartItemPersistence.class.getPackage())
+                .addPackage(ClientEntity.class.getPackage())
+                .addPackage(ClientDTO.class.getPackage())
                 .addAsResource("META-INF/persistence.xml", "META-INF/persistence.xml")
                 .addAsWebInfResource("META-INF/beans.xml", "beans.xml");
     }
@@ -101,9 +106,20 @@ public class CartItemLogicTest {
      */
     private void insertData() {
         for (int i = 0; i < 3; i++) {
+
+            String nameC = generateRandom(String.class);
+            String userIdC = generateRandom(String.class);
+            String emailC = generateRandom(String.class);
+            ClientEntity entityC = new ClientEntity();
+        	entityC.setName(nameC);
+        	entityC.setUserId(userIdC);
+        	entityC.setEmail(emailC);
+            em.persist(entityC);
+            
             CartItemEntity entity = new CartItemEntity();
-        	entity.setName(generateRandom(String.class));
-        	entity.setQuantity(generateRandom(Integer.class));
+            entity.setName(generateRandom(String.class));
+            entity.setQuantity(generateRandom(Integer.class));
+            entity.setClient(entityC);
             em.persist(entity);
             data.add(entity);
         }
@@ -253,14 +269,34 @@ public class CartItemLogicTest {
             }
         }
     }
-    
-    
-    
+
     /**
      * Test countProduct method
-     */ 
+     */
     @Test
-    public void countCartItemTest(){
-        Assert.assertEquals(data.size(), cartItemLogic.countCartItems()); 
+    public void countCartItemTest() {
+        Assert.assertEquals(data.size(), cartItemLogic.countCartItems());
     }
+
+    /**
+     * Test countProduct method
+     */
+    @Test
+    public void getCartItemsByClientTest() {
+        CartItemEntity entity = data.get(0);
+        List<CartItemDTO> list = 
+                cartItemLogic.getCartItemsByClient(1,10, entity.getClient().getId());
+        Assert.assertNotNull(list);
+        
+        CartItemDTO found = null;
+        for (CartItemDTO dtoLoop : list) {
+            if(dtoLoop.getId().equals(entity.getId())){
+                found = dtoLoop;
+                break;
+            }
+        }
+        Assert.assertNotNull(found);
+        Assert.assertEquals(entity.getId(), found.getId());
+    }
+
 }
