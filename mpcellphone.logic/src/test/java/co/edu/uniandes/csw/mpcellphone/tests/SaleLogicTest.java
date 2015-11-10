@@ -270,7 +270,7 @@ public class SaleLogicTest {
     @Test
     public void getSaleByProviderTest() {
         Long idProvider = data.get(0).getProviderId().getId();
-        List<SaleDTO> list = saleLogic.getSaleByClient(null, null,idProvider);
+        List<SaleDTO> list = saleLogic.getSaleByProvider(null, null,idProvider);
         Assert.assertEquals(1, list.size());
     }
 
