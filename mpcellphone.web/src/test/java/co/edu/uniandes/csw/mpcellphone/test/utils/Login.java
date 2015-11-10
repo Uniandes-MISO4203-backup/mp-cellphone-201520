@@ -35,8 +35,6 @@ public class Login {
         Client cliente = ClientBuilder.newClient();
         Response response = cliente.target(URLBASE).path(PATH_REGISTER).request().
                 post(Entity.entity(Login.createSampleUserDTO(), MediaType.APPLICATION_JSON)); 
-        System.out.println("**********************************************************************");
-        System.out.println(response.toString());
     }
     
     /**

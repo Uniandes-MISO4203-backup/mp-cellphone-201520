@@ -143,6 +143,21 @@ public class CartItemLogicTest {
 
         Assert.assertEquals(dto.getName(), entity.getName());
         Assert.assertEquals(dto.getQuantity(), entity.getQuantity());
+        
+        CartItemDTO newDto = CartItemConverter.refEntity2DTO(entity);
+        
+        Assert.assertNotNull(newDto);
+        Assert.assertEquals(entity.getId(), newDto.getId());
+        
+        CartItemDTO newDto2 = CartItemConverter.refEntity2DTO(null);
+        Assert.assertNull(newDto2);
+        
+        CartItemEntity entity2 = CartItemConverter.refDTO2Entity(newDto);
+        Assert.assertNotNull(entity2);
+        Assert.assertEquals( entity.getId(),entity2.getId());
+        
+        CartItemEntity entity3 = CartItemConverter.refDTO2Entity(null);
+        Assert.assertNull(entity3);
     }
 
     /**
@@ -262,6 +277,10 @@ public class CartItemLogicTest {
             }
             Assert.assertTrue(found);
         }
+        
+         List<CartItemEntity> entities = CartItemConverter.listDTO2Entity(dto2);
+        Assert.assertNotNull(entities);
+        Assert.assertEquals(1, entities.size());
     }
 
     /**
@@ -356,6 +375,10 @@ public class CartItemLogicTest {
 
         Assert.assertEquals(dto.getName(), entityFound.getName());
         Assert.assertEquals(dto.getQuantity(), entityFound.getQuantity());
+        
+        CartItemEntity newEntity = CartItemConverter.childDTO2Entity(dto,entity.getClient());
+        Assert.assertNotNull(newEntity);
+        Assert.assertNotNull(newEntity.getClient());
     }
     
     /**
