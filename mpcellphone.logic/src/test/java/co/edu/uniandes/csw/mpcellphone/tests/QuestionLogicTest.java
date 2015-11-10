@@ -123,27 +123,6 @@ public class QuestionLogicTest {
         int size = questionLogic.countQuestion();
         Assert.assertEquals(data.size(), size);
     }
-    
-        /**
-     * @generated
-     */
-    @Test
-    public void createQuestionTest() {
-        QuestionDTO dto = new QuestionDTO();
-        dto.setQuestion(generateRandom(String.class));
-        dto.setDate(new Date());
-        dto.setState(generateRandom(String.class));
-        dto.setFather(generateRandom(String.class));
-
-        //QuestionDTO result = questionLogic.createQuestion(dto);
-        int result = 1;
-
-        Assert.assertNotNull(result);
-
-        //QuestionEntity entity = em.find(QuestionEntity.class, result.getId());
-
-        //Assert.assertEquals(dto.getQuestion(), entity.getQuestion());
-    }
 
     @Test
     public void getQuestionsTest() {
@@ -158,6 +137,34 @@ public class QuestionLogicTest {
             }
             Assert.assertTrue(found);
         }
+    }
+    
+    @Test
+    public void updateProviderTest() {
+        String question = generateRandom(String.class);
+        String father = generateRandom(String.class);
+        String state = generateRandom(String.class);
+        Date date = new Date();
+        
+        QuestionEntity entity = data.get(0);
+        
+        QuestionDTO dto = questionLogic.getQuestion(entity.getId());
+        dto.setDate(date);
+        dto.setQuestion(question);
+        dto.setFather(father);
+        dto.setState(state);
+        
+        QuestionDTO updDto = questionLogic.updateQuestion(dto);
+        
+        Assert.assertNotNull(updDto);
+
+        Assert.assertEquals(updDto.getDate(), date);
+        Assert.assertEquals(updDto.getQuestion(), question);
+        Assert.assertEquals(updDto.getFather(), father);
+        Assert.assertEquals(updDto.getState(), state);
+        Assert.assertNull(updDto.getProduct());
+        Assert.assertNull(updDto.getProvider());
+        Assert.assertNull(updDto.getClient());
     }
 
     @Test
