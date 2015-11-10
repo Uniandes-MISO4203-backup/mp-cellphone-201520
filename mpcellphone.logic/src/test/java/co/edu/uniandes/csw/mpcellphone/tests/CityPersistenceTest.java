@@ -205,4 +205,21 @@ public class CityPersistenceTest {
         }
     }
     
+    
+    /**
+     * @generated
+     */
+    @Test
+    public void getNotCitiesTest() {
+        List<CityEntity> list = cityPersistence.findAll();
+        for (CityEntity ent : list) {
+            cityPersistence.delete(ent.getId());
+        }
+        list = cityPersistence.findAll();
+        int cantidad = list.size();
+        Assert.assertEquals(0,cantidad);        
+    }
+    
+    
+    
 }
