@@ -1,7 +1,7 @@
 (function (ng) {
     var mod = ng.module('mainApp');
-    mod.controller('orderQueryCtrl', ['CrudCreator', '$scope', 'saleService', 'rateService','orderQueryModel', '$location', 'authService', '$log',
-        function (CrudCreator, $scope, svc,rateService, model, $location, authSvc, $log) {
+    mod.controller('orderQueryCtrl', ['CrudCreator', '$scope', 'saleService', 'rateService', 'orderQueryModel', '$location', 'authService', '$log', 'checkoutService', 'shippingService', 'cityService',
+        function (CrudCreator, $scope, svc, rateService, model, $location, authSvc, $log, checkSvc, shipSvc, citySvc) {
             CrudCreator.extendController(this, svc, $scope, model, 'orderQuery', 'Order List');
             var user = authSvc.getCurrentUser();
             svc.getRoleOQ().then(function (data) {
@@ -12,40 +12,40 @@
                 var id = $location.search().id;
                 svc.getProductsBySale(user.id, id).then(function (data) {
                     $scope.detailOrderList = data;
-                   // $scope.rate = 3;
+                    // $scope.rate = 3;
                     $scope.max = 5;
-                    $scope.isReadonly = false; 
+                    $scope.isReadonly = false;
                     $scope.showAlert = false;
-                    $scope.alert={type:'success',msg:''};
-                    $scope.closeAlert = function(){
+                    $scope.alert = {type: 'success', msg: ''};
+                    $scope.closeAlert = function () {
                         $scope.showAlert = false;
                     }
-                    $scope.hoveringOver = function(value, product) {
+                    $scope.hoveringOver = function (value, product) {
                         $scope.overStar = value;
                         $scope.product = product;
                     };
-                    $scope.hoveringOverProvider = function(value, provider) {
+                    $scope.hoveringOverProvider = function (value, provider) {
                         $scope.overStarPro = value;
                         $scope.provid = provider;
                     };
                     $scope.ratingStates = [
                         {stateOn: 'glyphicon-star', stateOff: 'glyphicon-star-empty'}
                     ];
-                    $scope.titles = ['No rate','Bad','Poor','Regular','Good','Excelent'];
-                    $scope.rateProduct= function () {
-                        rateService.setRateProduct($scope.product,$scope.overStar)
-                                .then(function () { 
-                                    $scope.alert={type:'success',msg:'product '+$scope.product.name+' with '+$scope.overStar+ ' stars' };
+                    $scope.titles = ['No rate', 'Bad', 'Poor', 'Regular', 'Good', 'Excelent'];
+                    $scope.rateProduct = function () {
+                        rateService.setRateProduct($scope.product, $scope.overStar)
+                                .then(function () {
+                                    $scope.alert = {type: 'success', msg: 'product ' + $scope.product.name + ' with ' + $scope.overStar + ' stars'};
                                     $scope.showAlert = true;
                                 });
-                        return $scope.overStar;      
+                        return $scope.overStar;
                     };
-                    $scope.rateProvider= function () {
-                        rateService.setRateProvider($scope.provid,$scope.overStarPro)
-                                .then(function () { 
-                                    $scope.alert={type:'success',msg:'provider '+$scope.provid.name+' with '+$scope.overStarPro + ' stars' };
+                    $scope.rateProvider = function () {
+                        rateService.setRateProvider($scope.provid, $scope.overStarPro)
+                                .then(function () {
+                                    $scope.alert = {type: 'success', msg: 'provider ' + $scope.provid.name + ' with ' + $scope.overStarPro + ' stars'};
                                     $scope.showAlert = true;
-                                        });
+                                });
                         return $scope.overStarPro;
                     };
                 });
@@ -117,7 +117,7 @@
                     if (temp.length === 0) {
                         $scope.dataEmpty = true;
                         $('#tableData').hide();
-                    }else{
+                    } else {
                         $scope.dataEmpty = false;
                         $('#tableData').show();
                     }
@@ -136,6 +136,31 @@
                             return true;
                         }
                     }};
+
+                var lat = 0, lng = 0;
+                window.initMap = function () {
+                    map = new google.maps.Map(document.getElementById('map'), {
+                        center: {lat: -34.397, lng: 150.644},
+                        zoom: 8
+                    });
+                    
+                    var id = $location.search().id;
+                    checkSvc.getOrderById(id).then(function (data) {
+                        $log.log(data.ship)
+                        citySvc.getCityById(data.ship.city).then(function (data) {
+                            lat = data.latitude;
+                            lng = data.longitude;                            
+                            marker = new google.maps.Marker({
+                                position: {lat: lat, lng: lng},
+                                map: map,
+                                title: 'Tracking map'
+                            });
+                            map.setCenter({lat: lat, lng: lng});
+                        });
+
+                    });
+                };
+
                 $scope.recordActions = {
                     viewDetail: {
                         displayName: 'View Detail',
@@ -155,12 +180,16 @@
                         class: 'primary',
                         fn: function (record) {
                             var id = String(record.orderId.id);
+                            $scope.state = record.orderId.state;
                             $location.path('/tracking').search('id', id);
                         },
                         show: function () {
                             return true;
                         }
                     }};
+                $scope.ret = function () {
+                    $location.path('/orderLists');
+                };
             }
             else {
                 $location.path('/login');
@@ -176,7 +205,7 @@
         $scope.rate = 3;
         $scope.max = 5;
         $scope.isReadonly = false;
-        $scope.hoveringOver = function(value) {
+        $scope.hoveringOver = function (value) {
             $scope.overStar = value;
             $scope.percent = value;
         };

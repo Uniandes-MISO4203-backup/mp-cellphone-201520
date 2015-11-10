@@ -73,7 +73,7 @@
                 controller: 'orderQueryCtrl'
             }).when('/tracking', {
                 templateUrl: 'src/modules/tracking/tracking.html',
-                controller: 'trackingCtrl'
+                controller: 'orderQueryCtrl'
             }).otherwise('/catalog');
         }]);
 
