@@ -108,6 +108,9 @@ public class QuestionLogicTest {
             QuestionEntity entity = new QuestionEntity();
         	entity.setQuestion(generateRandom(String.class));
         	entity.setDate(new Date());
+                entity.setProvider(null);
+                entity.setClient(null);
+                entity.setProduct(null);
         	entity.setState(generateRandom(String.class));
         	entity.setFather(generateRandom(String.class));
             em.persist(entity);
