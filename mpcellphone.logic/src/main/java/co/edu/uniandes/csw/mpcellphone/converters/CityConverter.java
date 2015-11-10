@@ -10,6 +10,8 @@ import java.util.List;
  */
 public abstract class CityConverter {
 
+    private CityConverter() {}
+    
     /**
      * @param entity
      * @return
