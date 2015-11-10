@@ -43,6 +43,8 @@ public class SaleService {
     @Context 
     private HttpServletResponse response;
     
+    public final String X_TOTAL_COUNT = "X-Total-Count";
+    
     private ClientDTO client = (ClientDTO) SecurityUtils.getSubject().getSession().getAttribute("Client");
     
     @QueryParam("page") private Integer page;
@@ -66,7 +68,7 @@ public class SaleService {
     @GET
     public List<SaleDTO> getSales() {
         if (page != null && maxRecords != null) {
-            this.response.setIntHeader("X-Total-Count", saleLogic.countSale());
+            this.response.setIntHeader(X_TOTAL_COUNT, saleLogic.countSale());
         }
         return saleLogic.getSales(page, maxRecords);
     }
@@ -91,7 +93,7 @@ public class SaleService {
     @Path("/client/{id: \\d+}")
     public List<SaleDTO> getSaleByClient(@PathParam("id") Long id) {
         if (page != null && maxRecords != null) {
-            this.response.setIntHeader("X-Total-Count", saleLogic.countSale());
+            this.response.setIntHeader(X_TOTAL_COUNT, saleLogic.countSale());
         }
         return saleLogic.getSaleByClient(page, maxRecords, id);
     }
@@ -105,7 +107,7 @@ public class SaleService {
     @Path("/provider/{id: \\d+}")
     public List<SaleDTO> getSaleByProvider(@PathParam("id") Long id) {
         if (page != null && maxRecords != null) {
-            this.response.setIntHeader("X-Total-Count", saleLogic.countSale());
+            this.response.setIntHeader(X_TOTAL_COUNT, saleLogic.countSale());
         }
         return saleLogic.getSaleByProvider(page, maxRecords, id);
     }    
@@ -121,7 +123,7 @@ public class SaleService {
     @Path("/viewDetail/{id: \\d+}/{orderId: \\d+}")
     public List<ProductDTO> getProductsBySale(@PathParam("id") Long id, @PathParam("orderId") Long orderId) {
         if (page != null && maxRecords != null) {
-            this.response.setIntHeader("X-Total-Count", saleLogic.countSale());
+            this.response.setIntHeader(X_TOTAL_COUNT, saleLogic.countSale());
         }
         List<ProductDTO> products = saleLogic.getProductsBySale(page, maxRecords, id, orderId);
         for(ProductDTO product: products){
