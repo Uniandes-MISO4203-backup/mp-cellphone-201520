@@ -253,4 +253,14 @@ public class CartItemLogicTest {
             }
         }
     }
+    
+    
+    
+    /**
+     * Test countProduct method
+     */ 
+    @Test
+    public void countCartItemTest(){
+        Assert.assertEquals(data.size(), cartItemLogic.countCartItems()); 
+    }
 }
