@@ -15,6 +15,11 @@
                    // $scope.rate = 3;
                     $scope.max = 5;
                     $scope.isReadonly = false; 
+                    $scope.showAlert = false;
+                    $scope.alert={type:'success',msg:''};
+                    $scope.closeAlert = function(){
+                        $scope.showAlert = false;
+                    }
                     $scope.hoveringOver = function(value, product) {
                         $scope.overStar = value;
                         $scope.product = product;
@@ -29,12 +34,18 @@
                     $scope.titles = ['No rate','Bad','Poor','Regular','Good','Excelent'];
                     $scope.rateProduct= function () {
                         rateService.setRateProduct($scope.product,$scope.overStar)
-                                .then(function () { });
+                                .then(function () { 
+                                    $scope.alert={type:'success',msg:'product '+$scope.product.name+' with '+$scope.overStar+ ' stars' };
+                                    $scope.showAlert = true;
+                                });
                         return $scope.overStar;      
                     };
                     $scope.rateProvider= function () {
                         rateService.setRateProvider($scope.provid,$scope.overStarPro)
-                                .then(function () { });
+                                .then(function () { 
+                                    $scope.alert={type:'success',msg:'provider '+$scope.provid.name+' with '+$scope.overStarPro + ' stars' };
+                                    $scope.showAlert = true;
+                                        });
                         return $scope.overStarPro;      
                     };
                 });
