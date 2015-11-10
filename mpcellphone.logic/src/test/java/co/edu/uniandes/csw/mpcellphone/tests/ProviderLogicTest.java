@@ -131,6 +131,8 @@ public class ProviderLogicTest {
         dto.setName(generateRandom(String.class));
         dto.setUserId(generateRandom(String.class));
         dto.setEmail(generateRandom(String.class));
+        dto.setRate(generateRandom(Integer.class));
+        dto.setRateCount(generateRandom(Integer.class));
 
         ProviderDTO result = providerLogic.createProvider(dto);
 
