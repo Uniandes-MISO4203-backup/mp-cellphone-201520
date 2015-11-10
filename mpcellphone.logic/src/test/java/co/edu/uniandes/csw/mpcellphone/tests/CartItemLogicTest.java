@@ -299,4 +299,25 @@ public class CartItemLogicTest {
         Assert.assertEquals(entity.getId(), found.getId());
     }
 
+    /**
+     * @generated
+     */
+    @Test
+    public void createCartItemByClient(){
+        CartItemEntity entity = data.get(0);
+        
+        CartItemDTO dto = new CartItemDTO();
+        dto.setName(generateRandom(String.class));
+        dto.setQuantity(generateRandom(Integer.class));
+
+        CartItemDTO result = cartItemLogic.createCartItemByClient(
+                dto, entity.getClient().getId());
+
+        Assert.assertNotNull(result);
+
+        CartItemEntity entityFound = em.find(CartItemEntity.class, result.getId());
+
+        Assert.assertEquals(dto.getName(), entityFound.getName());
+        Assert.assertEquals(dto.getQuantity(), entityFound.getQuantity());
+    }
 }
