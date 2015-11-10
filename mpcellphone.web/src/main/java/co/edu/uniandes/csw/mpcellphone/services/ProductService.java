@@ -59,6 +59,7 @@ public class ProductService {
     private String cellPhoneName;
     private ProviderDTO provider = (ProviderDTO) SecurityUtils.getSubject().getSession().getAttribute("Provider");
     private static final String X_TOTAL_COUNT = "X-Total-Count";
+    private static final String TEXT_PLAIN = "text/plain";
 
     /**
      * @param dto
@@ -71,20 +72,20 @@ public class ProductService {
         if (provider == null) {
             throw new WebApplicationException(Response.status(Response.Status.NOT_FOUND)
                     .entity("Forbidden access.")
-                    .type("text/plain").build());
+                    .type(TEXT_PLAIN).build());
         }
         dto.setProvider(provider);
         ProductDTO dtoSearch = productLogic.getProductByImei(dto.getImei());
         if (dtoSearch != null && dtoSearch.getId() != null) {
             throw new WebApplicationException(Response.status(Response.Status.NOT_FOUND)
                     .entity("There is already a cellphone registered with the same Imei Id.")
-                    .type("text/plain").build());
+                    .type("TEXT_PLAIN").build());
         }
         if (RequestUtilsMP.isStolenImei(dto.getImei())) {
             throw new WebApplicationException(Response.status(Response.Status.NOT_FOUND)
                     .entity("The Imei id appears in the police database for stolen cellphones. "
                             + "Please contact with a police office near to your home")
-                    .type("text/plain").build());
+                    .type("TEXT_PLAIN").build());
         }
 
         return productLogic.createProduct(dto);

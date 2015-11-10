@@ -2,8 +2,8 @@
     var mod = ng.module('paymentModule');
     mod.controller('checkoutCtrl', ['CrudCreator', '$scope', 'authService', 'cartItemService', '$location'
                 , 'checkoutService', 'shippingService', 'creditCardService', 'shippingTypeService', '$log',
-        'saleService', 'shippingProductService', 'stateService', 'cityService',
-        function (CrudCreator, $scope, authSvc, ciSvc, $location, chSvc, shpSvc, ccSvc, stSvc, $log, saleSvc, proSvc, stateSvc, citySvc) {
+        'shippingProductService', 'stateService', 'cityService',
+        function (CrudCreator, $scope, authSvc, ciSvc, $location, chSvc, shpSvc, ccSvc, stSvc, $log, proSvc, stateSvc, citySvc) {
             $scope.cartItems = [];
             $scope.payment = {};
             $scope.totalCompra = 0;
