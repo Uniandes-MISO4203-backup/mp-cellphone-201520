@@ -146,6 +146,7 @@ public class UserLogicTest {
        UserDTO dto = userLogic.getUserByUserName(entity.getName());
        Assert.assertNotNull(dto);
        Assert.assertEquals(entity.getName(), dto.getName());
+       
     }
     
     @Test
