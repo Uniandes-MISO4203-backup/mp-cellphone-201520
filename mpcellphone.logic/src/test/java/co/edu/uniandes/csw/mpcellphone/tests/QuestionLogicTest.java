@@ -112,7 +112,7 @@ public class QuestionLogicTest {
                 entity.setClient(null);
                 entity.setProduct(null);
         	entity.setState(generateRandom(String.class));
-        	entity.setFather(generateRandom(String.class));
+        	entity.setFather(String.valueOf(generateRandom(Long.class)));
             em.persist(entity);
             data.add(entity);
         }
@@ -142,7 +142,7 @@ public class QuestionLogicTest {
     @Test
     public void updateProviderTest() {
         String question = generateRandom(String.class);
-        String father = generateRandom(String.class);
+        String father = String.valueOf(generateRandom(Long.class));
         String state = generateRandom(String.class);
         Date date = new Date();
         
@@ -168,10 +168,35 @@ public class QuestionLogicTest {
     }
 
     @Test
-    public void getUserTest() {
+    public void getQuestionTest() {
         QuestionEntity entity = data.get(0);
         QuestionDTO dto = questionLogic.getQuestion(entity.getId());
         Assert.assertNotNull(dto);
         Assert.assertEquals(entity.getQuestion(), dto.getQuestion());
+    }
+
+    @Test
+    public void getQuestionByFatherIdTest() {
+        QuestionEntity entity = data.get(0);
+        List<QuestionDTO> dtos = questionLogic.getByFatherId(Long.parseLong(entity.getFather()));
+        
+        Assert.assertNotNull(dtos);
+        
+        if(dtos.size() > 0){
+            QuestionDTO question = dtos.get(0);
+            Assert.assertEquals(entity.getId(), question.getId());   
+        }
+        
+    }
+    
+    /*
+     * @generated
+     */
+    @Test
+    public void deleteProviderTest() {
+        QuestionEntity entity = data.get(0);
+        questionLogic.deleteQuestion(entity.getId());
+        QuestionEntity deleted = em.find(QuestionEntity.class, entity.getId());
+        Assert.assertNull(deleted);
     }
 }
