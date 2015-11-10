@@ -29,6 +29,10 @@ public class MailUtilsMP {
     static MimeMultipart generateMultiPartMessage;
     static BodyPart generateBodyPartMessage;
     static BodyPart generateBodyPartAttach;
+    
+    public MailUtilsMP(){
+        
+    }
 
     /**
      * Metodo para env�o de correo sin anexos

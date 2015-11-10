@@ -98,7 +98,6 @@ public class ClientService {
     @PUT
     @Path("{id: \\d+}")
     public ClientDTO updateClient(@PathParam("id") Long id, ClientDTO dto) {
-        //this.updateUser(dto);
         dto.setId(id);
         updateUser(dto);
         return clientLogic.updateClient(dto);

@@ -26,7 +26,6 @@ public class RateService {
     
     @Inject private IRateProductLogic rateProductLogic;
     @Inject private IRateProviderLogic rateProviderLogic;
-    @Context private HttpServletResponse response;
     
     private ClientDTO client = (ClientDTO) SecurityUtils.getSubject().getSession().getAttribute("Client");
     
