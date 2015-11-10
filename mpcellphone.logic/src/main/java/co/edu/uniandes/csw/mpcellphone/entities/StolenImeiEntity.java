@@ -38,14 +38,6 @@ public class StolenImeiEntity implements Serializable{
     
      /**
      * 
-     * @param id
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
-    
-     /**
-     * 
      * @param imei
      */
     public void setImei(String imei) {
