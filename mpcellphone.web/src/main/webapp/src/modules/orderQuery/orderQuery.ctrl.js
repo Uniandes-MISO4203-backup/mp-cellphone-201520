@@ -1,6 +1,6 @@
 (function (ng) {
     var mod = ng.module('mainApp');
-    mod.controller('orderQueryCtrl', ['CrudCreator', '$scope', 'saleService', 'rateService', 'orderQueryModel', '$location', 'authService', '$log', 'checkoutService', 'cityService',
+    mod.controller('orderQueryCtrl', ['CrudCreator', '$scope', 'saleService', 'rateService', 'orderQueryModel', '$location', 'authService', '$log', 'checkoutS', 'cityService',
         function (CrudCreator, $scope, svc, rateService, model, $location, authSvc, $log, checkSvc, citySvc) {
             CrudCreator.extendController(this, svc, $scope, model, 'orderQuery', 'Order List');
             var user = authSvc.getCurrentUser();

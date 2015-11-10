@@ -15,7 +15,7 @@
                 return this.api.one('viewDetail/'+clientId+'/'+orderId).get();
             };
     }]);
-    mod.service('checkoutService', ['CrudCreator', 'checkoutContext', function (CrudCreator, context) {
+    mod.service('checkoutS', ['CrudCreator', 'checkoutContext', function (CrudCreator, context) {
             CrudCreator.extendService(this, context);
             this.getOrderById = function (orderId){
                 return this.api.one(orderId).get();
