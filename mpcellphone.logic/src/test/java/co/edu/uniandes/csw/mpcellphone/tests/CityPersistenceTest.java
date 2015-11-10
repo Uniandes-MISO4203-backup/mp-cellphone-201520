@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.mpcellphone.tests;
 
+import co.edu.uniandes.csw.mpcellphone.dtos.CityDTO;
 import co.edu.uniandes.csw.mpcellphone.entities.CityEntity;
 import co.edu.uniandes.csw.mpcellphone.entities.StateEntity;
 import co.edu.uniandes.csw.mpcellphone.persistence.CityPersistence;
@@ -108,9 +109,13 @@ public class CityPersistenceTest {
      */
     private void insertData() { 
         for (int i = 0; i < 3; i++) { 
+            StateEntity stateEntity = new StateEntity();
+            stateEntity.setName(generateRandom(String.class));
+            em.persist(stateEntity);
             
             CityEntity entity= new CityEntity();
             entity.setName(generateRandom(String.class));
+            entity.setState(stateEntity);
             
             em.persist(entity); 
             data.add(entity); 
@@ -210,6 +215,27 @@ public class CityPersistenceTest {
      * @generated
      */
     @Test
+    public void getCityByStateTest() {
+        CityEntity city = data.get(0);
+        
+        List<CityDTO> list = cityPersistence.getCityByState(1, 10, city.getState().getId());
+        
+        Assert.assertNotNull(list);
+        CityDTO found = null;
+        for (CityDTO ent : list) {
+            if(ent.getId().equals(city.getId())){
+                found = ent;
+                break;
+            }
+        }
+        Assert.assertNotNull(found);
+        Assert.assertEquals(found.getId(), city.getId());
+    }
+    
+    /**
+     * @generated
+     */
+    @Test
     public void getNotCitiesTest() {
         List<CityEntity> list = cityPersistence.findAll();
         for (CityEntity ent : list) {
@@ -219,6 +245,8 @@ public class CityPersistenceTest {
         int cantidad = list.size();
         Assert.assertEquals(0,cantidad);        
     }
+    
+    
     
     
     
