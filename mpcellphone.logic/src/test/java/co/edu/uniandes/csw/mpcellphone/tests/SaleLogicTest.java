@@ -281,5 +281,23 @@ public class SaleLogicTest {
         List<ProductDTO> list = saleLogic.getProductsBySale(null, null,idClient, idOrder);
         Assert.assertEquals(1, list.size());
     }
+    
+      /**
+     * Update rate product test
+     */
+    @Test
+    public void updateSalesTest() {
+        
+        SalesEntity entity = data.get(0);
+            
+        SaleDTO dto = SalesConverter.refEntity2DTO(entity);
+        Assert.assertNotNull(dto);
+        
+        SaleDTO saleUpdated = saleLogic.updateSale(dto);
+
+        Assert.assertNotNull(saleUpdated);
+        Assert.assertEquals(entity.getId(), saleUpdated.getId());
+        Assert.assertEquals(entity.getClientId().getId(), saleUpdated.getClientId().getId());
+    }
 
 }
